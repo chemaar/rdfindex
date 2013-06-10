@@ -133,20 +133,22 @@ rdfindex:slice2 a qb:Slice;
 .
 ```
 
-
-
-## T-BOX 
-
-A component can aggregate: indicators or slices but always one measure:
-* ...aggregates indicators, in that case the indicator is comprised of only one slice and only one measure. (One structure for any indicator).
-* ...aggregates slices of indicators (the structure of the indicator is reused).
-
-`C = a * I1 + b * I2+...+ m * In`
-`Ii = f(interval, aggregation-function) where interval (t1, t2) or interval(first 100) or interval (last 50)`
-
-
-## SPARQL Queries
-
+* We are going to define our aggregated indicator:
+```
+rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:aggregates [ 
+		rdfindex:aggregation-operator rdfindex:Average;
+		rdfindex:part-of rdfindex:slice1;  
+		rdfindex:part-of rdfindex:slice2; 
+		rdfindex:start  2005;
+		rdfindex:end    2010;
+		qb:measure rdfindex:life-expectancy;
+		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
+	];
+.
+```
+* This information can be processed for a tool to create the next SPARQL query (it has been proven in Fuseki) to return the desired values:
 ```
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfindex: <http://purl.org/rdfindex/ontology/>
@@ -159,6 +161,17 @@ SELECT ?year ?area (avg(?value) as ?average) WHERE {
 	?obs rdfindex:ref-area ?area.
 } GROUP BY ?year ?area
 ```
+
+
+## T-BOX 
+
+A component can aggregate: indicators or slices but always one measure:
+* ...aggregates indicators, in that case the indicator is comprised of only one slice and only one measure. (One structure for any indicator).
+* ...aggregates slices of indicators (the structure of the indicator is reused).
+
+`C = a * I1 + b * I2+...+ m * In`
+`Ii = f(interval, aggregation-function) where interval (t1, t2) or interval(first 100) or interval (last 50)`
+
 
 ## References
 
