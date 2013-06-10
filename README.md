@@ -78,6 +78,62 @@ slices but:
 
 ## Specification
 
+* Description of the indicator
+
+```
+rdfindex:LifeExpectancy a rdfindex:Indicator;
+	rdfs:label 	"Life expectancy"@en;
+	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
+	rdfindex:type 	rdfindex:Quantitative;	
+	qb:structure 	rdfindex:LifeExpectancyStructure ;  
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
+        qb:slice rdfindex:slice1, rdfindex:slice2  ;
+.
+```
+
+* Description of indicator's structure
+
+```
+rdfindex:LifeExpectancyStructure a qb:DataStructureDefinition;
+    qb:component 
+        [qb:dimension rdfindex:ref-area;         qb:order 1];
+   #    [qb:dimension rdfindex:ref-year;         qb:order 2; qb:componentAttachment qb:Slice];
+   #    [qb:dimension sdmx-dimension:sex;        qb:order 3; qb:componentAttachment qb:Slice];
+   #    [qb:measure   rdfindex:life-expectancy];
+   #    [qb:attribute sdmx-attribute:unitMeasure; qb:componentAttachment qb:DataSet;] ;
+   #    qb:sliceKey eg:sliceByRegion;
+.
+```
+
+* Male Life expectancy
+```
+rdfindex:slice1 a qb:Slice;
+#   qb:sliceStructure  		eg:sliceByRegion ;
+    sdmx-dimension:sex         	sdmx-code:sex-M ;
+    qb:observation rdfindex:o1c, 
+		rdfindex:o3c, 
+		rdfindex:o5c, 
+		rdfindex:o7c,  
+		rdfindex:o9c,  
+		rdfindex:o11c;
+.
+```
+
+* Female Life expectancy
+```
+rdfindex:slice2 a qb:Slice;
+#    qb:sliceStructure          eg:sliceByRegion ;
+    sdmx-dimension:sex         sdmx-code:sex-F ;
+    qb:observation rdfindex:o2c, 
+		rdfindex:o4c, 
+		rdfindex:o6c, 
+		rdfindex:o8c,
+		rdfindex:o10c,
+		rdfindex:o12c;
+.
+```
+
+
 
 ## T-BOX 
 
