@@ -23,7 +23,7 @@ This project defines:
 
 ### Motivating Example
 
-I have observations about the "Life Expectancy" in different countries and I want to create an index calle "The Best Country" that 
+I have observations about the "Life Expectancy" in different countries and I want to create an index calle "The Longest Life Country" that 
 takes a component called "HealthValue" and it is comprised of the average of life expectancy
 
 | Year  | Region        | Life Expectancy Male  | Life Expectancy Female |
@@ -42,6 +42,17 @@ slices but:
  * Basically the RDF Data Cube vocabulary eases the creation of slices but it does not enable the creation of composed slices, more specifically the slice...
 
 
+| Year  | Region        | Life Expectancy |
+| ------|-------------- | ----------------:|
+| 2005  |Spain          | 79
+| 2006  |Spain          | 79.5
+| 2007  |Spain          | 80
+| 2005  |Turkey         | 77.5
+| 2006  |Turkey         | 78
+| 2007  |Turkey         | 78.5
+
+* Component "HealthValue": FIXME
+* Index "The Longest Life Country": FIXME
 
 ## Specification
 
@@ -61,7 +72,7 @@ A component can aggregate: indicators or slices but always one measure:
 
 ## SPARQL Queries
 
-`
+<pre>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfindex: <http://purl.org/rdfindex/ontology/>
 SELECT ?year ?area (avg(?value) as ?average) WHERE {
@@ -71,7 +82,8 @@ SELECT ?year ?area (avg(?value) as ?average) WHERE {
 	?obs rdfindex:ref-year ?year.
 	FILTER (?year<=2005 && ?year<=2010).
 	?obs rdfindex:ref-area ?area.
-} GROUP BY ?year ?area`
+} GROUP BY ?year ?area
+</pre>
 
 ## References
 
