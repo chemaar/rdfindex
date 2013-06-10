@@ -69,6 +69,7 @@ rdfindex:type a owl:OWLDataTypeProperty;
 
 rdfindex:life-expectancy  a rdf:Property, qb:MeasureProperty;
     rdfs:label "life expectancy"@en;
+    skos:notation "life-expectancy" ;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     rdfs:range xsd:decimal . 
 
@@ -100,6 +101,9 @@ rdfindex:ref-period  a rdf:Property, qb:DimensionProperty;
 	rdfs:subPropertyOf sdmx-dimension:ref-period;
 	rdfs:range interval:Interval;
 	qb:concept sdmx-concept:ref-period . 
+
+
+
 #
 # T-BOX Computation Process Classes
 #
@@ -192,7 +196,7 @@ rdfindex:LifeExpectancy a rdfindex:Indicator;
 	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
 	rdfindex:type 	rdfindex:Quantitative;	
 	qb:structure 	rdfindex:LifeExpectancyStructure ;  
-	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
+	sdmx-attribute:unitMeasure dbpedia-res:Year ;
         qb:slice rdfindex:slice1, rdfindex:slice2  ;
 .
 
