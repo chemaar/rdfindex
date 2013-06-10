@@ -24,9 +24,21 @@ This project defines:
 ## Specification
 
 
+## T-BOX 
+
+A component can aggregate: indicators or slices but always one measure:
+* ...aggregates indicators, in that case the indicator is comprised of only one slice and only one measure. (One structure for any indicator).
+* ...aggregates slices of indicators (the structure of the indicator is reused).
+
+`C = a * I1 + b * I2+...+ m * In`
+`Ii = f(interval, aggregation-function) where interval (t1, t2) or interval(first 100) or interval (last 50)`
+
+
+
+
+
 ## SPARQL Queries
 
-``
 
 ## References
 
