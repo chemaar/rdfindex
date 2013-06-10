@@ -21,6 +21,28 @@ This project defines:
 * Attribute:  More information in the RDF Data Cube Vocabulary.
 
 
+### Motivating Example
+
+I have observations about the "Life Expectancy" in different countries and I want to create an index calle "The Best Country" that 
+takes a component called "HealthValue" and it is comprised of the average of life expectancy
+
+| Year  | Region        | Life Expectancy Male  | Life Expectancy Female |
+| ------|-------------- | ---------------------:|-----------------------:|
+| 2005  |Spain          | 78|80|
+| 2006  |Spain          | 78|81|
+| 2007  |Spain          | 78|82|
+| 2005  |Turkey          | 76|79|
+| 2006  |Turkey         | 76|80|
+| 2007  |Turkey          | 77|80|
+
+This is an example similar to the presented in the RDF Data Cube vocabulary in which we can define dimensiones, measures, attributes, datasets and 
+slices but:
+
+* if I want to create a composed indicator that is the "Life Expectancy" calculated as the average per country and year, how can I define this indicator? how can I define the computation process?
+ * Basically the RDF Data Cube vocabulary eases the creation of slices but it does not enable the creation of composed slices, more specifically the slice...
+
+
+
 ## Specification
 
 
@@ -39,6 +61,17 @@ A component can aggregate: indicators or slices but always one measure:
 
 ## SPARQL Queries
 
+`
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdfindex: <http://purl.org/rdfindex/ontology/>
+SELECT ?year ?area (avg(?value) as ?average) WHERE {
+	?slice qb:observation ?obs.
+	FILTER ( (?slice=rdfindex:slice1) || (?slice=rdfindex:slice2)).
+	?obs rdfindex:life-expectancy ?value.
+	?obs rdfindex:ref-year ?year.
+	FILTER (?year<=2005 && ?year<=2010).
+	?obs rdfindex:ref-area ?area.
+} GROUP BY ?year ?area`
 
 ## References
 
