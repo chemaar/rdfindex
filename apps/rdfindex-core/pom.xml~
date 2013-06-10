@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.rdfindex</groupId>
+	<artifactId>rdfindex-core</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<name>RDFIndex CORE Application</name>
+	<packaging>jar</packaging>
+	<description>RDFIndex CORE Processor</description>
+	<properties>
+		<org.springframework.version>2.5</org.springframework.version>
+		<scala.version>2.8.0</scala.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<type>jar</type>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<!--Jersey -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey</artifactId>
+			<version>0.8-ea-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<!--Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!--Jena -->
+		<dependency>
+			<groupId>com.hp.hpl.jena</groupId>
+			<artifactId>jena</artifactId>
+			<version>2.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hp.hpl.jena</groupId>
+			<artifactId>arq</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.0</version>
+		</dependency>
+ </dependencies>
+
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+			<comments />
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>chema_ar</id>
+			<name>Jose María Alvarez Rodriguez</name>
+			<email>chema.ar@gmail.com</email>
+			<url></url>
+			<organization />
+			<organizationUrl />
+			<roles>
+				<role>Project Admin</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>2</timezone>
+			<properties />
+		</developer>
+	</developers>
+
+
+	<!--Build plugins -->
+	<build>
+		<plugins>
+			<!-- <plugin> <groupId>com.google.code.maven-license-plugin</groupId> 
+				<artifactId>maven-license-plugin</artifactId> <configuration> <header>src/main/config/copyright.txt</header> 
+				<excludes> <exclude>**/LICENSE.txt</exclude> <exclude>**/COPYING.LESSER</exclude> 
+				<exclude>**/COPYING</exclude> <exclude>**/resources/**</exclude> </excludes> 
+				<mapping> <jspx>xml</jspx> </mapping> <executions> <execution> <goals> <goal>check</goal> 
+				</goals> </execution> </executions> </configuration> </plugin> -->
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>utf-8</encoding>
+					<showDeprecation>false</showDeprecation>
+				</configuration>
+			</plugin>
+
+			<plugin>
+			      <artifactId>maven-assembly-plugin</artifactId>
+			      <configuration>
+				<archive>
+				  <manifest>
+				    <mainClass>main.MainCPV2008Mapper</mainClass>
+				  </manifest>
+				</archive>
+				<descriptorRefs>
+				  <descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs>
+			      </configuration>
+			    </plugin>
+
+			
+		</plugins>
+	</build>
+</project>
