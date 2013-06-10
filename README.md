@@ -148,6 +148,33 @@ rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 	];
 .
 ```
+The generic template of an aggregated component should be:
+```
+rdfindex:AggregatedElement a rdfindex:Indicator;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:aggregates [ 
+		rdfindex:aggregation-operator skos:Concept;
+		rdfindex:part-of (qb:Slice | rdfindex:Indicator);  
+		rdfindex:filter [qb:dimension; rdfindex:Condition];
+		qb:measure sdmx:measure;
+		rdfindex:group-by qb:dimension;
+	];
+.
+```
+and it can be translated into a SPARQL query:
+```
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdfindex: <http://purl.org/rdfindex/ontology/>
+SELECT qb:dimension (avg(?value) as ?average) WHERE {
+	(?qb:Slice qb:observation ?obs | ?obs  qb:dataSet rdfindex:Indicator).
+	FILTER (?qb:Slice | rdfindex:Indicator).
+	?obs sdmx:measure ?value.
+	?obs qb:dimension ?dimension.
+	FILTER (?dimension).
+} GROUP BY qb:dimension 
+```
+
+
 * This information can be processed for a tool to create the next SPARQL query (it has been proven in Fuseki) to return the desired values:
 ```
 PREFIX qb: <http://purl.org/linked-data/cube#>
