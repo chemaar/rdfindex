@@ -1,0 +1,186 @@
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix lg:  <http://linkedgeodata.org/ontology/> .
+
+#
+# T-BOX Ontology Classes
+#
+
+
+rdfindex:Quantitative rdfs:subClassOf skos:Concept;
+.
+
+rdfindex:Qualitative rdfs:subClassOf skos:Concept;
+.
+
+
+rdfindex:Index rdfs:subClassOf qb:DataSet, skos:Concept;
+.
+
+rdfindex:Component rdfs:subClassOf qb:DataSet, skos:Concept;
+.
+
+rdfindex:Indicator rdfs:subClassOf qb:DataSet, skos:Concept;
+.
+
+#
+# T-BOX Ontology Properties
+#
+
+
+rdfindex:weight a owl:OWLDataTypeProperty;
+	rdfs:domain rdfindex:Indicator;
+	rdfs:range xsd:double;
+.
+
+rdfindex:type a owl:OWLDataTypeProperty;
+	rdfs:domain rdfindex:Indicator;
+	rdfs:range rdfindex:Quantitative, rdfindex:Qualitative;
+.
+
+rdfindex:life-expectancy  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "life expectancy"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal . 
+
+#
+# T-BOX Computation Process Classes
+#
+
+
+#
+# T-BOX Computation Process Properties
+#
+
+
+#A-BOX
+
+rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:aggregates [ 
+		rdfindex:aggregation-operator rdfindex:Average;
+		rdfindex:part-of rdfindex:slice1;  
+		rdfindex:part-of rdfindex:slice2; 
+		rdfindex:start  2005;
+		rdfindex:end    2010;
+		qb:measure rdfindex:life-expectancy;
+		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
+	];
+.
+
+
+rdfindex:LifeExpectancy a rdfindex:Indicator;
+	rdfs:label 	"Life expectancy"@en;
+	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
+	rdfindex:type 	rdfindex:Quantitative;	
+	qb:structure 	rdfindex:LifeExpectancyStructure ;  
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
+        qb:slice rdfindex:slice1, rdfindex:slice2  ;
+.
+
+
+#Examples instances
+
+rdfindex:LifeExpectancyStructure a qb:DataStructureDefinition;
+    qb:component 
+        [qb:dimension rdfindex:ref-area;         qb:order 1];
+   #    [qb:dimension rdfindex:ref-year;         qb:order 2; qb:componentAttachment qb:Slice];
+   #    [qb:dimension sdmx-dimension:sex;        qb:order 3; qb:componentAttachment qb:Slice];
+   #    [qb:measure   rdfindex:life-expectancy];
+   #    [qb:attribute sdmx-attribute:unitMeasure; qb:componentAttachment qb:DataSet;] ;
+#    qb:sliceKey eg:sliceByRegion;
+.
+
+
+#Male Life expectancy
+rdfindex:slice1 a qb:Slice;
+#   qb:sliceStructure  		eg:sliceByRegion ;
+    sdmx-dimension:sex         	sdmx-code:sex-M ;
+    qb:observation rdfindex:o1c, rdfindex:o3c, rdfindex:o7c,  rdfindex:o5c;
+.
+
+#Female Life expectancy
+rdfindex:slice2 a qb:Slice;
+#    qb:sliceStructure          eg:sliceByRegion ;
+    sdmx-dimension:sex         sdmx-code:sex-F ;
+    qb:observation rdfindex:o2c, rdfindex:o4c, rdfindex:o6c, rdfindex:o8c;
+.
+
+rdfindex:o1c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area               <http://dbpedia.org/resource/Spain> ;                  
+    rdfindex:life-expectancy         75 ;
+    .
+    
+rdfindex:o2c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                 <http://dbpedia.org/resource/Spain>;                  
+    rdfindex:life-expectancy         73 ;
+    .
+
+
+rdfindex:o3c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area               <http://dbpedia.org/resource/Spain> ;                  
+    rdfindex:life-expectancy         76 ;
+    .
+    
+rdfindex:o4c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                 <http://dbpedia.org/resource/Spain>;                  
+    rdfindex:life-expectancy         74 ;
+    .
+
+
+rdfindex:o5c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area               <http://dbpedia.org/resource/Turkey> ;                  
+    rdfindex:life-expectancy         65 ;
+    .
+    
+rdfindex:o6c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                 <http://dbpedia.org/resource/Turkey>;                  
+    rdfindex:life-expectancy         63 ;
+    .
+
+
+rdfindex:o7c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area               <http://dbpedia.org/resource/Turkey> ;                  
+    rdfindex:life-expectancy         66 ;
+    .
+    
+rdfindex:o8c a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                 <http://dbpedia.org/resource/Turkey>;                  
+    rdfindex:life-expectancy         64 ;
+    .
+
+
+
