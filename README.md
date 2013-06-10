@@ -20,6 +20,28 @@ This project defines:
 * Measure:  More information in the RDF Data Cube Vocabulary.
 * Attribute:  More information in the RDF Data Cube Vocabulary.
 
+### Existing problems
+Existing indexes are completely closed:
+
+* How can I know which are the indicators that have been used and their weight?
+* How data has been gathered? Data providers?
+* What kind of indicators has been used? qualitative or quantitative?
+* Have the observation values been normalized or estimated?
+* How data has been aggregated?
+* Can I calculate the same index?
+* Can I consume the index, indicators, etc. values from my application?
+* Which is the cost of adding a new indicator?
+* Multilingual explanations
+* ...
+
+Currently, this information can be only obtained reading the typical PDF report but a lot of valuable data and information is completely missing and you 
+must do an act of faith. That is why applying semantics and linked data the reuse of this information can be boosted.
+
+For instance, the WorldBank indicators or the Webindex observations are currently available as Open Data and Linked Open Data, nevertheless the information 
+about the computation process and a more fine-grained information (in terms of concepts not strings) about the indicators, etc. 
+is still missing.
+
+
 
 ### Motivating Example
 
@@ -67,9 +89,6 @@ A component can aggregate: indicators or slices but always one measure:
 `Ii = f(interval, aggregation-function) where interval (t1, t2) or interval(first 100) or interval (last 50)`
 
 
-
-
-
 ## SPARQL Queries
 
 ```
@@ -88,5 +107,14 @@ SELECT ?year ?area (avg(?value) as ?average) WHERE {
 ## References
 
 * http://www.w3.org/TR/vocab-data-cube/
+* http://purl.org/linked-data/sdmx/2009/concept# 
+* http://purl.org/linked-data/sdmx/2009/dimension# 
+* http://purl.org/linked-data/sdmx/2009/attribute#
+* http://purl.org/linked-data/sdmx/2009/measure#
+* http://purl.org/linked-data/sdmx/2009/metadata#
+* http://purl.org/linked-data/sdmx/2009/code#
+* http://purl.org/linked-data/sdmx/2009/subject#
+
+
 
 
