@@ -72,7 +72,7 @@ A component can aggregate: indicators or slices but always one measure:
 
 ## SPARQL Queries
 
-<pre>
+```
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfindex: <http://purl.org/rdfindex/ontology/>
 SELECT ?year ?area (avg(?value) as ?average) WHERE {
@@ -83,7 +83,7 @@ SELECT ?year ?area (avg(?value) as ?average) WHERE {
 	FILTER (?year<=2005 && ?year<=2010).
 	?obs rdfindex:ref-area ?area.
 } GROUP BY ?year ?area
-</pre>
+```
 
 ## References
 
