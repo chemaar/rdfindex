@@ -141,8 +141,9 @@ rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 		rdfindex:aggregation-operator rdfindex:Average;
 		rdfindex:part-of rdfindex:slice1;  
 		rdfindex:part-of rdfindex:slice2; 
-		rdfindex:start  2005;
-		rdfindex:end    2010;
+		rdfindex:filter [rdfindex:ref-year 
+					[rdfindex:start  2005;	rdfindex:end    2010;] 
+				];
 		qb:measure rdfindex:life-expectancy;
 		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
 	];
@@ -155,7 +156,7 @@ rdfindex:AggregatedElement a rdfindex:Indicator;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator skos:Concept;
 		rdfindex:part-of (qb:Slice | rdfindex:Indicator);  
-		rdfindex:filter [qb:dimension; rdfindex:Condition];
+		rdfindex:filter [qb:dimension; rdfindex:Condition]; #Time interval, region, provider, n items
 		qb:measure sdmx:measure;
 		rdfindex:group-by qb:dimension;
 	];
