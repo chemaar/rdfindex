@@ -1,4 +1,11 @@
-rdfindex
+The RDFindex
 ========
 
-A vocabulary and a processor to define RDF-based indexes and their computation process on top of the RDF Data Cube Vocabulary
+This project defines:
+
+* A high-level vocabulary on top of the RDF Data Cube Vocabulary to specify indexes such as "The Webindex", "The CSMIC", "The Shanghai Ranking" or "The H-index"
+* A computation process vocabulary to aggregate the different entities and data of an index
+* A process of the vocabulary and computation process
+
+
+
