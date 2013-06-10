@@ -132,8 +132,8 @@ rdfindex:aggregates a owl:ObjectProperty, rdf:Property;
 rdfindex:type a owl:ObjectProperty, rdf:Property; 
 	rdfs:label "The description of an aggregation."@en; 
 	rdfs:domain rdfindex:Observable; 
-	rdfs:range  rdfindex:rdfindex:Quantitative;
-	rdfs:range  rdfindex:rdfindex:Qualitative;
+	rdfs:range  rdfindex:Quantitative;
+	rdfs:range  rdfindex:Qualitative;
 . 
 
 
