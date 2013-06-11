@@ -28,6 +28,13 @@ public class PrettyPrinter {
 		os.close();
 	}
 	
+	public static void prettyPrint(Model result){
+		addPrefixes(result, PrefixManager.getResourceBundle());
+		RDFWriter w = result.getWriter("TURTLE");
+		w.write(result, System.out, "");
+	}
+	
+	
 	public static void addPrefixes(Model result, ResourceBundle mapPrefixesURIs){
 		Enumeration<String> prefixes = mapPrefixesURIs.getKeys();
 		while(prefixes.hasMoreElements()){

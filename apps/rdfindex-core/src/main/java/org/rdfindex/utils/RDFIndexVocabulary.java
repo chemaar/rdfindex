@@ -6,7 +6,7 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
 public class RDFIndexVocabulary {
 
-	public static final Resource OBSERVATION_TYPE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "dataset" );
+	public static final Resource OBSERVATION_TYPE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "observation" );
 	public static final Property QB_DATASET = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "dataset" );
 	public static final Property QB_OBSERVATION = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "observation" );
 	public static final Property REF_DATE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "ref-year" );

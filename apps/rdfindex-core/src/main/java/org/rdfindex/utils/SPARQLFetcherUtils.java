@@ -43,7 +43,7 @@ public class SPARQLFetcherUtils {
 			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():soln.toString();
 	}
 
-	public static String resourceValue (QuerySolution soln, String field){
+	public static String fetchResourceValue (QuerySolution soln, String field){
 		return (soln==null || soln.get(field)==null)?"": 
 			soln.get(field).isURIResource() ?  soln.getResource(field).getURI():soln.toString();
 	}
