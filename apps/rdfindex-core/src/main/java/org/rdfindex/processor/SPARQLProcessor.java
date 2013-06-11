@@ -1,10 +1,13 @@
 package org.rdfindex.processor;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.rdfindex.to.AggregationMetadataTO;
+import org.rdfindex.to.ObservationTO;
 import org.rdfindex.utils.SPARQLFetcherUtils;
 import org.rdfindex.utils.SPARQLUtils;
 
@@ -21,6 +24,9 @@ public class SPARQLProcessor implements Processor {
 	private static final String INDEX_VAR_SPARQL = "index";
 	private static final String COMPONENT_VAR_SPARQL = "component";
 	private static final String ELEMENT_VAR_SPARQL = "element";
+	private static final String NEW_VALUE_VAR_SPARQL = "newvalue";
+	private static final String DATE_VALUE_VAR_SPARQL = "date";
+	private static final String AGENT_VALUE_VAR_SPARQL = "date";
 	
 	protected Logger logger = Logger.getLogger(SPARQLProcessor.class);
 	@Override
@@ -38,7 +44,8 @@ public class SPARQLProcessor implements Processor {
 		return ModelFactory.createDefaultModel();
 	}
 
-	private void processComponentsOf(String index, Model tbox, Model abox) {
+	private List<ObservationTO> processComponentsOf(String index, Model tbox, Model abox) {
+		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		//Extract the set of components C
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, createComponentsFromIndexQuery(index, abox));
 		//For each ci in C
@@ -52,16 +59,46 @@ public class SPARQLProcessor implements Processor {
 		//		For each indi in I
 		//			ci_aggregated_value += indi
 		//i_aggregated value += ci_aggregated_value
-		
+		return observations;	
 	}
 
-	private void processIndicatorsOf(String component, Model tbox, Model abox) {
+	private List<ObservationTO> processIndicatorsOf(String component, Model tbox, Model abox) {
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, createComponentsFromIndexQuery(component, abox));
+		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		for (int i = 0; i < results.length; i++){
 			String indicator = SPARQLFetcherUtils.resourceValue(results[i], COMPONENT_VAR_SPARQL);
 			logger.info("Processing indicator "+indicator);
-			
+			AggregationMetadataTO metadata = getMetadataTO(indicator, abox);
+			String sparqlQuery = createSPARQLQuery(metadata);
+			observations.addAll(fetchNewObservations(metadata,SPARQLUtils.executeSimpleSparql(abox, sparqlQuery)));
 		}
+		//Convert observations in RDF and build a model to be query for the ancestor
+		//The communication between layers is a MODEL JENA not JAVA Objects
+		return observations;
+	}
+
+	private List<ObservationTO> fetchNewObservations(AggregationMetadataTO metadata, QuerySolution[] results) {
+		List<ObservationTO> newObservations = new LinkedList<ObservationTO>();
+		//A new observation will be created with the next metadata
+		for(int i = 0; i<results.length;i++){
+			ObservationTO observation = new ObservationTO();
+			observation.setUri(createObservationUniqueID());
+			observation.setUriDataset(metadata.getElement());
+			observation.setMeasure(metadata.getMeasure());
+			observation.setValue(SPARQLFetcherUtils.fetchStringValue(results[i], NEW_VALUE_VAR_SPARQL));
+			observation.setDate(SPARQLFetcherUtils.fetchStringValue(results[i], DATE_VALUE_VAR_SPARQL));
+			newObservations.add(observation);
+		}
+		return newObservations;
+	}
+
+	private String createObservationUniqueID() {
+		return "o"+System.nanoTime(); //FIXME: in a distributed environment this does not ensure an unique id, a common repo should be used
+	}
+
+	private String createSPARQLQuery(AggregationMetadataTO metadata) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	protected String createIndexQuery(Model abox) {		
