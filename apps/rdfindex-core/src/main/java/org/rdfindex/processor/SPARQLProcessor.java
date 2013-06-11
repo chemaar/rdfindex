@@ -14,6 +14,10 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class SPARQLProcessor implements Processor {
 
+	private static final String DIMENSION_VAR_SPARQL = "dimension";
+	private static final String PART_VAR_SPARQL = "part";
+	private static final String MEASURE_VAR_SPARQL = "measure";
+	private static final String OPERATOR_VAR_SPARQL = "operator";
 	private static final String INDEX_VAR_SPARQL = "index";
 	private static final String COMPONENT_VAR_SPARQL = "component";
 	private static final String ELEMENT_VAR_SPARQL = "element";
@@ -102,7 +106,7 @@ public class SPARQLProcessor implements Processor {
 				"?aggregation rdfindex:aggregation-operator ?operator. "+
 				"?aggregation rdfindex:part-of ?part. "+
 				"?aggregation qb:measure ?measure. "+
-				"?aggregation rdfindex:group-by ?dimensions "+
+				"?aggregation rdfindex:group-by ?dimension "+
 			"} ";
 		//Validation rules and assumptions:
 		//Check domain and ranges before 
@@ -110,11 +114,15 @@ public class SPARQLProcessor implements Processor {
 		//1 and only one measure can be aggregated. 
 		//1 and only one operator can be used. 
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, description);
-		
-
-		
-		
-		
+		for (int i = 0; i < results.length; i++){
+			if (i == 0){
+				aggregation.setElement(SPARQLFetcherUtils.resourceValue(results[i], ELEMENT_VAR_SPARQL));
+				aggregation.setOperator(SPARQLFetcherUtils.resourceValue(results[i], OPERATOR_VAR_SPARQL));
+				aggregation.setMeasure( SPARQLFetcherUtils.resourceValue(results[i], MEASURE_VAR_SPARQL));
+			}
+			aggregation.getPartsOf().add(SPARQLFetcherUtils.resourceValue(results[i], PART_VAR_SPARQL));
+			aggregation.getDimensions().add(SPARQLFetcherUtils.resourceValue(results[i], DIMENSION_VAR_SPARQL));		
+		}
 		return aggregation;
 	}
 }

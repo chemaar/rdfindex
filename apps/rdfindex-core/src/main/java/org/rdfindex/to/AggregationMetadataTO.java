@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class AggregationMetadataTO {
 
+	private String element;
 	private String operator;
 	private String measure;
 	private Set<String> partsOf;	
@@ -39,12 +40,19 @@ public class AggregationMetadataTO {
 	public void setDimensions(Set<String> dimensions) {
 		this.dimensions = dimensions;
 	}
+	public String getElement() {
+		return element;
+	}
+	public void setElement(String element) {
+		this.element = element;
+	}
 	@Override
 	public String toString() {
-		return "AggregationMetadataTO [operator=" + operator + ", measure="
-				+ measure + ", partsOf=" + partsOf + ", dimensions="
-				+ dimensions + "]";
+		return "AggregationMetadataTO [element=" + element + ", operator="
+				+ operator + ", measure=" + measure + ", partsOf=" + partsOf
+				+ ", dimensions=" + dimensions + "]";
 	}
+
 	
 	
 }
