@@ -61,11 +61,18 @@ public class SPARQLProcessor implements Processor {
 		//For each ci in C
 		for (int i = 0; i < results.length; i++){
 			String component = SPARQLFetcherUtils.fetchResourceValue(results[i], COMPONENT_VAR_SPARQL);
-			System.out.println("Processing component "+component);
+			System.out.println("Processing component "+component);			
 			List<ObservationTO> newObservations = processIndicatorsOf(component, tbox, abox);
-			//Model model = observationsAsRDF(newObservations);
-			//PrettyPrinter.prettyPrint(model);
-			observations.addAll(newObservations);
+			Model componentModel = observationsAsRDF(newObservations);
+			AggregationMetadataTO metadata = getMetadataTO(component, abox);
+			
+			String sparqlQuery = createSPARQLQuery(metadata);
+			System.out.println(sparqlQuery);
+			observations.addAll(
+					fetchNewObservations(metadata,
+							SPARQLUtils.executeSimpleSparql(componentModel, sparqlQuery)));//IMPORTANT: the model
+			PrettyPrinter.prettyPrint(observationsAsRDF(observations));
+			//observations.addAll(newObservations);
 		}
 		//  ci_aggregated_value = 0
 		//	extract the set of indicators I
@@ -199,7 +206,7 @@ public class SPARQLProcessor implements Processor {
 		AggregationMetadataTO aggregation = new AggregationMetadataTO();
 			String description = SPARQLUtils.NS+					
 			"SELECT * WHERE{ "+
-				"?element rdf:type rdfindex:Indicator.  "+
+				"?element rdf:type ?type  "+ //FIXME: how to select the type, it should be the same for index, component and indicator!
 				SPARQLFetcherUtils.createFilterResource(uri, ELEMENT_VAR_SPARQL)+
 				"?element rdfindex:aggregates ?aggregation. "+
 				"?aggregation rdfindex:aggregation-operator ?operator. "+
