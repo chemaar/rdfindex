@@ -24,6 +24,12 @@ public class SPARQLProcessorTest {
 
 	}
 
+	@Test
+	public void testCreateQuery(){
+		SPARQLProcessor rdfIndexProcessor = new SPARQLProcessor();
+		Model abox = createModel("dummyindex.ttl");
+		String query = rdfIndexProcessor.createIndexQuery(abox);
+	}
 
 	public static Model createModel(String filename) {
 		Model model =ModelFactory.createDefaultModel();
