@@ -2,10 +2,18 @@ package org.rdfindex.utils;
 
 import java.util.Set;
 
+import org.rdfindex.processor.SPARQLProcessor;
+
 import com.hp.hpl.jena.query.QuerySolution;
 
 public class SPARQLFetcherUtils {
 
+	public static String formatVar(String var){
+		return "?"+var;
+	}
+	public static String formatResource(String uri){
+		return "<"+uri+">";
+	}
 	//	public static IndexTO fetchPPNTO (QuerySolution soln){
 	//		String uri = resourceValue(soln,  "index"); //FIXME: Extract constans
 	//		return ppnTO;
@@ -42,6 +50,17 @@ public class SPARQLFetcherUtils {
 	//
 	//
 	//
+	
+	public static String createGroupByResource(Set<String> vars) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("GROUP BY ");
+		for(String var:vars){
+			sb.append(formatVar(var)+" ");
+		}
+		return sb.toString();
+	}
+	
+	
 	public static String createFilterResource(String resource, String onVar) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("FILTER ( ");
@@ -50,22 +69,28 @@ public class SPARQLFetcherUtils {
 		return sb.toString();
 	}
 
-	//	public static String createFilterNUTSCodes(Set<NUTSTO> set) {
-	//		StringBuffer sb = new StringBuffer();
-	//		if(set.size() > 0 ){
-	//			sb.append("FILTER ( ");
-	//			int i = 0;
-	//			for(NUTSTO nutsto:set){
-	//				sb.append(" (?nutsCode = <"+nutsto.getUri()+"> ) ");
-	//				i++;
-	//				if(i< set.size()){
-	//					sb.append (" || ");
-	//				}
-	//			}
-	//			sb.append("). ");
-	//		}	
-	//		return sb.toString();
-	//	}
+		public static String createFilterPartsOf(Set<String> set) {
+			return createFilterResources(set, SPARQLProcessor.PART_VAR_SPARQL);
+		}
+		
+		
+		public static String createFilterResources(Set<String> resources, String onVar) {
+			StringBuffer sb = new StringBuffer();
+			if(resources.size() > 0 ){
+				sb.append("FILTER ( ");
+				int i = 0;
+				for(String resource:resources){
+					sb.append(" (?"+onVar+" = <"+resource+"> ) ");
+					i++;
+					if(i< resources.size()){
+						sb.append (" || ");
+					}
+				}
+				sb.append("). ");
+			}	
+			return sb.toString();
+		}
+		
 	//
 	//
 	//	public static String createFilter(Set<PSCTO> set) {

@@ -8,40 +8,46 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.rdfindex.to.AggregationMetadataTO;
 import org.rdfindex.to.ObservationTO;
+import org.rdfindex.utils.RDFIndexVocabulary;
 import org.rdfindex.utils.SPARQLFetcherUtils;
 import org.rdfindex.utils.SPARQLUtils;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class SPARQLProcessor implements Processor {
 
-	private static final String DIMENSION_VAR_SPARQL = "dimension";
-	private static final String PART_VAR_SPARQL = "part";
-	private static final String MEASURE_VAR_SPARQL = "measure";
-	private static final String OPERATOR_VAR_SPARQL = "operator";
-	private static final String INDEX_VAR_SPARQL = "index";
-	private static final String COMPONENT_VAR_SPARQL = "component";
-	private static final String ELEMENT_VAR_SPARQL = "element";
-	private static final String NEW_VALUE_VAR_SPARQL = "newvalue";
-	private static final String DATE_VALUE_VAR_SPARQL = "date";
-	private static final String AGENT_VALUE_VAR_SPARQL = "date";
+	public static final String INDEX_VAR_SPARQL = "index";
+	public static final String COMPONENT_VAR_SPARQL = "component";
+	public static final String ELEMENT_VAR_SPARQL = "element";
+	public static final String INDICATOR_VAR_SPARQL = "indicator";
+	public static final String OBSERVATION_VAR_SPARQL = "observation";
+	public static final String MEASURE_VAR_SPARQL = "measure";
+	
+	public static final String DIMENSION_VAR_SPARQL = "dimension";
+	public static final String PART_VAR_SPARQL = "part";
+	public static final String OPERATOR_VAR_SPARQL = "operator";
+	public static final String NEW_VALUE_VAR_SPARQL = "newvalue";
+	public static final String DATE_VALUE_VAR_SPARQL = "date";
+	public static final String AGENT_VALUE_VAR_SPARQL = "agent";
+	private static final String VALUE_VAR_SPARQL = "value";
 	
 	protected Logger logger = Logger.getLogger(SPARQLProcessor.class);
 	@Override
-	public Model run(Model tbox, Model abox) {
+	public List<ObservationTO> run(Model tbox, Model abox) {
+		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		String indexQuery = createIndexQuery(abox);
 		//Ask the index to be generated
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, indexQuery);
+		System.out.println("Found  "+results.length+" indexes.");
 		for (int i = 0; i < results.length; i++){
 			String index = SPARQLFetcherUtils.resourceValue(results[i], INDEX_VAR_SPARQL);
-			logger.info("Processing index "+index);
-			processComponentsOf(index, tbox, abox);
+			System.out.println("Processing index "+index);
+			observations.addAll(processComponentsOf(index, tbox, abox));
 		}
 		//i_aggregated value
 	
-		return ModelFactory.createDefaultModel();
+		return observations;
 	}
 
 	private List<ObservationTO> processComponentsOf(String index, Model tbox, Model abox) {
@@ -51,8 +57,8 @@ public class SPARQLProcessor implements Processor {
 		//For each ci in C
 		for (int i = 0; i < results.length; i++){
 			String component = SPARQLFetcherUtils.resourceValue(results[i], COMPONENT_VAR_SPARQL);
-			logger.info("Processing component "+component);
-			processIndicatorsOf(component, tbox, abox);
+			System.out.println("Processing component "+component);
+			observations.addAll(processIndicatorsOf(component, tbox, abox));
 		}
 		//  ci_aggregated_value = 0
 		//	extract the set of indicators I
@@ -63,11 +69,13 @@ public class SPARQLProcessor implements Processor {
 	}
 
 	private List<ObservationTO> processIndicatorsOf(String component, Model tbox, Model abox) {
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, createComponentsFromIndexQuery(component, abox));
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, 
+				createIndicatorsFromComponentQuery(component, abox));
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		for (int i = 0; i < results.length; i++){
-			String indicator = SPARQLFetcherUtils.resourceValue(results[i], COMPONENT_VAR_SPARQL);
-			logger.info("Processing indicator "+indicator);
+			String indicator = SPARQLFetcherUtils.resourceValue(results[i], 
+					INDICATOR_VAR_SPARQL);
+			System.out.println("Processing indicator "+indicator);
 			AggregationMetadataTO metadata = getMetadataTO(indicator, abox);
 			String sparqlQuery = createSPARQLQuery(metadata);
 			observations.addAll(fetchNewObservations(metadata,SPARQLUtils.executeSimpleSparql(abox, sparqlQuery)));
@@ -77,7 +85,7 @@ public class SPARQLProcessor implements Processor {
 		return observations;
 	}
 
-	private List<ObservationTO> fetchNewObservations(AggregationMetadataTO metadata, QuerySolution[] results) {
+	protected static List<ObservationTO> fetchNewObservations(AggregationMetadataTO metadata, QuerySolution[] results) {
 		List<ObservationTO> newObservations = new LinkedList<ObservationTO>();
 		//A new observation will be created with the next metadata
 		for(int i = 0; i<results.length;i++){
@@ -92,16 +100,50 @@ public class SPARQLProcessor implements Processor {
 		return newObservations;
 	}
 
-	private String createObservationUniqueID() {
+	protected static String createSPARQLQuery(AggregationMetadataTO metadata) {
+		//FIXME: distinguish between slice or others to create the match pattern
+		//FIXME: extract dimensions
+		String sparqlQuery = SPARQLUtils.NS+" "+
+			"SELECT " +SPARQLFetcherUtils.formatVar(DATE_VALUE_VAR_SPARQL)+ " "+SPARQLFetcherUtils.formatVar(AGENT_VALUE_VAR_SPARQL)+" "+formatFormula(metadata.getOperator())+" "+ 
+			"WHERE{ " +
+				SPARQLFetcherUtils.formatVar(PART_VAR_SPARQL)+" "+
+					SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.QB_OBSERVATION.getURI())+" "+SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" . "+
+				createFilterParts(metadata.getPartsOf())+
+				SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
+					SPARQLFetcherUtils.formatResource(metadata.getMeasure())+" "+SPARQLFetcherUtils.formatVar(VALUE_VAR_SPARQL)+" . "+
+				SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
+					SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.REF_DATE.getURI())+" "+SPARQLFetcherUtils.formatVar(DATE_VALUE_VAR_SPARQL)+" . "+
+				SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
+						SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.REF_AGENT.getURI())+" "+SPARQLFetcherUtils.formatVar(AGENT_VALUE_VAR_SPARQL)+" . "+
+			"} "+ createGroupByDimensions(metadata.getPartsOf());
+		return sparqlQuery;
+	}
+
+	
+
+	protected static String createObservationUniqueID() {
 		return "o"+System.nanoTime(); //FIXME: in a distributed environment this does not ensure an unique id, a common repo should be used
 	}
 
-	private String createSPARQLQuery(AggregationMetadataTO metadata) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	protected static String createGroupByDimensions(Set<String> partsOf) {
+		Set s = new HashSet<String>(); //FIXME: extract from ontology
+		s.add(DATE_VALUE_VAR_SPARQL);
+		s.add(AGENT_VALUE_VAR_SPARQL);
+		return SPARQLFetcherUtils.createGroupByResource(s);
 	}
 
-	protected String createIndexQuery(Model abox) {		
+	protected static String formatFormula(String operator) {
+		//FIXME: extract mapping
+		String function = "avg"+"("+SPARQLFetcherUtils.formatVar(VALUE_VAR_SPARQL)+")";
+		return "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+	}
+
+	protected static String createFilterParts(Set<String> partsOf) {
+		return SPARQLFetcherUtils.createFilterPartsOf(partsOf);
+	}
+
+	protected static String createIndexQuery(Model abox) {		
 		String indexQuery = SPARQLUtils.NS+" "+
 			"SELECT ?index WHERE{ "+
 				"?index rdf:type rdfindex:Index. "+
@@ -109,7 +151,7 @@ public class SPARQLProcessor implements Processor {
 		return indexQuery;
 	}
 
-	protected String createComponentsFromIndexQuery(String indexURI, Model abox) {
+	protected static String createComponentsFromIndexQuery(String indexURI, Model abox) {
 		String componentFromIndexQuery = SPARQLUtils.NS+" "+ 
 			"SELECT ?component WHERE{ "+
 				"?index rdf:type rdfindex:Index.  "+
@@ -121,19 +163,19 @@ public class SPARQLProcessor implements Processor {
 	}
 	
 
-	protected String createIndicatorsFromComponentQuery(String componentURI, Model abox) {
+	protected static String createIndicatorsFromComponentQuery(String componentURI, Model abox) {
 		String componentFromIndexQuery = SPARQLUtils.NS+" "+ 
 			"SELECT ?indicator WHERE{ "+
-				"?component rdf:type rdfindex:Component.  "+
+				"?component  rdf:type rdfindex:Component.  "+
 				SPARQLFetcherUtils.createFilterResource(componentURI, COMPONENT_VAR_SPARQL)+
-				"?component rdfindex:aggregates ?indicators.  "+
+				"?component  rdfindex:aggregates ?indicators.  "+
 				"?indicators rdfindex:part-of ?indicator.  "+
 			"}";
 		return componentFromIndexQuery;
 	}
 	
 
-	protected AggregationMetadataTO getMetadataTO(String uri, Model abox) {
+	protected static AggregationMetadataTO getMetadataTO(String uri, Model abox) {
 		AggregationMetadataTO aggregation = new AggregationMetadataTO();
 			String description = SPARQLUtils.NS+					
 			"SELECT * WHERE{ "+

@@ -26,7 +26,7 @@
 #A-BOX-An example of dummy index
 #
 
-rdfindex:TheLongestLifeCountry a rdfindex:Component;
+rdfindex:TheLongestLifeCountry a rdfindex:Index;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:WeightedOperator;
