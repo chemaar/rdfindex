@@ -58,7 +58,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 			observationsFromComponents.addAll(componentObservations);
 		}
 		//Since we have generated a new set of observations for the components of this index we can aggregate
-		logger.debug("...the index "+index.getUri()+" is going to compute "+observationsFromComponents.size()+"  observations from components.");
+		logger.debug("...the index "+index.getUri()+" is going to compute "+observationsFromComponents.size()+" observations from components.");
 		Model indexModel = ModelFactory.createDefaultModel();
 		indexModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromComponents));
 		List<ObservationTO> observations = execute(indexModel, index.getMetadata(), index.getAggregated());
@@ -74,7 +74,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 			observationsFromIndicators.addAll(indicatorObservations);
 		}
 		//Since we have generated a new set of observations for the indicators of this component we can aggregate
-		logger.debug("...the component "+component.getUri()+" is going to compute "+observationsFromIndicators.size()+"  observations from indicators.");
+		logger.debug("...the component "+component.getUri()+" is going to compute "+observationsFromIndicators.size()+" observations from indicators.");
 		Model componentModel = ModelFactory.createDefaultModel();
 		componentModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromIndicators));
 		List<ObservationTO> observations = execute(componentModel, component.getMetadata(), component.getAggregated());
@@ -86,7 +86,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		observations.addAll(execute(this.abox, indicator.getMetadata(), indicator.getAggregated()));
-	//	System.out.println("PRINTING THE VALUES IN THE INDICATOR");
+	//	logger.debug("PRINTING THE VALUES IN THE INDICATOR");
 	//	PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;

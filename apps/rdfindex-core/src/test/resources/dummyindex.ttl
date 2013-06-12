@@ -30,9 +30,9 @@ rdfindex:TheLongestLifeCountry a rdfindex:Index;
 	rdfs:label 	"The Longest Life Country"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:aggregates [ 		
-		rdfindex:aggregation-operator rdfindex:Min;
+		rdfindex:aggregation-operator rdfindex:Mean;
 		rdfindex:part-of rdfindex:HealthValue ;
-		rdfindex:part-of rdfindex:HealthValue ;
+		rdfindex:part-of rdfindex:OtherHealthValue ;
 	];
 	qb:structure 	rdfindex:TheLongestLifeCountryDSD ;
 .
