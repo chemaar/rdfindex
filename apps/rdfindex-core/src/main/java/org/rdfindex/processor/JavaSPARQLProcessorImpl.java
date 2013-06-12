@@ -13,7 +13,6 @@ import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.IndexTO;
 import org.rdfindex.to.IndicatorTO;
 import org.rdfindex.to.ObservationTO;
-import org.rdfindex.utils.PrettyPrinter;
 import org.rdfindex.utils.RDFIndexUtils;
 import org.rdfindex.utils.RDFIndexVocabulary;
 import org.rdfindex.utils.SPARQLFetcherUtils;
@@ -51,6 +50,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	}
 	//FIXME: Refactor? an interface ObservableTO could be extracted and ComponentTO, IndexTO, etc. could implement it, just one method! so far I am goint to keep as it is
 	private List<ObservationTO> processIndex(IndexTO index) {
+		logger.debug("Processing index "+index.getUri());
 		List<ObservationTO> observationsFromComponents = new LinkedList<ObservationTO>();
 		List<ComponentTO> components = index.getComponents();
 		for(ComponentTO component:components){
@@ -58,12 +58,15 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 			observationsFromComponents.addAll(componentObservations);
 		}
 		//Since we have generated a new set of observations for the components of this index we can aggregate
+		logger.debug("...the index "+index.getUri()+" is going to compute "+observationsFromComponents.size()+"  observations from components.");
 		Model indexModel = ModelFactory.createDefaultModel();
 		indexModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromComponents));
 		List<ObservationTO> observations = execute(indexModel, index.getMetadata(), index.getAggregated());
+		logger.debug("...the index "+index.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
 	private List<ObservationTO> processComponent(ComponentTO component) {
+		logger.debug("Processing component "+component.getUri());
 		List<ObservationTO> observationsFromIndicators = new LinkedList<ObservationTO>();
 		List<IndicatorTO> indicators = component.getIndicators();
 		for(IndicatorTO indicator:indicators){
@@ -71,19 +74,21 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 			observationsFromIndicators.addAll(indicatorObservations);
 		}
 		//Since we have generated a new set of observations for the indicators of this component we can aggregate
+		logger.debug("...the component "+component.getUri()+" is going to compute "+observationsFromIndicators.size()+"  observations from indicators.");
 		Model componentModel = ModelFactory.createDefaultModel();
 		componentModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromIndicators));
 		List<ObservationTO> observations = execute(componentModel, component.getMetadata(), component.getAggregated());
-		//System.out.println("PRINTING THE VALUES IN THE COMPONENT");
-		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
+		logger.debug("...the component "+component.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
 	
 	private List<ObservationTO> processIndicator(IndicatorTO indicator) {
+		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		observations.addAll(execute(this.abox, indicator.getMetadata(), indicator.getAggregated()));
 	//	System.out.println("PRINTING THE VALUES IN THE INDICATOR");
 	//	PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
+		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
 	
@@ -155,7 +160,6 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 
 	//FIXME: extract mapping, what happen with the operation aggregator
 	protected static String formatFormula(String operator) {
-		System.out.println("OPERATOR "+operator);
 		if (operator.equalsIgnoreCase("http://purl.org/rdfindex/ontology/Mean")){
 			String function = "avg"+"("+SPARQLFetcherUtils.formatVar(RDFIndexUtils.MEASURE_VAR_SPARQL)+")";
 			return "("+ function+" as "+SPARQLFetcherUtils.formatVar(RDFIndexUtils.NEW_VALUE_VAR_SPARQL)+")";
@@ -166,7 +170,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	
 	//FIXME: in a distributed environment this does not ensure an unique id, a common repo should be used
 	protected static String createObservationUniqueID() {
-		return "http://purl.org/rdfindex/computation/o"+System.nanoTime(); 
+		return "http://purl.org/rdfindex/computation/resource/o"+System.nanoTime(); 
 	}
 	
 	
