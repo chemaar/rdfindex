@@ -8,9 +8,15 @@ public class RDFIndexVocabulary {
 
 	public static final Resource OBSERVATION_TYPE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "observation" );
 	public static final Property QB_DATASET = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "dataSet" );
+	public static final Property QB_DIMENSION = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "dimension" );
+	public static final Property QB_MEASURE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "measure" );
 	public static final Property QB_OBSERVATION = ResourceFactory.createProperty(PrefixManager.getURIPrefix("qb"), "observation" );
+	
 	public static final Property REF_DATE = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "ref-year" );
+
 	public static final Property REF_AGENT = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "ref-area" );;
+	
+	public static final Property PART_OF = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "part-of" );
 	
 	
 

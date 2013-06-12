@@ -5,7 +5,8 @@ import java.util.List;
 public class ComponentTO {
 	private String uri;
 	private List<IndicatorTO> indicators;
-	private AggregationMetadataTO metadata;
+	private DatasetStructureTO metadata;
+	private AggregatedTO aggregated;
 	public String getUri() {
 		return uri;
 	}
@@ -18,11 +19,23 @@ public class ComponentTO {
 	public void setIndicators(List<IndicatorTO> indicators) {
 		this.indicators = indicators;
 	}
-	public AggregationMetadataTO getMetadata() {
+	public DatasetStructureTO getMetadata() {
 		return metadata;
 	}
-	public void setMetadata(AggregationMetadataTO metadata) {
+	public void setMetadata(DatasetStructureTO metadata) {
 		this.metadata = metadata;
 	}
+	public AggregatedTO getAggregated() {
+		return aggregated;
+	}
+	public void setAggregated(AggregatedTO aggregated) {
+		this.aggregated = aggregated;
+	}
+	@Override
+	public String toString() {
+		return "ComponentTO [uri=" + uri + ", indicators=" + indicators
+				+ ", metadata=" + metadata + ", aggregated=" + aggregated + "]";
+	}
+	
 	
 }

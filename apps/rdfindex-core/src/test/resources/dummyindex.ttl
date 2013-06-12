@@ -31,9 +31,10 @@ rdfindex:TheLongestLifeCountry a rdfindex:Index;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:Min;
 		rdfindex:part-of rdfindex:HealthValue ;
-		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
+		qb:measure rdfindex:value;
+		qb:dimension  rdfindex:ref-area, rdfindex:ref-year;
 	];
-
+	qb:structure 	rdfindex:TheLongestLifeCountryDSD ;
 .
 
 rdfindex:HealthValue a rdfindex:Component;
@@ -42,22 +43,23 @@ rdfindex:HealthValue a rdfindex:Component;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator rdfindex:Min;
 		rdfindex:part-of rdfindex:AggregatedLifeExpectancy;
-		qb:measure rdfindex:life-expectancy;
-		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
+		qb:measure rdfindex:value;
+		qb:dimension  rdfindex:ref-area, rdfindex:ref-year;
 	];
-
+	qb:structure 	rdfindex:HealthValueDSD ;  
 .
 
 rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
+	rdfs:label 	"Aggregated Life expectancy"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator rdfindex:Mean;
 		rdfindex:part-of rdfindex:LifeExpectancy;  
-		qb:measure rdfindex:life-expectancy;
-		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
+		qb:measure  rdfindex:value;
+		qb:dimension rdfindex:ref-area, rdfindex:ref-year;
 	];
-
+	qb:structure 	rdfindex:AggregatedLifeExpectancyDSD ;  
 .
 
 
@@ -65,21 +67,48 @@ rdfindex:LifeExpectancy a rdfindex:Indicator;
 	rdfs:label 	"Life expectancy"@en;
 	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
 	rdfindex:type 	rdfindex:Quantitative;	
-	qb:structure 	rdfindex:LifeExpectancyStructure ;  
+	qb:structure 	rdfindex:LifeExpectancyDSD ;  
 	sdmx-attribute:unitMeasure dbpedia-res:Year ;
         qb:slice rdfindex:slice1, rdfindex:slice2  ;
 .
 
 
 #Examples instances: it is necessary to add attachments
+#
+# Since an index, component or indicator is a qb:dataSet it is necessary to define their structure
+#
 
-rdfindex:LifeExpectancyStructure a qb:DataStructureDefinition;
-    qb:component    [qb:dimension rdfindex:ref-area;  qb:order 1],
-        [qb:dimension rdfindex:ref-year;  qb:order 2; qb:componentAttachment qb:Slice],
-        [qb:dimension sdmx-dimension:sex; qb:order 3; qb:componentAttachment qb:Slice],
-        [qb:measure   rdfindex:life-expectancy],
-        [qb:attribute sdmx-attribute:unitMeasure; qb:componentAttachment qb:DataSet];
-#    qb:sliceKey eg:sliceByRegion;
+
+rdfindex:TheLongestLifeCountryDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+rdfindex:HealthValueDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+rdfindex:AggregatedLifeExpectancyDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+rdfindex:LifeExpectancyDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:dimension sdmx-dimension:sex],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
 .
 
 
@@ -113,14 +142,14 @@ rdfindex:o1c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                  
-    rdfindex:life-expectancy         78 ;
+    rdfindex:value        78 ;
     .
     
 rdfindex:o2c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                 
-    rdfindex:life-expectancy         80 ;
+    rdfindex:value        80 ;
     .
 
 
@@ -128,14 +157,14 @@ rdfindex:o3c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                  
-    rdfindex:life-expectancy         78 ;
+    rdfindex:value        78 ;
     .
     
 rdfindex:o4c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                  
-    rdfindex:life-expectancy         81 ;
+    rdfindex:value        81 ;
     .
 
 
@@ -143,14 +172,14 @@ rdfindex:o5c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                   
-    rdfindex:life-expectancy         78 ;
+    rdfindex:value        78 ;
     .
     
 rdfindex:o6c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                   
-    rdfindex:life-expectancy         82 ;
+    rdfindex:value        82 ;
     .
 
 #Turkey observations
@@ -159,14 +188,14 @@ rdfindex:o7c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                
-    rdfindex:life-expectancy         76 ;
+    rdfindex:value        76 ;
     .
     
 rdfindex:o8c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                  
-    rdfindex:life-expectancy         79 ;
+    rdfindex:value        79 ;
     .
 
 
@@ -174,14 +203,14 @@ rdfindex:o9c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                 
-    rdfindex:life-expectancy         76 ;
+    rdfindex:value        76 ;
     .
     
 rdfindex:o10c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                
-    rdfindex:life-expectancy         80 ;
+    rdfindex:value        80 ;
     .
 
 
@@ -189,13 +218,13 @@ rdfindex:o11c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                           
-    rdfindex:life-expectancy         77 ;
+    rdfindex:value        77 ;
     .
     
 rdfindex:o12c a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                              
-    rdfindex:life-expectancy         80 ;
+    rdfindex:value        80 ;
     .
 

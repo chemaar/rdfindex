@@ -2,6 +2,6 @@ package org.rdfindex.to;
 
 public interface Observable {
 
-	public AggregationMetadataTO getMetadataTO();
+	public DatasetStructureTO getMetadataTO();
 	public String getURI();
 }

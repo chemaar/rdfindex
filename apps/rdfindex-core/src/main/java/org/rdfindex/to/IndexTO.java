@@ -6,7 +6,10 @@ public class IndexTO {
 	private String uri;
 
 	private List<ComponentTO> components;
-	private AggregationMetadataTO metadata;
+	private DatasetStructureTO metadata;
+	private AggregatedTO aggregated;
+	
+	
 	public String getUri() {
 		return uri;
 	}
@@ -19,17 +22,24 @@ public class IndexTO {
 	public void setComponents(List<ComponentTO> components) {
 		this.components = components;
 	}
-	public AggregationMetadataTO getMetadata() {
+	public DatasetStructureTO getMetadata() {
 		return metadata;
 	}
-	public void setMetadata(AggregationMetadataTO metadata) {
+	public void setMetadata(DatasetStructureTO metadata) {
 		this.metadata = metadata;
+	}
+	public AggregatedTO getAggregated() {
+		return aggregated;
+	}
+	public void setAggregated(AggregatedTO aggregated) {
+		this.aggregated = aggregated;
 	}
 	@Override
 	public String toString() {
 		return "IndexTO [uri=" + uri + ", components=" + components
-				+ ", metadata=" + metadata + "]";
+				+ ", metadata=" + metadata + ", aggregated=" + aggregated + "]";
 	}
+
 	
 	
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.rdfindex.to.AggregationMetadataTO;
+import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.ObservationTO;
 import org.rdfindex.utils.PrettyPrinter;
 import org.rdfindex.utils.RDFIndexUtils;
@@ -51,7 +51,7 @@ public class SPARQLProcessor implements Processor {
 			List<ObservationTO> newObservations = processIndicatorsOf(component, tbox, abox);
 			Model componentModel = observationsAsRDF(newObservations);
 			PrettyPrinter.prettyPrint(componentModel);
-			AggregationMetadataTO metadata = getMetadataTO(component, abox);
+			DatasetStructureTO metadata = getMetadataTO(component, abox);
 			String sparqlQuery = createSPARQLQuery(metadata);
 			observations.addAll(
 					fetchNewObservations(metadata,
@@ -76,7 +76,7 @@ public class SPARQLProcessor implements Processor {
 			String indicator = SPARQLFetcherUtils.fetchResourceValue(results[i], 
 					RDFIndexUtils.INDICATOR_VAR_SPARQL);
 			System.out.println("Processing indicator "+indicator);
-			AggregationMetadataTO metadata = getMetadataTO(indicator, abox);	
+			DatasetStructureTO metadata = getMetadataTO(indicator, abox);	
 			String sparqlQuery = createSPARQLQuery(metadata);
 			observations.addAll(fetchNewObservations(metadata,SPARQLUtils.executeSimpleSparql(abox, sparqlQuery)));
 		}
@@ -85,7 +85,7 @@ public class SPARQLProcessor implements Processor {
 		return observations;
 	}
 
-	protected static List<ObservationTO> fetchNewObservations(AggregationMetadataTO metadata, QuerySolution[] results) {
+	protected static List<ObservationTO> fetchNewObservations(DatasetStructureTO metadata, QuerySolution[] results) {
 		List<ObservationTO> newObservations = new LinkedList<ObservationTO>();
 		//A new observation will be created with the next metadata
 		for(int i = 0; i<results.length;i++){
@@ -101,7 +101,7 @@ public class SPARQLProcessor implements Processor {
 		return newObservations;
 	}
 
-	protected static String createSPARQLQuery(AggregationMetadataTO metadata) {
+	protected static String createSPARQLQuery(DatasetStructureTO metadata) {
 		//FIXME: distinguish between slice or others to create the first match pattern
 		String sparqlQuery = SPARQLUtils.NS+" "+
 			"SELECT " +SPARQLFetcherUtils.formatVar(RDFIndexUtils.DATE_VALUE_VAR_SPARQL)+ " "+
@@ -202,8 +202,8 @@ public class SPARQLProcessor implements Processor {
 	}
 	
 
-	protected static AggregationMetadataTO getMetadataTO(String uri, Model abox) {
-		AggregationMetadataTO aggregation = new AggregationMetadataTO();
+	protected static DatasetStructureTO getMetadataTO(String uri, Model abox) {
+		DatasetStructureTO aggregation = new DatasetStructureTO();
 			String description = SPARQLUtils.NS+					
 			"SELECT * WHERE{ "+
 				"?element rdf:type ?type  "+ //FIXME: how to select the type, it should be the same for index, component and indicator!

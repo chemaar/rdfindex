@@ -9,19 +9,16 @@ import org.rdfindex.processor.SPARQLProcessorTest;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class MetadataDAOImplTest {
-
+	Model tbox = SPARQLProcessorTest.createModel("rdfindex.ttl");
+	Model abox = SPARQLProcessorTest.createModel("dummyindex.ttl");
 	@Test
-	public void testGetIndexes() {
-		Model tbox = SPARQLProcessorTest.createModel("rdfindex.ttl");
-		Model abox = SPARQLProcessorTest.createModel("dummyindex.ttl");
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
+	public void testGetIndexes() {	
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);	
 		Assert.assertEquals(1,metadata.getIndexMetadata().size());
 	}
 
 	@Test
 	public void testGetComponents() {
-		Model tbox = SPARQLProcessorTest.createModel("rdfindex.ttl");
-		Model abox = SPARQLProcessorTest.createModel("dummyindex.ttl");
 		String indexUri = "http://purl.org/rdfindex/ontology/TheLongestLifeCountry";
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
 		Assert.assertEquals(1,metadata.getComponentMetadata(indexUri).size());
@@ -29,11 +26,27 @@ public class MetadataDAOImplTest {
 	
 	@Test
 	public void testGetIndicators() {
-		Model tbox = SPARQLProcessorTest.createModel("rdfindex.ttl");
-		Model abox = SPARQLProcessorTest.createModel("dummyindex.ttl");
 		String componentUri = "http://purl.org/rdfindex/ontology/HealthValue";
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);		
 		Assert.assertEquals(1,metadata.getIndicatorMetadata(componentUri).size());
+	}
+	
+	@Test
+	public void testGetIndicatorDSD() {
+		String indicatorUri = "http://purl.org/rdfindex/ontology/LifeExpectancy";
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);	
+		Assert.assertEquals(3,metadata.getDatasetStructure(indicatorUri).getDimensions().size());
+	}
+	
+	@Test
+	public void testGetComponentAggregated() {
+		String indexUri = "http://purl.org/rdfindex/ontology/TheLongestLifeCountry";
+		String componentUri = "http://purl.org/rdfindex/ontology/HealthValue";
+		String indicatorUri = "http://purl.org/rdfindex/ontology/AggregatedLifeExpectancy";
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
+		Assert.assertEquals(1,metadata.getAggregatedTO(indexUri).getPartsOf().size());
+		Assert.assertEquals(1,metadata.getAggregatedTO(componentUri).getPartsOf().size());
+		Assert.assertEquals(1,metadata.getAggregatedTO(indicatorUri).getPartsOf().size());
 	}
 	
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.rdfindex.to.AggregationMetadataTO;
+import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.ObservationTO;
 import org.rdfindex.utils.SPARQLUtils;
 
@@ -40,7 +40,7 @@ public class SPARQLProcessorTest {
 		String uri = "http://purl.org/rdfindex/ontology/AggregatedLifeExpectancy";
 		String measure = "http://purl.org/rdfindex/ontology/life-expectancy";
 		String operator = "http://purl.org/rdfindex/ontology/Mean";
-		AggregationMetadataTO metadata = rdfIndexProcessor.getMetadataTO(uri , abox);
+		DatasetStructureTO metadata = rdfIndexProcessor.getMetadataTO(uri , abox);
 		Assert.assertEquals(uri, metadata.getElement());
 		Assert.assertEquals(measure, metadata.getMeasure());
 		Assert.assertEquals(operator, metadata.getOperator());
@@ -52,7 +52,7 @@ public class SPARQLProcessorTest {
 	public void testGetCreateQuery(){
 		Model abox = createModel("dummyindex.ttl");
 		String uri = "http://purl.org/rdfindex/ontology/AggregatedLifeExpectancy";
-		AggregationMetadataTO metadata = SPARQLProcessor.getMetadataTO(uri , abox);
+		DatasetStructureTO metadata = SPARQLProcessor.getMetadataTO(uri , abox);
 		String expected = SPARQLUtils.NS+" "+ "SELECT ?date ?agent (avg(?value) as ?newvalue) WHERE{ ?part <http://purl.org/linked-data/cube#observation> ?observation . FILTER (  (?part = <http://purl.org/rdfindex/ontology/slice2> )  ||  (?part = <http://purl.org/rdfindex/ontology/slice1> ) ). ?observation <http://purl.org/rdfindex/ontology/life-expectancy> ?value . ?observation <http://purl.org/rdfindex/ontology/ref-year> ?date . ?observation <http://purl.org/rdfindex/ontology/ref-area> ?agent . } GROUP BY ?date ?agent ";
 		Assert.assertEquals(expected,SPARQLProcessor.createSPARQLQuery(metadata));
 	}
