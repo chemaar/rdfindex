@@ -1,8 +1,25 @@
 package org.rdfindex.utils;
 
+import java.util.List;
+
+import org.rdfindex.to.ObservationTO;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+
 
 public class SPARQLQueriesHelper {
 
+	
+	public static Model observationsAsRDF(List<ObservationTO> newObservations) {
+		Model model = ModelFactory.createDefaultModel();
+		for(ObservationTO observation:newObservations){
+			model.add(RDFIndexUtils.observationAsRDF(observation));
+		}
+		return model;
+	}
+	
+	
 	public static String createQueryAggregatesFromElement(String uri) {
 		String createQueryAggregatesFromElement = SPARQLUtils.NS+" "+ 
 			"SELECT ?element ?type ?ref ?operator WHERE{ "+
@@ -13,7 +30,7 @@ public class SPARQLQueriesHelper {
 				"?aggregated ?type ?ref.  "+
 				//"FILTER(?type=qb:dimension || ?type=qb:measure || ?type=rdfindex:part-of)" +
 				"FILTER(?type=rdfindex:part-of)" +
-		//This is information is already available in the Dataset Structure
+				//This is information is already available in the Dataset Structure
 			"}";
 		return createQueryAggregatesFromElement;
 	}

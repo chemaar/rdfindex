@@ -1,16 +1,16 @@
 package org.rdfindex.dao;
 
-import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.rdfindex.processor.SPARQLProcessorTest;
+
+import test.utils.TestHelper;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class MetadataDAOImplTest {
-	Model tbox = SPARQLProcessorTest.createModel("rdfindex.ttl");
-	Model abox = SPARQLProcessorTest.createModel("dummyindex.ttl");
+	Model tbox = TestHelper.createModel("rdfindex.ttl");
+	Model abox = TestHelper.createModel("dummyindex.ttl");
 	@Test
 	public void testGetIndexes() {	
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);	

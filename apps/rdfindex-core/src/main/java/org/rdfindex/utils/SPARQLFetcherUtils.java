@@ -37,6 +37,16 @@ public class SPARQLFetcherUtils {
 	//		return pscTO;
 	//	}
 	//
+	
+	public static String fetchStringOrResource (QuerySolution soln, String field){
+		return (soln==null  || soln.get(field)==null)?"": 
+			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():
+											soln.get(field).isURIResource()?
+													soln.getResource(field).getURI():
+													soln.toString();
+	}
+	
+	
 	public static String fetchStringValue (QuerySolution soln, String field){
 		return (soln==null  || soln.get(field)==null)?"": 
 			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():soln.toString();

@@ -1,5 +1,7 @@
 package org.rdfindex.utils;
 
+import java.util.Map;
+
 import org.rdfindex.to.ObservationTO;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -15,8 +17,14 @@ public class RDFIndexUtils {
 		Resource observationResource = ResourceFactory.createResource(observation.getUri());
 		model.add(observationResource, RDF.type, RDFIndexVocabulary.OBSERVATION_TYPE );
 		model.add(observationResource,RDFIndexVocabulary.QB_DATASET, ResourceFactory.createResource(observation.getUriDataset()));
-		model.add(observationResource,RDFIndexVocabulary.REF_DATE,observation.getDate());
-		model.add(observationResource,RDFIndexVocabulary.REF_AGENT, ResourceFactory.createResource(observation.getAgent()));
+		Map <String,String>dimensions = observation.getDimensions();
+		for(String dimensionUri:dimensions.keySet()){
+			model.add(observationResource,
+					ResourceFactory.createProperty(dimensionUri),
+					ResourceFactory.createResource(dimensions.get(dimensionUri))); 
+					//FIXME:Ask to the abox which is the range of of the dimension to generate a resource or a literal
+					//Now everyting is a resource
+		}
 		model.add(observationResource,ResourceFactory.createProperty(observation.getMeasure()),observation.getValue());
 		return model;
 	}
