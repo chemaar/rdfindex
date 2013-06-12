@@ -59,9 +59,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 		}
 		//Since we have generated a new set of observations for the components of this index we can aggregate
 		logger.debug("...the index "+index.getUri()+" is going to compute "+observationsFromComponents.size()+" observations from components.");
-		Model indexModel = ModelFactory.createDefaultModel();
-		indexModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromComponents));
-		List<ObservationTO> observations = execute(indexModel, index.getMetadata(), index.getAggregated());
+		List<ObservationTO> observations = execute(observationsFromComponents, index.getMetadata(), index.getAggregated());
 		logger.debug("...the index "+index.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
@@ -75,9 +73,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 		}
 		//Since we have generated a new set of observations for the indicators of this component we can aggregate
 		logger.debug("...the component "+component.getUri()+" is going to compute "+observationsFromIndicators.size()+" observations from indicators.");
-		Model componentModel = ModelFactory.createDefaultModel();
-		componentModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromIndicators));
-		List<ObservationTO> observations = execute(componentModel, component.getMetadata(), component.getAggregated());
+		List<ObservationTO> observations = execute(observationsFromIndicators, component.getMetadata(), component.getAggregated());
 		logger.debug("...the component "+component.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
@@ -90,6 +86,12 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	//	PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
+	}
+	
+	protected static List<ObservationTO> execute(List<ObservationTO> observations, DatasetStructureTO metadata, AggregatedTO aggregated){
+		Model model = ModelFactory.createDefaultModel();
+		model.add(SPARQLQueriesHelper.observationsAsRDF(observations));
+		return execute(model, metadata, aggregated);
 	}
 	
 	protected static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
