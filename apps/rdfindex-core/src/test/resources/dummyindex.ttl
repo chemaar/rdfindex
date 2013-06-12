@@ -31,8 +31,6 @@ rdfindex:TheLongestLifeCountry a rdfindex:Index;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:Min;
 		rdfindex:part-of rdfindex:HealthValue ;
-		qb:measure rdfindex:value;
-		qb:dimension  rdfindex:ref-area, rdfindex:ref-year;
 	];
 	qb:structure 	rdfindex:TheLongestLifeCountryDSD ;
 .
@@ -43,8 +41,6 @@ rdfindex:HealthValue a rdfindex:Component;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator rdfindex:Min;
 		rdfindex:part-of rdfindex:AggregatedLifeExpectancy;
-		qb:measure rdfindex:value;
-		qb:dimension  rdfindex:ref-area, rdfindex:ref-year;
 	];
 	qb:structure 	rdfindex:HealthValueDSD ;  
 .
@@ -56,8 +52,6 @@ rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator rdfindex:Mean;
 		rdfindex:part-of rdfindex:LifeExpectancy;  
-		qb:measure  rdfindex:value;
-		qb:dimension rdfindex:ref-area, rdfindex:ref-year;
 	];
 	qb:structure 	rdfindex:AggregatedLifeExpectancyDSD ;  
 .

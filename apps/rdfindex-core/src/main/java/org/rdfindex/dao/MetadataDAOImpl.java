@@ -111,11 +111,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 			}
 			String type = SPARQLFetcherUtils.fetchResourceValue(results[i], "type");
 			String ref = SPARQLFetcherUtils.fetchResourceValue(results[i], "ref");
-			if (type.equals(RDFIndexVocabulary.QB_DIMENSION.getURI())){
-				aggregated.getDimensions().add(ref);
-			}else if (type.equals(RDFIndexVocabulary.QB_MEASURE.getURI())){
-				aggregated.setMeasure(ref);
-			}else if (type.equals(RDFIndexVocabulary.PART_OF.getURI())){
+			if (type.equals(RDFIndexVocabulary.PART_OF.getURI())){
 				aggregated.getPartsOf().add(ref);//FIXME: to be removed it is part of the composition
 			}
 		}

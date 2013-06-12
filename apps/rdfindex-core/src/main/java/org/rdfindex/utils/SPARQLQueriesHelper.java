@@ -11,7 +11,9 @@ public class SPARQLQueriesHelper {
 				"?aggregated rdfindex:part-of ?part.  "+
 				"?aggregated rdfindex:aggregation-operator ?operator.  "+
 				"?aggregated ?type ?ref.  "+
-				"FILTER(?type=qb:dimension || ?type=qb:measure || ?type=rdfindex:part-of)" +
+				//"FILTER(?type=qb:dimension || ?type=qb:measure || ?type=rdfindex:part-of)" +
+				"FILTER(?type=rdfindex:part-of)" +
+		//This is information is already available in the Dataset Structure
 			"}";
 		return createQueryAggregatesFromElement;
 	}
