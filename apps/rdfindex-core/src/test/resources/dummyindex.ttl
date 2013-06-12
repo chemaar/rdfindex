@@ -27,6 +27,7 @@
 #
 
 rdfindex:TheLongestLifeCountry a rdfindex:Index;
+	rdfs:label 	"The Longest Life Country"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:Min;
@@ -36,6 +37,7 @@ rdfindex:TheLongestLifeCountry a rdfindex:Index;
 .
 
 rdfindex:HealthValue a rdfindex:Component;
+	rdfs:label 	"Health Value"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
 	rdfindex:aggregates [ 

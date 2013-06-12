@@ -39,6 +39,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 			IndexTO indexTO = new IndexTO();
 			indexTO.setUri(indexUri);
 			indexTO.setComponents(getComponentMetadata(indexUri));
+			indexTO.setMetadata(getDatasetStructure(indexUri));
 			indexTO.setAggregated(getAggregatedTO(indexUri));
 			indexes.add(indexTO);			
 		}
@@ -55,6 +56,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 			ComponentTO componentTO = new ComponentTO();
 			componentTO.setUri(componentUri);
 			componentTO.setIndicators(getIndicatorMetadata(componentUri));
+			componentTO.setMetadata(getDatasetStructure(componentUri));
 			componentTO.setAggregated(getAggregatedTO(componentUri));
 			components.add(componentTO);
 		}

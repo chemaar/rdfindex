@@ -22,6 +22,7 @@ import org.rdfindex.utils.SPARQLUtils;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class JavaSPARQLProcessorImpl  implements Processor{
 
@@ -48,33 +49,48 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	
 		return observations;
 	}
+	//FIXME: Refactor? an interface ObservableTO could be extracted and ComponentTO, IndexTO, etc. could implement it, just one method! so far I am goint to keep as it is
 	private List<ObservationTO> processIndex(IndexTO index) {
-		List<ObservationTO> observations = new LinkedList<ObservationTO>();
+		List<ObservationTO> observationsFromComponents = new LinkedList<ObservationTO>();
 		List<ComponentTO> components = index.getComponents();
 		for(ComponentTO component:components){
 			List<ObservationTO> componentObservations = processComponent(component);
-			observations.addAll(componentObservations);
+			observationsFromComponents.addAll(componentObservations);
 		}
-	
+		//Since we have generated a new set of observations for the components of this index we can aggregate
+		Model indexModel = ModelFactory.createDefaultModel();
+		indexModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromComponents));
+		List<ObservationTO> observations = execute(indexModel, index.getMetadata(), index.getAggregated());
 		return observations;
 	}
 	private List<ObservationTO> processComponent(ComponentTO component) {
-		List<ObservationTO> observations = new LinkedList<ObservationTO>();
+		List<ObservationTO> observationsFromIndicators = new LinkedList<ObservationTO>();
 		List<IndicatorTO> indicators = component.getIndicators();
 		for(IndicatorTO indicator:indicators){
 			List<ObservationTO> indicatorObservations = processIndicator(indicator);
-			observations.addAll(indicatorObservations);
+			observationsFromIndicators.addAll(indicatorObservations);
 		}
+		//Since we have generated a new set of observations for the indicators of this component we can aggregate
+		Model componentModel = ModelFactory.createDefaultModel();
+		componentModel.add(SPARQLQueriesHelper.observationsAsRDF(observationsFromIndicators));
+		List<ObservationTO> observations = execute(componentModel, component.getMetadata(), component.getAggregated());
+		//System.out.println("PRINTING THE VALUES IN THE COMPONENT");
+		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
 		return observations;
 	}
 	
 	private List<ObservationTO> processIndicator(IndicatorTO indicator) {
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
-		String sparqlQuery = createSPARQLQuery(indicator.getMetadata(),indicator.getAggregated());
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, sparqlQuery);
-		List<ObservationTO> newObservations = fetchNewObservations(indicator.getMetadata(),results);
-		PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(newObservations));
+		observations.addAll(execute(this.abox, indicator.getMetadata(), indicator.getAggregated()));
+	//	System.out.println("PRINTING THE VALUES IN THE INDICATOR");
+	//	PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observations));
 		return observations;
+	}
+	
+	protected static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
+		String sparqlQuery = createSPARQLQuery(metadata,aggregated);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);
+		return fetchNewObservations(metadata,results);
 	}
 	
 	protected static List<ObservationTO> fetchNewObservations(DatasetStructureTO metadata, QuerySolution[] results) {
