@@ -2,7 +2,6 @@ package org.rdfindex.utils;
 
 import java.util.Set;
 
-import org.rdfindex.processor.SPARQLProcessor;
 
 import com.hp.hpl.jena.query.QuerySolution;
 
@@ -70,7 +69,7 @@ public class SPARQLFetcherUtils {
 	}
 
 		public static String createFilterPartsOf(Set<String> set) {
-			return createFilterResources(set, SPARQLProcessor.PART_VAR_SPARQL);
+			return createFilterResources(set, RDFIndexUtils.PART_VAR_SPARQL);
 		}
 		
 		

@@ -20,4 +20,18 @@ public class RDFIndexUtils {
 		model.add(observationResource,ResourceFactory.createProperty(observation.getMeasure()),observation.getValue());
 		return model;
 	}
+
+	public static final String INDEX_VAR_SPARQL = "index";
+	private static final String VALUE_VAR_SPARQL = "value";
+	public static final String COMPONENT_VAR_SPARQL = "component";
+	public static final String ELEMENT_VAR_SPARQL = "element";
+	public static final String INDICATOR_VAR_SPARQL = "indicator";
+	public static final String OBSERVATION_VAR_SPARQL = "observation";
+	public static final String MEASURE_VAR_SPARQL = "measure";
+	public static final String DIMENSION_VAR_SPARQL = "dimension";
+	public static final String PART_VAR_SPARQL = "part";
+	public static final String OPERATOR_VAR_SPARQL = "operator";
+	public static final String NEW_VALUE_VAR_SPARQL = "newvalue";
+	public static final String DATE_VALUE_VAR_SPARQL = "date";
+	public static final String AGENT_VALUE_VAR_SPARQL = "agent";
 }
