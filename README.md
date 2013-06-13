@@ -186,6 +186,22 @@ SELECT  ?dim0 ?dim1 (avg(?measure) as ?newvalue) WHERE{
 
 ```
 
+The Java-SPARQL based processor uses the next SPARQL template that is filled with the metainformation:
+```
+sparqlQuery = "SELECT "+dimensionVars+" "+formatFormula(operator)+" "+
+	      "WHERE{ " +
+			SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+				
+				SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.QB_DATASET.getURI())+" "+
+					SPARQLFetcherUtils.formatVar(PART_VAR_SPARQL)+" . "+
+			SPARQLFetcherUtils.createFilterPartsOf(partsOf)+
+			SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
+				SPARQLFetcherUtils.formatResource(measure)+" "+
+					SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+" . "+
+			createDimensionsBGPs+		
+		"} GROUP BY"+dimensionVars;
+```
+
+
 The process to generate an aggregated element is the next one (with a bottom-up approach from indicator to index):
 * Fill the SPARQL query template according to element (indicator, component, index) metainformation
 * Query existing observations
@@ -213,7 +229,7 @@ in an isolated mode)
  * RDF Data cube observations 
  * OWA operators of SPARQL 1.1
 
-### TO-DO restrictions
+### TO-DO and restrictions
 
 * It should be possible to define restrictions on dimensions and measures. For instance a filter. To tackle this the SPIN
 vocabulary could be used
