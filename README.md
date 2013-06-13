@@ -46,7 +46,7 @@ is still missing.
 
 ### Motivating Example
 
-Imagine we can define an index called "The Longest Life Country". This index comprises two components (with their indicators):
+Imagine we want to define a dummy index called "The Longest Life Country". This index comprises two components (with their indicators):
 * Health
  * Life Expectancy 
 * Public Spending
