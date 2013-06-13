@@ -21,12 +21,12 @@ public class MetadataDAOImplTest {
 	public void testGetComponents() {
 		String indexUri = "http://purl.org/rdfindex/ontology/TheLongestLifeCountry";
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
-		Assert.assertEquals(1,metadata.getComponentMetadata(indexUri).size());
+		Assert.assertEquals(2,metadata.getComponentMetadata(indexUri).size());
 	}
 	
 	@Test
 	public void testGetIndicators() {
-		String componentUri = "http://purl.org/rdfindex/ontology/HealthValue";
+		String componentUri = "http://purl.org/rdfindex/ontology/PublicSpending";
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);		
 		Assert.assertEquals(1,metadata.getIndicatorMetadata(componentUri).size());
 	}
@@ -41,10 +41,10 @@ public class MetadataDAOImplTest {
 	@Test
 	public void testGetComponentAggregated() {
 		String indexUri = "http://purl.org/rdfindex/ontology/TheLongestLifeCountry";
-		String componentUri = "http://purl.org/rdfindex/ontology/HealthValue";
+		String componentUri = "http://purl.org/rdfindex/ontology/PublicSpending";
 		String indicatorUri = "http://purl.org/rdfindex/ontology/AggregatedLifeExpectancy";
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
-		Assert.assertEquals(1,metadata.getAggregatedTO(indexUri).getPartsOf().size());
+		Assert.assertEquals(2,metadata.getAggregatedTO(indexUri).getPartsOf().size());
 		Assert.assertEquals(1,metadata.getAggregatedTO(componentUri).getPartsOf().size());
 		Assert.assertEquals(1,metadata.getAggregatedTO(indicatorUri).getPartsOf().size());
 	}
