@@ -22,9 +22,7 @@ public class JavaSPARQLProcessorImplTest {
 	@Test
 	public void testProcessing(){
 		Processor rdfIndexProcessor = new JavaSPARQLProcessorImpl();
-		Model tbox = TestHelper.createModel("rdfindex.ttl");
-		Model abox = TestHelper.createModel("dummyindex.ttl");
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
 		List<ObservationTO> result = rdfIndexProcessor.run(metadata);
 		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(result));
 		Assert.assertEquals(4, result.size());

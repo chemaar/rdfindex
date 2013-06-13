@@ -16,7 +16,8 @@ public interface RDFIndexMetadataDAO {
 	public List<IndicatorTO> getIndicatorMetadata(String componentUri);
 	public DatasetStructureTO getDatasetStructure(String uri);
 	public abstract AggregatedTO getAggregatedTO(String elementUri);
-	public Model getAbox();
-	public Model getTbox();
+	public Model getIndexMetadataModel();
+	public Model getRDFIndexModel();
+	public Model getObservationsModel();
 	
 }

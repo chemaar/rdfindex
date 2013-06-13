@@ -1,0 +1,149 @@
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix lg:  <http://linkedgeodata.org/ontology/> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+
+#Observations about life expectancy: year, area, male|female,value
+
+#Spanish observations 
+
+rdfindex:o1 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                  
+    rdfindex:value        78 ;
+    .
+    
+rdfindex:o2 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                 
+    rdfindex:value        80 ;
+    .
+
+
+rdfindex:o3 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                  
+    rdfindex:value        78 ;
+    .
+    
+rdfindex:o4 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                  
+    rdfindex:value        81 ;
+    .
+
+
+rdfindex:o5 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                   
+    rdfindex:value        78 ;
+    .
+    
+rdfindex:o6 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                   
+    rdfindex:value        82 ;
+    .
+
+#Turkey observations
+
+rdfindex:o7 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                
+    rdfindex:value        76 ;
+    .
+    
+rdfindex:o8 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                                  
+    rdfindex:value        79 ;
+    .
+
+
+rdfindex:o9 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                                 
+    rdfindex:value        76 ;
+    .
+    
+rdfindex:o10 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                                
+    rdfindex:value        80 ;
+    .
+
+
+rdfindex:o11 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                           
+    rdfindex:value        77 ;
+    .
+    
+rdfindex:o12 a qb:Observation;
+    qb:dataSet                 rdfindex:LifeExpectancy ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                              
+    rdfindex:value        80 ;
+    .
+
+#Observations about health public spending: year, area, 
+
+
+rdfindex:o13 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                  
+    rdfindex:value       2000 ;
+    .
+    
+rdfindex:o14 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                 
+    rdfindex:value        3000 ;
+    .
+    
+    
+rdfindex:o15 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                  
+    rdfindex:value       1000 ;
+    .
+    
+rdfindex:o16 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                 
+    rdfindex:value        1500 ;
+    .
+    
+    

@@ -89,7 +89,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	private List<ObservationTO> processIndicator(IndicatorTO indicator) {
 		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
-		observations.addAll(execute(this.metadata.getAbox(), indicator.getMetadata(), indicator.getAggregated()));
+		observations.addAll(execute(this.metadata.getObservationsModel(), indicator.getMetadata(), indicator.getAggregated()));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}

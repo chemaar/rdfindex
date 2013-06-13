@@ -83,7 +83,7 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 	public Object visit(IndicatorTO indicator) {
 		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
-		observations.addAll(RDFIndexUtils.execute(this.metadata.getAbox(), indicator.getMetadata(), indicator.getAggregated()));
+		observations.addAll(RDFIndexUtils.execute(this.metadata.getObservationsModel(), indicator.getMetadata(), indicator.getAggregated()));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}

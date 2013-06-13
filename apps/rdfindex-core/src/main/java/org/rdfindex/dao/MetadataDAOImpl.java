@@ -22,37 +22,52 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	
 	//FIXME: some information is repeated, aggregates is used in two different modes!
 	
-	private Model abox;
-	private Model tbox;
+	private Model indexMetadataModel;
+	private Model rdfIndexModel;
+	private Model observationsModel;
 	private Model datasource;
 	
 	//FIXME: better just one datasource
-	public MetadataDAOImpl(Model tbox, Model abox) {
-		this.abox = abox;
-		this.tbox = tbox;
+	public MetadataDAOImpl(Model rdfIndexModel, Model indexMetadataModel, Model observations) {
+		this.indexMetadataModel = indexMetadataModel;
+		this.rdfIndexModel = rdfIndexModel;
+		this.observationsModel = observations;
 		this.datasource = ModelFactory.createDefaultModel();
-		this.datasource.add(abox);
-		this.datasource.add(tbox);
+		this.datasource.add(this.indexMetadataModel);
+		this.datasource.add(this.rdfIndexModel);
+		this.datasource.add(this.observationsModel);
 	}
 
 
-	public Model getAbox() {
-		return abox;
+	public Model getIndexMetadataModel() {
+		return indexMetadataModel;
 	}
 
 
-	public void setAbox(Model abox) {
-		this.abox = abox;
+	public void setIndexMetadataModel(Model abox) {
+		this.indexMetadataModel = abox;
 	}
 
 
-	public Model getTbox() {
-		return tbox;
+	public Model getRDFIndexModel() {
+		return rdfIndexModel;
 	}
 
 
-	public void setTbox(Model tbox) {
-		this.tbox = tbox;
+	public void setRDFIndexModel(Model tbox) {
+		this.rdfIndexModel = tbox;
+	}
+
+	
+	
+	
+	public Model getObservationsModel() {
+		return observationsModel;
+	}
+
+
+	public void setObservationsModel(Model observations) {
+		this.observationsModel = observations;
 	}
 
 

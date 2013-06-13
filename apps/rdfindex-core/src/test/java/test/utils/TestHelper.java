@@ -31,5 +31,13 @@ public class TestHelper {
 			return in;
 		}
 	}
+	
+	public static final String DUMMY_OBSERVATIONS_FILE="dummyobservations.ttl";
+	public static final String DUMMY_INDEX_METADATA_MODEL_FILE="dummyindex.ttl";
+	public static final String INDEX_MODEL_FILE="rdfindex.ttl";
+	
+	public static Model INDEX_MODEL = TestHelper.createModel(INDEX_MODEL_FILE);
+	public static Model DUMMY_INDEX_METADATA_MODEL = TestHelper.createModel(DUMMY_INDEX_METADATA_MODEL_FILE);
+	public static Model DUMMY_OBSERVATIONS_MODEL = TestHelper.createModel(DUMMY_OBSERVATIONS_FILE);
 
 }
