@@ -30,6 +30,26 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	}
 
 
+	public Model getAbox() {
+		return abox;
+	}
+
+
+	public void setAbox(Model abox) {
+		this.abox = abox;
+	}
+
+
+	public Model getTbox() {
+		return tbox;
+	}
+
+
+	public void setTbox(Model tbox) {
+		this.tbox = tbox;
+	}
+
+
 	public List<IndexTO> getIndexMetadata(){
 		List<IndexTO> indexes = new LinkedList<IndexTO>();
 		String indexQuery = SPARQLQueriesHelper.createIndexQuery();

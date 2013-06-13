@@ -18,22 +18,24 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Processor{
 
 	protected Logger logger = Logger.getLogger(RDFIndexProcessorVisitor.class);
-	protected Model abox;
-	protected Model tbox;
+	private RDFIndexMetadataDAO metadata;
 	
 	public RDFIndexProcessorVisitor(){
 		
 	}
-	@Override
-	public List<ObservationTO> run(Model tbox, Model abox) {
-		this.abox = abox;
-		this.tbox = tbox;
-		List<ObservationTO> observations = new LinkedList<ObservationTO>();
+	
+	public RDFIndexProcessorVisitor(RDFIndexMetadataDAO metadata){
+		this.metadata = metadata;
 		
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(tbox, abox);
+	}
+	
+	@Override
+	public List<ObservationTO> run(RDFIndexMetadataDAO metadata) {
+		List<ObservationTO> observations = new LinkedList<ObservationTO>();
+		this.metadata = metadata;
 		List<IndexTO> indexes = metadata.getIndexMetadata();
 		for(IndexTO index:indexes){
-			List<ObservationTO> indexObservations = this.visit(index);
+			List<ObservationTO> indexObservations = (List<ObservationTO>) this.visit(index);
 			observations.addAll(indexObservations);
 		}
 	
@@ -42,12 +44,12 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 	
 	//FIXME: Refactor? an interface ObservableTO could be extracted and ComponentTO, IndexTO, etc. could implement it, just one method! so far I am going to keep as it is
 	//This kind be perfectly implemented with map/reduce, each index, component and indicator in any node.
-	public List<ObservationTO> visit(IndexTO index) {
+	public Object visit(IndexTO index) {
 		logger.debug("Processing index "+index.getUri());
 		List<ObservationTO> observationsFromComponents = new LinkedList<ObservationTO>();
 		List<ComponentTO> components = index.getComponents();
 		for(ComponentTO component:components){
-			List<ObservationTO> componentObservations = visit(component);
+			List<ObservationTO> componentObservations = (List<ObservationTO>) this.visit(component);
 			observationsFromComponents.addAll(componentObservations);
 		}
 		//Since we have generated a new set of observations for the components of this index we can aggregate
@@ -60,12 +62,12 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 	
 	
 	
-	public List<ObservationTO> visit(ComponentTO component) {
+	public Object visit(ComponentTO component) {
 		logger.debug("Processing component "+component.getUri());
 		List<ObservationTO> observationsFromIndicators = new LinkedList<ObservationTO>();
 		List<IndicatorTO> indicators = component.getIndicators();
 		for(IndicatorTO indicator:indicators){
-			List<ObservationTO> indicatorObservations = visit(indicator);
+			List<ObservationTO> indicatorObservations = (List<ObservationTO>) this.visit(indicator);
 			observationsFromIndicators.addAll(indicatorObservations);
 		}
 		//Since we have generated a new set of observations for the indicators of this component we can aggregate
@@ -78,10 +80,10 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 	
 	
 	
-	public List<ObservationTO> visit(IndicatorTO indicator) {
+	public Object visit(IndicatorTO indicator) {
 		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
-		observations.addAll(RDFIndexUtils.execute(this.abox, indicator.getMetadata(), indicator.getAggregated()));
+		observations.addAll(RDFIndexUtils.execute(this.metadata.getAbox(), indicator.getMetadata(), indicator.getAggregated()));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}

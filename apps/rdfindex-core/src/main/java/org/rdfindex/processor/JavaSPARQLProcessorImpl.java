@@ -28,19 +28,17 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 
 	protected Logger logger = Logger.getLogger(JavaSPARQLProcessorImpl.class);
 	protected RDFIndexMetadataDAO metadata;
-	protected Model abox;
-	protected Model tbox;
 	
 	public JavaSPARQLProcessorImpl(){
 		
 	}
+	
 	@Override
-	public List<ObservationTO> run(Model tbox, Model abox) {
-		this.abox = abox;
-		this.tbox = tbox;
+	public List<ObservationTO> run(RDFIndexMetadataDAO metadata) {
+
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
 		
-		this.metadata = new MetadataDAOImpl(tbox, abox);
+		this.metadata = metadata;
 		List<IndexTO> indexes = this.metadata.getIndexMetadata();
 		for(IndexTO index:indexes){
 			List<ObservationTO> indexObservations = processIndex(index);
@@ -90,7 +88,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	private List<ObservationTO> processIndicator(IndicatorTO indicator) {
 		logger.debug("Processing indicator "+indicator.getUri());
 		List<ObservationTO> observations = new LinkedList<ObservationTO>();
-		observations.addAll(execute(this.abox, indicator.getMetadata(), indicator.getAggregated()));
+		observations.addAll(execute(this.metadata.getAbox(), indicator.getMetadata(), indicator.getAggregated()));
 		logger.debug("...the indicator "+indicator.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}

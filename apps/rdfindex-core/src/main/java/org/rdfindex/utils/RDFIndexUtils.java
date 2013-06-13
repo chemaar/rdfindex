@@ -125,7 +125,8 @@ public class RDFIndexUtils {
 		return newObservations;
 	}
 	public static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
-		String sparqlQuery = SPARQLUtils.NS+" "+createSPARQLQuery(metadata,aggregated);		
+		String sparqlQuery = SPARQLUtils.NS+" "+createSPARQLQuery(metadata,aggregated);	
+
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);
 		return fetchNewObservations(metadata,results);
 	}
