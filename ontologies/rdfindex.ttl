@@ -4,7 +4,6 @@
 @prefix rdfindex-project: <http://purl.org/rdfindex/project/> .
 @prefix rdfindex-component:  <http://purl.org/rdfindex/component/> .
 @prefix rdfindex-indicator:  <http://purl.org/rdfindex/indicator/> .
-
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
@@ -123,6 +122,12 @@ rdfindex:ref-period  a rdf:Property, qb:DimensionProperty;
 	qb:concept sdmx-concept:ref-period . 
 
 
+rdfindex:sparql-notation  a rdf:Property;
+	rdfs:label "The notation in SKOS of an OWA operator."@en;
+	rdfs:subPropertyOf skos:notation;
+	rdfs:domain rdfindex:StatisticalMathOperator;
+	. 
+	
 
 #
 # T-BOX Computation Process Classes
@@ -173,17 +178,17 @@ rdfindex:aggregation-operator a owl:ObjectProperty, rdf:Property;
 
 rdfindex:Mean rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
 	rdfs:label "Average";	
-	skos:notation "mean";	
+	rdfindex:sparql-notation "avg";	
 .
 
 rdfindex:Min rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
 	rdfs:label "Min";	
-	skos:notation "min";	
+	rdfindex:sparql-notation "min";	
 .
 
 rdfindex:Max rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
 	rdfs:label "Max";	
-	skos:notation "Max";	
+	rdfindex:sparql-notation "Max";	
 .
 
 
