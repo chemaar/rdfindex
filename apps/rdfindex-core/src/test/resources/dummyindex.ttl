@@ -31,13 +31,13 @@ rdfindex:TheLongestLifeCountry a rdfindex:Index;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:Mean;
-		rdfindex:part-of rdfindex:HealthValue ;
-		rdfindex:part-of rdfindex:OtherHealthValue ;
+		rdfindex:part-of rdfindex:Health ;
+		rdfindex:part-of rdfindex:PublicSpending ;
 	];
 	qb:structure 	rdfindex:TheLongestLifeCountryDSD ;
 .
 
-rdfindex:HealthValue a rdfindex:Component;
+rdfindex:Health a rdfindex:Component;
 	rdfs:label 	"Health Value"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
@@ -48,18 +48,24 @@ rdfindex:HealthValue a rdfindex:Component;
 	qb:structure 	rdfindex:HealthValueDSD ;  
 .
 
-rdfindex:OtherHealthValue a rdfindex:Component;
-	rdfs:label 	"OtherHealth Value"@en;
+rdfindex:PublicSpending a rdfindex:Component;
+	rdfs:label 	"Public Spending"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
 	rdfindex:aggregates [ 
 		rdfindex:aggregation-operator rdfindex:Min;
-		rdfindex:part-of rdfindex:AggregatedLifeExpectancy;
+		rdfindex:part-of rdfindex:HealthPublicSpending;
 	];
-	qb:structure 	rdfindex:OtherHealthValueDSD ;  
+	qb:structure 	rdfindex:PublicSpendingDSD ;  
 .
 
-
+rdfindex:HealthPublicSpending a rdfindex:Indicator;
+	rdfs:label 	"Health Public Spending"@en;
+	rdfs:comment 	"Investment in health with the public spending."@en;
+	rdfindex:type 	rdfindex:Quantitative;	
+	qb:structure 	rdfindex:HealthPublicSpendingdDSD ;  
+	sdmx-attribute:unitMeasure dbpedia-res:Year ;
+.
 
 rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 	rdfs:label 	"Aggregated Life expectancy"@en;
@@ -72,14 +78,12 @@ rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 	qb:structure 	rdfindex:AggregatedLifeExpectancyDSD ;  
 .
 
-
 rdfindex:LifeExpectancy a rdfindex:Indicator;
 	rdfs:label 	"Life expectancy"@en;
 	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
 	rdfindex:type 	rdfindex:Quantitative;	
 	qb:structure 	rdfindex:LifeExpectancyDSD ;  
 	sdmx-attribute:unitMeasure dbpedia-res:Year ;
-        qb:slice rdfindex:slice1, rdfindex:slice2  ;
 .
 
 
@@ -106,14 +110,19 @@ rdfindex:HealthValueDSD a qb:DataStructureDefinition;
 .
 
 
-rdfindex:OtherHealthValueDSD a qb:DataStructureDefinition;
+rdfindex:PublicSpendingDSD a qb:DataStructureDefinition;
     qb:component    [qb:dimension rdfindex:ref-area],
         [qb:dimension rdfindex:ref-year],
         [qb:measure   rdfindex:value],
         [qb:attribute sdmx-attribute:unitMeasure];
 .
 
-
+rdfindex:HealthPublicSpendingdDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
 
 rdfindex:AggregatedLifeExpectancyDSD a qb:DataStructureDefinition;
     qb:component    [qb:dimension rdfindex:ref-area],
@@ -130,41 +139,20 @@ rdfindex:LifeExpectancyDSD a qb:DataStructureDefinition;
         [qb:attribute sdmx-attribute:unitMeasure];
 .
 
+#Slices have been removed
 
-#Male Life expectancy slice
-rdfindex:slice1 a qb:Slice;
-#   qb:sliceStructure  		eg:sliceByRegion ;
-    sdmx-dimension:sex         	sdmx-code:sex-M ;
-    qb:observation rdfindex:o1c, 
-		rdfindex:o3c, 
-		rdfindex:o5c, 
-		rdfindex:o7c,  
-		rdfindex:o9c,  
-		rdfindex:o11c;
-.
+#Observations about life expectancy: year, area, male|female,value
 
-#Female Life expectancy slice
-rdfindex:slice2 a qb:Slice;
-#    qb:sliceStructure          eg:sliceByRegion ;
-    sdmx-dimension:sex         sdmx-code:sex-F ;
-    qb:observation rdfindex:o2c, 
-		rdfindex:o4c, 
-		rdfindex:o6c, 
-		rdfindex:o8c,
-		rdfindex:o10c,
-		rdfindex:o12c;
-.
+#Spanish observations 
 
-#Spain observations
-
-rdfindex:o1c a qb:Observation;
+rdfindex:o1 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                  
     rdfindex:value        78 ;
     .
     
-rdfindex:o2c a qb:Observation;
+rdfindex:o2 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                 
@@ -172,14 +160,14 @@ rdfindex:o2c a qb:Observation;
     .
 
 
-rdfindex:o3c a qb:Observation;
+rdfindex:o3 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                  
     rdfindex:value        78 ;
     .
     
-rdfindex:o4c a qb:Observation;
+rdfindex:o4 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                  
@@ -187,14 +175,14 @@ rdfindex:o4c a qb:Observation;
     .
 
 
-rdfindex:o5c a qb:Observation;
+rdfindex:o5 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                   
     rdfindex:value        78 ;
     .
     
-rdfindex:o6c a qb:Observation;
+rdfindex:o6 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Spain;                                   
@@ -203,14 +191,14 @@ rdfindex:o6c a qb:Observation;
 
 #Turkey observations
 
-rdfindex:o7c a qb:Observation;
+rdfindex:o7 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                
     rdfindex:value        76 ;
     .
     
-rdfindex:o8c a qb:Observation;
+rdfindex:o8 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                  
@@ -218,14 +206,14 @@ rdfindex:o8c a qb:Observation;
     .
 
 
-rdfindex:o9c a qb:Observation;
+rdfindex:o9 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                 
     rdfindex:value        76 ;
     .
     
-rdfindex:o10c a qb:Observation;
+rdfindex:o10 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2006 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                                
@@ -233,17 +221,50 @@ rdfindex:o10c a qb:Observation;
     .
 
 
-rdfindex:o11c a qb:Observation;
+rdfindex:o11 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                           
     rdfindex:value        77 ;
     .
     
-rdfindex:o12c a qb:Observation;
+rdfindex:o12 a qb:Observation;
     qb:dataSet                 rdfindex:LifeExpectancy ;
     rdfindex:ref-year                2005 ;         
     rdfindex:ref-area                dbpedia-res:Turkey;                                              
     rdfindex:value        80 ;
     .
 
+#Observations about health public spending: year, area, 
+
+
+rdfindex:o13 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                  
+    rdfindex:value       2000 ;
+    .
+    
+rdfindex:o14 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Spain;                                 
+    rdfindex:value        3000 ;
+    .
+    
+    
+rdfindex:o15 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2005 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                  
+    rdfindex:value       1000 ;
+    .
+    
+rdfindex:o16 a qb:Observation;
+    qb:dataSet                 rdfindex:HealthPublicSpending ;
+    rdfindex:ref-year                2006 ;         
+    rdfindex:ref-area                dbpedia-res:Turkey;                                 
+    rdfindex:value        1500 ;
+    .
+    
+    

@@ -17,6 +17,7 @@ public class RDFIndexVocabulary {
 	public static final Property REF_AGENT = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "ref-area" );;
 	
 	public static final Property PART_OF = ResourceFactory.createProperty(PrefixManager.getURIPrefix("rdfindex"), "part-of" );
+	public static final String RDFINDEX_COMPUTATION_RESOURCE_OBS_BASE = PrefixManager.getURIPrefix("rdfindex-res")+"o";
 	
 	
 

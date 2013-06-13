@@ -1,0 +1,77 @@
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-measure:  <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-concept:  <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix sdmx-code:  <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lg:      <http://linkedgeodata.org/ontology/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sdmx-metadata:  <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-subject:  <http://purl.org/linked-data/sdmx/2009/subject#> .
+
+<http://purl.org/rdfindex/computation/resource/o1807930675158>
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value 78.000000000000000000000000 .
+
+<http://purl.org/rdfindex/computation/resource/o1807930747280>
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value 79.500000000000000000000000 .
+
+<http://purl.org/rdfindex/computation/resource/o1807913575726>
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value 3000 .
+
+<http://purl.org/rdfindex/computation/resource/o1807913499861>
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "2000" .
+
+<http://purl.org/rdfindex/computation/resource/o1807930820150>
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "79.500000000000000000000000" .
+
+<http://purl.org/rdfindex/computation/resource/o1807930593108>
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "78.000000000000000000000000" .
+
+<http://purl.org/rdfindex/computation/resource/o1807913423603>
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "1500" .
+
+<http://purl.org/rdfindex/computation/resource/o1807913337541>
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "1000" .

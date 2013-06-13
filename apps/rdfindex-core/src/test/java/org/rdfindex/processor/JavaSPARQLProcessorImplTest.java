@@ -23,7 +23,7 @@ public class JavaSPARQLProcessorImplTest {
 		Model tbox = TestHelper.createModel("rdfindex.ttl");
 		Model abox = TestHelper.createModel("dummyindex.ttl");
 		List<ObservationTO> result = rdfIndexProcessor.run(tbox,abox);
-		PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(result));
+		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(result));
 		Assert.assertEquals(4, result.size());
 	}
 }

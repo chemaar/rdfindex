@@ -25,7 +25,8 @@ public class RDFIndexUtils {
 					//FIXME:Ask to the abox which is the range of of the dimension to generate a resource or a literal
 					//Now everyting is a resource
 		}
-		model.add(observationResource,ResourceFactory.createProperty(observation.getMeasure()),observation.getValue());
+		//Very important to indicate to the SPARQL processor that the value is a number!
+		model.addLiteral(observationResource,ResourceFactory.createProperty(observation.getMeasure()),Double.valueOf(observation.getValue()));		
 		return model;
 	}
 
