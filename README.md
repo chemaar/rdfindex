@@ -245,6 +245,8 @@ value.
 work is focused on the computation process and the client should be in charge of presenting the results we consider 
 it is not an issue to be solved.
 * Would it be better to use the property "skos:narrower" instead of "part-of"?
+* Improve the taxonomy and the logical model
+* Apply to a real use case: Webindex, CSMIC or Worldbank
 
 ## Conclusions
 
