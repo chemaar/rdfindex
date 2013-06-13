@@ -222,6 +222,7 @@ the same dimensions and kind of measure. (Structure, domain and range validation
 * Possiblity of distributed processing (the computation of aggregmated indicators, components or indexes can be performed 
 in an isolated mode)
 * Dynamic configuration
+* Visualization capabilities. For instance using Cubeviz...
 * Support
  * RDF Data cube dimensions (only resources no literals support)
  * RDF Data cube measures (only numerical values support)
@@ -243,6 +244,7 @@ value.
 * It is not possible to use select modifiers such as "LIMIT, HAVING or ORDER" but taking into account that this 
 work is focused on the computation process and the client should be in charge of presenting the results we consider 
 it is not an issue to be solved.
+* Would it be better to use the property "skos:narrower" instead of "part-of"?
 
 ## Conclusions
 
