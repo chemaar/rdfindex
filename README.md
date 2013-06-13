@@ -217,9 +217,9 @@ The process to generate an aggregated element is the next one (with a bottom-up 
 * Currently the definition of weights it is configured in the indicator or component metadata, maybe it would be better to 
 set the weight in the property "part-of" instead of the generic metadata.
 * Validation of dimensions and measures. To aggregate some dimensions the narrower componens must have 
-the same dimensions and kind of meausre. (Structure, domain and range validation)
+the same dimensions and kind of measure. (Structure, domain and range validation)
 * Generation of human-readable documentation
-* Possiblity of distributed processing (the computation of aggregated indicators, components or indexes can be performed 
+* Possiblity of distributed processing (the computation of aggregmated indicators, components or indexes can be performed 
 in an isolated mode)
 * Dynamic configuration
 * Support
