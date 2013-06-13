@@ -53,7 +53,7 @@ Imagine we want to define a dummy index called "The Longest Life Country". This 
  * Health Public Spending
  
 
-This dummy index must be calculated using an average between the life expectancy (withouth taking into account the sex) and the public spending. Furthermore 
+This dummy index (the full example is at apps/rdfindex-core/src/test/resources) must be calculated using an average between the life expectancy (withouth taking into account the sex) and the public spending. Furthermore 
 we have the next observations (values are not real):
 
 * Life expectancy
