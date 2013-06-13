@@ -119,7 +119,7 @@ rdfindex:LifeExpectancyDSD a qb:DataStructureDefinition;
 .
 ```
 
-* We are going to define our aggregated indicator:
+* We are going to define our aggregated indicator that removes the sex dimension in its structure:
 
 ```
 rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
@@ -133,6 +133,17 @@ rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
 	qb:structure 	rdfindex:AggregatedLifeExpectancyDSD ;  
 .
 ```
+
+```
+rdfindex:AggregatedLifeExpectancyDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+```
+
 
 * Description of the "Health" component:
 
