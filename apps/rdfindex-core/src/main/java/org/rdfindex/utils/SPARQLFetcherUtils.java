@@ -43,18 +43,18 @@ public class SPARQLFetcherUtils {
 			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():
 											soln.get(field).isURIResource()?
 													soln.getResource(field).getURI():
-													soln.toString();
+													"";
 	}
 	
 	
 	public static String fetchStringValue (QuerySolution soln, String field){
 		return (soln==null  || soln.get(field)==null)?"": 
-			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():soln.toString();
+			soln.get(field).isLiteral() ?  soln.getLiteral(field).getString():"";
 	}
 
 	public static String fetchResourceValue (QuerySolution soln, String field){
 		return (soln==null || soln.get(field)==null)?"": 
-			soln.get(field).isURIResource() ?  soln.getResource(field).getURI():soln.toString();
+			soln.get(field).isURIResource() ?  soln.getResource(field).getURI():"";
 	}
 	//
 	//

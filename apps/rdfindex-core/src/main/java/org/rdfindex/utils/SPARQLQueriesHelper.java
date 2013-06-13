@@ -22,11 +22,12 @@ public class SPARQLQueriesHelper {
 	
 	public static String createQueryAggregatesFromElement(String uri) {
 		String createQueryAggregatesFromElement = SPARQLUtils.NS+" "+ 
-			"SELECT ?element ?type ?ref ?operator WHERE{ "+
+			"SELECT ?element ?type ?ref ?operator ?notation WHERE{ "+
 				"?element rdfindex:aggregates ?aggregated. " +
 				SPARQLFetcherUtils.createFilterResource(uri, RDFIndexUtils.ELEMENT_VAR_SPARQL)+
 				"?aggregated rdfindex:part-of ?part.  "+
 				"?aggregated rdfindex:aggregation-operator ?operator.  "+
+				"OPTIONAL { ?operator rdfindex:sparql-notation ?notation }. "+
 				"?aggregated ?type ?ref.  "+
 				//"FILTER(?type=qb:dimension || ?type=qb:measure || ?type=rdfindex:part-of)" +
 				"FILTER(?type=rdfindex:part-of)" +

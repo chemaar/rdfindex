@@ -24,6 +24,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+@Deprecated
 public class JavaSPARQLProcessorImpl  implements Processor{
 
 	protected Logger logger = Logger.getLogger(JavaSPARQLProcessorImpl.class);

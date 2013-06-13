@@ -13,6 +13,8 @@ import org.rdfindex.processor.JavaSPARQLProcessorImpl;
 import org.rdfindex.processor.Processor;
 import org.rdfindex.to.IndexTO;
 import org.rdfindex.to.ObservationTO;
+import org.rdfindex.utils.PrettyPrinter;
+import org.rdfindex.utils.SPARQLQueriesHelper;
 
 import test.utils.TestHelper;
 
@@ -45,7 +47,9 @@ public class RDFIndexProcessorVisitorTest {
 		
 		for(IndexTO index:indexes){
 			List<ObservationTO> indexObservations = (List<ObservationTO>) rdfIndexProcessor.visit(index);
+			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 			Assert.assertEquals(4, indexObservations.size());
+			
 		}
 	}
 

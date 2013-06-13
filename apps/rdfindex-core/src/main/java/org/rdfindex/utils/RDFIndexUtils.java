@@ -50,15 +50,24 @@ public class RDFIndexUtils {
 	public static final String DATE_VALUE_VAR_SPARQL = "date";
 	public static final String AGENT_VALUE_VAR_SPARQL = "agent";
 	//FIXME: extract mapping, what happen with the operation aggregator
-	public static String formatFormula(String operator) {
-		if (operator == null){
-			return "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";	
-		}else if (operator.equalsIgnoreCase("http://purl.org/rdfindex/ontology/Mean")){
-			String function = "avg"+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
-			return "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
-		}else{
-			return "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+	public static String formatFormula(AggregatedTO aggregated) {
+		String formula = "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+		if (aggregated.getOperator() != null){
+			String operatorNotation = aggregated.getOperatorNotation();
+			if (operatorNotation!= null && !operatorNotation.equalsIgnoreCase("")){
+				String function = operatorNotation+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
+				formula = "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+			}
 		}
+		return formula;
+//		if (operator == null){
+//				
+//		}else if (operator.equalsIgnoreCase("http://purl.org/rdfindex/ontology/Mean")){
+//			String function = "avg"+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
+//			return "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+//		}else{
+//			return "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+//		}
 	
 		
 	}
@@ -88,7 +97,7 @@ public class RDFIndexUtils {
 			//There is no aggregation so we keep as ?part the whole element
 			partsOf.add(metadata.getElement());
 		}
-		sparqlQuery = "SELECT "+dimensionVars+" "+formatFormula(operator)+" "+
+		sparqlQuery = "SELECT "+dimensionVars+" "+formatFormula(aggregated)+" "+
 				"WHERE{ " +
 					SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+				
 						SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.QB_DATASET.getURI())+" "+
@@ -126,7 +135,6 @@ public class RDFIndexUtils {
 	}
 	public static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
 		String sparqlQuery = SPARQLUtils.NS+" "+createSPARQLQuery(metadata,aggregated);	
-
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);
 		return fetchNewObservations(metadata,results);
 	}

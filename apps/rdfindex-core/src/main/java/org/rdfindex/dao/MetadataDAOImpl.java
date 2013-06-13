@@ -16,6 +16,7 @@ import org.rdfindex.utils.SPARQLUtils;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	
@@ -23,10 +24,15 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	
 	private Model abox;
 	private Model tbox;
+	private Model datasource;
 	
+	//FIXME: better just one datasource
 	public MetadataDAOImpl(Model tbox, Model abox) {
 		this.abox = abox;
 		this.tbox = tbox;
+		this.datasource = ModelFactory.createDefaultModel();
+		this.datasource.add(abox);
+		this.datasource.add(tbox);
 	}
 
 
@@ -53,7 +59,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	public List<IndexTO> getIndexMetadata(){
 		List<IndexTO> indexes = new LinkedList<IndexTO>();
 		String indexQuery = SPARQLQueriesHelper.createIndexQuery();
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, indexQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, indexQuery);
 		for (int i = 0; i < results.length; i++){
 			String indexUri = SPARQLFetcherUtils.fetchResourceValue(results[i], RDFIndexUtils.INDEX_VAR_SPARQL);
 			IndexTO indexTO = new IndexTO();
@@ -70,7 +76,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	public List<ComponentTO> getComponentMetadata(String indexUri){
 		List<ComponentTO> components = new LinkedList<ComponentTO>();
 		String componentsQuery = SPARQLQueriesHelper.createComponentsFromIndex(indexUri);
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, componentsQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, componentsQuery);
 		for (int i = 0; i < results.length; i++){
 			String componentUri = SPARQLFetcherUtils.fetchResourceValue(results[i], RDFIndexUtils.COMPONENT_VAR_SPARQL);
 			ComponentTO componentTO = new ComponentTO();
@@ -88,7 +94,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	public List<IndicatorTO> getIndicatorMetadata(String componentUri){
 		List<IndicatorTO> indicators = new LinkedList<IndicatorTO>();
 		String indicatorsQuery = SPARQLQueriesHelper.createIndicatorsFromComponent(componentUri);
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, indicatorsQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, indicatorsQuery);
 		for (int i = 0; i < results.length; i++){
 			String indicatorUri = SPARQLFetcherUtils.fetchResourceValue(results[i], RDFIndexUtils.INDICATOR_VAR_SPARQL);
 			IndicatorTO indicatorTO = new IndicatorTO();
@@ -104,7 +110,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 		DatasetStructureTO structure = new DatasetStructureTO();
 		structure.setElement(elementUri);
 		String dsdQuery = SPARQLQueriesHelper.createQueryDASFromElement(elementUri);
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, dsdQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, dsdQuery);
 		for (int i = 0; i < results.length; i++){
 			if (i == 0){
 				String label = SPARQLFetcherUtils.fetchStringValue(results[i], "label");
@@ -125,11 +131,13 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	public AggregatedTO getAggregatedTO(String elementUri){
 		AggregatedTO aggregated = new AggregatedTO();
 		String aggregatedQuery = SPARQLQueriesHelper.createQueryAggregatesFromElement(elementUri);
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(abox, aggregatedQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, aggregatedQuery);
 		for (int i = 0; i < results.length; i++){
 			if (i == 0){
 				String operator = SPARQLFetcherUtils.fetchResourceValue(results[i], "operator");
+				String notation = SPARQLFetcherUtils.fetchStringValue(results[i], "notation");
 				aggregated.setOperator(operator);
+				aggregated.setOperatorNotation(notation);
 			}
 			String type = SPARQLFetcherUtils.fetchResourceValue(results[i], "type");
 			String ref = SPARQLFetcherUtils.fetchResourceValue(results[i], "ref");

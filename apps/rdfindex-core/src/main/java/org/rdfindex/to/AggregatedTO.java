@@ -6,6 +6,7 @@ import java.util.Set;
 public class AggregatedTO {
 
 	private String operator;
+	private String operatorNotation;
 	private Set<String> partsOf;	
 	public String getOperator() {
 		return operator;
@@ -22,12 +23,18 @@ public class AggregatedTO {
 	public void setPartsOf(Set<String> partsOf) {
 		this.partsOf = partsOf;
 	}
+	public String getOperatorNotation() {
+		return operatorNotation;
+	}
+	public void setOperatorNotation(String operatorNotation) {
+		this.operatorNotation = operatorNotation;
+	}
 	@Override
 	public String toString() {
-		return "AggregatedTO [operator=" + operator + ", partsOf=" + partsOf
-				+ "]";
+		return "AggregatedTO [operator=" + operator + ", operatorNotation="
+				+ operatorNotation + ", partsOf=" + partsOf + "]";
 	}
-	
+
 
 	
 	
