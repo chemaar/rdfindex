@@ -54,19 +54,6 @@ rdfindex:o4 a qb:Observation;
     .
 
 
-rdfindex:o5 a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                dbpedia-res:Spain;                                   
-    rdfindex:value        78 ;
-    .
-    
-rdfindex:o6 a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                dbpedia-res:Spain;                                   
-    rdfindex:value        82 ;
-    .
 
 #Turkey observations
 
@@ -100,19 +87,7 @@ rdfindex:o10 a qb:Observation;
     .
 
 
-rdfindex:o11 a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                dbpedia-res:Turkey;                                           
-    rdfindex:value        77 ;
-    .
-    
-rdfindex:o12 a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                dbpedia-res:Turkey;                                              
-    rdfindex:value        80 ;
-    .
+
 
 #Observations about health public spending: year, area, 
 
