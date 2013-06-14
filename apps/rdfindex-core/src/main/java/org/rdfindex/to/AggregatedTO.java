@@ -7,20 +7,30 @@ public class AggregatedTO {
 
 	private String operator;
 	private String operatorNotation;
-	private Set<String> partsOf;	
+	private Set<PartTO> partsOf;
+	
 	public String getOperator() {
 		return operator;
 	}
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-	public Set<String> getPartsOf() {
-		if (this.partsOf == null){
-			this.partsOf = new HashSet<String>();
+	
+	public Set<String> getPartsOfAsDatasetURIs() {
+		//FIXME: Caché?
+		Set <String> partsDatasets = new HashSet<String>();
+		for(PartTO part:this.partsOf){
+			partsDatasets.add(part.getDataset());
+		}
+		return partsDatasets;
+	}
+	public Set<PartTO> getPartsOf() {
+		if(this.partsOf==null){
+			this.partsOf = new HashSet<PartTO>();
 		}
 		return partsOf;
 	}
-	public void setPartsOf(Set<String> partsOf) {
+	public void setPartsOf(Set<PartTO> partsOf) {
 		this.partsOf = partsOf;
 	}
 	public String getOperatorNotation() {

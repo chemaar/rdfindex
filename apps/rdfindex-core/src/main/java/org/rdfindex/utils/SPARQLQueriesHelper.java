@@ -18,19 +18,33 @@ public class SPARQLQueriesHelper {
 		}
 		return model;
 	}
-	
-	
+	/**
+	 SELECT ?element ?type ?ref ?operator ?notation WHERE{ 
+		 ?element rdfindex:aggregates ?aggregated. 
+		 FILTER (  (?element = <http://purl.org/rdfindex/ontology/TheLongestLifeCountry> ) ). 
+		 ?aggregated rdfindex:part-of ?part.  
+		 ?aggregated rdfindex:aggregation-operator ?operator.  
+		 OPTIONAL { ?operator rdfindex:sparql-notation ?notation }. 
+		 ?part ?type ?ref.  
+		 }
+
+	**/
 	public static String createQueryAggregatesFromElement(String uri) {
 		String createQueryAggregatesFromElement = SPARQLUtils.NS+" "+ 
-			"SELECT ?element ?type ?ref ?operator ?notation WHERE{ "+
+			"SELECT ?element ?part ?type ?ref ?operator ?notation ?weight WHERE{ "+
 				"?element rdfindex:aggregates ?aggregated. " +
 				SPARQLFetcherUtils.createFilterResource(uri, RDFIndexUtils.ELEMENT_VAR_SPARQL)+
 				"?aggregated rdfindex:part-of ?part.  "+
 				"?aggregated rdfindex:aggregation-operator ?operator.  "+
 				"OPTIONAL { ?operator rdfindex:sparql-notation ?notation }. "+
-				"?aggregated ?type ?ref.  "+
+				"?part ?type ?ref.  "+
+				"OPTIONAL { "+ 
+				"	 ?part rdfindex:dataset  ?dataset. "+ 
+				"	 FILTER NOT EXISTS { ?part rdfindex:weight []; } "+
+				"	 ?dataset rdfindex:weight ?weight " +
+				"}. "+
 				//"FILTER(?type=qb:dimension || ?type=qb:measure || ?type=rdfindex:part-of)" +
-				"FILTER(?type=rdfindex:part-of)" +
+				//"FILTER(?type=rdfindex:part-of)" +
 				//This is information is already available in the Dataset Structure
 			"}";
 		return createQueryAggregatesFromElement;
@@ -56,7 +70,8 @@ public class SPARQLQueriesHelper {
 				"?component  rdf:type rdfindex:Component.  "+
 				SPARQLFetcherUtils.createFilterResource(componentURI, RDFIndexUtils.COMPONENT_VAR_SPARQL)+
 				"?component  rdfindex:aggregates ?indicators.  "+
-				"?indicators rdfindex:part-of ?indicator.  "+
+				"?indicators rdfindex:part-of ?part.  "+
+				"?part rdfindex:dataset ?indicator.  "+
 				"?indicator  rdf:type rdfindex:Indicator.  "+
 			"}";
 		return componentFromIndexQuery;
@@ -68,7 +83,8 @@ public class SPARQLQueriesHelper {
 				"?index rdf:type rdfindex:Index.  "+
 				SPARQLFetcherUtils.createFilterResource(indexURI, RDFIndexUtils.INDEX_VAR_SPARQL)+
 				"?index rdfindex:aggregates ?components.  "+
-				"?components rdfindex:part-of ?component.  "+
+				"?components rdfindex:part-of ?part.  "+
+				"?part rdfindex:dataset ?component.  "+
 				"?component  rdf:type rdfindex:Component.  "+
 			"}";
 		return componentFromIndexQuery;

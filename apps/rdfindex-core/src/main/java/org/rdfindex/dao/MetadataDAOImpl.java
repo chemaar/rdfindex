@@ -1,13 +1,16 @@
 package org.rdfindex.dao;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.rdfindex.to.AggregatedTO;
 import org.rdfindex.to.ComponentTO;
 import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.IndexTO;
 import org.rdfindex.to.IndicatorTO;
+import org.rdfindex.to.PartTO;
 import org.rdfindex.utils.RDFIndexUtils;
 import org.rdfindex.utils.RDFIndexVocabulary;
 import org.rdfindex.utils.SPARQLFetcherUtils;
@@ -146,7 +149,9 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 	public AggregatedTO getAggregatedTO(String elementUri){
 		AggregatedTO aggregated = new AggregatedTO();
 		String aggregatedQuery = SPARQLQueriesHelper.createQueryAggregatesFromElement(elementUri);
+		Map<String, PartTO> partsOf = new HashMap<String, PartTO>();
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, aggregatedQuery);
+		PartTO partTO;
 		for (int i = 0; i < results.length; i++){
 			if (i == 0){
 				String operator = SPARQLFetcherUtils.fetchResourceValue(results[i], "operator");
@@ -154,13 +159,33 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 				aggregated.setOperator(operator);
 				aggregated.setOperatorNotation(notation);
 			}
-			String type = SPARQLFetcherUtils.fetchResourceValue(results[i], "type");
-			String ref = SPARQLFetcherUtils.fetchResourceValue(results[i], "ref");
-			if (type.equals(RDFIndexVocabulary.PART_OF.getURI())){
-				aggregated.getPartsOf().add(ref);//FIXME: to be removed it is part of the composition
+			//WARNING: this is a blank node
+			String part = results[i].get("part")!=null?results[i].get("part").toString():"";
+			partTO = partsOf.get(part);
+			if(partTO==null){
+				partTO = new PartTO();
 			}
+			String weight = SPARQLFetcherUtils.fetchStringValue(results[i], "weight");
+			//Take default weight
+			if(!weight.equalsIgnoreCase("")){
+				partTO.setWeight(weight);
+			}
+			String type = SPARQLFetcherUtils.fetchResourceValue(results[i], "type");
+			String ref = SPARQLFetcherUtils.fetchStringOrResource(results[i], "ref");
+			//FIMXE: use a table?
+			if(type.equals(RDFIndexVocabulary.DATASET.getURI())){
+				partTO.setDataset(ref);	
+			}else if (type.equals(RDFIndexVocabulary.WEIGHT.getURI())){
+				partTO.setWeight(ref);
+			}else if (type.equals(RDFIndexVocabulary.NORMALIZES.getURI())){
+				partTO.setNormalization(ref);
+			}else{
+				//SKIP
+			}
+			partsOf.put(part, partTO);
 		}
-
+		aggregated.getPartsOf().addAll(partsOf.values());
+		System.out.println(aggregated);
 		return aggregated;
 	}
 	

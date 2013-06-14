@@ -13,6 +13,7 @@ import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.IndexTO;
 import org.rdfindex.to.IndicatorTO;
 import org.rdfindex.to.ObservationTO;
+import org.rdfindex.to.PartTO;
 import org.rdfindex.utils.PrettyPrinter;
 import org.rdfindex.utils.RDFIndexUtils;
 import org.rdfindex.utils.RDFIndexVocabulary;
@@ -133,7 +134,7 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	
 	protected static String createSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated) {
 		Set<String> dimensions = metadata.getDimensions();
-		Set<String> partsOf = aggregated.getPartsOf();
+		Set<String> partsOf = aggregated.getPartsOfAsDatasetURIs();
 		String measure = metadata.getMeasure();
 		String operator = aggregated.getOperator();
 		StringBuffer createDimensionsBGPs = new StringBuffer();
@@ -169,6 +170,8 @@ public class JavaSPARQLProcessorImpl  implements Processor{
 	}
 
 
+
+	
 
 	//FIXME: extract mapping, what happen with the operation aggregator
 	protected static String formatFormula(String operator) {

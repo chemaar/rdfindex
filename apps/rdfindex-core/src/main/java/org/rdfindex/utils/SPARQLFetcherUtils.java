@@ -46,6 +46,10 @@ public class SPARQLFetcherUtils {
 													"";
 	}
 	
+	public static String fetchAnnonValue (QuerySolution soln, String field){
+		return (soln==null  || soln.get(field)==null)?"": 
+			soln.get(field).isAnon() ?  soln.get(field).asResource().getURI():"";
+	}
 	
 	public static String fetchStringValue (QuerySolution soln, String field){
 		return (soln==null  || soln.get(field)==null)?"": 

@@ -77,7 +77,7 @@ public class RDFIndexUtils {
 	}
 	public static String createSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated) {
 		Set<String> dimensions = metadata.getDimensions();
-		Set<String> partsOf = aggregated.getPartsOf();
+		Set<String> partsOf = aggregated.getPartsOfAsDatasetURIs();
 		String measure = metadata.getMeasure();
 		String operator = aggregated.getOperator();
 		StringBuffer createDimensionsBGPs = new StringBuffer();
