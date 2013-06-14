@@ -1,0 +1,162 @@
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-measure:  <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-concept:  <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix sdmx-code:  <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lg:      <http://linkedgeodata.org/ontology/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sdmx-metadata:  <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix rdfindex-res:  <http://purl.org/rdfindex/resource/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-subject:  <http://purl.org/linked-data/sdmx/2009/subject#> .
+
+rdfindex-res:o6808082350541
+      a       qb:observation ;
+      qb:dataSet rdfindex:HealthPublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "1500.0"^^xsd:double .
+
+rdfindex-res:o6808076933924
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o6808088484409
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "1500.0"^^xsd:double .
+
+rdfindex-res:o6808068768726
+      a       qb:observation ;
+      qb:dataSet rdfindex:AggregatedLifeExpectancy ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o6808101067327
+      a       qb:observation ;
+      qb:dataSet rdfindex:TheLongestLifeCountry ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "1539.75"^^xsd:double .
+
+rdfindex-res:o6808068844487
+      a       qb:observation ;
+      qb:dataSet rdfindex:AggregatedLifeExpectancy ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o6808100994099
+      a       qb:observation ;
+      qb:dataSet rdfindex:TheLongestLifeCountry ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "1039.75"^^xsd:double .
+
+rdfindex-res:o6808082195124
+      a       qb:observation ;
+      qb:dataSet rdfindex:HealthPublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "3000.0"^^xsd:double .
+
+rdfindex-res:o6808077079982
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "79.5"^^xsd:double .
+
+rdfindex-res:o6808077006581
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "79.5"^^xsd:double .
+
+rdfindex-res:o6808088631776
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "3000.0"^^xsd:double .
+
+rdfindex-res:o6808082270828
+      a       qb:observation ;
+      qb:dataSet rdfindex:HealthPublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "2000.0"^^xsd:double .
+
+rdfindex-res:o6808068581049
+      a       qb:observation ;
+      qb:dataSet rdfindex:AggregatedLifeExpectancy ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "79.5"^^xsd:double .
+
+rdfindex-res:o6808068698627
+      a       qb:observation ;
+      qb:dataSet rdfindex:AggregatedLifeExpectancy ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "79.5"^^xsd:double .
+
+rdfindex-res:o6808076847732
+      a       qb:observation ;
+      qb:dataSet rdfindex:Health ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o6808082418963
+      a       qb:observation ;
+      qb:dataSet rdfindex:HealthPublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "1000.0"^^xsd:double .
+
+rdfindex-res:o6808088404814
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "1000.0"^^xsd:double .
+
+rdfindex-res:o6808100851579
+      a       qb:observation ;
+      qb:dataSet rdfindex:TheLongestLifeCountry ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2006> ;
+      rdfindex:value "789.0"^^xsd:double .
+
+rdfindex-res:o6808100759932
+      a       qb:observation ;
+      qb:dataSet rdfindex:TheLongestLifeCountry ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "539.0"^^xsd:double .
+
+rdfindex-res:o6808088557699
+      a       qb:observation ;
+      qb:dataSet rdfindex:PublicSpending ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <2005> ;
+      rdfindex:value "2000.0"^^xsd:double .

@@ -185,7 +185,6 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 			partsOf.put(part, partTO);
 		}
 		aggregated.getPartsOf().addAll(partsOf.values());
-		System.out.println(aggregated);
 		return aggregated;
 	}
 	
