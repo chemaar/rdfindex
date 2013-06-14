@@ -44,7 +44,7 @@ rdfindex:Health a rdfindex:Component;
 	rdfindex:weight 1;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:OWA;
-		rdfindex:part-of [rdfindex:dataset rdfindex:A ; rdfindex:weight 10];
+		rdfindex:part-of [rdfindex:dataset rdfindex:A ; rdfindex:weight 2];
 		rdfindex:part-of [rdfindex:dataset rdfindex:B] ;
 	];
 	qb:structure 	rdfindex:HealthValueDSD ;  
@@ -78,6 +78,7 @@ rdfindex:ADSD a qb:DataStructureDefinition;
 
 rdfindex:B a rdfindex:Indicator;
 	rdfs:label 	"B"@en;
+	rdfindex:weight  1;
 	rdfindex:type 	rdfindex:Quantitative;
 	qb:structure 	rdfindex:BDSD ;
 .
