@@ -192,6 +192,11 @@ rdfindex:Max rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistic
 .
 
 
+rdfindex:OWA rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "OWD";	
+	rdfindex:sparql-notation "sum";	
+.
+
 
 
 

@@ -1,0 +1,157 @@
+@prefix rdfindex-res:  <http://purl.org/rdfindex/resource/> .
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix lg:  <http://linkedgeodata.org/ontology/> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+
+rdfindex:TheWeightLongestLifeCountry a rdfindex:Index;
+	rdfs:label 	"The Weight Longest Life Country"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:Min;
+		rdfindex:part-of [rdfindex:dataset rdfindex:Health];
+	];
+	qb:structure 	rdfindex:TheWeightLongestLifeCountryDSD ;
+.
+
+rdfindex:TheWeightLongestLifeCountryDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+rdfindex:Health a rdfindex:Component;
+	rdfs:label 	"Health Value"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight 1;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:OWA;
+		rdfindex:part-of [rdfindex:dataset rdfindex:A ; rdfindex:weight 10];
+		rdfindex:part-of [rdfindex:dataset rdfindex:B] ;
+	];
+	qb:structure 	rdfindex:HealthValueDSD ;  
+.
+
+
+rdfindex:HealthValueDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+rdfindex:A a rdfindex:Indicator;
+	rdfs:label 	"A"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight  1;
+	qb:structure 	rdfindex:ADSD ;
+.
+
+rdfindex:ADSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+rdfindex:B a rdfindex:Indicator;
+	rdfs:label 	"B"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	qb:structure 	rdfindex:BDSD ;
+.
+
+
+rdfindex:BDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex:ref-area],
+        [qb:dimension rdfindex:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+
+
+#
+#Observations
+#
+
+
+rdfindex-res:o19833809484141
+      a       qb:observation ;
+      qb:dataSet rdfindex:A ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <http://example.org/year/2005> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o19833809554183
+      a       qb:observation ;
+      qb:dataSet rdfindex:A ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <http://example.org/year/2006> ;
+      rdfindex:value "76.0"^^xsd:double .
+
+rdfindex-res:o19833809624202
+      a       qb:observation ;
+      qb:dataSet rdfindex:A ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <http://example.org/year/2005> ;
+      rdfindex:value "76.0"^^xsd:double .
+
+rdfindex-res:o19833809367200
+      a       qb:observation ;
+      qb:dataSet rdfindex:A ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <http://example.org/year/2006> ;
+      rdfindex:value "78.0"^^xsd:double .
+
+rdfindex-res:o19833834153330
+      a       qb:observation ;
+      qb:dataSet rdfindex:B ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <http://example.org/year/2006> ;
+      rdfindex:value "80.0"^^xsd:double .
+
+rdfindex-res:o19833834083896
+      a       qb:observation ;
+      qb:dataSet rdfindex:B ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <http://example.org/year/2005> ;
+      rdfindex:value "80.0"^^xsd:double .
+
+rdfindex-res:o19833834221223
+      a       qb:observation ;
+      qb:dataSet rdfindex:B ;
+      rdfindex:ref-area dbpedia-res:Turkey ;
+      rdfindex:ref-year <http://example.org/year/2005> ;
+      rdfindex:value "79.0"^^xsd:double .
+
+rdfindex-res:o19833834005439
+      a       qb:observation ;
+      qb:dataSet rdfindex:B ;
+      rdfindex:ref-area dbpedia-res:Spain ;
+      rdfindex:ref-year <http://example.org/year/2006> ;
+      rdfindex:value "81.0"^^xsd:double .
+      

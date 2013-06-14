@@ -148,6 +148,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 
 	public AggregatedTO getAggregatedTO(String elementUri){
 		AggregatedTO aggregated = new AggregatedTO();
+		aggregated.setAggregator(elementUri);
 		String aggregatedQuery = SPARQLQueriesHelper.createQueryAggregatesFromElement(elementUri);
 		Map<String, PartTO> partsOf = new HashMap<String, PartTO>();
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(datasource, aggregatedQuery);
@@ -157,7 +158,7 @@ public class MetadataDAOImpl implements RDFIndexMetadataDAO {
 				String operator = SPARQLFetcherUtils.fetchResourceValue(results[i], "operator");
 				String notation = SPARQLFetcherUtils.fetchStringValue(results[i], "notation");
 				aggregated.setOperator(operator);
-				aggregated.setOperatorNotation(notation);
+				aggregated.setOperatorNotation(notation);				
 			}
 			//WARNING: this is a blank node
 			String part = results[i].get("part")!=null?results[i].get("part").toString():"";

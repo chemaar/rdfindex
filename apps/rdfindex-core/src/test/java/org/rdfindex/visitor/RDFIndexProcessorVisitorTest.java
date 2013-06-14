@@ -22,31 +22,50 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 public class RDFIndexProcessorVisitorTest {
 
+//	@Test
+//	public void testProcessing(){
+//		//Test as processor
+//		Processor rdfIndexProcessor = new RDFIndexProcessorVisitor();
+//		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
+//		List<ObservationTO> result = rdfIndexProcessor.run(metadata);
+//		Assert.assertEquals(4, result.size());
+//	}
+//
+//
+//	@Test
+//	public void testAsVisitor() throws Exception{
+//		//Test as visitor
+//		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
+//		RDFIndexVisitor rdfIndexProcessor = new RDFIndexProcessorVisitor(metadata);
+//		
+//		List<IndexTO> indexes = metadata.getIndexMetadata();
+//		
+//		for(IndexTO index:indexes){
+//			List<ObservationTO> indexObservations = (List<ObservationTO>) rdfIndexProcessor.visit(index);
+//			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
+//			Assert.assertEquals(4, indexObservations.size());
+//			
+//		}
+//	}
+//	
 	@Test
-	public void testProcessing(){
-		//Test as processor
-		Processor rdfIndexProcessor = new RDFIndexProcessorVisitor();
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
-		List<ObservationTO> result = rdfIndexProcessor.run(metadata);
-		Assert.assertEquals(4, result.size());
-	}
-
-
-	@Test
-	public void testAsVisitor() throws Exception{
-		//Test as visitor
-		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
+	public void testWeightedAsVisitor() throws Exception {
+		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(
+				TestHelper.INDEX_MODEL, 
+				TestHelper.createModel("weight/dummyindex-weight.ttl"),
+				TestHelper.createModel("weight/dummyobservations-weight.ttl"));	
 		RDFIndexVisitor rdfIndexProcessor = new RDFIndexProcessorVisitor(metadata);
-		
+		//Test as visitor
 		List<IndexTO> indexes = metadata.getIndexMetadata();
 		
 		for(IndexTO index:indexes){
 			List<ObservationTO> indexObservations = (List<ObservationTO>) rdfIndexProcessor.visit(index);
-			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
+			PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 			Assert.assertEquals(4, indexObservations.size());
 			
 		}
 	}
+	
 
 	
 }

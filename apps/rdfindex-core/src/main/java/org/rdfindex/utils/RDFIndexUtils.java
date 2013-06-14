@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.antlr.stringtemplate.StringTemplate;
 import org.rdfindex.to.AggregatedTO;
 import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.ObservationTO;
@@ -28,8 +29,8 @@ public class RDFIndexUtils {
 			model.add(observationResource,
 					ResourceFactory.createProperty(dimensionUri),
 					ResourceFactory.createResource(dimensions.get(dimensionUri))); 
-					//FIXME:Ask to the abox which is the range of of the dimension to generate a resource or a literal
-					//Now everyting is a resource
+			//FIXME:Ask to the abox which is the range of of the dimension to generate a resource or a literal
+			//Now everyting is a resource
 		}
 		//Very important to indicate to the SPARQL processor that the value is a number!
 		model.addLiteral(observationResource,ResourceFactory.createProperty(observation.getMeasure()),Double.valueOf(observation.getValue()));		
@@ -52,35 +53,34 @@ public class RDFIndexUtils {
 	//FIXME: extract mapping, what happen with the operation aggregator
 	public static String formatFormula(AggregatedTO aggregated) {
 		String formula = "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
+
 		if (aggregated.getOperator() != null){
 			String operatorNotation = aggregated.getOperatorNotation();
 			if (operatorNotation!= null && !operatorNotation.equalsIgnoreCase("")){
-				String function = operatorNotation+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
+				String function = "";
+				//And what happened if w? always appear as 1?
+				if(aggregated.getOperator().equalsIgnoreCase(RDFIndexVocabulary.OWA.getURI())){
+					function = operatorNotation+"(?w*"+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
+				}else{
+					function = operatorNotation+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
+				}
 				formula = "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
 			}
+
 		}
 		return formula;
-//		if (operator == null){
-//				
-//		}else if (operator.equalsIgnoreCase("http://purl.org/rdfindex/ontology/Mean")){
-//			String function = "avg"+"("+SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+")";
-//			return "("+ function+" as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
-//		}else{
-//			return "( min("+ SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+") as "+SPARQLFetcherUtils.formatVar(NEW_VALUE_VAR_SPARQL)+")";
-//		}
-	
-		
+
 	}
 	//FIXME: in a distributed environment this does not ensure an unique id, a common repo should be used
 	public static String createObservationUniqueID() {
 		return RDFIndexVocabulary.RDFINDEX_COMPUTATION_RESOURCE_OBS_BASE+System.nanoTime(); 
 	}
-	
+
 	public static String createTemplateSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated, Map<String,String> tableSimbols) {
 		return "";
 	}
-	
-	
+
+
 	public static String createSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated) {
 		Set<String> dimensions = metadata.getDimensions();
 		Set<String> partsOf = aggregated.getPartsOfAsDatasetURIs();
@@ -88,35 +88,52 @@ public class RDFIndexUtils {
 		String operator = aggregated.getOperator();
 		StringBuffer createDimensionsBGPs = new StringBuffer();
 		StringBuffer dimensionVars = new StringBuffer();
-		String sparqlQuery = "";
+		String owaAttr = "";
+
 		int i = 0; //Maybe a table?
 		for(String dim:dimensions){
 			String dimVar = "?dim"+(i++);
 			dimensionVars.append(" "+dimVar);
 			createDimensionsBGPs.append(
 					SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
-					SPARQLFetcherUtils.formatResource(dim)+" "+
-					" "+dimVar+". "
-			);
-		}
+							SPARQLFetcherUtils.formatResource(dim)+" "+
+							" "+dimVar+". "
+					);
+		}		
+		
 		if(operator == null && partsOf.size()==0){
 			//There is no aggregation so we keep as ?part the whole element
 			partsOf.add(metadata.getElement());
+			
+		}else{
+			owaAttr=("?element rdfindex:aggregates ?parts. " +
+					SPARQLFetcherUtils.createFilterResource(aggregated.getAggregator(), RDFIndexUtils.ELEMENT_VAR_SPARQL)+
+					"?parts rdfindex:part-of ?partof."+
+					"?partof rdfindex:dataset ?part ."+
+					"?part rdfindex:weight ?defaultw. "+
+					"OPTIONAL {?partof rdfindex:weight ?aggregationw.} ."+
+					"BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w).");
 		}
-		sparqlQuery = "SELECT "+dimensionVars+" "+formatFormula(aggregated)+" "+
-				"WHERE{ " +
-					SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+				
-						SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.QB_DATASET.getURI())+" "+
-								SPARQLFetcherUtils.formatVar(PART_VAR_SPARQL)+" . "+
-					SPARQLFetcherUtils.createFilterPartsOf(partsOf)+
-					SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
-							SPARQLFetcherUtils.formatResource(measure)+" "+
-								SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+" . "+
-					createDimensionsBGPs+		
-				"} GROUP BY"+dimensionVars;
 		
-		return sparqlQuery;
+		StringTemplate sparqlQueryTemplate = new StringTemplate("SELECT "+dimensionVars+" "+formatFormula(aggregated)+" "+
+				"WHERE{ " +
+				"$owafilter$"+
+				SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+				
+				SPARQLFetcherUtils.formatResource(RDFIndexVocabulary.QB_DATASET.getURI())+" "+
+				SPARQLFetcherUtils.formatVar(PART_VAR_SPARQL)+" . "+
+				SPARQLFetcherUtils.createFilterPartsOf(partsOf)+
+				SPARQLFetcherUtils.formatVar(OBSERVATION_VAR_SPARQL)+" "+
+				SPARQLFetcherUtils.formatResource(measure)+" "+
+				SPARQLFetcherUtils.formatVar(MEASURE_VAR_SPARQL)+" . "+
+				createDimensionsBGPs+		
+				"} GROUP BY"+dimensionVars);
+		sparqlQueryTemplate.setAttribute("owafilter", owaAttr);
+		System.out.println(sparqlQueryTemplate.toString());
+		return sparqlQueryTemplate.toString();
 	}
+	
+	
+	
 	public static List<ObservationTO> fetchNewObservations(DatasetStructureTO metadata, QuerySolution[] results) {
 		List<ObservationTO> newObservations = new LinkedList<ObservationTO>();
 		//A new observation will be created with the next metadata
@@ -139,14 +156,14 @@ public class RDFIndexUtils {
 		}
 		return newObservations;
 	}
-	
+
 	public static String createSPARQL(DatasetStructureTO metadata, AggregatedTO aggregated){
 		return createSPARQLQuery(metadata,aggregated);
 	}
-	
+
 	public static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
 		String sparqlQuery = SPARQLUtils.NS+" "+createSPARQLQuery(metadata,aggregated);	
-		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);
+		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);		
 		return fetchNewObservations(metadata,results);
 	}
 	public static List<ObservationTO> execute(List<ObservationTO> observations, DatasetStructureTO metadata, AggregatedTO aggregated){

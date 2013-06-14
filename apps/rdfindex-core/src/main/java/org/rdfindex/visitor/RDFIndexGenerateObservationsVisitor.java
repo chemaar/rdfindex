@@ -11,7 +11,9 @@ import org.rdfindex.to.ComponentTO;
 import org.rdfindex.to.IndexTO;
 import org.rdfindex.to.IndicatorTO;
 import org.rdfindex.to.ObservationTO;
+import org.rdfindex.utils.PrettyPrinter;
 import org.rdfindex.utils.RDFIndexUtils;
+import org.rdfindex.utils.SPARQLQueriesHelper;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;

@@ -1,4 +1,10 @@
 @prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-org: <http://purl.org/rdfindex/organization/> .
+@prefix rdfindex-people: <http://purl.org/rdfindex/people/> .
+@prefix rdfindex-project: <http://purl.org/rdfindex/project/> .
+@prefix rdfindex-component:  <http://purl.org/rdfindex/component/> .
+@prefix rdfindex-indicator:  <http://purl.org/rdfindex/indicator/> .
+
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
@@ -18,26 +24,53 @@
 @prefix qb:      <http://purl.org/linked-data/cube#> .
 @prefix interval:  <http://www.w3.org/2006/time#> .
 @prefix lg:  <http://linkedgeodata.org/ontology/> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+
+
+<http://purl.org/rdfindex/ontology/>
+    a owl:Ontology;
+    owl:versionInfo "0.1";
+    rdfs:label "RDF Index ontology"@en;
+    rdfs:comment "This is the first version of the RDF Index taxonomy for representing indicators, modeling and processing an index."@en;
+    dcterms:created "2012-20-05"^^xsd:date;
+    dcterms:modified "2012-08-31"^^xsd:date;
+    dcterms:title "RDF Index ontology"@en;
+    dcterms:author rdfindex-people:Chema, rdfindex-org:SEERC ;
+    dcterms:publisher  rdfindex-people:Chema;
+    dcterms:contributor  rdfindex-org:SEERC, rdfindex-project:RELATE ;
+    dcterms:license <http://opendatacommons.org/licenses/by/1.0/> .
+
 
 #
 # T-BOX Ontology Classes
 #
 
 
-rdfindex:Quantitative rdfs:subClassOf skos:Concept;
+rdfindex:Quantitative rdf:type owl:Class ;
+	rdfs:subClassOf skos:Concept;
 .
 
-rdfindex:Qualitative rdfs:subClassOf skos:Concept;
+rdfindex:Qualitative rdf:type owl:Class ;
+	rdfs:subClassOf skos:Concept;
 .
 
+#FIXME: generate taxonomy
 
-rdfindex:Index rdfs:subClassOf qb:DataSet, skos:Concept;
+rdfindex:Observable rdf:type owl:Class ;
+	rdfs:subClassOf skos:Concept;
+ 	rdfs:subClassOf qb:DataSet;
 .
 
-rdfindex:Component rdfs:subClassOf qb:DataSet, skos:Concept;
+rdfindex:Index rdf:type owl:Class ;
+	rdfs:subClassOf rdfindex:Observable ;
 .
 
-rdfindex:Indicator rdfs:subClassOf qb:DataSet, skos:Concept;
+rdfindex:Component rdf:type owl:Class ;
+	rdfs:subClassOf rdfindex:Observable ;
+.
+
+rdfindex:Indicator rdf:type owl:Class ;
+	rdfs:subClassOf rdfindex:Observable ;
 .
 
 #
@@ -51,136 +84,110 @@ rdfindex:weight a owl:OWLDataTypeProperty;
 .
 
 rdfindex:type a owl:OWLDataTypeProperty;
-	rdfs:domain rdfindex:Indicator;
-	rdfs:range rdfindex:Quantitative, rdfindex:Qualitative;
+	rdfs:domain rdfindex:Observable;
+	rdfs:range  rdfindex:Quantitative, rdfindex:Qualitative;
 .
 
-rdfindex:life-expectancy  a rdf:Property, qb:MeasureProperty;
+rdfindex:value a rdf:Property, qb:MeasureProperty;
     rdfs:label "life expectancy"@en;
+    skos:notation "life-expectancy" ;
     rdfs:subPropertyOf sdmx-measure:obsValue;
-    rdfs:range xsd:decimal . 
+    rdfs:range xsd:double . 
+
+rdfindex:obsStatus-N a skos:Concept, sdmx-concept:Concept, sdmx-code:ObsStatus;
+    rdfs:label "Normalised status"@en;
+    skos:topConceptOf sdmx-code:obsStatus;
+    skos:inScheme     sdmx-code:obsStatus;
+    skos:prefLabel "Normalised"@en ;
+    skos:notation "N" ;
+    skos:definition "It is used when an observation status is normalised."@en ; 
+.
+
+rdfindex:ref-area a rdf:Property, qb:DimensionProperty; 
+	rdfs:label "URI to an Area"@en; 
+	rdfs:subPropertyOf sdmx-dimension:ref-area; 
+	rdfs:range skos:Concept; 
+	qb:concept sdmx-concept:ref-area . 
+
+rdfindex:ref-year  a rdf:Property, qb:DimensionProperty;
+	rdfs:label "Period and year (fix range to interval:Interval)"@en;
+	rdfs:subPropertyOf sdmx-dimension:ref-period;
+	rdfs:range xsd:int;
+	qb:concept sdmx-concept:ref-period . 
+
+
+rdfindex:ref-period  a rdf:Property, qb:DimensionProperty;
+	rdfs:label "Period"@en;
+	rdfs:subPropertyOf sdmx-dimension:ref-period;
+	rdfs:range interval:Interval;
+	qb:concept sdmx-concept:ref-period . 
+
+
 
 #
 # T-BOX Computation Process Classes
 #
+rdfindex:StatisticalMathOperator rdf:type owl:Class ;
+	rdfs:subClassOf skos:Concept;
+	rdfs:label "Type of descriptive aggregators";		
+.
 
+
+rdfindex:DescriptiveStatistics rdf:type owl:Class ;
+	rdfs:subClassOf rdfindex:StatisticalMathOperator;
+	rdfs:label "Type of descriptive aggregators";		
+.
+
+rdfindex:SummaryStatistics rdf:type owl:Class ;
+	rdfs:subClassOf rdfindex:StatisticalMathOperator;
+	rdfs:label "Type of summary aggregators";		
+.
+
+#DescriptiveStatistics	min, max, mean, geometric mean, n, sum, sum of squares, standard deviation, variance, percentiles, skewness, kurtosis, median
+#SummaryStatistics	min, max, mean, geometric mean, n, sum, sum of squares, standard deviation, variance
 
 #
 # T-BOX Computation Process Properties
 #
 
+rdfindex:aggregates a owl:ObjectProperty, rdf:Property; 
+	rdfs:label "The description of an aggregation."@en; 
+	rdfs:domain skos:Concept; 
+. 
 
-#A-BOX
+rdfindex:type a owl:ObjectProperty, rdf:Property; 
+	rdfs:label "The description of an aggregation."@en; 
+	rdfs:domain rdfindex:Observable; 
+	rdfs:range  rdfindex:Quantitative;
+	rdfs:range  rdfindex:Qualitative;
+. 
 
-rdfindex:AggregatedLifeExpectancy a rdfindex:Indicator;
-	rdfindex:type 	rdfindex:Quantitative;
-	rdfindex:aggregates [ 
-		rdfindex:aggregation-operator rdfindex:Average;
-		rdfindex:part-of rdfindex:slice1;  
-		rdfindex:part-of rdfindex:slice2; 
-		rdfindex:start  2005;
-		rdfindex:end    2010;
-		qb:measure rdfindex:life-expectancy;
-		rdfindex:group-by rdfindex:ref-area, rdfindex:ref-year;
-	];
+rdfindex:aggregation-operator a owl:ObjectProperty, rdf:Property; 
+	rdfs:label "The operator used in an aggregation."@en; 
+	rdfs:domain rdfindex:Observable; 
+	rdfs:range rdfindex:StatisticalMathOperator;
+. 
+#
+#A-BOX-Computation Process
+#
+
+rdfindex:Mean rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "Average";	
+	skos:notation "mean";	
+.
+
+rdfindex:Min rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "Min";	
+	skos:notation "min";	
+.
+
+rdfindex:Max rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "Max";	
+	skos:notation "Max";	
 .
 
 
-rdfindex:LifeExpectancy a rdfindex:Indicator;
-	rdfs:label 	"Life expectancy"@en;
-	rdfs:comment 	"Number of years that a person lives since his birth in a certain region and period."@en;
-	rdfindex:type 	rdfindex:Quantitative;	
-	qb:structure 	rdfindex:LifeExpectancyStructure ;  
-	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
-        qb:slice rdfindex:slice1, rdfindex:slice2  ;
-.
 
-
-#Examples instances
-
-rdfindex:LifeExpectancyStructure a qb:DataStructureDefinition;
-    qb:component 
-        [qb:dimension rdfindex:ref-area;         qb:order 1];
-   #    [qb:dimension rdfindex:ref-year;         qb:order 2; qb:componentAttachment qb:Slice];
-   #    [qb:dimension sdmx-dimension:sex;        qb:order 3; qb:componentAttachment qb:Slice];
-   #    [qb:measure   rdfindex:life-expectancy];
-   #    [qb:attribute sdmx-attribute:unitMeasure; qb:componentAttachment qb:DataSet;] ;
-#    qb:sliceKey eg:sliceByRegion;
-.
-
-
-#Male Life expectancy
-rdfindex:slice1 a qb:Slice;
-#   qb:sliceStructure  		eg:sliceByRegion ;
-    sdmx-dimension:sex         	sdmx-code:sex-M ;
-    qb:observation rdfindex:o1c, rdfindex:o3c, rdfindex:o7c,  rdfindex:o5c;
-.
-
-#Female Life expectancy
-rdfindex:slice2 a qb:Slice;
-#    qb:sliceStructure          eg:sliceByRegion ;
-    sdmx-dimension:sex         sdmx-code:sex-F ;
-    qb:observation rdfindex:o2c, rdfindex:o4c, rdfindex:o6c, rdfindex:o8c;
-.
-
-rdfindex:o1c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area               <http://dbpedia.org/resource/Spain> ;                  
-    rdfindex:life-expectancy         75 ;
-    .
-    
-rdfindex:o2c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                 <http://dbpedia.org/resource/Spain>;                  
-    rdfindex:life-expectancy         73 ;
-    .
-
-
-rdfindex:o3c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2006 ;         
-    rdfindex:ref-area               <http://dbpedia.org/resource/Spain> ;                  
-    rdfindex:life-expectancy         76 ;
-    .
-    
-rdfindex:o4c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2006 ;         
-    rdfindex:ref-area                 <http://dbpedia.org/resource/Spain>;                  
-    rdfindex:life-expectancy         74 ;
-    .
-
-
-rdfindex:o5c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area               <http://dbpedia.org/resource/Turkey> ;                  
-    rdfindex:life-expectancy         65 ;
-    .
-    
-rdfindex:o6c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2005 ;         
-    rdfindex:ref-area                 <http://dbpedia.org/resource/Turkey>;                  
-    rdfindex:life-expectancy         63 ;
-    .
-
-
-rdfindex:o7c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2006 ;         
-    rdfindex:ref-area               <http://dbpedia.org/resource/Turkey> ;                  
-    rdfindex:life-expectancy         66 ;
-    .
-    
-rdfindex:o8c a qb:Observation;
-    qb:dataSet                 rdfindex:LifeExpectancy ;
-    rdfindex:ref-year                2006 ;         
-    rdfindex:ref-area                 <http://dbpedia.org/resource/Turkey>;                  
-    rdfindex:life-expectancy         64 ;
-    .
 
 
 

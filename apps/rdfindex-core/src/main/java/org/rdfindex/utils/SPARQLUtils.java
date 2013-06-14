@@ -25,7 +25,7 @@ public class SPARQLUtils {
 		model.enterCriticalSection(Lock.READ) ;//Concurrency protect, it is  absolutely not neccesary but is recommended
 		try{
 			Query query = QueryFactory.create(queryStr) ;
-			QueryExecution qexec = null;
+			QueryExecution qexec = null;			
 			try {
 				qexec = QueryExecutionFactory.create(query, model) ;
 

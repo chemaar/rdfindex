@@ -33,6 +33,7 @@ public class TestHelper {
 	}
 	
 	public static final String DUMMY_OBSERVATIONS_FILE="dummyobservations.ttl";
+	
 	public static final String DUMMY_INDEX_METADATA_MODEL_FILE="dummyindex.ttl";
 	public static final String INDEX_MODEL_FILE="rdfindex.ttl";
 	
