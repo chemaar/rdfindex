@@ -1,4 +1,5 @@
-import test.utils.TestHelper;
+package test.utils;
+
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
