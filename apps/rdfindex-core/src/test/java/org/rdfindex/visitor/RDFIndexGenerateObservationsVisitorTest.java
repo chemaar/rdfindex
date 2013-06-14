@@ -43,8 +43,8 @@ public class RDFIndexGenerateObservationsVisitorTest {
 		List<IndexTO> indexes = metadata.getIndexMetadata();
 		
 		for(IndexTO index:indexes){
-			String sparqlQuery = (String) rdfIndexProcessor.visit(index);			
-			Assert.assertEquals(2336 , sparqlQuery.length());
+			List<ObservationTO> observations =  (List<ObservationTO>) rdfIndexProcessor.visit(index);			
+			Assert.assertEquals(16 , observations.size());
 			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 		
 			

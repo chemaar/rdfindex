@@ -16,7 +16,7 @@ import test.utils.TestHelper;
 
 public class RDFIndexSPARQLGeneratorVisitorTest {
 	
-	//@Test
+	@Test
 	public void testGeneratedQueryIndex() throws Exception {
 		RDFIndexMetadataDAO metadata = new MetadataDAOImpl(TestHelper.INDEX_MODEL, TestHelper.DUMMY_INDEX_METADATA_MODEL, TestHelper.DUMMY_OBSERVATIONS_MODEL);	
 		RDFIndexVisitor rdfIndexProcessor = new RDFIndexSPARQLGeneratorVisitor(metadata);
@@ -25,7 +25,7 @@ public class RDFIndexSPARQLGeneratorVisitorTest {
 		
 		for(IndexTO index:indexes){
 			String sparqlQuery = (String) rdfIndexProcessor.visit(index);			
-			Assert.assertEquals(3816 , sparqlQuery.length());
+			Assert.assertEquals(3482 , sparqlQuery.length());
 			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 		
 			

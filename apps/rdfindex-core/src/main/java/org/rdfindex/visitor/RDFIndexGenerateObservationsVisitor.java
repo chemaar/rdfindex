@@ -52,7 +52,7 @@ public class RDFIndexGenerateObservationsVisitor extends RDFIndexVisitor impleme
 			List<ObservationTO> componentObservations = (List<ObservationTO>) this.visit(component);
 			observationsFromComponents.addAll(componentObservations);
 		}
-		List<ObservationTO> observations = RDFIndexUtils.execute(observationsFromComponents, index.getMetadata(), index.getAggregated());
+		List<ObservationTO> observations = RDFIndexUtils.execute(this.metadata,observationsFromComponents, index.getMetadata(), index.getAggregated());
 		logger.debug("The index "+index.getUri()+" has generated "+observations.size());
 		observations.addAll(observationsFromComponents);	
 		logger.debug("Total collected "+observations.size());
@@ -69,7 +69,8 @@ public class RDFIndexGenerateObservationsVisitor extends RDFIndexVisitor impleme
 			List<ObservationTO> indicatorObservations = (List<ObservationTO>) this.visit(indicator);
 			observationsFromIndicators.addAll(indicatorObservations);
 		}
-		List<ObservationTO> observations = RDFIndexUtils.execute(observationsFromIndicators, component.getMetadata(), component.getAggregated());
+		
+		List<ObservationTO> observations = RDFIndexUtils.execute(this.metadata,observationsFromIndicators, component.getMetadata(), component.getAggregated());
 		logger.debug("The component "+component.getUri()+" has generated "+observations.size());
 		observations.addAll(observationsFromIndicators);
 		logger.debug("Total collected "+observations.size());

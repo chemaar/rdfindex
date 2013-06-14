@@ -1,3 +1,4 @@
+@prefix rdfindex-res:  <http://purl.org/rdfindex/resource/> .
 @prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -88,7 +89,4 @@ rdfindex:BDSD a qb:DataStructureDefinition;
         [qb:measure   rdfindex:value],
         [qb:attribute sdmx-attribute:unitMeasure];
 .
-
-
-
 

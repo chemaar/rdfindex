@@ -60,7 +60,7 @@ public class RDFIndexProcessorVisitorTest {
 		
 		for(IndexTO index:indexes){
 			List<ObservationTO> indexObservations = (List<ObservationTO>) rdfIndexProcessor.visit(index);
-			PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
+		//	PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 			Assert.assertEquals(4, indexObservations.size());
 			
 		}

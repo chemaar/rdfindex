@@ -55,7 +55,7 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 		//Since we have generated a new set of observations for the components of this index we can aggregate
 		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observationsFromComponents));
 		logger.debug("...the index "+index.getUri()+" is going to compute "+observationsFromComponents.size()+" observations from components.");
-		List<ObservationTO> observations = RDFIndexUtils.execute(observationsFromComponents, index.getMetadata(), index.getAggregated());
+		List<ObservationTO> observations = RDFIndexUtils.execute(this.metadata,observationsFromComponents, index.getMetadata(), index.getAggregated());
 		logger.debug("...the index "+index.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}
@@ -73,7 +73,7 @@ public class RDFIndexProcessorVisitor extends RDFIndexVisitor implements Process
 		//Since we have generated a new set of observations for the indicators of this component we can aggregate
 		//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(observationsFromIndicators));
 		logger.debug("...the component "+component.getUri()+" is going to compute "+observationsFromIndicators.size()+" observations from indicators.");
-		List<ObservationTO> observations = RDFIndexUtils.execute(observationsFromIndicators, component.getMetadata(), component.getAggregated());
+		List<ObservationTO> observations = RDFIndexUtils.execute(this.metadata,observationsFromIndicators, component.getMetadata(), component.getAggregated());
 		logger.debug("...the component "+component.getUri()+" has generated "+observations.size()+" new observations.");
 		return observations;
 	}

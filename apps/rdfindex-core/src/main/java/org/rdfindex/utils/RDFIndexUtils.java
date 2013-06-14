@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.antlr.stringtemplate.StringTemplate;
+import org.rdfindex.dao.RDFIndexMetadataDAO;
 import org.rdfindex.to.AggregatedTO;
 import org.rdfindex.to.DatasetStructureTO;
 import org.rdfindex.to.ObservationTO;
@@ -168,7 +169,17 @@ public class RDFIndexUtils {
 	}
 	public static List<ObservationTO> execute(List<ObservationTO> observations, DatasetStructureTO metadata, AggregatedTO aggregated){
 		Model model = ModelFactory.createDefaultModel();
-		model.add(SPARQLQueriesHelper.observationsAsRDF(observations));
+		model.add(SPARQLQueriesHelper.observationsAsRDF(observations));		
+		return execute(model, metadata, aggregated);
+	}
+	//Very importan if the model is separated from the observations!
+	public static List<ObservationTO> execute(
+			RDFIndexMetadataDAO metadataDAO,
+			List<ObservationTO> observations,
+			DatasetStructureTO metadata, AggregatedTO aggregated) {
+		Model model = ModelFactory.createDefaultModel();
+		model.add(metadataDAO.getIndexMetadataModel());
+		model.add(SPARQLQueriesHelper.observationsAsRDF(observations));		
 		return execute(model, metadata, aggregated);
 	}
 }
