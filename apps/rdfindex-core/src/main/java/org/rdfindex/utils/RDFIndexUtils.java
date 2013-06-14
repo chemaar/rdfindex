@@ -75,6 +75,12 @@ public class RDFIndexUtils {
 	public static String createObservationUniqueID() {
 		return RDFIndexVocabulary.RDFINDEX_COMPUTATION_RESOURCE_OBS_BASE+System.nanoTime(); 
 	}
+	
+	public static String createTemplateSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated, Map<String,String> tableSimbols) {
+		return "";
+	}
+	
+	
 	public static String createSPARQLQuery(DatasetStructureTO metadata, AggregatedTO aggregated) {
 		Set<String> dimensions = metadata.getDimensions();
 		Set<String> partsOf = aggregated.getPartsOfAsDatasetURIs();
@@ -133,6 +139,11 @@ public class RDFIndexUtils {
 		}
 		return newObservations;
 	}
+	
+	public static String createSPARQL(DatasetStructureTO metadata, AggregatedTO aggregated){
+		return createSPARQLQuery(metadata,aggregated);
+	}
+	
 	public static List<ObservationTO> execute(Model model, DatasetStructureTO metadata, AggregatedTO aggregated){
 		String sparqlQuery = SPARQLUtils.NS+" "+createSPARQLQuery(metadata,aggregated);	
 		QuerySolution[] results = SPARQLUtils.executeSimpleSparql(model, sparqlQuery);
