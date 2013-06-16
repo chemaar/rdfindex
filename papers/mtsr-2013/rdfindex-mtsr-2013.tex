@@ -1,0 +1,105 @@
+\documentclass{llncs}
+
+%\usepackage{llncsdoc}
+
+%\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\usepackage{url}
+\usepackage{rotating}
+
+%%%Math
+\usepackage{latexsym}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{amsthm}
+%\usepackage{eurosans}
+
+\usepackage{eurosym}
+
+\usepackage{longtable}
+
+\usepackage{listings}
+
+\usepackage{color}
+\usepackage{textcomp}
+
+
+\definecolor{gray}{gray}{0.5}
+\definecolor{green}{rgb}{0,0.5,0}
+
+
+\begin{document}
+\title{Leveraging semantics to represent and compute quantitative indexes. \\ The RDFindex approach.}
+
+\titlerunning{}
+
+\author{Jose Mar\'{i}a Alvarez-Rodr\'{i}guez\inst{1}} 
+
+\authorrunning{Jose Mar\'{i}a Alvarez-Rodr\'{i}guez}
+
+
+\tocauthor{Jose Mar\'{i}a Alvarez}
+
+
+\institute{The South East European Research Center\\   
+  \email{{jmalvarez@seerc.org}},\\
+   WWW home page: \texttt{http://www.seerc.org}, \\
+}
+
+
+\date{}
+
+\maketitle
+
+\renewcommand{\labelitemi}{$\bullet$}
+
+\begin{abstract}
+FIXME
+\end{abstract}
+
+\section{Introduction}
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{|p{3cm}||p{3.5cm}|p{2.5cm}|p{2.5cm}|p{1cm}|}
+\hline
+  \textbf{Component} & \textbf{Indicator} & \textbf{Year} & \textbf{Country} & \textbf{Value}  \\  \hline
+  Aid Efectiveness & Life Expectancy Male & 2010 & Spain & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Male & 2011 & Spain & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Female & 2010 & Spain & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Female & 2011 & Spain & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Male & 2010 & Greece & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Male & 2011 & Greece & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Female & 2010 & Greece & $1.0$ \\ \hline
+  Aid Efectiveness & Life Expectancy Female & 2011 & Greece & $1.0$ \\ \hline
+  Health & Public Spending (\%) & 2010 & Spain & $1.0$ \\ \hline
+  Health & Public Spending (\%) & 2011 & Spain & $1.0$ \\ \hline
+  Health & Public Spending (\%) & 2010 & Spain & $1.0$ \\ \hline
+  Health & Public Spending (\%) & 2011 & Spain & $1.0$ \\ \hline
+  \hline
+  \end{tabular}
+  \caption{Example of observations from the WorldBank.}
+  \label{config-corfu}
+  \end{center}
+\end{table} 
+
+
+\section{Related Work}
+\section{Theoretical modelling of a quantitative composite index}
+\section{Representation of a quantitative composite index in RDF: The RDFIndex}
+\section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
+%
+\subsection{Use Case: FIXME}
+% % 
+\section{Discussion and Further Steps}
+
+\section{Conclusions and Future Work}
+
+\end{document}
+
