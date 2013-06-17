@@ -61,6 +61,20 @@ FIXME
 
 \section{Introduction}
 
+
+As a motivating example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the WorldBank data to model and compute a new index, ``The Naive World Bank Index''. This 
+index uses the topics ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$) with the aim of comparing the status and evolution of health in several countries to decide whether new 
+investments are performed. From these components two indicators has been respectively selected by experts: ``Life Expectancy'' ($i_1$) and ``Health expenditure, total (\%) of GDP'' ($i_2$). 
+Once components and their indicators are defined and data can be retrieved from the WorldBank it is necessary to set how the index and components are computed 
+taking into account that only data about indicators is available. Following a top-down approach the index, $i$, is calculated through ordered weighted averaging (OWA) using the 
+formula: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$. On the other hand, both components only aggregates one indicator but the ``Aid Efectiveness'' 
+must firstly compute the ``Life Expectancy'' without considering the sex dimension. Making this implies the need of calculating the average age by country and year to create 
+a new ``derivated'' indicator of ``Life Expectancy''. Apart from that the computation must also consider the observation status and values must be normalized using the 
+z-score before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to change in the future 
+adding new data sources, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). Finally, the policy-maker 
+is also interested in applying this index to other scenarios and he needs a way of explaining in different languages how the index is computed. 
+
+
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
 \begin{center}
@@ -75,14 +89,14 @@ FIXME
   Aid Efectiveness & Life Expectancy Male & 2011 & Greece & $1.0$ \\ \hline
   Aid Efectiveness & Life Expectancy Female & 2010 & Greece & $1.0$ \\ \hline
   Aid Efectiveness & Life Expectancy Female & 2011 & Greece & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2010 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2011 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2010 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2011 & Spain & $1.0$ \\ \hline
+  Health & Health expenditure, total (\%) of GDP) & 2010 & Spain & $1.0$ \\ \hline
+  Health & Health expenditure, total (\%) of GDP) & 2011 & Spain & $1.0$ \\ \hline
+  Health & Health expenditure, total (\%) of GDP) & 2010 & Spain & $1.0$ \\ \hline
+  Health & Health expenditure, total (\%) of GDP) & 2011 & Spain & $1.0$ \\ \hline
   \hline
   \end{tabular}
   \caption{Example of observations from the WorldBank.}
-  \label{config-corfu}
+  \label{tab:example-wb}
   \end{center}
 \end{table} 
 
