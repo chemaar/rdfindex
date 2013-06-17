@@ -36,16 +36,18 @@
 \begin{document}
 \title{Leveraging semantics to represent and compute quantitative indexes. \\ The RDFindex approach.}
 
-\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{3}}
+\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{2}  \and Patricia Ordoñez de Pablo\inst{3}}
 
 
-\authorrunning{Jose Mar\'{i}a Alvarez \and Michail Vafolopoulos \and  Jos\'{e} Emilio Labra}
+\authorrunning{Jose Mar\'{i}a Alvarez \and  Jos\'{e} Emilio Labra \and Patricia Ordoñez de Pablos}
 
 
 \institute{South East European Research Center, \\ 54622, Thessaloniki, Greece\\
   \email{{jmalvarez@seerc.org}}\\
 \and WESO Research Group, Department of Computer Science, University of Oviedo, \\ 33007, Oviedo, Spain.\\
   \email{{labra@uniovi.es.es}}\\  
+  \and WESO Research Group, Department of Business Administration, University of Oviedo, \\ 33007, Oviedo, Spain.\\
+  \email{{patriop@uniovi.es.es}}\\  
 }
 
 
@@ -60,6 +62,36 @@ FIXME
 \end{abstract}
 
 \section{Introduction}
+Public and private bodies are continuously seeking for new analytical tools and methods to assess, rank and compare their performance based 
+on different indicators and dimensions with the objective of making some decision or developing a new policy. 
+In this context the creation and use of quantitative indexes is a wider but critized practice that has been applied to various 
+domains such as bibliometrics and academic performance and quality (the Impact Factor by Thomson-Reuters or the H-index), 
+the Web impact (the Webindex by the Webfoundation) or Cloud Computing (the CSMIC index, the Global Cloud Index by Cisco, the CSC index, 
+the VMWare Cloud Index, etc.) or university quality (the Shanghai or the Webometrics rankings) to name a few. 
+Therefore policy-makers as well as individuals are continuously evaluating quantitative measures to tackle 
+existing problems or support their decisions. Nevertheless the sheer mass of data now available in the web is 
+raising a new dynamic and challenging environment in which traditional tools are facing major 
+problems to deal with datasources diversity, structural issues or complex processes of estimation. Following some efforts 
+such as ``Policy-making $2.0$'' that \textit{refers to a blend of emerging and fast developing technologies 
+that enable better, more timely and more participated decision-making}, new paradigms and tools are required to take advantage of 
+the existing environment (open data and big data) to design and estimate this dynamic environment according to new requirements of 
+transparency, standardization, adaptability and extensibility among others with the aim of providing new context-aware 
+and added-value services such as visualization that can help a deepen and broaden understanding of the impact of a 
+policy in a more fast and efficient way. As a consequence common features and requirements can be extracted out from the existing situation:
+\begin{itemize}
+ \item Data sources. 
+ \item Structure. Quantitative indexes are usually defined by experts to aggregate several indicators in just one value providing a measure of the impact or 
+ performance of some policy or activity in a certain area. The structure of these indexes are obviously subjected to change over time 
+ to collect more information or adjust some parameters and technology should be able to afford proper techniques 
+ to automatically represent new changes in an efficient way.
+ 
+ \item Computation process. 
+ \item Documentation.
+\end{itemize}
+
+
+ %. That is why a technique to automatically define index structure through a common and shared model can help...
+
 
 
 As a motivating example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the WorldBank data to model and compute a new index, ``The Naive World Bank Index''. This 
@@ -73,6 +105,7 @@ a new ``derivated'' indicator of ``Life Expectancy''. Apart from that the comput
 z-score before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to change in the future 
 adding new data sources, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). Finally, the policy-maker 
 is also interested in applying this index to other scenarios and he needs a way of explaining in different languages how the index is computed. 
+
 
 
 \begin{table}[!htb]
@@ -102,6 +135,10 @@ is also interested in applying this index to other scenarios and he needs a way 
 
 
 \section{Related Work}
+
+%In the particular case of statistical data, the RDF Data Cube Vocabulary (Cyganiak & Reynolds, 2012), a W3C Working Draft document, is a shared effort to represent statistical data in RDF reusing parts (the cube model) of the Statistical Data and Metadata Exchange Vocabulary (SDMX) (SDMX initiative, 2005), an ISO standard for exchanging and sharing statistical data and metadata among organizations. The Data Cube vocabulary is a core foundation which supports extension vocabularies to enable publication of other aspects of statistical data flows or other multi-dimensional data sets. Previously, the Statistical Core Vocabulary (SCOVO, 2009), published by DERI, was the standard in fact to describe statistical information in the Web of Data. Some works are also emerging to publish statistical data following the concepts of the LOD initiative such as (Bosch, Cyganiak, Wackerow et al., 2012), (Zapilko & Mathiak, 2012) or (Rivera-Salas, Martin,  Maia Da Mota,  Auer, S. et al., 2012) among others.
+
+
 \section{Theoretical modelling of a quantitative composite index}
 \section{Representation of a quantitative composite index in RDF: The RDFIndex}
 \section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
