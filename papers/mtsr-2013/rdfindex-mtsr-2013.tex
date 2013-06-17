@@ -72,14 +72,17 @@ Therefore policy-makers as well as individuals are continuously evaluating quant
 existing problems or support their decisions. Nevertheless the sheer mass of data now available in the web is 
 raising a new dynamic and challenging environment in which traditional tools are facing major 
 problems to deal with datasources diversity, structural issues or complex processes of estimation. Following some efforts 
-such as ``Policy-making $2.0$'' that \textit{refers to a blend of emerging and fast developing technologies 
+such as the ``Policy-making $2.0$'' within the Cross-Over project that \textit{refers to a blend of emerging and fast developing technologies 
 that enable better, more timely and more participated decision-making}, new paradigms and tools are required to take advantage of 
 the existing environment (open data and big data) to design and estimate this dynamic environment according to new requirements of 
 transparency, standardization, adaptability and extensibility among others with the aim of providing new context-aware 
 and added-value services such as visualization that can help a deepen and broaden understanding of the impact of a 
 policy in a more fast and efficient way. As a consequence common features and requirements can be extracted out from the existing situation:
 \begin{itemize}
- \item Data sources. FIXME
+ \item Data sources. Data and information is continuously being generated as observations from social networks, public and private institutions, NGOs, services and applications, etc. 
+ creating  a \textit{marem\'{a}gnum} of sources, formats and access protocols with a huge potential for exploitation. Nevertheless data processing, knowledge inferring, etc. are not mere processes 
+ of retrieving and gathering, it is necessary to deal with semantic and syntactic issues with the aim of enabling a proper re-use of data and information 
+ and generate new knowledge. 
  
  \item Structure. Quantitative indexes are usually defined (a mathematical model) by experts to aggregate several indicators (in a tree structure) in just one value providing 
  a measure of the impact or performance of some policy in a certain context. The structure of these indexes are obviously subjected to change over time 
@@ -101,59 +104,25 @@ policy in a more fast and efficient way. As a consequence common features and re
 
 On the other hand, the Semantic Web area has experienced during last years a growing commitment from both academia and industrial areas 
 with the objective of elevating the meaning of web information resources through a common and shared data model (graphs) and 
-an underlying semantics based on different logic formalisms (ontologies). In the same way the 
-effort carried out by international standardization organisms such as the W3C has produced and is currently delivering 
-new specifications, vocabularies and models to boost the use of semantic technologies in a broad scope 
-of domains such as e-Government, e-Health, Biomedicine, Education, Bibliography or Geography to name a few, 
-with the aim of solving existing problems of integration and interoperability among applications and create 
-a proper knowledge environment under Web-based protocolos. The Resource Description Framework (RDF), based on a graph model, 
-and the Web Ontology Language (OWL), designed to formalize and model domain knowledge, are the two main \textit{ingredients} to reuse 
-information and data in a knowledge-based realm. Thus data, information and knowledge can be easily shared, exchanged and linked~\cite{Maali_Cyganiak_2011} 
+an underlying semantics based on different logic formalisms (ontologies). The Resource Description Framework (RDF), based on a graph model, 
+and the Web Ontology Language (OWL), designed to formalize and model domain knowledge, are a \textit{lingua-franca} to reuse information 
+and data in a knowledge-based environment. Thus data, information and knowledge can be easily shared, exchanged and linked~\cite{Maali_Cyganiak_2011} 
 to other knowledge and databases through the use URIs, more specifically HTTP-URIs. Therefore the broad objective of this effort can 
 be summarized as a new environment of added-value services that can encourage and improve B2B (Business to Business), B2C (Business to Client) or 
 A2A (Administration to Administration) relationships by means of the implementation of new contex-awareness expert systems 
 to tackle existing cross-domain problems in which data heterogeneities, lack of standard knowledge representation and 
-interoperability problems are common factors. 
+interoperability problems are common factors. As part of the Semantic Web area, recent times have also seen the deployment of 
+the Linked (Open) Data initiative  to make it possible the view and application of the Semantic Web to create a large 
+and distributed database on the Web. 
 
+Obviously semantic technologies and tools can partially fulfill the features and requirements of this challenging environment for new policy-making strategies. 
+A common and shared data model based on existing standardized semantic web vocabularies and datasets can be used to 
+represent quantitative indexes from both, structural and computational, points of view enabling the right exploitation of metadata and semantics. 
+That is why the present paper introduces: 1) a high-level model on top of the RDF Data Cube Vocabulary, a shared effort to model statistical data in RDF reusing parts 
+(the cube model) of the Statistical Data and Metadata Exchange Vocabulary (SDMX), to represent the structure of quantitative indexes and 
+2) a Java-SPARQL based processor to exploit the metainformation and compute new values of an index.
 
-
-% \begin{itemize}
-%  \item The Linked Data~\cite{Berners-Lee-2006,Heath_Bizer_2011} initiative. The emerging Web of Data and 
-%  the sheer mass of information now available make it possible the deployment of new added-value services and applications based on the reuse of existing 
-%  vocabularies and datasets. This initiative seeks for the application of semantic web concepts to 
-%  create a large and distributed database on the Web. In order to reach this major objective the publication 
-%  of information and data under a common data model (RDF) and formats~\cite{rdf-syntax,turtle-syntax,n3-syntax,rdf-binario,rdf-json} with a specific formal 
-%  query language (SPARQL~\cite{Sparql11}) provide the required building blocks to turn the Web of documents 
-%  into a real database of data~\cite{freebase}. As a consequence the popular diagram of the Linked Data Cloud~\cite{linked-data-cloud}, 
-%  generated from metadata extracted from the Comprehensive Knowledge Archive Network (CKAN~\cite{ckan}) out, 
-%  contains $337$ datasets, with more than $25$ billion RDF triples and $395$ million links in different 
-%  domains. Research works are focused in two main areas: 1) production/publishing~\cite{bizer07how} and 2) consumption of 
-%  Linked Data. In the first case data quality~\cite{bizer2007,wiqa,ld-quality,DBLP:journals/ws/BizerC09,lodq,link-qa}, conformance~\cite{DBLP:journals/ws/HoganUHCPD12}, 
-%  provenance~\cite{w3c-prov,DBLP:conf/ipaw/HartigZ10}, trust~\cite{Carroll05namedgraphs}, description of datasets~\cite{void,Cyganiak08semanticsitemaps,ckanValidator} and 
-%  entity reconciliation~\cite{Serimi,Maali_Cyganiak_2011} are becoming major objectives since a mass of amount data is already available~\cite{Triplify} 
-%  through SPARQL endpoints deployed on the top of RDF repositories such as OpenLink Virtuoso~\cite{Virtuoso} or OWLim~\cite{Kiryakov:2005:OPS:2113364.2113388}. 
-%  Furthermore and with regards to the promotion of raw data to RDF, there is an increasing interest in the creation of methodologies, best practices/recipes~\cite{best-gld,linked-data-cookbook} and lifecycles~\cite{gld-lifecycle,lod2-stack}. In this sense, some 
-%  Linked Data design considerations can be found in~\cite{bizer07how} covering from the design or URIs~\cite{Sauermann+2007a,bernerslee1998uri,uris-uk}, design patterns~\cite{linked-data-patterns}, 
-%  publication of RDF datasets and vocabularies~\cite{Berr08}, etc. to the establishment of Linked Data profiles~\cite{basic-profile-w3c}.
-%  
-%  On the other hand, consumption of Linked Data is being addressed to provide new ways of data visualization~\cite{DBLP:journals/semweb/DadzieR11,hoga-etal-2011-swse-JWS}, 
-%  faceted browsing~\cite{Pietriga06fresnel, citeulike:8529753,Sparallax} and searching~\cite{hoga-etal-2011-swse-JWS}, processing~\cite{Harth:2011:SIP:1963192.1963318} and exploitation of data applying 
-%  different approaches such as sensors~\cite{Jeung:2010:EMM:1850003.1850235,ontology-search} and techniques 
-%  such as distributed queries\cite{Hartig09executingsparql,Ankolekar07thetwo,sparqlOpt}, scalable reasoning process~\cite{Urbani2010WebPIE,HoganHarthPolleres2009,DBLP:conf/semweb/HoganPPD10}, 
-%  annnotation of web pages~\cite{rdfa-primer} or  information retrieval~\cite{Pound} to name a few.
-%  
-% 
-% 
-%  
-%  \item The underlying semantics. FIXME: owl, reasoning, etc.
-%  
-%  
-%  \end{itemize}
- 
-
-
-
-As a motivating example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the WorldBank data to model and compute a new index, ``The Naive World Bank Index''. This 
+Finally, as a motivating example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the WorldBank data to model and compute a new index, ``The Naive World Bank Index''. This 
 index uses the topics ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$) with the aim of comparing the status and evolution of health in several countries to decide whether new 
 investments are performed. From these components two indicators has been respectively selected by experts: ``Life Expectancy'' ($i_1$) and ``Health expenditure, total (\%) of GDP'' ($i_2$). 
 Once components and their indicators are defined and data can be retrieved from the WorldBank it is necessary to set how the index and components are computed 
@@ -164,7 +133,6 @@ a new ``derivated'' indicator of ``Life Expectancy''. Apart from that the comput
 z-score before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to change in the future 
 adding new data sources, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). Finally, the policy-maker 
 is also interested in applying this index to other scenarios and he needs a way of explaining in different languages how the index is computed. 
-
 
 
 \begin{table}[!htb]
@@ -194,19 +162,61 @@ is also interested in applying this index to other scenarios and he needs a way 
 
 
 \section{Related Work}
+The present work is focused in applying Semantic Web and Linked Data principles to model 
+quantitative indexes from both structural and computational points of view. 
 
-%In the particular case of statistical data, the RDF Data Cube Vocabulary (Cyganiak & Reynolds, 2012), a W3C Working Draft document, is a shared effort to represent statistical data in RDF reusing parts (the cube model) of the Statistical Data and Metadata Exchange Vocabulary (SDMX) (SDMX initiative, 2005), an ISO standard for exchanging and sharing statistical data and metadata among organizations. The Data Cube vocabulary is a core foundation which supports extension vocabularies to enable publication of other aspects of statistical data flows or other multi-dimensional data sets. Previously, the Statistical Core Vocabulary (SCOVO, 2009), published by DERI, was the standard in fact to describe statistical information in the Web of Data. Some works are also emerging to publish statistical data following the concepts of the LOD initiative such as (Bosch, Cyganiak, Wackerow et al., 2012), (Zapilko & Mathiak, 2012) or (Rivera-Salas, Martin,  Maia Da Mota,  Auer, S. et al., 2012) among others.
+% 
+% In the same way the 
+% effort carried out by international standardization organisms such as the W3C has produced and is currently delivering 
+% new specifications, vocabularies and models to boost the use of semantic technologies in a broad scope 
+% of domains such as e-Government, e-Health, Biomedicine, Education, Bibliography or Geography to name a few, 
+% with the aim of solving existing problems of integration and interoperability among applications and create 
+% a proper knowledge environment under Web-based protocolos.
+% 
+% In order to reach this major objective the publication of information 
+% and data under a common data model (RDF) and formats with a specific formal query language (SPARQL~\cite{Sparql11}) provide the required building blocks to turn the Web of documents 
+% into a real database of data~\cite{freebase}. As a consequence the popular diagram of the Linked Data Cloud~\cite{linked-data-cloud}, 
+% generated from metadata extracted from the Comprehensive Knowledge Archive Network (CKAN~\cite{ckan}) out, 
+% contains $337$ datasets, with more than $25$ billion RDF triples and $395$ million links in different  domains. 
+% Research works are focused in two main areas: 1) production/publishing~\cite{bizer07how} and 2) consumption of  Linked Data. 
+% In the first case data quality~\cite{bizer2007,wiqa,ld-quality,DBLP:journals/ws/BizerC09,lodq,link-qa}, conformance~\cite{DBLP:journals/ws/HoganUHCPD12}, 
+% provenance~\cite{w3c-prov,DBLP:conf/ipaw/HartigZ10}, trust~\cite{Carroll05namedgraphs}, description of datasets~\cite{void,Cyganiak08semanticsitemaps,ckanValidator} and 
+% entity reconciliation~\cite{Serimi,Maali_Cyganiak_2011} are becoming major objectives since a mass of amount data is already available~\cite{Triplify} 
+% through SPARQL endpoints deployed on the top of RDF repositories such as OpenLink Virtuoso or OWLim. 
+% On the other hand, consumption of Linked Data is being addressed to provide new ways of data visualization~\cite{DBLP:journals/semweb/DadzieR11,hoga-etal-2011-swse-JWS}, 
+% faceted browsing~\cite{Pietriga06fresnel, citeulike:8529753,Sparallax} and searching~\cite{hoga-etal-2011-swse-JWS}, processing~\cite{Harth:2011:SIP:1963192.1963318} and exploitation of data applying 
+% different approaches such as sensors~\cite{Jeung:2010:EMM:1850003.1850235,ontology-search} and techniques  such as distributed 
+% queries\cite{Hartig09executingsparql,Ankolekar07thetwo,sparqlOpt}, scalable reasoning process~\cite{Urbani2010WebPIE,HoganHarthPolleres2009,DBLP:conf/semweb/HoganPPD10}, 
+% annnotation of web pages~\cite{rdfa-primer} or information retrieval~\cite{Pound} to name a few.
+
+
+
+% In the particular case of statistical data, the RDF Data Cube Vocabulary (Cyganiak & Reynolds, 2012), 
+% a W3C Working Draft document, is a shared effort to represent statistical data in RDF reusing parts (the cube model) 
+% of the Statistical Data and Metadata Exchange Vocabulary (SDMX) (SDMX initiative, 2005), an ISO standard 
+% for exchanging and sharing statistical data and metadata among organizations. The Data Cube vocabulary is a core 
+% foundation which supports extension vocabularies to enable publication of other aspects of statistical data flows or 
+% other multi-dimensional data sets. Previously, the Statistical Core Vocabulary (SCOVO, 2009), published by DERI,
+% was the standard in fact to describe statistical information in the Web of Data. Some works are also emerging 
+% to publish statistical data following the concepts of the LOD initiative such as (Bosch, Cyganiak, Wackerow et al., 2012), (Zapilko & Mathiak, 2012) or 
+% (Rivera-Salas, Martin,  Maia Da Mota,  Auer, S. et al., 2012) among others.
 
 
 \section{Theoretical modelling of a quantitative composite index}
 \section{Representation of a quantitative composite index in RDF: The RDFIndex}
 \section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
 %
-\subsection{Use Case: FIXME}
+\section{Use Case: FIXME}
 % % 
 \section{Discussion and Further Steps}
 
 \section{Conclusions and Future Work}
+
+\bibliographystyle{plain}
+% %\bibliographystyle{unsrt}
+% %\bibliographystyle{acm}
+\bibliography{references}
+% \renewcommand{\bibname}{References}
 
 \end{document}
 
