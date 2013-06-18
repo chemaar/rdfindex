@@ -370,7 +370,7 @@ WHERE{
   BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
   ?observation $m$ ?measure . 
   ?observation ?dim ?dimRef. 
-  FILTER($?dim  \in D$).
+  FILTER ($?dim  \in D$).
 }GROUP BY ($d_i \in D$)
 \end{lstlisting}
 \caption{SPARQL template for building aggregated observations.}
@@ -378,11 +378,28 @@ WHERE{
 \end{figure}
 
 
-\section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
-%
+\subsection{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
+The first implementation of the RDFIndex vocabulary processor is based on traditional 
+language processor techniques FIXME such as the use of design patterns (e.g. Visitor) 
+to separate the exploitation of metadata from the interpretation. Thus the processor 
+works and provides next functionalities (hereafter load and query an endpoint are completely the same due to 
+data is separated from access and storage formats):
+
+\begin{itemize}
+ \item The RDFIndex ontology is loaded to have access to common definitions.
+ \item The structure of an index described with the aforementioned vocabulary is 
+ also loaded to create a kind of Abstract Syntax Tree (AST) containing the defined metadata.
+ \item Once the metadata structure is available in the AST it can be leverage 
+ through three AST walkers that performs: 1) validation (structure and RDF Data Cube normalization) 
+ and 2) SPARQL queries creation and 3) documentation generation (optional). As an example a partial creation of a SPARQL implementing 
+ the z-score normalization function is presented in Figure~\ref{fig:sparql-zscore}.
+ \item In order to promote new observations to the different components and indexes 
+ a set of raw observations is also loaded and a new AST walker generates new values, through SPARQL queries (see Figure~\ref{fig:sparql-generated-query}), 
+ in a bottom-up approach until reaching the upper-level (index).
+ \end{itemize}
 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=SQL,mathescape]  
+\begin{lstlisting}[language=SQL]  
 prefix afn: <http://jena.hpl.hp.com/ARQ/function#>
 SELECT ( (?measure-?mean)/?stddev as ?zscore) 
 WHERE{
@@ -405,12 +422,40 @@ WHERE{
 }
 \end{lstlisting}
 \caption{Z-score normalization using SPARQL.}
- \label{fig:results-rdf-sparql-template}
+ \label{fig:sparql-zscore}
+\end{figure}
+
+
+% 
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL]  
+prefix rdfindex:  <http://purl.org/rdfindex/ontology/> 
+SELECT ?dim0 ?dim1 ( sum(?w*?measure) as ?newvalue) 
+WHERE{ 
+  rdfindex-wb:TheWorldBankNaiveIndex  
+  rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset ?part .
+  FILTER ((?part =rdfindex-wb:AidEffectiveness) || 
+	  (?part =rdfindex-wb:Health)). 
+  ?observation qb:dataSet ?part . 
+  ?part rdfindex:weight ?defaultw.        
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation rdfindex:value ?measure . 
+  ?observation rdfindex-wbont:ref-area ?dim0. 
+  ?observation rdfindex-wbont:ref-year ?dim1. 
+} GROUP BY ?dim0 ?dim1 
+\end{lstlisting}
+\caption{Example of generated SPARQL query.}
+ \label{fig:sparql-generated-query}
 \end{figure}
 
 
 
-\section{Use Case: FIXME}
+
+\section{FIXME: Use Case: TheCloudindex (not in this version)}
+
 % % 
 \section{Discussion and Further Steps}
 
