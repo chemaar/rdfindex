@@ -127,7 +127,7 @@ That is why the present paper introduces: 1) a high-level model on top of the RD
 
 Finally, as a motivating example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the WorldBank data to model and compute a new index, ``The Naive World Bank Index''. This 
 index uses the topics ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$) with the aim of comparing the status and evolution of health in several countries to decide whether new 
-investments are performed. From these components two indicators has been respectively selected by experts: ``Life Expectancy'' ($i_1$) and ``Health expenditure, total (\%) of GDP'' ($i_2$). 
+investments are performed. From these components two indicators has been respectively selected by experts: ``Life Expectancy'' ($in_1$) and ``Health expenditure, total (\%) of GDP'' ($in_2$). 
 Once components and their indicators are defined and data can be retrieved from the WorldBank it is necessary to set how the index and components are computed 
 taking into account that only data about indicators is available. Following a top-down approach the index, $i$, is calculated through ordered weighted averaging (OWA) using the 
 formula: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$. On the other hand, both components only aggregates one indicator but the ``Aid Efectiveness'' 
@@ -253,7 +253,7 @@ Following the on-going example, see Table~\ref{tab:example-wb}, the modelling of
  \item Two indicators can be found: \{ ($in_1$, ``Life Expectancy''), ($in_2$, ``Health expenditure, total (\% of GDP)'') \}, each indicator contains a set 
  of observations $O_{in_i}$. The dimensions for each indicator are: $D_{in_1}$  \{(``Year'', ``Country'', ``Sex''\} and $D_{in_2}$ \{``Year'', ``Country''\}.
  \item In order to group the ``Life Expectancy'' without the ``Sex'' dimension it is necessary to define a new aggregated dataset $aq_1$ which 
- dimensions $D_{aq_1}$ are \{``Year'', ``Country''\} and the OWA operator is the average of the values $v$. In this sample the aggregated indicator $aq_1$
+ dimensions $D_{aq_1}$ are \{``Year'', ``Country''\} and the OWA operator is the average of values $v \in O_{in_1}$. In this sample the aggregated indicator $aq_1$
  can be built due to the indicator ``Life Expectancy'' accomplish with the aforementioned necessary conditions: 1) $D_{aq} \subseteq D_{in_1} \wedge D_{aq_1} \subseteq D_{in_2}$ and 
  2) $m_{aq_1}= m_{in_1}$ = ``Life Expectancy''.
  \item In the same way, the set of components: \{($c_1$,``Aid Efectiveness''), ($c_2$,``Health'')\} are built aggregating the indicators $aq_1$ and 
@@ -287,7 +287,7 @@ with the aim of being extended in the future to fit new requirements.
    Status $s$ & \texttt{sdmx-concept:obsStatus} &  \\ \hline
    Dataset $q$ & \texttt{qb:dataSet} &  \\ \hline
    Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} &  \\ \hline
-   Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  \\ \hline
+   Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  FIXME: dublin core?\\ \hline
    Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} &  \\ \hline
    OWA operator $p$ &  \texttt{skos:Concept} and SPARQL 1.1 aggregation operators & FIXME \\ \hline
    Index, Component and Indicator & \texttt{skos:Concept} & FIXME \\ \hline
