@@ -356,7 +356,7 @@ rdfindex:value a rdf:Property, qb:MeasureProperty;
 Once the structure and computation process can be built on the top of existing RDF vocabulary it is also 
 possible to make a translation to a generic SPARQL query (includes the basic OWA operator), see Figure~\ref{fig:results-rdf-sparql-template}, in order generate new observations following the bottom-up approach that previous section has presented.
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{lstlisting}[language=SQL,mathescape]  
 SELECT ($d_i \in D$) [(sum(?w*?measure) as ?newvalue) | OWA(?measure)]
 WHERE{
@@ -380,6 +380,36 @@ WHERE{
 
 \section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
 %
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,mathescape]  
+prefix afn: <http://jena.hpl.hp.com/ARQ/function#>
+SELECT ( (?measure-?mean)/?stddev as ?zscore) 
+WHERE{
+ ...
+ ?observation rdfindex:value ?measure 
+ {
+  SELECT ?mean (afn:sqrt((SUM((?measure-?mean)*(?measure-?mean))/?count)) 
+		as ?stddev) 
+  WHERE{ 
+   ?observation rdfindex:value ?measure 
+   {
+    SELECT (COUNT(?measure) as ?count) (AVG(?measure) as ?mean)
+    WHERE {
+     ?observation rdfindex:value ?measure 
+     }GROUP BY ?count ?mean LIMIT 1
+
+   }	
+  }GROUP BY ?mean ?count LIMIT 1
+ }
+}
+\end{lstlisting}
+\caption{Z-score normalization using SPARQL.}
+ \label{fig:results-rdf-sparql-template}
+\end{figure}
+
+
+
 \section{Use Case: FIXME}
 % % 
 \section{Discussion and Further Steps}
