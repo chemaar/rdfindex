@@ -30,7 +30,6 @@
 
 
 
-
 \definecolor{gray}{gray}{0.5}
 \definecolor{green}{rgb}{0,0.5,0}
 
@@ -273,7 +272,9 @@ a human-readble form of the index.
 Since previous section has stated the building blocks to represent quantitative indexes by aggregation a direct translation built 
 on top of the RDF Data Cube Vocabulary, SDMX and other semantic web vocabularies is presented in Table~\ref{index-to-rdf}. Thus 
 all concepts in the index are described reusing existing definitions, taking advantage of previous efforts and pre-established semantics 
-with the aim of being extended in the future to fit new requirements.
+with the aim of being extended in the future to fit new requirements. According to these mapping a definition of the index in the 
+on-going example and some dimensions are presented in Figure~\ref{fig:results-rdf-index} and Figure~\ref{fig:results-rdf-index}.
+FIXME: Maybe an observation?
 
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
@@ -281,11 +282,11 @@ with the aim of being extended in the future to fit new requirements.
 \begin{tabular}{|p{3cm}||p{6cm}|p{3cm}|}
 \hline
   \textbf{Concept} & \textbf{Vocabulary element} &  \textbf{Comments}  \\  \hline
-   Observation $o$ & \texttt{qb:observation} &  \\ \hline
+   Observation $o$ & \texttt{qb:Observation} &  \\ \hline
    Numerical value $v$ & \texttt{xsd:double} &  \\ \hline
    Measure $m$ & \texttt{qb:MeasureProperty} \texttt{sdmx-measure:obsValue} &  \\ \hline
    Status $s$ & \texttt{sdmx-concept:obsStatus} &  \\ \hline
-   Dataset $q$ & \texttt{qb:dataSet} &  \\ \hline
+   Dataset $q$ & \texttt{qb:dataSet} and \texttt{qb:qb:DataStructureDefinition} &  \\ \hline
    Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} &  \\ \hline
    Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  FIXME: dublin core?\\ \hline
    Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} &  \\ \hline
@@ -298,8 +299,83 @@ with the aim of being extended in the future to fit new requirements.
   \end{center}
 \end{table} 
 
-FIXME: example
+\begin{figure}[!ht]
+\begin{lstlisting}[language=XML]  
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
+@prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
 
+rdfindex-wb:TheWorldBankNaiveIndex 
+  a rdfindex:Index;
+  rdfs:label "The Weight Longest Life Country"@en;
+  rdfindex:type rdfindex:Quantitative;
+  rdfindex:aggregates [ 		
+    rdfindex:aggregation-operator rdfindex:OWA;
+    rdfindex:part-of [
+      rdfindex:dataset rdfindex-wb:AidEffectiveness; 
+      rdfindex:weight 0.4];
+    rdfindex:part-of [rdfindex:dataset rdfindex-wb:Health; 
+      rdfindex:weight 0.6];
+  ];
+  #More metadata properties...
+  qb:structure 	rdfindex-wb:TheWorldBankNaiveIndexDSD ; .
+  
+rdfindex-wb:TheWorldBankNaiveIndexDSD 
+  a qb:DataStructureDefinition;  
+  qb:component    
+  [qb:dimension rdfindex-wbont:ref-area],
+  [qb:dimension rdfindex-wbont:ref-year],
+  [qb:measure   rdfindex:value],
+  [qb:attribute sdmx-attribute:unitMeasure];
+  #More metadata properties...
+  .
+\end{lstlisting}
+\caption{Example of an index structure in RDF.}
+ \label{fig:results-rdf-index}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL]  
+rdfindex-wbont:ref-area a rdf:Property, 
+  qb:DimensionProperty; 
+   rdfs:subPropertyOf sdmx-dimension:ref-area; 
+  rdfs:range skos:Concept; 
+  qb:concept sdmx-concept:ref-area . 
+
+rdfindex:value a rdf:Property, qb:MeasureProperty;
+  rdfs:label "Value of an observation"@en;
+  skos:notation "value" ;
+  rdfs:subPropertyOf sdmx-measure:obsValue;
+  rdfs:range xsd:double . 
+\end{lstlisting}
+\caption{Example of a dimension and a measure definition in RDF.}
+ \label{fig:results-rdf-properties}
+\end{figure}
+
+
+Once the structure and computation process can be built on the top of existing RDF vocabulary it is also 
+possible to make a translation to a generic SPARQL query (includes the basic OWA operator), see Figure~\ref{fig:results-rdf-sparql-template}, in order generate new observations following the bottom-up approach that previous section has presented.
+
+\begin{figure}[ht]
+\begin{lstlisting}[language=SQL,mathescape]  
+SELECT ($d_i \in D$) [(sum(?w*?measure) as ?newvalue) | OWA(?measure)]
+WHERE{
+  $q$ rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset $q_i$ .
+  FILTER($?partof \in Q$).  
+  ?observation rdf:type qb:Observation.
+  ?part rdfindex:weight ?defaultw.     
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation $m$ ?measure . 
+  ?observation ?dim ?dimRef. 
+  FILTER($?dim  \in D$).
+}GROUP BY ($d_i \in D$)
+\end{lstlisting}
+\caption{SPARQL template for building aggregated observations.}
+ \label{fig:results-rdf-sparql-template}
+\end{figure}
 
 
 \section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
