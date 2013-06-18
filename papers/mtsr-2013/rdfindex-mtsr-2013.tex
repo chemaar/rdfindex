@@ -196,6 +196,57 @@ Some works are also emerging to publish statistical data following the concepts 
 such as~\cite{DBLP:conf/semweb/ZapilkoM11,DBLP:journals/ijsc/SalasMBCMA12,DDI2013,DBLP:conf/dgo/FernandezMG11} among others.
 
 \section{Theoretical modelling of a quantitative composite index}
+This section outlines a model for representing quantitative indexes based on the aggregation 
+of different components and indicators. Furthermore a computation process for those elements is 
+also presented in order to specify the calculation of new observations.
+
+Basically, a quantitative index is comprised of the aggregation of several component observations. In the same way, 
+a component is also composed of the aggreagation of indicators that keep real observations. From this initial definition 
+some characteristics and assumptions can be found: 1) although observations can be directly mapped to an index or a component, they 
+are usually computed applying a bottom-up approach from an indicator to a component and index. 2) An observation is 
+a real numerical value extracted from some agent out under a certain context. Generally observations only takes one measure and are considered 
+to be raw without any pre-processing technique. 3) Before aggregating observation values, componens and indexes can 
+estimate missing values to finally normalize them in order to get a final quantitative value.
+
+According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
+dataset of numerical observations under a specific context (dimensions and/or metadata) that can be directly extracted from external 
+sources out or computed by some kind of OWA operator. 
+
+\begin{definition}[Observation-$o$]
+It is a tuple $\{v,m,s\}$, where $v$ is a numerical value for the measure $m$ with an status $s$ that belongs to 
+only one dataset of observations $O$. 
+\end{definition}
+
+
+\begin{definition}[Dataset-$q$]
+It is the tuple $\{O,m,D,A,T\}$, where $O$ is a set of observations for only one measure $m$ that is described under 
+a set of dimensions, $D$, and a set of annotations, 
+\end{definition}
+
+
+\begin{definition}[Aggregated dataset-$aq$]
+It is a composed dataset which set of observations $O$ is computed through 
+the aggregation of a set of existing datasets $Q_i$ through an OWA operator $p$.
+\end{definition}
+
+As a necessary condition for the computation proces, an aggregated dataset $aq$ defined by means of the set of dimensions $D_{aq}$ can be computed iif 
+$\forall q_j \in Q_i: D_{aq} \subseteq D_{q_j}$.
+
+
+
+As a consequence of the aforementioned definitions some remarks must be outlined in order to restrict the understanding of 
+a quantitative index (structure and computation):
+\begin{itemize}
+ \item The set of dimensions $D$, annotations $A$ and $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
+ the same context.
+ \item An index $i$ and a component $c$ are aggregated datasets. (FIXME: sure?)
+ \item An indicator $in$ can be both dataset or aggregated dataset.
+ \item All elements that comprises the definitions must be uniquely identified. 
+\end{itemize}
+
+
+
+
 \section{Representation of a quantitative composite index in RDF: The RDFIndex}
 \section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
 %
