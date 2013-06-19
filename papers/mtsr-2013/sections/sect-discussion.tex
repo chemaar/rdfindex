@@ -1,1 +1,71 @@
-FIXME
+Previous sections have presented the motivation of this work, a vocabulary designed on top of the 
+RDF Data Cube Vocabulary for modellling quantitative indexes and a Java-SPARQL based processor 
+to validate and compute any kind of index. According to the requirements and features 
+of quantitative indexes an initial evaluation is presented in Table~\ref{tab:eval-rdfindex} to show 
+how the application of semantic technologies can ease indexes management and their computation process.
+
+Furthermore it is relevant to remark that data quality and filtering is currently a big challenge 
+due to the vast amount of data that is continuosly being generated. Policy-makers as agents in charge 
+of making decissions must be able to manage this information in a timely and flexible fashion. In this 
+context semantic technologies provides the adequate and standarized building blocks 
+to improve the dynamism and updating capabilities of policy-maker tools. Neverthless 
+the initial effort to translate existing index definitions and computation processes to this approach can 
+be hard and time-consuming but going beyond of that further updates and tools can perfectly benefit from this effort as 
+other ``semantized'' domains have already done FIXME: medical, etc.
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{|p{3cm}|p{8cm}|}
+\hline
+  \textbf{Feature} & \textbf{Main advantages}  \\  \hline
+  Data sources & \begin{itemize}
+                  \item Common and shared data model, RDF.
+                  \item Description of data providers (provenance and trust).
+                  \item A formal query language to query data, SPARQL.
+                  \item Use of Internet protocols, HTTP.
+                  \item Data enrichment and validation (domain and range).
+                  \item Unique identification of entities, concepts, etc. through (HTTP) URIs.
+                  \item Possibiliy of publishing new data under the aforementioned characteristics.
+                  \item Standardization and integration of data sources.
+                 \end{itemize} \\ \hline  
+  Structure &  \begin{itemize}
+                  \item Meta-description of index structure (validation).
+                  \item Re-use of existing semantic web vocabularies.
+                  \item Re-use of existing datasets to enrich metadata.
+                  \item Context-aware definitions.
+                  \item Underlying logic formalism.                  
+                  \item Orthogonal and flexible.                 
+                 \end{itemize} \\ \hline  
+  Computation process &  \begin{itemize}
+                  \item Meta-description of datasets aggregation.
+                  \item Validation of composed datasets.
+                  \item OWA operators support.
+                  \item Direct translation to SPARQL queries.  
+                 \end{itemize} \\ \hline
+  Documentation & \begin{itemize}
+                  \item Multilingual support to describe datasets, etc.
+                  \item Easy generation with existing tools.                
+                 \end{itemize} \\ \hline               
+  \hline
+   Cross-Domain Features & \begin{itemize}
+                  \item Separation of concerns and responsibilities: data and metadata (structure and computation).
+                  \item Standardization (put in action specs from organisms such as W3C).
+                  \item Declarative and adaptive approach.
+                  \item Non-vendor lock-in (format, access and computation).
+                  \item Integration and Interoperability.
+                  \item Transparency.
+                  \item Help to build own indexes.
+                  \item Align to existing trend (data management: quality and filtering)
+                  \item Easy integration with third-party services such as visualization.
+                  \item Contribution to the Web of Data.
+                 \end{itemize} \\ \hline              
+  \hline
+  \end{tabular}
+  \caption{Initial evaluation of semantic technologies for modelling and computing quantitative indexes.}
+  \label{tab:eval-rdfindex}
+  \end{center}
+\end{table} 
+
+
+ 
