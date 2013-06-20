@@ -32,15 +32,15 @@ an OWA operator $p$ to the observations $O_{q_i}$.
 \end{definition}
 
 As a necessary condition for the computation process, an aggregated dataset $aq$ defined by means of the set of dimensions $D_{aq}$ can be computed iif 
-$\forall q_j \in Q: D_{aq} \subseteq D_{q_j}$. Furthermore the OWA operator $p$ can only aggregate values belonging to the same measure $m$. Finally, 
+$\forall q_j \in Q: D_{aq} \subseteq D_{q_j}$. Furthermore the OWA operator $p$ can only aggregate values belonging to the same measure $m$.
 
 As a consequence of the aforementioned definitions some remarks must be outlined in order to restrict the understanding of 
 a quantitative index (structure and computation):
 \begin{itemize}
- \item The set of dimensions $D$, annotations $A$ and $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
+ \item The set of dimensions $D$, annotations $A$ and attributes $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
  the same context.
  \item An index $i$ and a component $c$ are aggregated datasets. Nevertheless this restriction is relaxed if observations can be directly mapped to 
- these elements without any computation processes.
+ these elements without any computation process.
  \item An indicator $in$ can be both dataset or aggregated dataset.
  \item All elements in definitions must be uniquely identified. 
  \item An aggregated dataset is also a dataset. FIXME: demonstration, relational algebra?
@@ -197,7 +197,10 @@ data is separated from access and storage formats):
  the z-score normalization function is presented in Figure~\ref{fig:sparql-zscore}.
  \item In order to promote new observations to the different components and indexes 
  a set of raw observations is also loaded and a new AST walker generates new values, through SPARQL queries (see Figure~\ref{fig:sparql-generated-query}), 
- in a bottom-up approach until reaching the upper-level (index), see Figure~\ref{fig:generated observation}.
+ in a bottom-up approach until reaching the upper-level (index), see Table~\ref{tab:example-generated-wb} and Figure~\ref{fig:generated observation}. Finally 
+ each new observation also contains a data property to store the hash MD5 of a string comprising 
+ (publisher, $q$, $D$, $v$) and separated by \#, e.g. ``RDFIndex\#TheWorldBankNaiveIndex\#Spain\#2010\#0.707'', to avoid ``man-in-the-middle'' attacks when the new observations 
+ are published.
  \end{itemize}
 
 \begin{figure}[!ht]
@@ -255,6 +258,40 @@ WHERE{
 
 
 
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{|p{4.5cm}|p{1cm}|p{1.5cm}|p{1cm}|p{1.8cm}|}
+\hline
+  \textbf{Description} & \textbf{Year} & \textbf{Country} & \textbf{Value} & \textbf{Status} \\  \hline
+  \multicolumn{5}{|c|}{\textbf{Indicator}} \\ \hline
+  Aggregated Life Expectancy  & 2010 & Spain & $82$ & Estimated \\ \hline
+  Aggregated Life Expectancy  & 2011 & Spain & $82$ & Estimated \\ \hline
+  Aggregated Life Expectancy  & 2010 & Greece & $80.5$ & Estimated \\ \hline
+  Aggregated Life Expectancy  & 2011 & Greece & $81$ & Estimated \\ \hline
+  \multicolumn{5}{|c|}{\textbf{Component}} \\ \hline
+  Aid Efectiveness  & 2010 & Spain & $0.707$  & Estimated \\ \hline
+  Aid Efectiveness  & 2011 & Spain & $0.707$  & Estimated \\ \hline
+  Aid Efectiveness  & 2010 & Greece & $-0.707$ & Estimated \\ \hline
+  Aid Efectiveness  & 2011 & Greece & $-0.707$ & Estimated \\ \hline
+  Health & 2010 & Spain & $0.707$ & Estimated \\ \hline
+  Health & 2011 & Spain & $0.707$ & Estimated \\ \hline
+  Health & 2010 & Greece & $-0.707$ & Estimated \\ \hline
+  Health & 2011 & Greece & $-0.707$ & Estimated \\ \hline
+ \multicolumn{5}{|c|}{\textbf{Index}} \\ \hline
+  The Naive World Bank Index & 2010 & Spain & $0.707$ & Estimated \\ \hline
+  The Naive World Bank Index & 2011 & Spain & $0.707$ & Estimated \\ \hline
+  The Naive World Bank Index & 2010 & Greece & $-0.707$ & Estimated \\ \hline
+  The Naive World Bank Index & 2011 & Greece & $-0.707$ & Estimated\\ \hline
+  \hline
+  \end{tabular}
+  \caption{Example of aggregated observations from the WorldBank.}
+  \label{tab:example-generated-wb}
+  \end{center}	 
+\end{table} 
+
+
+
 \begin{figure}[!ht]
 \begin{lstlisting}[language=SQL]  
 rdfindex-wb:o6808100851579
@@ -263,18 +300,19 @@ rdfindex-wb:o6808100851579
       rdfindex-wbont:ref-area dbpedia-res:Spain ;
       rdfindex-wbont:ref-year
 	<http://reference.data.gov.uk/id/
-	gregorian-interval/2006-01-01T00:00:00/P1Y> ;
+	gregorian-interval/2010-01-01T00:00:00/P1Y> ;
       ...
       #rdfs:{label,comment} {literal};
       #dcterms:{issued, date, contributor, author, publisher, identifier} 
       #	{resource, literal};
-      rdfindex:hash-md5 "";
+      rdfindex:md5-hash "6cdda76088cd161d766809d6a78d35f6";
       sdmx-concept:obsStatus
               sdmx-code:obsStatus-E;
-      rdfindex:value "FIXME"^^xsd:double .
+      rdfindex:value "0.707"^^xsd:double .
 \end{lstlisting}
 \caption{Partial example of populated observation for ``The World Bank Naive Index''.}
  \label{fig:generated observation}
 \end{figure}
+
 
 FIXME: A Java code snippet of visitors?
