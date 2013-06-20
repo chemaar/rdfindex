@@ -197,10 +197,10 @@ data is separated from access and storage formats):
  the z-score normalization function is presented in Figure~\ref{fig:sparql-zscore}.
  \item In order to promote new observations to the different components and indexes 
  a set of raw observations is also loaded and a new AST walker generates new values, through SPARQL queries (see Figure~\ref{fig:sparql-generated-query}), 
- in a bottom-up approach until reaching the upper-level (index), see Table~\ref{tab:example-generated-wb} and Figure~\ref{fig:generated observation}. Finally 
- each new observation also contains a data property to store the hash MD5 of a string comprising 
+ in a bottom-up approach until reaching the upper-level (index), see Table~\ref{tab:example-generated-wb} and Figure~\ref{fig:generated observation}. 
+ Finally each new observation also contains a data property to store the hash MD5 of a string comprising 
  (publisher, $q$, $D$, $v$) and separated by \#, e.g. ``RDFIndex\#TheWorldBankNaiveIndex\#Spain\#2010\#0.707'', to avoid ``man-in-the-middle'' attacks when the new observations 
- are published.
+ are published. This value are easily generated using the new string functions in SPARQL 1.1 \texttt{concat} and \texttt{MD5}.
  \end{itemize}
 
 \begin{figure}[!ht]
