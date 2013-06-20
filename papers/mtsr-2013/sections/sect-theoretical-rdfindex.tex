@@ -2,16 +2,16 @@ This section outlines a model for representing quantitative indexes based on the
 of different components and indicators. Furthermore a computation process for those elements is 
 also presented in order to specify the population of new observations.
 
-Basically, a quantitative index is comprised of the aggregation of several component observations. In the same way, 
+Basically, a quantitative index is comprised of the aggregation of several components. In the same way, 
 a component is also composed of the aggregation of indicators that keep real observations. From this initial definition 
 some characteristics and assumptions can be found: 1) although observations can be directly mapped to an index or a component, they 
-are usually computed applying a bottom-up approach from an indicator to a component and index. 2) An observation is 
+are usually computed applying a bottom-up approach from an indicator to a component and so on. 2) An observation is 
 a real numerical value extracted from some agent out under a certain context. Generally observations only takes one measure and are considered 
 to be raw without any pre-processing technique. 3) Before aggregating observation values, componens and indexes can 
-estimate missing values to finally normalize them in order to get a final quantitative value.
+estimate missing values to finally normalize them in order to get a quantitative value.
 
 According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
-dataset of numerical observations under a specific context (dimensions and/or metadata) that can be directly extracted from external 
+dataset of numerical observations under a specific context (dimensions and/or meta-data) that can be directly extracted from external 
 sources out or computed by some kind of OWA operator. 
 
 \begin{definition}[Observation-$o$]\upshape
@@ -27,7 +27,7 @@ a set of dimensions $D$ and a set of annotations $A$. Additionally, some attribu
 
 
 \begin{definition}[Aggregated dataset-$aq$]\upshape
-It is an aggregation of $n$ datasets $q_i$ (identified by $Q$) which set of observations $O$ is derivated by applying 
+It is an aggregation of $n$ datasets $q_i$ (identified by the set $Q$) which set of observations $O$ is derivated by applying 
 an OWA operator $p$ to the observations $O_{q_i}$. 
 \end{definition}
 
@@ -39,14 +39,14 @@ a quantitative index (structure and computation):
 \begin{itemize}
  \item The set of dimensions $D$, annotations $A$ and $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
  the same context.
- \item An index $i$ and a component $c$ are aggregated datasets. Neverthless this restriction is relaxed if observations can be directly mapped to 
+ \item An index $i$ and a component $c$ are aggregated datasets. Nevertheless this restriction is relaxed if observations can be directly mapped to 
  these elements without any computation processes.
  \item An indicator $in$ can be both dataset or aggregated dataset.
  \item All elements in definitions must be uniquely identified. 
- \item An aggregated dataset is also a dataset.
+ \item An aggregated dataset is also a dataset. FIXME: demonstration, relational algebra?
 \end{itemize}
 
-Following the on-going example, see Table~\ref{tab:example-wb}, the modelling of the ``The Naive World Bank Index'' would be the next one:
+Following the on-going example, see Table~\ref{tab:example-wb}, the modeling of the ``The Naive World Bank Index'' would be the next one:
 \begin{itemize}
  \item Each row of the table is an observation $o_i$ with a numerical value $v$, the measure is $m_{in}$ and the status is ``Raw''.
  \item Two indicators can be found: \{ ($in_1$, ``Life Expectancy''), ($in_2$, ``Health expenditure, total (\% of GDP)'') \}, each indicator contains a set 
@@ -63,18 +63,19 @@ Following the on-going example, see Table~\ref{tab:example-wb}, the modelling of
 
 As final remark, the computation process is generating new observations, following a bottom-up approach, according to the structure defined 
 in each dataset. Although a logical structure of indexes, components and indicators can be directly established using narrower/broader properties 
-the main advantage lies in the possibility of expressing new elements by aggregating others describing their structure. Nevertheless restrictions 
-about the type of dataset that can be aggregated in each level could be added at any time for other reseasons such as validation or to generate 
-a human-readble form of the index.
+the main advantage of this approach lies in the possibility of expressing new elements by aggregating others describing their structure. Nevertheless restrictions 
+about the type of dataset that can be aggregated in each level could be added at any time for other reasons such as validation or to generate 
+a human-readable form of the index.
 
 
 \section{Representation of a quantitative composite index in RDF: The RDFIndex}
 Since previous section has stated the building blocks to represent quantitative indexes by aggregation a direct translation built 
 on top of the RDF Data Cube Vocabulary, SDMX and other semantic web vocabularies is presented in Table~\ref{index-to-rdf}. Thus 
 all concepts in the index are described reusing existing definitions, taking advantage of previous efforts and pre-established semantics 
-with the aim of being extended in the future to fit new requirements. According to these mapping a definition of the index in the 
-on-going example and some dimensions are presented in Figure~\ref{fig:results-rdf-index} and Figure~\ref{fig:results-rdf-index}.
-FIXME: Maybe an observation?
+with the aim of being extended in the future to fit new requirements. According to these mappings a definition of the index in the 
+on-going example and some dimensions are presented in Figure~\ref{fig:results-rdf-index} and Figure~\ref{fig:results-rdf-properties}.
+
+FIXME: Maybe an observation? include a table with all reused vocabularies? a diagraa of the ontology?
 
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
@@ -91,7 +92,7 @@ FIXME: Maybe an observation?
    Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  FIXME: dublin core?\\ \hline
    Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} &  \\ \hline
    OWA operator $p$ &  \texttt{skos:Concept} and SPARQL 1.1 aggregation operators & FIXME \\ \hline
-   Index, Component and Indicator & \texttt{skos:Concept} & FIXME \\ \hline
+   Index, Component and Indicator & \texttt{skos:Concept} & FIXME: structure \\ \hline
   \hline
   \end{tabular}
   \caption{Mapping between the index definition and the RDF Data Cube Vocabulary.}
@@ -117,7 +118,7 @@ rdfindex-wb:TheWorldBankNaiveIndex
     rdfindex:part-of [rdfindex:dataset rdfindex-wb:Health; 
       rdfindex:weight 0.6];
   ];
-  #More metadata properties...
+  #More meta-data properties...
   qb:structure 	rdfindex-wb:TheWorldBankNaiveIndexDSD ; .
   
 rdfindex-wb:TheWorldBankNaiveIndexDSD 
@@ -127,7 +128,7 @@ rdfindex-wb:TheWorldBankNaiveIndexDSD
   [qb:dimension rdfindex-wbont:ref-year],
   [qb:measure   rdfindex:value],
   [qb:attribute sdmx-attribute:unitMeasure];
-  #More metadata properties...
+  #More meta-data properties...
   .
 \end{lstlisting}
 \caption{Example of an index structure in RDF.}
@@ -154,7 +155,8 @@ rdfindex:value a rdf:Property, qb:MeasureProperty;
 
 
 Once the structure and the computation processes can be built on the top of existing RDF vocabulary it is also 
-possible to make a translation to a generic SPARQL query (includes the basic OWA operator), see Figure~\ref{fig:results-rdf-sparql-template}, in order generate new observations following the bottom-up approach that previous section has presented.
+possible to make a translation to a generic SPARQL query (includes the basic OWA operator), see Figure~\ref{fig:results-rdf-sparql-template}, 
+in order generate new observations following the bottom-up approach that previous section has presented.
 
 \begin{figure}[!ht]
 \begin{lstlisting}[language=SQL,mathescape]  
@@ -180,16 +182,16 @@ WHERE{
 
 \subsection{A Java-SPARQL based interpreter of the RDFIndex}
 The first implementation of the RDFIndex vocabulary processor is based on traditional 
-language processor techniques FIXME such as the use of design patterns (e.g. Composite or Visitor) 
-to separate the exploitation of metadata from the interpretation. Thus the processor 
-works and provides next functionalities (hereafter load and query an endpoint are completely the same due to 
+language processor techniques such as the use of design patterns (e.g. Composite or Visitor) 
+to separate the exploitation of meta-data from the interpretation. Thus the processor 
+works and provides next functionalities (hereafter load and query an endpoint are completely equivalent due to 
 data is separated from access and storage formats):
 
 \begin{itemize}
  \item The RDFIndex ontology is loaded to have access to common definitions.
  \item The structure of an index described with the aforementioned vocabulary is 
- also loaded to create a kind of Abstract Syntax Tree (AST) containing the defined metadata.
- \item Once the metadata structure is available in the AST it can be leverage 
+ also loaded to create a kind of Abstract Syntax Tree (AST) containing the defined meta-data.
+ \item Once the meta-data structure is available in the AST it can be managed 
  through three AST walkers that performs: 1) validation (structure and RDF Data Cube normalization) 
  and 2) SPARQL queries creation and 3) documentation generation (optional). As an example a partial creation of a SPARQL implementing 
  the z-score normalization function is presented in Figure~\ref{fig:sparql-zscore}.
@@ -275,4 +277,4 @@ rdfindex-wb:o6808100851579
  \label{fig:generated observation}
 \end{figure}
 
-
+FIXME: A Java code snippet of visitors?
