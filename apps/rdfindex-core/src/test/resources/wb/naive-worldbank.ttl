@@ -165,8 +165,6 @@ rdfindex-wb:LifeExpectancy a rdfindex:Indicator;
 .
 
 
-#FIXME: add sex dimension
-
 rdfindex-wb:LifeExpectancyDSD a qb:DataStructureDefinition;
     qb:component    
 		[qb:dimension rdfindex-wbont:ref-area],
