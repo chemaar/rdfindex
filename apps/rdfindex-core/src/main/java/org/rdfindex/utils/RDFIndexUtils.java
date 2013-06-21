@@ -129,7 +129,7 @@ public class RDFIndexUtils {
 				createDimensionsBGPs+		
 				"} GROUP BY"+dimensionVars);
 		sparqlQueryTemplate.setAttribute("owafilter", owaAttr);
-		System.out.println(sparqlQueryTemplate.toString());
+		
 		return sparqlQueryTemplate.toString();
 	}
 	
