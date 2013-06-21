@@ -1,5 +1,5 @@
 @prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
-@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/> .
+@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
 @prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
 @prefix rdfindex-org: <http://purl.org/rdfindex/organization/> .
 @prefix rdfindex-people: <http://purl.org/rdfindex/people/> .
@@ -160,15 +160,7 @@ rdfindex-wb:AggregatedLifeExpectancyDSD a qb:DataStructureDefinition;
         [qb:attribute sdmx-attribute:unitMeasure];
 .
 
-rdfindex-wb:LifeExpectancyM a rdfindex:Indicator;
-	rdfs:label 	"Life expectancy at birth by male sex"@en;
-	rdfindex:type 	rdfindex:Quantitative;
-	rdfindex:weight  1;
-	qb:structure 	rdfindex-wb:LifeExpectancyDSD ;
-.
-
-
-rdfindex-wb:LifeExpectancyF a rdfindex:Indicator;
+rdfindex-wb:LifeExpectancy a rdfindex:Indicator;
 	rdfs:label 	"Life expectancy at birth by male sex"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
@@ -180,11 +172,13 @@ rdfindex-wb:LifeExpectancyF a rdfindex:Indicator;
 
 rdfindex-wb:LifeExpectancyDSD a qb:DataStructureDefinition;
     qb:component    
-	[qb:dimension rdfindex-wbont:ref-area],
+		[qb:dimension rdfindex-wbont:ref-area],
         [qb:dimension rdfindex-wbont:ref-year],
+        [qb:dimension sdmx-dimension:sex],
         [qb:measure   rdfindex:value],
         [qb:attribute sdmx-attribute:unitMeasure];
 .
+
 
 
 
