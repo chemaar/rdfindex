@@ -27,7 +27,7 @@ public class NaiveWorldBankTest {
 		
 		for(IndexTO index:indexes){
 			String sparqlQuery = (String) rdfIndexProcessor.visit(index);			
-			Assert.assertEquals(2581 , sparqlQuery.length());
+			Assert.assertEquals(3544 , sparqlQuery.length());
 			//PrettyPrinter.prettyPrint(SPARQLQueriesHelper.observationsAsRDF(indexObservations));
 		
 			

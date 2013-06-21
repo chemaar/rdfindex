@@ -85,7 +85,7 @@ rdfindex-wb:AidEffectiveness a rdfindex:Component;
 		rdfindex:aggregation-operator rdfindex:Min;
 		rdfindex:part-of [rdfindex:dataset rdfindex-wb:AggregatedLifeExpectancy];
 	];
-	qb:structure 	rdfindex:AidEffectivenessDSD ;  
+	qb:structure 	rdfindex-wb:AidEffectivenessDSD ;  
 .
 
 
@@ -136,16 +136,13 @@ rdfindex-wb:HealthExpenditureDSD a qb:DataStructureDefinition;
 
 
 
-
-#FIXME: aggregate slices
-rdfindex-wb:AggregatedLifeExpectancy a rdfindex:Component;
+rdfindex-wb:AggregatedLifeExpectancy a rdfindex:Indicator;
 	rdfs:label 	"Life expectancy aggregated"@en;
 	rdfindex:type 	rdfindex:Quantitative;
 	rdfindex:weight  1;
 	rdfindex:aggregates [ 		
 		rdfindex:aggregation-operator rdfindex:Mean;
-		rdfindex:part-of [rdfindex:dataset rdfindex-wb:LifeExpectancyM];
-		rdfindex:part-of [rdfindex:dataset rdfindex-wb:LifeExpectancyF] ;
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:LifeExpectancy];
 	];
 	qb:structure 	rdfindex-wb:AggregatedLifeExpectancyDSD ;
 .
