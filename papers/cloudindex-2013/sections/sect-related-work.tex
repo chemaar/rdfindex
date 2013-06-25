@@ -1,0 +1,56 @@
+%Open Data
+Recent times have seen the deployment of the Open Data initiative due to the strategy 
+developed by the governments in USA, UK or Australia and that have been followed by most of countries around the world to deliver data 
+catalogues containing valuable public sector information (PSI). This is not a new concept but a recent formalized definition made 
+by the Open Definition can be summarized as: ``A piece of data is open if anyone is free to use, re-use, and redistribute it — subject only, at most, to the requirement 
+to attribute and/or share-alike.'' In this context the Open (Government) Data movement (W3C) is making a great effort 
+to spread this view in public and private bodies with the objective of boosting transparency and a new data-driven economy. 
+From a corporate strategy point of view the re-use of existing open data must encourage and improve 
+more efficient policy-making processes. Under this view there is a perfect matching between the Linked Data and the Open Data 
+principles: on the one hand the Linked Data community is generating the proper environment of standard 
+specifications and tools to manage data and, on the other hand, the Open Data initiative is requiring 
+the right methods to generate a real re-use of the public data. The combination of these 
+two views leads us to the Linked Open Data (LOD) effort that seeks for applying the principles of 
+Linked Data to implement the Open Data mission.
+
+Currently one of the mainstreams in the Semantic Web area lies in the application of the LOD initiative in 
+different domains such as  e-Government, e-Health, Biomedicine, Education, Bibliography or Geography to name a few,  
+with the aim of solving existing problems of integration and interoperability among applications and create a 
+knowledge environment under the Web-based protocols. In this context, the present work is therefore focused 
+in applying semantic web vocabularies and datasets to model quantitative indexes from both structural 
+and computational points of view in a ``Policy-Making'' context. 
+
+In order to reach the major objective of building a re-usable Web of Data,  
+the publication of information and data under a common data model (RDF) and formats with 
+a specific formal query language (SPARQL~\cite{Sparql11}) provide the required building blocks to turn 
+the Web of documents into a real database of data~\cite{freebase}. As a consequence the popular 
+diagram of the LOD Cloud~\cite{linked-data-cloud}, generated from meta-data extracted from the Comprehensive Knowledge Archive Network (CKAN~\cite{ckan}) out, 
+contains $337$ datasets, with more than $25$ billion RDF triples and $395$ million links in different  domains. 
+Research works are focused in two main areas: 1) production/publishing~\cite{bizer07how} and 2) consumption. 
+In the first case data quality~\cite{bizer2007,wiqa,ld-quality,lodq,link-qa}, conformance~\cite{HoganUHCPD:2012:237}, 
+provenance~\cite{w3c-prov,DBLP:conf/ipaw/HartigZ10}, trust~\cite{Carroll05namedgraphs}, description of datasets~\cite{void,Cyganiak08semanticsitemaps,ckanValidator} and 
+entity reconciliation~\cite{Serimi,Maali_Cyganiak_2011} are becoming major objectives since a mass of amount data is already available~\cite{Triplify} 
+through SPARQL endpoints deployed on the top of RDF repositories such as OpenLink Virtuoso or OWLim. 
+
+On the other hand, consumption of Linked Data is being addressed to provide new ways of data visualization~\cite{DBLP:journals/semweb/DadzieR11,hoga-etal-2011-swse-JWS}, 
+faceted browsing~\cite{Pietriga06fresnel,citeulike:8529753,Sparallax} and searching~\cite{hoga-etal-2011-swse-JWS}, processing~\cite{Harth:2011:SIP:1963192.1963318} and exploitation of data applying 
+different approaches such as sensors~\cite{Jeung:2010:EMM:1850003.1850235,ontology-search} and techniques  such as distributed 
+queries\cite{Hartig09executingsparql,Ankolekar07thetwo,sparqlOpt}, scalable reasoning process~\cite{DBLP:conf/semweb/UrbaniKOH09,HoganHarthPolleres2009,DBLP:conf/semweb/HoganPPD10}, 
+annotation of web pages~\cite{rdfa-primer} or information retrieval~\cite{Pound} to name a few.
+
+In the particular case of statistical data, the RDF Data Cube Vocabulary~\cite{rdf-data-cube}
+a W3C Working Draft document, is a shared effort to represent statistical data in RDF reusing parts (the cube model) 
+of the Statistical Data and Metadata Exchange Vocabulary (SDMX)~\cite{sdmx}, an ISO standard 
+for exchanging and sharing statistical data and meta-data among organizations. The Data Cube vocabulary is a core 
+foundation which supports extension vocabularies to enable publication of other aspects of statistical data flows or 
+other multi-dimensional data sets. Previously, the Statistical Core Vocabulary~\cite{scovo} was the standard in fact to describe statistical information in the Web of Data.
+Some works are also emerging to mainly publish statistical data following the concepts of the LOD initiative 
+such as~\cite{DBLP:conf/semweb/ZapilkoM11,DBLP:journals/ijsc/SalasMBCMA12,DDI2013,DBLP:conf/dgo/FernandezMG11,webindexlod} 
+among others.
+
+All the aforementioned works must be considered in order to re-use existing vocabularies and datasets to address 
+the challenges of creating meta-described quantitative indexes. Mainly semantics allows us to model logical restrictions 
+on data and the computation process while linked data enables the description of indexes in terms of existing concepts and 
+the publication of new data and information under a set of principles to boost their re-use and automatic 
+processing through machine-readable formats and access protocols.
+
