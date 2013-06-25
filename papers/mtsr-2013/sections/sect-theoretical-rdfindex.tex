@@ -81,15 +81,15 @@ on-going example and some dimensions are presented in Figure~\ref{fig:results-rd
 \hline
   \textbf{Concept} & \textbf{Vocabulary element} &  \textbf{Comments}  \\  \hline
    Observation $o$ & \texttt{qb:Observation} &  Enrichment through annotations\\ \hline
-   Numerical value $v$ & \texttt{xsd:double} & Restriction to quantitative values  \\ \hline
-   Measure $m$ & \texttt{qb:MeasureProperty} \texttt{sdmx-measure:obsValue} & \\ \hline
+   Numerical value $v$ & \texttt{xsd:double} & Restriction to numerical values  \\ \hline
+   Measure $m$ & \texttt{qb:MeasureProperty} \texttt{sdmx-measure:obsValue} & Restriction to one measure \\ \hline
    Status $s$ & \texttt{sdmx-concept:obsStatus} & Defined by the SDMX-RDF vocabulary\\ \hline
    Dataset $q$ & \texttt{qb:dataSet} and \texttt{qb:qb:DataStructureDefinition} &  Metadata of the \texttt{qb:dataSet}\\ \hline
-   Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} &  \\ \hline
+   Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} & Context of observations \\ \hline
    Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  Intensive use of Dublin Core\\ \hline
    Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} & Link to existing datasets such as DBPedia \\ \hline
-   OWA operator $p$ &  \texttt{skos:Concept} and SPARQL 1.1 aggregation operators &  \\ \hline
-   Index, Component and Indicator & \texttt{skos:Concept} & SKOS taxonomy (logical structure). \\ \hline
+   OWA operator $p$ &  SPARQL 1.1 aggregation operators & Other extensions depend on the RDF repository \\ \hline
+   Index, Component and Indicator & \texttt{skos:Concept} & SKOS taxonomy (logical structure) \\ \hline
   \hline
   \end{tabular}
   \caption{Summary of mapping between the index definition and the RDF Data Cube Vocabulary.}
@@ -178,7 +178,7 @@ WHERE{
 
 
 \subsection{A Java-SPARQL based interpreter of the RDFIndex}
-The first implementation of the RDFIndex vocabulary processor is based on traditional 
+The first implementation of the RDFIndex vocabulary processor~\footnote{\url{https://github.com/chemaar/rdfindex}} is based on traditional 
 language processor techniques such as the use of design patterns (e.g. Composite or Visitor) 
 to separate the exploitation of meta-data from the interpretation. Thus the processor 
 works and provides next functionalities (hereafter load and query an endpoint are completely equivalent due to 
