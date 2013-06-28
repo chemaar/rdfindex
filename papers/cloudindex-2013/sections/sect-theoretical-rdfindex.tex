@@ -1,13 +1,15 @@
-% This section outlines a model for representing quantitative indexes based on the aggregation 
-% of different components and indicators. Furthermore a computation process for those elements is 
-% also presented in order to specify the population of new observations. 
 Essentially a quantitative index is comprised of the aggregation of several components. In the same way, 
 a component is also composed of the aggregation of indicators that keep concrete observations. From this initial definition 
-some characteristics and assumptions can be found: 1) although observations can be directly mapped to an index or a component, they 
-are frequently computed applying a bottom-up approach from an indicator to a component and so on. 2) An observation is 
-a real numerical value extracted from some agent out under a precise context. Generally observations only takes one measure and are considered 
-to be raw without any pre-processing. 3) Before aggregating observation values, componens and indexes can 
-estimate missing values to finally normalize them in order to get a quantitative value. According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
+some characteristics and assumptions can be found:
+
+\begin{enumerate}
+ \item Although observations can be directly mapped to an index or a component, they are frequently computed applying a bottom-up approach from an indicator to a component and so on.
+ \item An observation is a real numerical value extracted from some agent out under a precise context. Generally observations only takes one measure and are considered 
+to be raw without any pre-processing.
+ \item Before aggregating observation values, componens and indexes can estimate missing values to finally normalize them in order to get a quantitative value.
+\end{enumerate}
+
+According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
 dataset of observations under a specific context (dimensions and/or meta-data) that can be directly gathered from external 
 sources or computed by some kind of OWA operator. 
 
@@ -65,7 +67,7 @@ about the type of dataset that can be aggregated in each level could be added at
 a human-readable form of the index.
 
 
-\section{Representation of a quantitative composite index in RDF: The RDFIndex}
+\subsection{Representation of a quantitative composite index in RDF}
 Since previous section has stated the key definitions to represent quantitative indexes by aggregation, a direct translation built 
 on the top of the RDF Data Cube Vocabulary, SDMX and other semantic web vocabularies is presented in Table~\ref{index-to-rdf}. Thus 
 all concepts in the index are described reusing existing definitions, taking advantage of previous efforts and pre-established semantics 
