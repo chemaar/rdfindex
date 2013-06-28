@@ -213,8 +213,27 @@
  address = {Berlin, Heidelberg},
 } 
 
-%[11] N. Kephart, Six Must-Have Cloud Management Features, http://www.wired.com/insights/2012/11/six-must-have-cloud-management-features/ (access: 25.02.2012)
-%[12] OASIS Cloud Application Management for Platforms (CAMP) TC. https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=camp  (access: 25.02.2012) 
+% 
+@misc{Kephart2012,
+  author = {Nicholas Kephart},
+  title = {Linked Data},
+  url = {Six Must-Have Cloud Management Features},
+  year = 2012,
+  timestamp = {2012-02-06},
+  month = {jul}
+}
+
+
+@TechReport{OASISCamp,
+  author =       {Martin Chapman and Adrian Otto},
+  title =        {OASIS Cloud Application Management for Platforms (CAMP)},
+  institution =  {OASIS},
+  year =         {2012},
+  type = {{OASIS} TC},
+  note = {https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=camp}
+}
+
+
 
 
 
@@ -272,6 +291,18 @@
 
 
 %[17] D. Armstrong, K. Djemame, Towards Quality of Service in the Cloud. FIXME
+
+@inproceedings{DBLP:conf/gecon/KavanaghD12,
+  author    = {Richard E. Kavanagh and
+               Karim Djemame},
+  title     = {{The ISQoS Grid Broker for Temporal and Budget Guarantees}},
+  booktitle = {GECON},
+  year      = {2012},
+  pages     = {76-90},
+  ee        = {http://dx.doi.org/10.1007/978-3-642-35194-5_6},
+  crossref  = {DBLP:conf/gecon/2012},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
 
 
 @inproceedings{Lopes:2006:PEM:1135771.1136110,
@@ -490,7 +521,36 @@ doi={10.1109/ICRTIT.2012.6206823},}
 	author = {Wlodzimierz Funika and Pawel Koperek}
 }
 
-%[30] Esper Project website, http://esper.codehaus.org (access: 25.02.2012)
+%[30] Esper Project website, (access: 25.02.2012)
+
+@Misc{lod2-project,
+author = {ESPER Project},
+title = {{ESPER Project}},
+month = may,
+year = {2013},
+note = {\url{http://esper.codehaus.org/}}
+}
+
+
+@inproceedings{dosSantosTeixeira:2010:DSA:1774088.1774434,
+ author = {dos Santos Teixeira, Pedro Henriques and Milidi\'{u}, Ruy Luiz},
+ title = {{Data stream anomaly detection through principal subspace tracking}},
+ booktitle = {Proceedings of the 2010 ACM Symposium on Applied Computing},
+ series = {SAC '10},
+ year = {2010},
+ isbn = {978-1-60558-639-7},
+ location = {Sierre, Switzerland},
+ pages = {1609--1616},
+ numpages = {8},
+ url = {http://doi.acm.org/10.1145/1774088.1774434},
+ doi = {10.1145/1774088.1774434},
+ acmid = {1774434},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {anomaly detection, data streams, dimensionality reduction, time series, unsupervised learning},
+} 
+
+
 
 @incollection{srt-15
 year={2012},
@@ -526,10 +586,13 @@ pages={15-24}
   year = 2007
 }
 
-%[32] G.F. Anastasi, Quality of Service Management in Service Oriented Architectures. PhD Dissertation, Scuola Superiore Sant’Anna. (2011).
-
-
-
+ @THESIS{anastasi2011,
+      author = {Gaetano Anastasi},
+      title = {Quality of Service Management in Service Oriented Architectures},
+      institution = {Scuola Superiore Sant'Anna},
+      year = {2011},
+      type = {{Ph.D. Thesis}},      
+    }
 
 @article{cucinottaSOA_IA09,
     abstract = {{Industrial automation platforms are experiencing a paradigm shift. New technologies are making their way in the area, including embedded real-time systems, standard local area networks like Ethernet, Wi-Fi and ZigBee, IP-based communication protocols, standard service oriented architectures (SOAs) and Web services. An automation system will be composed of flexible autonomous components with plug \& play functionality, self configuration and diagnostics, and autonomic local control that communicate through standard networking technologies. However, the introduction of these new technologies raises important problems that need to be properly solved, one of these being the need to support real-time and quality-of-service (QoS) for real-time applications. This paper describes a SOA enhanced with real-time capabilities for industrial automation. The proposed architecture allows for negotiation of the QoS requested by clients from Web services, and provides temporal encapsulation of individual activities. This way, it is possible to perform an}},
@@ -587,7 +650,7 @@ pages={15-24}
 }
 
 %[36] T. Cucinotta, S. Gogouvitis, K. Kostanteli, SLAs in Virtualized Cloud Computing  Infrastructures with QoS Assurance, eChallenges e-2011 Conference Proceedings. (2011).
-
+%http://www.cin.ufpe.br/~redis/intranet/bibliography/middleware/ferreti-qos-2010.pdf
 
 @inproceedings{Van:2009:SVR:1673076.1674142,
  author = {Van, Hien Nguyen and Tran, Frederic Dang and Menaud, Jean-Marc},
@@ -957,12 +1020,27 @@ doi={10.1109/ICEBE.2012.54},}
 } 
 
 
-%[59] Sensor Web Enablement WG, http://www.opengeospatial.org/projects/groups/sensorweb (access: 25.02.2012)
-%[60] Extended Environments Markup Language (EEML), http://www.eeml.org (access: 25.02.2012)
+
+%[60] ,  (access: 25.02.2012)
 %[61] 52º North, http://52north.org (access: 25.02.2012)
 %[62] NASA/JPL Sensor Webs Project, http://sensorwebs.jpl.nasa.gov (access: 25.02.2012).
 %[63] European Space Agency, http://www.esa.int/esaCP/index.html (access: 25.02.2012).
 
+@Misc{sensorweb-wb,
+author = {OpenGeoSpatial Consortium},
+title = {{Sensor Web Enablement}},
+month = may,
+year = {2013},
+note = {\url{http://www.opengeospatial.org/projects/groups/sensorweb}}
+}
+
+@Misc{eeml,
+author = {EEML},
+title = {{Extended Environments Markup Language (EEML)}},
+month = may,
+year = {2013},
+note = {\url{http://www.eeml.org}}
+}
 
 @article{Sheth:2008:SSW:1444383.1444435,
  author = {Sheth, Amit and Henson, Cory and Sahoo, Satya S.},
@@ -1707,5 +1785,19 @@ BibTeX | BibTeX (beta) | EndNote | ACM Ref
   ee        = {http://dx.doi.org/10.1016/j.future.2012.06.006},
   bibsource = {DBLP, http://dblp.uni-trier.de}
 }
+
+
+
+@inproceedings{DBLP:conf/wosp/Iosup13,
+  author    = {Alexandru Iosup},
+  title     = {{IaaS cloud benchmarking: approaches, challenges, and experience}},
+  booktitle = {HotTopiCS},
+  year      = {2013},
+  pages     = {1-2},
+  ee        = {http://doi.acm.org/10.1145/2462307.2462309},
+  crossref  = {DBLP:conf/wosp/2013hot},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
 
 
