@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<!DOCTYPE urlrewrite   PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+"webapps/moldeas/WEB-INF/urlrewrite2.6.dtd">
+<urlrewrite>
+
+<!--
+<rule>
+    <from>^/[(\s)|(\/)]*$</from>
+    <to type="redirect">/datasets/moldeas/moldeas-onto.ttl</to>
+</rule>
+-->
+
+<rule>
+    <from>^/rdfindex[(\s)|(\/)]*$</from>
+    <to type="redirect">/rdfindex/ontology/</to>
+</rule>
+
+
+
+
+</urlrewrite>

@@ -1,0 +1,178 @@
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
+@prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
+@prefix rdfindex-org: <http://purl.org/rdfindex/organization/> .
+@prefix rdfindex-people: <http://purl.org/rdfindex/people/> .
+@prefix rdfindex-project: <http://purl.org/rdfindex/project/> .
+@prefix rdfindex-component:  <http://purl.org/rdfindex/component/> .
+@prefix rdfindex-indicator:  <http://purl.org/rdfindex/indicator/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix lg:  <http://linkedgeodata.org/ontology/> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+
+
+#
+# Custom dimensions for the Worldbank indicators
+# Add sex dimension
+#
+
+rdfindex-wbont:ref-area a rdf:Property, qb:DimensionProperty; 
+	rdfs:label "URI to an Area"@en; 
+	rdfs:subPropertyOf sdmx-dimension:ref-area; 
+	rdfs:range skos:Concept; 
+	qb:concept sdmx-concept:ref-area . 
+
+rdfindex-wbont:ref-year  a rdf:Property, qb:DimensionProperty;
+	rdfs:label "Period and year"@en;
+	rdfs:subPropertyOf sdmx-dimension:ref-period;
+	rdfs:range interval:Interval;
+	qb:concept sdmx-concept:ref-period . 
+
+
+rdfindex-wbont:ref-period  a rdf:Property, qb:DimensionProperty;
+	rdfs:label "Period"@en;
+	rdfs:subPropertyOf sdmx-dimension:ref-period;
+	rdfs:range interval:Interval;
+	qb:concept sdmx-concept:ref-period . 
+
+
+#
+# Definition of the World Bank naive index
+#
+
+
+rdfindex-wb:TheWorldBankNaiveIndex a rdfindex:Index;
+	rdfs:label 	"The Weight Longest Life Country"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:OWA;
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:AidEffectiveness; rdfindex:weight 0.4];
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:Health; rdfindex:weight 0.6];
+	];
+	qb:structure 	rdfindex-wb:TheWorldBankNaiveIndexDSD ;
+.
+
+rdfindex-wb:TheWorldBankNaiveIndexDSD a qb:DataStructureDefinition;
+    qb:component    
+	[qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+rdfindex-wb:AidEffectiveness a rdfindex:Component;
+	rdfs:label 	"Aid Effectiveness"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight 1;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:Min;
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:AggregatedLifeExpectancy];
+	];
+	qb:structure 	rdfindex-wb:AidEffectivenessDSD ;  
+.
+
+
+
+rdfindex-wb:AidEffectivenessDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+rdfindex-wb:Health a rdfindex:Component;
+	rdfs:label 	"Health"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight 1;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:Min;
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:HealthExpenditure];
+	];
+	qb:structure 	rdfindex-wb:HealthValueDSD ;  
+.
+
+
+rdfindex-wb:HealthValueDSD a qb:DataStructureDefinition;
+    qb:component    [qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+rdfindex-wb:HealthExpenditure a rdfindex:Indicator;
+	rdfs:label 	"Health expenditure, total (% of GDP)"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight  1;
+	qb:structure 	rdfindex-wb:HealthExpenditureDSD ;
+.
+
+rdfindex-wb:HealthExpenditureDSD a qb:DataStructureDefinition;
+    qb:component    
+	[qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+
+rdfindex-wb:AggregatedLifeExpectancy a rdfindex:Indicator;
+	rdfs:label 	"Life expectancy aggregated"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight  1;
+	rdfindex:aggregates [ 		
+		rdfindex:aggregation-operator rdfindex:Mean;
+		rdfindex:part-of [rdfindex:dataset rdfindex-wb:LifeExpectancy];
+	];
+	qb:structure 	rdfindex-wb:AggregatedLifeExpectancyDSD ;
+.
+
+
+
+rdfindex-wb:AggregatedLifeExpectancyDSD a qb:DataStructureDefinition;
+    qb:component    
+	[qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+rdfindex-wb:LifeExpectancy a rdfindex:Indicator;
+	rdfs:label 	"Life expectancy at birth by male sex"@en;
+	rdfindex:type 	rdfindex:Quantitative;
+	rdfindex:weight  1;
+	qb:structure 	rdfindex-wb:LifeExpectancyDSD ;
+.
+
+
+rdfindex-wb:LifeExpectancyDSD a qb:DataStructureDefinition;
+    qb:component    
+		[qb:dimension rdfindex-wbont:ref-area],
+        [qb:dimension rdfindex-wbont:ref-year],
+        [qb:dimension sdmx-dimension:sex],
+        [qb:measure   rdfindex:value],
+        [qb:attribute sdmx-attribute:unitMeasure];
+.
+
+
+

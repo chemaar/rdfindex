@@ -14,9 +14,9 @@
 
 %%%Math
 \usepackage{latexsym}
-% \usepackage{amsmath}
-% \usepackage{amssymb}
-% \usepackage{amsthm}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{amsthm}
 %\usepackage{eurosans}
 
 \usepackage{eurosym}
@@ -29,23 +29,28 @@
 \usepackage{textcomp}
 
 
+
 \definecolor{gray}{gray}{0.5}
 \definecolor{green}{rgb}{0,0.5,0}
 
 
 \begin{document}
-\title{Leveraging semantics to represent and compute quantitative indexes. \\ The RDFindex approach.}
 
-\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{3}}
+\title{Leveraging semantics to represent and compute quantitative indexes. \\ The RDFIndex approach.\thanks{This is the full version of the article including some source 
+code listings, tables or complete examples for a better understanding during the reviews. Nevertheless some listings, tables, examples and figures will be omitted in a final version.}}
+
+\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{2}  \and Patricia Ordoñez de Pablos\inst{3}}
 
 
-\authorrunning{Jose Mar\'{i}a Alvarez \and Michail Vafolopoulos \and  Jos\'{e} Emilio Labra}
+\authorrunning{Jose Mar\'{i}a Alvarez \and  Jos\'{e} Emilio Labra \and Patricia Ordoñez de Pablos}
 
 
 \institute{South East European Research Center, \\ 54622, Thessaloniki, Greece\\
   \email{{jmalvarez@seerc.org}}\\
 \and WESO Research Group, Department of Computer Science, University of Oviedo, \\ 33007, Oviedo, Spain.\\
   \email{{labra@uniovi.es.es}}\\  
+  \and WESO Research Group, Department of Business Administration, University of Oviedo, \\ 33007, Oviedo, Spain.\\
+  \email{{patriop@uniovi.es.es}}\\  
 }
 
 
@@ -56,47 +61,50 @@
 \renewcommand{\labelitemi}{$\bullet$}
 
 \begin{abstract}
-FIXME
+The compilation of key performance indicators (KPIs) in just one value is 
+becoming a challenging task in certain domains to summarize data and information. 
+In this context, policymakers are continuously gathering and analyzing statistical 
+data with the aim of providing objective measures about a specific policy, activity, 
+product or service and making some kind of decision. Nevertheless existing tools 
+and techniques based on traditional processes are preventing a 
+proper use of the new dynamic and data environment avoiding more timely, 
+adaptable and flexible (on-demand) quantitative index creation. On the other hand, 
+semantic-based technologies emerge to provide the adequate building blocks 
+to represent domain-knowledge and process data in a flexible fashion 
+using a common and shared data model. That is why a RDF vocabulary designed on 
+the top of the RDF Data Cube Vocabulary to model quantitative indexes 
+is introduced in this paper. Moreover a Java and SPARQL based processor 
+of this vocabulary is also presented as a tool to exploit the index meta-data structure and automatically 
+perform the computation process to populate new values. Finally some discussion, 
+conclusions and future work are also outlined.
 \end{abstract}
-
+% 
 \section{Introduction}
-
-\begin{table}[!htb]
-\renewcommand{\arraystretch}{1.3}
-\begin{center}
-\begin{tabular}{|p{3cm}||p{5cm}|p{1.8cm}|p{1.8cm}|p{1cm}|}
-\hline
-  \textbf{Component} & \textbf{Indicator} & \textbf{Year} & \textbf{Country} & \textbf{Value}  \\  \hline
-  Aid Efectiveness & Life Expectancy Male & 2010 & Spain & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Male & 2011 & Spain & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Female & 2010 & Spain & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Female & 2011 & Spain & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Male & 2010 & Greece & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Male & 2011 & Greece & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Female & 2010 & Greece & $1.0$ \\ \hline
-  Aid Efectiveness & Life Expectancy Female & 2011 & Greece & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2010 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2011 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2010 & Spain & $1.0$ \\ \hline
-  Health & Health expenditure, total (\% of GDP) & 2011 & Spain & $1.0$ \\ \hline
-  \hline
-  \end{tabular}
-  \caption{Example of observations from the WorldBank.}
-  \label{config-corfu}
-  \end{center}
-\end{table} 
-
-
+\input{sections/sect-intro}
 \section{Related Work}
-\section{Theoretical modelling of a quantitative composite index}
-\section{The RDFIndex approach}
-\section{A $\{Java\rightarrow based \rightarrow SPARQL\}$  interpreter of the RDFIndex}
-%
-\subsection{Use Case: A naive World Bank index}
-% % 
+\input{sections/sect-related-work}
+\section{Theoretical modeling of a quantitative composite index}
+\input{sections/sect-theoretical-rdfindex}
+% \section{FIXME: Use Case: TheCloudindex (not in this version)}
+% % % 
+\clearpage
 \section{Discussion and Further Steps}
-
+\input{sections/sect-discussion}
 \section{Conclusions and Future Work}
+\input{sections/sect-conclusions}
+
+\section{Acknowledgements}
+This work is part of the FP7 Marie Curie Initial Training Network ``RELATE'' (cod. 264840) and developed in the context 
+of the Workpackage 4 and more specifically under the project ``Quality Management in Service-based Systems and Cloud Applications''. It is 
+also funded by the ROCAS project with code TIN2011-27871, a research project partially funded by the Spanish Ministry of Science and Innovation.
+
+\clearpage
+
+\bibliographystyle{plain}
+% %\bibliographystyle{unsrt}
+% % %\bibliographystyle{acm}
+\bibliography{references}
+ % \renewcommand{\bibname}{References}
 
 \end{document}
 

@@ -1,0 +1,132 @@
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
+@prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
+@prefix rdfindex-org: <http://purl.org/rdfindex/organization/> .
+@prefix rdfindex-people: <http://purl.org/rdfindex/people/> .
+@prefix rdfindex-project: <http://purl.org/rdfindex/project/> .
+@prefix rdfindex-component:  <http://purl.org/rdfindex/component/> .
+@prefix rdfindex-indicator:  <http://purl.org/rdfindex/indicator/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix interval:  <http://www.w3.org/2006/time#> .
+@prefix lg:  <http://linkedgeodata.org/ontology/> .
+@prefix dbpedia-res:  <http://dbpedia.org/resource/> .
+
+#
+#Observations
+#
+
+
+rdfindex-wb:o1
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "M";
+      rdfindex:value "79"^^xsd:double .
+      
+rdfindex-wb:o2
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "M";
+      rdfindex:value "79"^^xsd:double .
+      
+rdfindex-wb:o3
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "85"^^xsd:double .
+
+rdfindex-wb:o4
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "85"^^xsd:double .
+      
+      
+rdfindex-wb:o5
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "M";
+      rdfindex:value "78"^^xsd:double .
+      
+rdfindex-wb:o6
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "M";
+      rdfindex:value "79"^^xsd:double .
+      
+rdfindex-wb:o7
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "83"^^xsd:double .
+
+rdfindex-wb:o8
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:LifeExpectancy ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "83"^^xsd:double .
+      
+rdfindex-wb:o9
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:HealthExpenditure ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "74.2"^^xsd:double .
+      
+rdfindex-wb:o10
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:HealthExpenditure ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "73.6"^^xsd:double .
+
+rdfindex-wb:o11
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:HealthExpenditure ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece ;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "61.5"^^xsd:double .
+      
+rdfindex-wb:o12
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:HealthExpenditure ;
+      rdfindex-wbont:ref-area dbpedia-res:Greece;
+      rdfindex-wbont:ref-year <http://reference.data.gov.uk/id/gregorian-interval/2011-01-01T00:00:00/P1Y> ;
+      rdfindex-wb:sex "F";
+      rdfindex:value "61.2"^^xsd:double .
+
+      

@@ -44,55 +44,70 @@
 # T-BOX Ontology Classes
 #
 
-
 rdfindex:Quantitative rdf:type owl:Class ;
+	rdfs:label "Quantitative observable element"@en;
 	rdfs:subClassOf skos:Concept;
 .
 
 rdfindex:Qualitative rdf:type owl:Class ;
+	rdfs:label "Qualitative observable element"@en;
 	rdfs:subClassOf skos:Concept;
-.
-
-#FIXME: generate taxonomy
-
-rdfindex:Observable rdf:type owl:Class ;
-	rdfs:subClassOf skos:Concept;
- 	rdfs:subClassOf qb:DataSet;
 .
 
 rdfindex:Index rdf:type owl:Class ;
-	rdfs:subClassOf rdfindex:Observable ;
+	rdfs:subClassOf rdfindex:Quantitative;
+ 	rdfs:subClassOf qb:DataSet;
+	rdfs:label "The class of quantitative indexes."@en;
 .
 
 rdfindex:Component rdf:type owl:Class ;
-	rdfs:subClassOf rdfindex:Observable ;
+	rdfs:subClassOf rdfindex:Quantitative;
+ 	rdfs:subClassOf qb:DataSet;
+	rdfs:label "The class of quantitative components."@en;
 .
 
 rdfindex:Indicator rdf:type owl:Class ;
-	rdfs:subClassOf rdfindex:Observable ;
+	rdfs:subClassOf rdfindex:Quantitative;
+ 	rdfs:subClassOf qb:DataSet;
+	rdfs:label "The class of quantitative indicators."@en;
 .
 
 #
 # T-BOX Ontology Properties
 #
 
+rdfindex:weight-scheme a owl:OWLDataTypeProperty;
+	rdfs:domain rdfindex:Index;
+	rdfs:range rdf:list;
+.
+
 
 rdfindex:weight a owl:OWLDataTypeProperty;
 	rdfs:domain rdfindex:Indicator;
+	rdfs:domain rdfindex:Component;
 	rdfs:range xsd:double;
 .
 
 rdfindex:type a owl:OWLDataTypeProperty;
-	rdfs:domain rdfindex:Observable;
+	rdfs:domain rdfindex:Indicator;
+	rdfs:domain rdfindex:Component;
+	rdfs:domain rdfindex:Indicator;
 	rdfs:range  rdfindex:Quantitative, rdfindex:Qualitative;
 .
 
 rdfindex:value a rdf:Property, qb:MeasureProperty;
-    rdfs:label "life expectancy"@en;
-    skos:notation "life-expectancy" ;
+    rdfs:label "Value of an observation"@en;
+    skos:notation "value" ;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     rdfs:range xsd:double . 
 
+
+rdfindex:sparql-notation  a rdf:Property;
+	rdfs:label "The notation in SKOS of an OWA operator."@en;
+	rdfs:subPropertyOf skos:notation;
+	rdfs:domain rdfindex:StatisticalMathOperator;
+	. 
+	
 rdfindex:obsStatus-N a skos:Concept, sdmx-concept:Concept, sdmx-code:ObsStatus;
     rdfs:label "Normalised status"@en;
     skos:topConceptOf sdmx-code:obsStatus;
@@ -102,50 +117,25 @@ rdfindex:obsStatus-N a skos:Concept, sdmx-concept:Concept, sdmx-code:ObsStatus;
     skos:definition "It is used when an observation status is normalised."@en ; 
 .
 
-rdfindex:ref-area a rdf:Property, qb:DimensionProperty; 
-	rdfs:label "URI to an Area"@en; 
-	rdfs:subPropertyOf sdmx-dimension:ref-area; 
-	rdfs:range skos:Concept; 
-	qb:concept sdmx-concept:ref-area . 
-
-rdfindex:ref-year  a rdf:Property, qb:DimensionProperty;
-	rdfs:label "Period and year (fix range to interval:Interval)"@en;
-	rdfs:subPropertyOf sdmx-dimension:ref-period;
-	rdfs:range xsd:int;
-	qb:concept sdmx-concept:ref-period . 
-
-
-rdfindex:ref-period  a rdf:Property, qb:DimensionProperty;
-	rdfs:label "Period"@en;
-	rdfs:subPropertyOf sdmx-dimension:ref-period;
-	rdfs:range interval:Interval;
-	qb:concept sdmx-concept:ref-period . 
-
-
-rdfindex:sparql-notation  a rdf:Property;
-	rdfs:label "The notation in SKOS of an OWA operator."@en;
-	rdfs:subPropertyOf skos:notation;
-	rdfs:domain rdfindex:StatisticalMathOperator;
-	. 
-	
 
 #
-# T-BOX Computation Process Classes
+# T-BOX Computation Process Classes: align with sdmx
 #
+
 rdfindex:StatisticalMathOperator rdf:type owl:Class ;
 	rdfs:subClassOf skos:Concept;
-	rdfs:label "Type of descriptive aggregators";		
+	rdfs:label "Type of statistical math operators.";		
 .
 
 
 rdfindex:DescriptiveStatistics rdf:type owl:Class ;
 	rdfs:subClassOf rdfindex:StatisticalMathOperator;
-	rdfs:label "Type of descriptive aggregators";		
+	rdfs:label "The descriptive statistics operators.";		
 .
 
 rdfindex:SummaryStatistics rdf:type owl:Class ;
 	rdfs:subClassOf rdfindex:StatisticalMathOperator;
-	rdfs:label "Type of summary aggregators";		
+	rdfs:label "The summary statistics operators.";		
 .
 
 #DescriptiveStatistics	min, max, mean, geometric mean, n, sum, sum of squares, standard deviation, variance, percentiles, skewness, kurtosis, median
@@ -156,24 +146,34 @@ rdfindex:SummaryStatistics rdf:type owl:Class ;
 #
 
 rdfindex:aggregates a owl:ObjectProperty, rdf:Property; 
+	rdfs:subPropertyOf skos:narrower;
 	rdfs:label "The description of an aggregation."@en; 
 	rdfs:domain skos:Concept; 
 . 
 
-rdfindex:type a owl:ObjectProperty, rdf:Property; 
-	rdfs:label "The description of an aggregation."@en; 
-	rdfs:domain rdfindex:Observable; 
-	rdfs:range  rdfindex:Quantitative;
-	rdfs:range  rdfindex:Qualitative;
-. 
-
 rdfindex:aggregation-operator a owl:ObjectProperty, rdf:Property; 
 	rdfs:label "The operator used in an aggregation."@en; 
-	rdfs:domain rdfindex:Observable; 
+	rdfs:domain skos:Concept; 
 	rdfs:range rdfindex:StatisticalMathOperator;
+.
+
+rdfindex:dataset a owl:ObjectProperty, rdf:Property; 
+	rdfs:label "The QB dataset that is being aggregated."@en; 
+	rdfs:domain qb:dataSet; 
+	rdfs:range  qb:dataSet;
 . 
+
+
+rdfindex:part-of a owl:ObjectProperty, rdf:Property; 
+	rdfs:subPropertyOf skos:narrower;
+	rdfs:label "The description of an aggregation."@en; 
+	rdfs:domain skos:Concept; 
+. 
+
+
+ 
 #
-#A-BOX-Computation Process
+#A-BOX-OWA operators from SPARQL 1.1
 #
 
 rdfindex:Mean rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
@@ -188,15 +188,15 @@ rdfindex:Min rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistic
 
 rdfindex:Max rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
 	rdfs:label "Max";	
-	rdfindex:sparql-notation "Max";	
+	rdfindex:sparql-notation "max";	
 .
 
-
-rdfindex:OWA rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
-	rdfs:label "OWD";	
+rdfindex:Sum rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "Sum";	
 	rdfindex:sparql-notation "sum";	
 .
 
-
-
-
+rdfindex:OWA rdf:type  rdfindex:SummaryStatistics, rdfindex:DescriptiveStatistics ;
+	rdfs:label "sum";	
+	rdfindex:sparql-notation "sum";	
+.

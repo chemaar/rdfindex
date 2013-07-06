@@ -1,0 +1,105 @@
+Public and private bodies are continuously seeking for new analytical tools and methods to assess, rank and compare their performance based 
+on distinct indicators and dimensions with the objective of making some decision or developing a new policy. 
+In this context the creation and use of quantitative indexes is a widely accepted practice that has been applied to various 
+domains such as Bibliometrics and academic performance and quality (the Impact Factor by Thomson-Reuters, the H-index or the Shanghai and Webometrics rankings), 
+the Web impact (the Webindex by the Webfoundation) or Cloud Computing (the Service Measurement Index by the CSMIC consortium, the Global Cloud Index by Cisco, 
+the CSC index, the VMWare Cloud Index, etc.) or Smart Cities (The European Smart Cities ranking) to name a few (apart from the traditional ones such as the Gross domestic product). 
+Therefore policymakers as well as individuals are continuously evaluating quantitative measures to tackle or improve 
+existing problems in different areas and support their decisions. Nevertheless the sheer mass of data now available in the web is 
+raising a new dynamic and challenging environment in which traditional tools are facing major 
+problems to deal with data-sources diversity, structural issues or complex processes of estimation. According to some efforts 
+such as the ``Policy-making $2.0$'' within the Cross-Over project~\footnote{\url{http://www.crossover-project.eu/}} that \textit{refers to a blend of emerging and fast developing technologies 
+that enable better, more timely and more participated decision-making}, new paradigms and tools are required to take advantage of 
+the existing environment (open data and big data) to design and estimate actions in this dynamic context according to requirements of 
+transparency, standardization, adaptability and extensibility among others with the aim of providing new context-aware 
+and added-value services such as visualization that can help a deepen and broaden understanding of the impact of a 
+policy in a more fast and efficient way. As a consequence common features and requirements can be extracted from the existing situation out:
+\begin{itemize}
+ \item Data sources. Data and information is continuously being generated as observations from social networks, public and private institutions, NGOs, services and applications, etc. 
+ creating a tangled environment of sources, formats and access protocols with a huge but restricted potential for exploitation. Nevertheless data processing, knowledge inferring, etc. are not mere processes 
+ of gathering and analyzing, it is necessary to deal with semantic and syntactic issues, e.g. particular measurements and dimensions or name mismatches, 
+ in order to enable a proper data/information re-use and knowledge generation.
+ 
+ \item Structure. Quantitative indexes are usually defined (a mathematical model) by experts to aggregate several indicators (in a hierarchy structure) in just one value to provide
+ a measure of the impact or performance of some policy in a certain context. The structure of these indexes are obviously subjected to change over time 
+ to collect more information or adjust their composition and relationships (narrower/broader). That is why technology should be able to afford 
+ adequate techniques to automatically populate new changes in an efficient way.
+ 
+  \item Computation process. This feature refers to the calculation of the index. Observations are gathered from diverse data sources and aligned 
+  to the index structure, commonly indicators, that are processed through various mathematical operators to generate a final index value. 
+  Nevertheless the computation process is not always described neither open (any minor change can imply a long time for validation) implying that 
+  cannot be easily replied for third-parties with other purposes, for instance research, preventing one 
+  of the most wanted characteristics such as transparency. Furthermore it is necessary to ensure that the computation process 
+  is sound and correct.
+
+  \item Documentation. As the European project Cross-over has stated, new policy-making strategies go ahead of a simple and closed value and it is necessary to bring 
+  new ways of exploiting data and information. Moreover the use of the Web as a dissemination channel represents a powerful environment in which 
+  information should be available taking into account the multilingual and multicultural character of information. In this context documentation mechanisms 
+  must necessarily cover all the aforementioned features to afford a detailed explanation of a quantitative index-based policy to both policymakers 
+  and final users. However existing initiatives usually generates some kind of hand-made report which is not easy to keep up-to-date and deliver 
+  to the long-tail of interested third-parties.
+\end{itemize}
+
+On the other hand, the Semantic Web area has experienced during last years a growing commitment from both academia and industrial areas 
+with the objective of elevating the meaning of web information resources through a common and shared data model (graphs) and 
+an underlying semantics based on a logic formalism (ontologies). The Resource Description Framework (RDF), based on a graph model, 
+and the Web Ontology Language (OWL), designed to formalize and model domain knowledge, are a \textit{lingua-franca} to re-use information 
+and data in a knowledge-based environment. Thus data, information and knowledge can be easily shared, exchanged and linked~\cite{Maali_Cyganiak_2011} 
+to other databases through the use URIs, more specifically HTTP-URIs. Therefore the broad objective of this effort can 
+be summarized as a new environment of data-based services to encourage and improve B2B (Business to Business), B2C (Business to Client) or 
+A2A (Administration to Administration) relationships. Under this view the implementation of new context-awareness expert systems 
+to tackle existing cross-domain problems in which data heterogeneities, lack of standard knowledge representation and 
+interoperability problems are common scenarios for applying this approach. Furthermore recent times have also seen the deployment of 
+the Linked (Open) Data~\cite{Berners-Lee-2006,Heath_Bizer_2011} initiative  to make it possible the view and application of the Semantic Web to create a large and distributed database on the Web. 
+
+Obviously semantic web technologies can partially fulfill the features and requirements of this challenging environment for supporting 
+new policy-making strategies. A common and shared data model based on existing standardized semantic web vocabularies and datasets can be used to 
+represent quantitative indexes from both, structural and computational, points of view enabling a right exploitation of meta-data and semantics. 
+That is why the present paper introduces: 1) a high-level model on top of the RDF Data Cube Vocabulary~\cite{rdf-data-cube}, a shared effort to model statistical data in RDF reusing parts 
+(the cube model) of the Statistical Data and Metadata Exchange Vocabulary~\cite{sdmx} (SDMX), to represent the structure and computation of quantitative indexes and 
+2) a Java-SPARQL based processor to exploit the meta-information and compute the new index values.
+
+Finally, as a motivating and on-going example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the World Bank data to model and compute a new index, ``The Naive World Bank Index''. This 
+index uses the topics ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$) with the aim of comparing the status and health evolution in several countries to decide whether new 
+investments are performed. From these components two indicators have been respectively selected by experts: ``Life Expectancy'' ($in_1$) and ``Health expenditure, total (\%) of GDP'' ($in_2$). 
+Once components and their indicators are defined and data can be retrieved from the World Bank it is necessary to set how the index and components are computed 
+taking into account that only data about indicators is available. Following a top-down approach the index, $i$, is calculated through an ordered weighted averaging (OWA) operator using the 
+formula: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$. On the other hand, both components only aggregates one indicator but the ``Aid Efectiveness'' 
+must firstly compute the ``Life Expectancy'' without considering the sex dimension. Making this implies the need of populating the average age by country and year to create 
+a new ``derivate'' indicator of ``Life Expectancy''. Apart from that the computation must also consider the observation status and values must be normalized using the 
+\textit{z-score} before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to change in the future 
+adding new data sources and meta-data, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). Finally, the policy-maker 
+is also interested in applying this index to other scenarios and he also needs a way of explaining in different languages how the index is computed. 
+
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{|p{5.5cm}|p{1cm}|p{2cm}|p{1cm}|p{1.5cm}|}
+\hline
+  \textbf{Description} & \textbf{Year} & \textbf{Country} & \textbf{Value} & \textbf{Status} \\  \hline
+  Life Expectancy Male & 2010 & Spain & $79$ & Normal \\ \hline
+  Life Expectancy Male & 2011 & Spain & $79$ & Normal\\ \hline
+  Life Expectancy Female & 2010 & Spain & $85$ & Normal\\ \hline
+  Life Expectancy Female & 2011 & Spain & $85$ & Normal\\ \hline
+  Life Expectancy Male & 2010 & Greece & $78$ & Normal\\ \hline
+  Life Expectancy Male & 2011 & Greece & $79$ & Normal\\ \hline
+  Life Expectancy Female & 2010 & Greece & $83$ & Normal\\ \hline
+  Life Expectancy Female & 2011 & Greece & $83$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2010 & Spain & $74.2$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2011 & Spain & $73.6$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2010 & Spain & $61.5$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2011 & Spain & $61.2$ & Normal\\ \hline
+  \hline
+  \end{tabular}
+  \caption{Example of indicator observations from the WorldBank.}
+  \label{tab:example-wb}
+  \end{center}	 
+\end{table} 
+
+
+
+
+	 	
+
+

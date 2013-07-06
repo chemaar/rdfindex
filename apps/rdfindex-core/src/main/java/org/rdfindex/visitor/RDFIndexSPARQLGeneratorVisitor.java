@@ -55,7 +55,7 @@ public class RDFIndexSPARQLGeneratorVisitor extends RDFIndexVisitor implements P
 			
 		}		
 		String sparqlQuery = RDFIndexUtils.createSPARQLQuery(component.getMetadata(), component.getAggregated());
-		logger.debug("Component "+component.getUri()+" has generated :\n"+sparqlQuery);
+		logger.debug("\tComponent "+component.getUri()+" has generated :\n\t"+sparqlQuery);
 		composedSPARQLQuery.append(sparqlQuery);		
 		return composedSPARQLQuery.toString();
 	}
@@ -64,7 +64,7 @@ public class RDFIndexSPARQLGeneratorVisitor extends RDFIndexVisitor implements P
 	
 	public Object visit(IndicatorTO indicator) {
 		String sparqlQuery = RDFIndexUtils.createSPARQLQuery(indicator.getMetadata(), indicator.getAggregated());	
-		logger.debug("Indicator "+indicator.getUri()+" has generated :\n"+sparqlQuery);
+		logger.debug("\t\tIndicator "+indicator.getUri()+" has generated :\n\t\t"+sparqlQuery);
 		return sparqlQuery;
 	}
 	
