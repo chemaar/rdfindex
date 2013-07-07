@@ -76,6 +76,7 @@ on-going example and some dimensions are presented in Figure~\ref{fig:results-rd
 
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
+\scriptsize
 \begin{center}
 \begin{tabular}{|p{3cm}||p{4.8cm}|p{4.5cm}|}
 \hline
@@ -98,7 +99,7 @@ on-going example and some dimensions are presented in Figure~\ref{fig:results-rd
 \end{table} 
 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=XML]  
+\begin{lstlisting}[language=XML,basicstyle=\scriptsize]  
 @prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
 @prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
 @prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
@@ -133,7 +134,7 @@ rdfindex-wb:TheWorldBankNaiveIndexDSD
 \end{figure}
 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=SQL]  
+\begin{lstlisting}[language=XML,basicstyle=\scriptsize]  
 rdfindex-wbont:ref-area a rdf:Property, 
   qb:DimensionProperty; 
    rdfs:subPropertyOf sdmx-dimension:ref-area; 
@@ -156,7 +157,7 @@ possible to make a translation to a generic SPARQL query (includes the basic OWA
 in order generate new observations following the bottom-up approach that previous section has outlined.
 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=SQL,mathescape]  
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize,mathescape]  
 SELECT ($d_i \in D$) [(sum(?w*?measure) as ?newvalue) | OWA(?measure)]
 WHERE{
   $q$ rdfindex:aggregates ?parts.
@@ -230,7 +231,7 @@ data is separated from access and storage formats):
 
 % 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=SQL]  
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
 prefix rdfindex:  <http://purl.org/rdfindex/ontology/> 
 SELECT ?dim0 ?dim1 ( sum(?w*?measure) as ?newvalue) 
 WHERE{ 
@@ -257,6 +258,7 @@ WHERE{
 
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
+\scriptsize
 \begin{center}
 \begin{tabular}{|p{4.5cm}|p{1cm}|p{1.5cm}|p{1cm}|p{1.8cm}|}
 \hline
@@ -290,7 +292,7 @@ WHERE{
 
 
 \begin{figure}[!ht]
-\begin{lstlisting}[language=SQL]  
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
 rdfindex-wb:o6808100851579
       a       qb:observation ;
       qb:dataSet rdfindex-wb:TheWorldBankNaiveIndex  ;
@@ -307,7 +309,7 @@ rdfindex-wb:o6808100851579
               sdmx-code:obsStatus-E;
       rdfindex:value "0.707"^^xsd:double .
 \end{lstlisting}
-\caption{Partial example of populated observation for ``The World Bank Naive Index''.}
+\caption{Partial example of a populated observation for ``The World Bank Naive Index''.}
  \label{fig:generated observation}
 \end{figure}
 

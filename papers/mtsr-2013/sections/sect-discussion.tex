@@ -1,8 +1,7 @@
 Previous sections have presented the motivation of this work, a vocabulary designed on top of the 
 RDF Data Cube Vocabulary for modeling quantitative indexes and a Java-SPARQL based processor 
 to validate and compute any kind of index. According to the requirements and features 
-of quantitative indexes an initial evaluation is presented in Table~\ref{tab:eval-rdfindex} and Table~\ref{tab:eval-rdfindex-cross} 
-to show how the application of semantic technologies can ease indexes management and their computation process 
+of quantitative indexes an initial evaluation is presented in Table~\ref{tab:eval-rdfindex} to show how the application of semantic technologies can ease indexes management and their computation process 
 to make the most of data~\footnote{http://fcw.com/articles/2013/06/11/data-performance-management.aspx}: 
 collect, verify, analyze, apply, share, protect, archive and re-use.
 
@@ -16,8 +15,9 @@ other ``semantized'' domains have already done.
  
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
+\scriptsize
 \begin{center}
-\begin{tabular}{|p{3cm}|p{3.5cm}|p{6.5cm}|}
+\begin{tabular}{|p{3cm}|p{3cm}|p{6.5cm}|}
 \hline
   \textbf{Feature} & \textbf{Crucial Step} &\textbf{Main advantages}  \\  \hline
   Data sources &  \begin{itemize} \item Collect. \item Verify. \item Tag (enrichment).\end{itemize} & \begin{itemize}
@@ -47,24 +47,9 @@ other ``semantized'' domains have already done.
   Documentation & \begin{itemize} \item Verify. \item Apply. \item Share. \item Archive. \item Re-use. \end{itemize} &\begin{itemize}
                   \item Multilingual support to describe datasets, etc.
                   \item Easy generation with existing tools.                
-                 \end{itemize} \\ \hline               
-       
-  \hline
-  \end{tabular}
-  \caption{Initial evaluation of semantic technologies for modeling and computing quantitative indexes.}
-  \label{tab:eval-rdfindex}
-  \end{center}
-\end{table} 
-
-
-
-\begin{table}[!htb]
-\renewcommand{\arraystretch}{1.3}
-\begin{center}
-\begin{tabular}{|p{3.5cm}|p{3cm}|p{6.5cm}|}
-\hline
-  \textbf{Feature} & \textbf{Crucial Step} &\textbf{Main advantages}  \\  \hline
-   Cross-Domain Features & All & \begin{itemize}
+                 \end{itemize} \\ \hline      
+                 
+                 Cross-Domain Features & All & \begin{itemize}
                   \item Separation of concerns and responsibilities: data and meta-data (structure and computation).
                   \item Standardization (put in action specs from organisms such as W3C).
                   \item Declarative and adaptive approach.
@@ -75,13 +60,31 @@ other ``semantized'' domains have already done.
                   \item Align to existing trend (data management: quality and filtering)
                   \item Easy integration with third-party services such as visualization.
                   \item Contribution to the Web of Data.
-                 \end{itemize} \\ \hline              
+                 \end{itemize} \\ \hline        
+       
   \hline
   \end{tabular}
-  \caption{Cross-Domain initial evaluation of semantic technologies for modeling and computing quantitative indexes.}
-  \label{tab:eval-rdfindex-cross}
+  \caption{Initial evaluation of semantic technologies for modeling and computing quantitative indexes.}
+  \label{tab:eval-rdfindex}
   \end{center}
 \end{table} 
+
+
+
+% \begin{table}[!htb]
+% \renewcommand{\arraystretch}{1.3}
+% \scriptsize
+% \begin{center}
+% \begin{tabular}{|p{3.5cm}|p{1.8cm}|p{8.5cm}|}
+% \hline
+%   \textbf{Feature} & \textbf{Crucial Step} &\textbf{Main advantages}  \\  \hline
+%          
+%   \hline
+%   \end{tabular}
+%   \caption{Cross-Domain initial evaluation of semantic technologies for modeling and computing quantitative indexes.}
+%   \label{tab:eval-rdfindex-cross}
+%   \end{center}
+% \end{table} 
 
 
  
