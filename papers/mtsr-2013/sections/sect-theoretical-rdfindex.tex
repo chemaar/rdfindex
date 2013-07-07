@@ -6,7 +6,7 @@ a component is also composed of the aggregation of indicators that keep concrete
 some characteristics and assumptions can be found: 1) although observations can be directly mapped to an index or a component, they 
 are frequently computed applying a bottom-up approach from an indicator to a component and so on. 2) An observation is 
 a real numerical value extracted from some agent out under a precise context. Generally observations only takes one measure and are considered 
-to be raw without any pre-processing. 3) Before aggregating observation values, componens and indexes can 
+to be raw without any pre-processing. 3) Before aggregating observation values, components and indexes can 
 estimate missing values to finally normalize them in order to get a quantitative value. According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
 dataset of observations under a specific context (dimensions and/or meta-data) that can be directly gathered from external 
 sources or computed by some kind of OWA operator. 
@@ -24,7 +24,7 @@ a set of dimensions $D$ and a set of annotations $A$. Additionally, some attribu
 
 
 \begin{definition}[Aggregated dataset-$aq$]\upshape
-It is an aggregation of $n$ datasets $q_i$ (identified by the set $Q$) which set of observations $O$ is derivated by applying 
+It is an aggregation of $n$ datasets $q_i$ (identified by the set $Q$) which set of observations $O$ is derivate by applying 
 an OWA operator $p$ to the observations $O_{q_i}$. 
 \end{definition}
 
@@ -72,7 +72,7 @@ all concepts in the index are described reusing existing definitions, taking adv
 with the aim of being extended in the future to fit new requirements. According to these mappings a definition of the index in the 
 on-going example and some dimensions are presented in Figure~\ref{fig:results-rdf-index} and Figure~\ref{fig:results-rdf-properties}.
 
-% FIXME: Maybe an observation? include a table with all reused vocabularies? a diagraa of the ontology?
+% FIXME: Maybe an observation? include a table with all reused vocabularies? a diagram of the ontology?
 
 \begin{table}[!htb]
 \renewcommand{\arraystretch}{1.3}
@@ -106,7 +106,7 @@ on-going example and some dimensions are presented in Figure~\ref{fig:results-rd
 
 rdfindex-wb:TheWorldBankNaiveIndex 
   a rdfindex:Index;
-  rdfs:label "The Weight Longest Life Country"@en;
+  rdfs:label "The World Bank Naive Index"@en;
   rdfindex:type rdfindex:Quantitative;
   rdfindex:aggregates [ 		
     rdfindex:aggregation-operator rdfindex:OWA;
