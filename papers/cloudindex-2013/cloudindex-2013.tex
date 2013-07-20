@@ -38,19 +38,20 @@
 
 \title{Towards a semantic-based representation and computation of a quantitative index for context-aware quality management in the Cloud. \\ The CloudIndex approach.}
 
-\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{2}  \and Patricia Ordoñez de Pablos\inst{3}}
+\author{Jose Mar\'{i}a \'{A}lvarez\inst{1} \and Jos\'{e} Emilio Labra\inst{2}  \and Patricia Ordoñez de Pablos\inst{3} \and Iraklis Parakaskis\inst{1}}
 
 
 \authorrunning{Jose Mar\'{i}a Alvarez \and  Jos\'{e} Emilio Labra \and Patricia Ordoñez de Pablos}
 
 
 \institute{South East European Research Center, \\ 54622, Thessaloniki, Greece\\
-  \email{{jmalvarez@seerc.org}}\\
+  \email{{jmalvarez,iparaskakis@seerc.org}}\\
+  \email{{iparaskakis@seerc.org}}\\
 \and WESO Research Group, Department of Computer Science, University of Oviedo, \\ 33007, Oviedo, Spain.\\
   \email{{labra@uniovi.es.es}}\\  
   \and WESO Research Group, Department of Business Administration, University of Oviedo, \\ 33007, Oviedo, Spain.\\
-  \email{{patriop@uniovi.es.es}}\\  
-}
+  \email{{patriop@uniovi.es.es}}
+  }
 
 
 \date{}
@@ -60,28 +61,31 @@
 \renewcommand{\labelitemi}{$\bullet$}
 
 \begin{abstract}
-Cloud Computing and Service Oriented Architectures have seen a dramatic increase of the amount of applications, services, 
+Service-oriented computing and cloud computing have seen a dramatic increase of the amount of applications, 
 management platforms, data, etc. gaining momentum in Information and Communication Technology and 
-more specifically in the deployment of the next Internet of Services. Furthermore one of the next big things 
-in a service environment lies in the creation of brokerage services that can automatically 
-detect and make decisions according to an user profile, service level agreements (SLAs), etc. In this sense Quality of Service (QoS) 
+more specifically in the deployment of the next Internet of Services. In this context, one of the next big things 
+lies in the creation of brokerage services that can automatically detect and make decisions according to 
+an user profile, service level agreements (SLAs), etc. In this sense Quality of Service (QoS) 
 seeks for providing an intelligent environment of self-management components based on domain 
 knowledge in which both functional and non-functional properties of cloud components can be optimized 
-in terms of cost, efficiency or reliability easing the transition to a smart cloud environment. 
-Thus the creation of a QoS-based brokerage service can be seen as a special kind of policy-making strategy 
-that must compile several key performance indicators (KPIs) to summarize data and information and obtain an objective quantitative measure. 
-Nevertheless the quantitative analysis of several KPIs is becoming a challenging task due to a tangled and heterogeneous environment of data, providers, etc. 
-In this sense existing tools and techniques based on traditional processes are preventing a proper use of the new dynamic and data environment avoiding 
+in terms of cost, efficiency or reliability easing the transition to a smart cloud environment. Thus the creation of 
+a QoS-based brokerage service can be seen as a special kind of policy-making strategy 
+that must compile several key performance indicators (KPIs) to summarize data and information and obtain an objective 
+quantitative measure. Nevertheless the quantitative analysis of several KPIs is becoming a challenging task due to 
+a tangled and heterogeneous environment of data, providers, etc. Existing tools and techniques based on 
+traditional processes are preventing a proper use of the new dynamic and data environment avoiding 
 more timely, adaptable and flexible (on-demand) quantitative index creation and, as a consequence, more accurate decisions. 
 On the other hand, semantic-based technologies emerge to provide the adequate building blocks 
-to represent domain-knowledge and process data in a flexible fashion using a common and shared data model. That is why the present paper introduces 
-a Resource Description Framework (RDF) vocabulary to semantically represent and compute quantitative indexes over a real-time architecture with the aim 
-of providing a context-aware system to manage QoS for brokerage services. A first qualitative evaluation and discussion of this approach 
-are also presented to finally outline some conclusions and future work.
+to represent domain-knowledge and process data in a flexible fashion using a common and shared data model. That is why 
+the present paper introduces a Resource Description Framework (RDF) vocabulary to semantically represent and compute 
+quantitative indexes over a real-time architecture with the aim of providing a context-aware 
+system to manage QoS indicators. An evaluation applying the Analytical Hierarchy Process (AHP) method to compare 
+the different approaches for QoS management according to an user profile is presented. Finally some discussion, conclusions 
+and future work are also outlined.
 \end{abstract}
 % 
-% \section{Introduction}
-% \input{sections/sect-intro}
+\section{Introduction}
+%\input{sections/sect-intro}
 % \section{Background}
 % % \input{sections/sect-background}
 % \section{Related Work}
@@ -103,7 +107,7 @@ of the Workpackage 4 and more specifically under the project ``Quality Managemen
 also supported by the ROCAS project (cod. TIN2011-27871), a research project partially funded by the Spanish Ministry of Science and Innovation.
 
 \clearpage
-\nocite{*}
+%\nocite{*}
 \bibliographystyle{plain}
 % %\bibliographystyle{unsrt}
 % % %\bibliographystyle{acm}

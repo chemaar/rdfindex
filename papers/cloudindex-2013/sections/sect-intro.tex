@@ -1,13 +1,59 @@
-Public and private bodies are continuously seeking for new analytical tools and methods to assess, rank and compare their performance based 
-on distinct indicators and dimensions with the objective of making some decision or developing a new policy. 
+Cloud Computing~\cite{mell2011nist} systems and Service Oriented Architectures (SOA) have 
+reached a level of complexity~\cite{Huebscher:2008:SAC:1380584.1380585,Conejero:2012:MSQ:2357487.2357591} that implies the necessity of new methods 
+and algorithms to automatically deal with the vast amount of data, variables, 
+parameters, etc. that appears in this new realm for the advanced management of 
+applications, services or resources. 
+
+In this new environment QoS is playing a relatively minor role but its 
+importance, in a wide range of applications scenarios, is likely become more 
+crucial than ever before. In recent years and due to the deployment of web 
+services a considerable research effort in QoS has been made. However existing 
+QoS mechanisms are actually available in a few large scale commercial 
+environments and with a limited extent. The main problem lies in the complexity 
+of designing QoS models that enables an adequate management of a distributed 
+architecture making decisions about resource provisioning, getting feedback for 
+the final users, etc. with the objective of avoiding existing ``brute-force''
+solutions and overprovisioning. In the widely-accepted definition~\cite{mell2011nist} of 
+the National Institute of Standards and Technology (NIST) QoS would be aligned to the concept 
+of ``Measured Service'' and more specifically to define both characteristics applicable to a service and operations 
+to be delivered such as predictive analysis. The aforementioned points are very 
+challenging and should be addressed in order to ease an intelligent, 
+flexible and self-managing system of cloud-based applications and platforms.
+
+Furthermore a proper management of a cloud system taking into account QoS 
+features can save costs, keep high-performance, reserve resources on-demand and 
+offer a user-friendly experience to both IT managers and final users. 
+Traditionally, QoS has been handled using a combination of network resource 
+provisioning with techniques such as admission control or active queue 
+management. Nowadays these old-fashioned techniques can be applied to a static 
+environment but in the near future, the challenge of providing higher elasticity and 
+dynamic adaptation cannot be accomplished with these methods. 
+
+The features and requirements of these new cloud systems with regards 
+to QoS~\cite{Pedersen:2011:AMQ:2114495.2115542} match the advantages of software component and 
+knowledge-based architectures. In fact, Autonomic Computing support for the next generation of cloud systems 
+needs to be~\cite{Conejero:2012:MSQ:2357487.2357591,Pedersen:2011:AMQ:2114495.2115542}: 
+1) Self-x management, 2) agile, flexible and reliable, 4) deployable over a multiple cloud platforms, 5) handle complexity, 6) enable 
+collaboration and coordination and 7) cost-effective and greener 
+(energy-efficient). Under this context, semantic technologies have emerged as an 
+option to design and develop intelligent software components and agents to 
+perform certain tasks on the Web and fulfill user's requirements (in this case 
+applications). Therefore, Semantics enables machines to automatically process 
+and enrich data from different sources and has the potential to deeply influence 
+the further development of the Internet Economy as cloud systems also does. 
+In the Semantic Web area, there is also a growing commitment to process large data streams applying 
+new stream reasoning~\cite{Bolles:2008:SSE:1789394.1789438,Barbieri:2010:EEC:1739041.1739095} 
+or complex event processing~\cite{Anicic:2011:EUL:1963405.1963495} (CEP) techniques. 
+
+On the other hand, public and private bodies are continuously seeking for new analytical tools 
+and methods to assess, rank and compare their performance based on distinct indicators and dimensions 
+with the objective of making some decision or developing a new policy. 
 In this context the creation and use of quantitative indexes is a widely accepted practice that has been applied to various 
 domains such as Bibliometrics and academic performance and quality (the Impact Factor by Thomson-Reuters, the H-index or the Shanghai and Webometrics rankings), 
-the Web impact (the Webindex by the Webfoundation) or Cloud Computing (the Service Measurement Index by the CSMIC consortium, the Global Cloud Index by Cisco, 
-the CSC index, the VMWare Cloud Index, etc.) or Smart Cities (The European Smart Cities ranking) to name a few (apart from the traditional ones such as the Gross domestic product). 
+the Web impact (the Webindex by the Webfoundation) or Smart Cities (The European Smart Cities ranking) to name a few. 
 Therefore policymakers as well as individuals are continuously evaluating quantitative measures to tackle or improve 
 existing problems in different areas and support their decisions. Nevertheless the sheer mass of data now available in the web is 
-raising a new dynamic and challenging environment in which traditional tools are facing major 
-problems to deal with data-sources diversity, structural issues or complex processes of estimation. According to some efforts 
+raising a new dynamic and challenging environment in which traditional tools are facing major problems to deal with data-sources diversity, structural issues or complex processes of estimation. According to some efforts 
 such as the ``Policy-making $2.0$'' within the Cross-Over project~\footnote{\url{http://www.crossover-project.eu/}} that \textit{refers to a blend of emerging and fast developing technologies 
 that enable better, more timely and more participated decision-making}, new paradigms and tools are required to take advantage of 
 the existing environment (open data and big data) to design and estimate actions in this dynamic context according to requirements of 
@@ -59,6 +105,7 @@ That is why the present paper introduces: 1) a high-level model on top of the RD
 (the cube model) of the Statistical Data and Metadata Exchange Vocabulary~\cite{sdmx} (SDMX), to represent the structure and computation of quantitative indexes and 
 2) a Java-SPARQL based processor to exploit the meta-information and compute the new index values.
 
+\subsection{Motivating Scenario}
 Finally, as a motivating and on-going example, see Table~\ref{tab:example-wb}, a policy-maker wants to re-use the World Bank data to model and compute a new index, ``The Naive World Bank Index''. This 
 index uses the topics ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$) with the aim of comparing the status and health evolution in several countries to decide whether new 
 investments are performed. From these components two indicators have been respectively selected by experts: ``Life Expectancy'' ($in_1$) and ``Health expenditure, total (\%) of GDP'' ($in_2$). 
