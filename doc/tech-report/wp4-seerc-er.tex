@@ -1,0 +1,172 @@
+% KWEB Del 1.1 (WP1.1) Report
+%
+
+\documentclass[a4paper,twoside,12pt]{report}
+\usepackage{times}
+\usepackage{graphics}
+%\usepackage{graphicx}
+%\usepackage{epsfig}
+%\usepackage[]{graphicx}
+\usepackage{deliverable}
+%\usepackage{pnamed}
+
+%cabeceras
+
+\usepackage[T1]{fontenc}
+% españolización
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xspace}
+% mejoras visuales
+\usepackage{enumerate}
+\usepackage{fancyhdr}  % para configurar los encabezados
+\usepackage{fancybox}  % para hacer cajitas
+\usepackage[normal,oneline,sf,bf]{caption2}
+\usepackage{titlesec}  % para configurar los títulos de sección
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{epigraph}
+
+% citas, referencias e índices
+\usepackage{cite}
+%\usepackage{citesort}   % da errores al compilar
+\usepackage{makeidx}
+
+% incrustaciones de código fuente
+%\usepackage[norules,nolineno]{lgrind}
+\usepackage{verbatim}
+\usepackage{listings}
+%\usepackage{noweb,a4wide}
+
+
+%\usepackage{textcomp}
+\usepackage[right]{eurosym}
+
+% columnas
+\usepackage{multicol}
+
+% tablas
+\usepackage{longtable}
+
+%\input{commands}
+
+% \addto\captionsspanish{
+%         \def\listtablename{\'Indice de tablas}%
+%         \def\tablename{Tabla}} 
+
+
+
+\lstset{%
+        language=Java,
+	basicstyle=\footnotesize\sffamily,
+	keywordstyle=\bfseries, %\color{darkred}
+ 	stringstyle=\itshape, %\color{violet}
+ 	commentstyle=\itshape, %\color{blue}
+ 	showspaces=false,
+ 	showtabs=false,
+ 	showstringspaces=false,
+ 	frame=trBL,
+        frameround=tttt,
+        %backgroundcolor=\color{lightyellow},
+ 	extendedchars=true,
+ 	numbers=none,
+        aboveskip=0.5cm,
+        belowskip=0.5cm,
+        xleftmargin=1cm,
+        xrightmargin=1cm,
+	breaklines=true,
+        morekeywords={PREFIX,java,rdf,rdfs,url,dcterms,foaf,skos,gr,skosxl}
+}
+\definecolor{darkred}{rgb}{0.5, 0, 0}
+\definecolor{violet}{rgb}{1, 0, 1}
+\definecolor{lightyellow}{rgb}{1,1,0.8}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{examples}[theorem]{Ejemplo}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Ejemplo}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{note}[theorem]{Nota}
+
+
+
+\begin{document}
+
+\title{Quality Management in Service-based Systems and Cloud Applications}
+
+\author{
+{Jose María Alvarez-SEERC\\
+jmalvarez@seerc.org \\
+josem.alvarez@josemalvarez.es}}
+
+\revised{September 30, 2013}
+
+%\issuer{Vrije Universiteit Amsterdam}
+
+\identifier{WP4-SEERC-ER-TR}
+
+\version{v1.0}
+
+\state{Final}
+
+\project{WP4‐Quality Management and Business Model Innovation}
+
+\distribution{protected}
+
+\synopsis{\strut\\
+The FP7 Marie Curie Initial Training Network ``RELATE''  \\
+Technical Report.
+
+Keywords: cloud computing, services quality, semantics
+}
+
+\coverpages
+
+\setcounter{page}{0}
+
+\pagenumbering{roman}
+
+\include{historial}
+\include{resumen}
+
+\setlength{\parskip}{0.0cm}
+\tableofcontents
+\listoffigures
+\listoftables
+\setlength{\parskip}{1.0ex}
+
+\newpage
+\pagenumbering{arabic}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagestyle{kweb}
+
+%\input{chapters/intro}
+%\input{chapters/consideraciones-generales}
+% \input{chapters/personas}
+%\input{localidades}
+%\input{documentos}
+%\input{organizaciones}
+%\input{roles}
+%\input{eventos}
+%\input{proyectos-ley}
+
+\bibliographystyle{unsrt}
+% \bibliography{AEN01-00}
+
+\end{document}
