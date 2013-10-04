@@ -1,0 +1,449 @@
+In this section a literature review of main datastream processing techniques and tools is presented. After that 
+an empirical evaluation of some selected features, see Table~\ref{features-techniques}, is also outlined to finally present 
+a summary, see Table~\ref{table:tools-1} and Table~\ref{table:tools-ii}, of the most 
+relevant approaches for semantic-based QoS management.
+
+The increasing number of applications and services on the cloud is creating an 
+across computer platform to support new methods in different disciplines such as 
+life sciences or engineering disciplines. The stream model for data intensive 
+monitoring and analysis can potentially benefit these applications but the 
+processing of data in real time must ensure that data is gathered continuously 
+(24/7), large volumes of data are properly addressed taking into account that 
+data sources are distributed and is often not feasible to store all data for 
+processing at a later time, thereby, requiring real-time analysis. 
+
+On the other hand, a sensor can be defined as a data source which can produces a 
+sequence of data items over time~\cite{deri2010}. This definition leads us to a new 
+environment in which any device can continuously produce data and we can take 
+advantage of this information to deliver advanced services on monitoring 
+distinct domains such as traffic, logistics or supply chain management, etc. 
+Gartner predicts that ``By 2015, wirelessly networked sensors in everything we 
+own will form a new Web. But it will only be of value if the \textit{terabyte torrent} 
+of data it generates can be collected, analyzed and interpreted'' and this 
+implies that new techniques and models should be developed to deal with this 
+vast amount of data making the integration and interoperability among 
+applications possible.
+
+In the particular context of Cloud Computing each resource, application or 
+service can be seen as a data sensor producing data and information about their 
+current status that can be processed in an automatic way with the objective of 
+enabling self-management cloud systems and applications. Nevertheless some 
+problems arise to manage a stream of data: storage, semantics, inference and 
+querying, among others. As authors present in~\cite{deri2010} traditional data stream 
+management systems (DSMS) assumes stream data has a bigger impact in query 
+performance than static metadata. In the case of Linked Data this situation is 
+more dramatic due to the existence of different vocabularies and the possibility 
+of having new RDF triples in execution time that are not modeled by static 
+metadata. Existing triple stores do not manage this situation and assume RDF 
+data is static. In a cloud system environment this assumption is no longer hold 
+and a method to query and make decisions in real-time processing stream data 
+must be provided in order to deliver a reactive knowledge-based system. More 
+specifically in the QoS management context, the need of dynamic adaptation of 
+resources is dramatically growing up due to the necessity of adjusting costs and 
+optimizing the reservation of cloud resources. Thus the QoS management can be 
+seen as a motivating scenario to apply stream reasoning over data coming from 
+cloud resources.
+
+First efforts to address the data stream challenges were made in the IEEE 1451 
+definition, the Radiation Detection Standards (ANSI N42), the OGC Sensor Web 
+Enablement (SWE)~\cite{sensorweb-wb} or the Extended Environments Markup Language~\cite{eeml} (EEML). 
+They followed a domain-specific approach that cannot be easily applied in other 
+contexts. A standard with a broader application was the Sensor Web Enablement 
+standard which was implemented by the 52º North project~\cite{52project}, the NASA/JPL~\cite{nasajpl}
+Sensor Webs Project~\cite{Sheth:2008:SSW:1444383.1444435} and the European Space Agency among others. 
+Efforts with regards to Linked Data such as ``SensorBase'' enables the publication 
+of sensor data via HTTP POST as well as Pachube that offers a RESTfull interface 
+for querying stream real-time sensor data in different formats such as JSON or EEML. 
+Nevertheless the main drawback of these approaches is the lack of semantic descriptions to describe data streams.
+
+
+In~\cite{Sheth:2008:SSW:1444383.1444435} authors proposed the use of RDFa to annotate ontological concepts and 
+properties to SWE by using XLink. Thus the sensor information can support 
+semantic functionalities and new services can be implemented on the top of RDF. 
+Furthermore Whitehouse et al. launched the SemanticStreams project~\cite{Whitehouse:2006:SSF:2180141.2180148} based on 
+Prolog rules to allow user queries on the semantics of sensor and in~\cite{Bouillet:2007:SMU:1769087.1769099} 
+authors propose to use OWL to represent data stream and provide a semantic 
+context in which the composition of applications could be easily done. However 
+they assume~\cite{deri2010} that semantic descriptions are already available and have 
+enough quality. Finally the W3C Semantic Sensor Network Incubator Group has 
+proposed the SSN Ontology~\cite{Compton:2012:OPS:2400766.2401456} to answer the need of a domain-independent and 
+end-to-end model for sensing application by merging sensor focused (e.g. SensorML), observation-focused (e.g. observation and measurement) and system 
+focused views. It also covers subdomains which are sensor-specific such as the 
+sensing principles and capabilities and can be used to define how a sensor will 
+perform in a particular context. Nevertheless further steps imply their real 
+adoption in a Linked Sensor Data context to bridge the new era of Internet of 
+Things and Internet of Services fostering their potential adoption in the OGC 
+community.
+
+Following the review of approaches to mix semantic technologies and stream data processing is 
+presented with special focus on storage, stream processing, analytics and some applications:
+\begin{itemize}
+ \item In the case of storage, RDF triple stores such as Sesame, Apache Jena 
+(Joseki), RISC-3X, YARS2, Oracle Semantic, OWLim, OpenLink Virtuoso have gained 
+importance in recent times due to the deployment of the Linked Open Data initiative. Most of them are based on a SQL-backend and offer distinct 
+services such as basic reasoning processes and a query service via a SPARQL 
+endpoint. The main focus of these repositories is the scalability in terms of 
+the number of triples they can manage. There is mainly adequate when data do not 
+change frequently and a better performance can be reached applying well-known 
+techniques of indexing. Moreover the current initiative of NoSQL databases 
+brings the opportunity of using new representation and retrieving models (key-value, document oriented, column-family or graph) to deal with the vast amount of data in contexts such as Social Media 
+or in our case of study data coming from dozen of applications.
+
+Furthermore Apache Hadoop~\cite{perera2013mapreduce,owens2013mapreduce} and projects built on top of this Map/Reduce 
+framework~\cite{Dean:2008:MSD:1327452.1327492} such as Apache Pig, Hive, Mahout, Cassandra or Zookeeper enable a 
+distributed processing environment of large data sets across clusters of 
+computers using simple programming models. The storage and processing models of 
+large datasets is not a mere question and it must be carefully planned to avoid 
+scalability problems. In this context there are also some projects providing 
+data flows such as Storm~\cite{BigDataManing} (a distributed and fault-tolerant teal-time 
+computation environment), most of these efforts are boosted by the main social 
+media sites such as Facebook, Twitter or Linkedin. 
+
+\item There is a growing set of both commercial and open tools that 
+claims to provide large scale and distributed data stream processing, inspired in Apache Drill~\cite{hausenblas2013apache}. 
+All of them use their own internal data models, cluster processing, a formal query language and different kinds of 
+predictive analytics. In this context Impala~\cite{impala-project}, SPARK~\cite{zaharia2012discretized}, Sparrow~\cite{ousterhout2013sparrow},
+Shark~\cite{DBLP:conf/sigmod/XinRZFSS13}, S4~\cite{neumeyer2010s4}, Druid~\cite{yangdruid} or MapR~\cite{mapr-project} technologies to name a 
+few deliver such predictive services on big data through off-line and real-time queries. Usually they 
+also take advantage of: 1) programming languages with functional and parallel capabilities such as Scala, Clojure, Erlang or Python; 
+2) NoSQL stores and 3) MapReduce-based frameworks such as Apache Hadoop. Finally an advanced dashboard to manage jobs is 
+commonly provided as a graphical interface for controlling the distributed execution and the results of predictive 
+analysis functions.
+
+
+\item Data stream management systems (DSMS) are other possibility to manage data streams GraphgCQ, Amazon/Cougar, Aurora, Gigascope, 
+Hancock, Niagara, OpenCQ, Stream, Stream Mill, Tapestry, Tribeca, Streambase, Coral8, Apama or Truviso among others were implemented to overcome the 
+limitation of traditional DBMS when continuous data updates appear. They are based on different data models and their implicit semantics is not based on static 
+restrictions such as the ACID principles. The main objective lies in getting a better performance when huge amounts of data should be managed. According to~\cite{deri2010} and 
+taking into account there is no benchmark available about their support of Linked Data streams these management systems are not suitable for processing RDF streams. 
+
+
+\item StreamingSPARQL~\cite{Bolles:2008:SSE:1789394.1789438} and 
+C-SPARQL~\cite{Barbieri:2010:EEC:1739041.1739095} purpose extensions to the 
+existing SPARQL language to register queries in a time frame or sliding windows. 
+StreamSPARQL presents a rather simple query evaluation model without taking into 
+account performance issues whilst C-SPARQL enables an execution framework built 
+of top of existing stream data management and triple storage systems. In that 
+sense C-SPARQL is supposed to be more stable than StreamSPARQL and it also 
+provides a service for splitting the continuous queries into two groups: static 
+and dynamic which are merged through orchestration service binding the required 
+facts when new RDF triples arise. A complete summary and tutorial on semantic 
+stream reasoning is provided in~\cite{stream-reasoning-linked-data}. Authors also outline all the features that 
+stream reasoning should address such as the use of continuous semantics instead 
+of ``static'' semantics. In~\cite{deri2010} authors present the Continuous Query Evaluation 
+over Linked Streams (CQELS) project to unify data coming from both the Linked 
+Open Data cloud and sensor stream data. They focus on continuous queries that 
+is, queries that are registered in the system, and executed every time new data 
+matches their criteria considering the queries themselves as input parameters. 
+Finally a complete study of stream processing in the cloud 
+is also depicted in~\cite{Backman:2012:MPS:2169090.2169091}.
+
+\item On the other hand, the CEP community is concerned with timely detection of 
+compound events in streams of simple events. Nevertheless event processing 
+cannot combine streams with background knowledge and cannot perform reasoning 
+tasks. Although the use of event processing engines is widely accepted and 
+technology such as Drools Fusion is well-known and used in production 
+environments the use of semantic web technologies can perfectly manage 
+background knowledge, mix different data streams and execute reasoning 
+processes. That is why the conjunction of event processing for dealing with a 
+vast amount of data and semantics to manage several streams and background 
+knowledge can improve the exploitation of diverse data streams. In this context 
+EP-SPARQL~\cite{Anicic:2011:EUL:1963405.1963495} is an extension of the existing SPARQL language to support complex 
+events and stream reasoning. The main challenge of this work is to take 
+advantage of real-time data, and recognizes important situations of interest in 
+a timely fashion. Authors conclude that EP-SPARQL specifies complex events by 
+temporarily situating real-time streaming data, and uses background ontologies 
+to enable stream reasoning.
+
+\item The problem of querying large datasets and performing semantic reasoning 
+is being addressed in WebPIE~\cite{DBLP:journals/ws/UrbaniKMHB12} and QueryPIE~\cite{Urbani:2011:QBR:2063016.2063063} which are prototypes 
+implemented in the context of the LarKC project. These projects show how to use 
+a Map/Reduce framework for building an inference engine. WebPIE is focused on 
+the calculation of the transitive closure of OWL semantics, more specifically 
+RDFS and OWL-Horst. This inference engine proposes a scalable technique to 
+parallelize OWL Horst forward inference over $100$ billion of RDF triples. The 
+main drawback of this approach lies in the necessity of executing the whole 
+reasoning process when new facts arise that is why it cannot be considered 
+adequate for stream reasoning. On the other hand and with the objective of 
+processing dynamic data QueryPIE offers a backward inference engine to execute 
+queries over large datasets performing a reasoning process before retrieving 
+results. This approach is similar to the traditional backtracking technique used 
+in Prolog engines. In this context of reasoning over large datasets, in~\cite{DBLP:journals/ijswis/HoganHP09,Umbrich:2012:IRL:2415113.2415129,Umbrich:2012:FUW:2413941.2413963} 
+a system to compute the closure of RDF graphs is also presented but it 
+only supports a fragment of OWL Horst to enable efficient materialization and 
+(live) query processing on the Linked Data realm. 
+
+\item As we have seen in the previous works the implementation of SPARQL 
+extensions to be executed in a distributed environment is currently a good 
+approach to deal with a mass of data and provide a scalable environment for the 
+Semantic Web. In this sense, authors in~\cite{DBLP:journals/pvldb/HuangAR11} make an implementation of a SPARQL 
+distributed engine to split data and queries into different nodes to get 
+local-optimizations. In~\cite{Schatzle:2011:PMS:1999299.1999303} authors propose a translation of SPARQL queries 
+into Pig Latin for the scalable processing of complex queries on very large RDF 
+datasets. They introduce PigSPARQL, a system which processes the SPARQL queries 
+as Map/Reduce jobs, and make an evaluation using the benchmark SP2Bench (a 
+specific SPARQL performance benchmark) getting good results. Following a similar 
+approach HadoopSPARQL~\cite{liuhadoopsparql} is a tool that allows user to submit multiple queries 
+at the same time. These queries are handled by an algorithm that is in charge of 
+creating and distributing sub queries using Map/Reduce jobs. In~\cite{FarhanHusain:2009:SRL:1695659.1695734} authors 
+present a work to store RDF in HDFS (Hadoop File System) and an algorithm to ask 
+SPARQL queries. H2RDF~\cite{Papailiou:2012:HAQ:2187980.2188058}, Jena-HBase~\cite{DBLP:conf/semweb/KhadilkarKTC12} and the proposal in~\cite{maindonald2007data} 
+are similar works trying to manage large RDF datasets and execute distributed SPARQL queries. 
+
+\item The use of the R statistics package is widely accepted in the Big 
+Data community to make decisions, predictions or analysis and perform statistical methods on large datasets. In 
+the context of SPARQL, there is a specific package, \texttt{r-sparql}, to work with R that enables the 
+connection to existing RDF endpoints from the R processor. The analysis and exploitation of large datasets is not easy to solve and data 
+mining frameworks as Weka or Apache Mahout offer scalable methods and algorithms 
+to detect patterns, etc. in data. The main drawback of these tools lies in the 
+lack of integration with semantic technologies. Another problem arises when a 
+large RDF dataset must be processed, mainly due to the URIs. To tackle this 
+problem there are compacted formats such RDF Binary~\cite{DBLP:journals/ws/FernandezMGPA13} for publishing and exchanging RDF triples.
+
+
+\item Regarding streaming applications, in~\cite{DBLP:conf/cloudcom/VijayakumarZA10} two applications are described 
+and used as benchmarks in the data mining domain. The first one, CluStream, is a 
+cluster evolving data streams~\cite{Aggarwal:2003:FCE:1315451.1315460} that groups similar objects or data points 
+from a given set into clusters. They address the problem of clustering data when 
+data is arriving from continuous streams and changing over the time. Firstly, 
+mini-clusters are created to compute statistical information. After that a 
+modified version of the K-means algorithm is applied to create the final output 
+of clusters. The second algorithm studies the frequency of occurring items in a 
+distributed data stream, Approx-Freq-Counts~\cite{Schneider:2009:ESD:1586640.1587424}. Two parameters are defined: 
+support and error, each node observes the frequencies of item sets in each 
+stream and periodically sends this information to a parent node. These two 
+approaches are considered to solve the problem of resource provisioning for data 
+stream applications in virtualized or cloud environments finding dynamic 
+patterns when data arrive.  The resource provisioning algorithm correctly 
+converges to the optimal CPU allocation based on the data arrival rate and 
+computational needs. The algorithm identifies over-flow and under-flow 
+conditions and converges to the same level, irrespective of the initial 
+allocation. The main advantage of this approach is that the system can 
+automatically tune itself based on resource needs. 
+
+\item Finally in~\cite{Ishii:2011:ESC:2055437.2055625} authors present the ElasticStream system that dynamically 
+allocates computational resources on the cloud in an elastic manner for a data 
+stream processing application. To minimize the charges for using the Cloud 
+environment while satisfying the SLA, they formulate a linear programming 
+problem to optimize the costs as a trade-off between the application’s latency 
+and charges. A system is also implemented to assign or remove computational 
+resources dynamically on the top of the data stream middleware. Authors also 
+conclude that their approach could save up to 80\% of the costs while maintaining 
+the application’s latency in comparison to a na\"{i}ve approach. Nevertheless they 
+remain as future work the prediction of data rate and the inclusion of new 
+features in the platform to a better stream data management. This approach does 
+not use any semantic feature to address the needs of managing a cloud 
+environment and it is just based on an optimization algorithm to select 
+adequately the allocation of resources in the cloud.
+
+\end{itemize}
+
+\subsection{Summary and Evaluation}
+This section presents a summary of the most relevant aforementioned techniques with the aim
+of establishing a fact-sheet and a tool for making decisions when a technique 
+has to be selected for some use. We have created a set of features, see Table~\ref{features-techniques}, 
+to list those references that present some evidence for validating its application 
+and contribution to datastream and big data processing. This list is not exclusive 
+but remarks main characteristics to take into account when a monitoring tool/technique 
+is required. Each feature is evaluated following the next approaches:
+\begin{itemize}
+ \item Open ended questions using a word/sentence associated to the feature, for instance ``MapReduce'' or ``SQL''.
+ \item Multiple choice using the Likert scale~\cite{albaum1997likert} value: 1-Strongly disagree, 2-Disagree, 3-Neither agree nor disagree, 4-Agree and 5-Strongly agree.
+ \item Closed ended questions with a Yes (Y)/No (N) value.
+ \item Finally the symbol ``-'' is used to represent those unknown/missing/not applicable features.
+\end{itemize}
+
+
+% \begin{table}[!ht]
+% \renewcommand{\arraystretch}{1.3}
+% \tiny
+% \begin{center}
+% \begin{tabular}[c]{|p{1cm}|p{2.5cm}|p{5cm}|p{3cm}|} 
+% \hline
+%   \textbf{Feature}& \textbf{Label} &  \textbf{Definition}  &  \textbf{Type} \\\hline
+%   $f_1$&Data model & This feature indicates how data is represented & Word/sentence associated \\ \hline
+%   $f_2$&Programming Language & The programming language used to implement this tool/technique & Word/sentence associated \\ \hline
+%   $f_3$&Reasoning & The tool enables some kind of reasoning process & Yes/No and Word/sentence associated  \\ \hline
+%   $f_4$&Input Format & The input formats that the technique can process & Word/sentence associated  \\ \hline
+%   $f_5$&Output Format & The output format that the technique can generate & Word/sentence associated  \\ \hline
+%   $f_6$&Data integration & The tool enables the consumption of different datasources &  Yes/No \\ \hline
+%   $f_7$&Architecture & The type of architecture for data processing & Word/sentence associated\\ \hline
+%   $f_8$&Programming Model & The type of programming model for data processing  & Word/sentence associated\\ \hline
+%   $f_9$&API & The tool provides and API to manage all processes & Yes/No  \\ \hline
+%   $f_{10}$&Accesibility & The tool can be easily used in different context & Likert scale  \\ \hline
+%   $f_{11}$&Adaptability & The tool can be easily configured to meet new requiremens & Likert scale  \\ \hline
+%   $f_{12}$&Auditability & The tool provides a mechanism to know how it is working & Likert scale  \\ \hline
+%   $f_{13}$&Elasticity & The tool can be adjusted its resource consumption to meet demand & Likert scale  \\ \hline
+%   $f_{14}$&Extensibility & The tool can be easily extended & Likert scale  \\ \hline
+%   $f_{15}$&Flexibility & The tool can be configured on-demand adding/removing features & Likert scale  \\ \hline  
+%   $f_{16}$&Interoperability & The tool can be integrated with third-parties  & Likert scale  \\ \hline
+%   $f_{17}$&Portability & The tool can be easily move to different architectures & Likert scale  \\ \hline
+%   $f_{18}$&Usability & The tool can be easily configured  & Likert scale  \\ \hline
+%   $f_{19}$&Security & The tool can be used under a protocol for secure communication & Likert scale  \\ \hline
+%   $f_{20}$&Standards & The tool is based in the use of standars (compliance) & Likert scale\ \\ \hline
+%   $f_{21}$&Off-line processing & The technique enables off-line/batch processing & Yes/No  \\ \hline
+%   $f_{22}$&Real-time processing & The technique enables real-time processing & Yes/No  \\ \hline
+%   $f_{23}$&Storage & The database to store data &  Word/sentence associated \\ \hline
+%   $f_{24}$&Query & The formal query language to accesss to results & Word/sentence associated\\ \hline
+%   $f_{25}$&Dashboard & The technique provides a graphical tool to manage processes, export data, etc. & Likert scale\ \\ \hline
+%   $f_{26}$&Licensing and pricing & The type of license & Word/sentence associated \\ \hline
+%   $f_{27}$&Maturity & The level of maturity or development of the tool & Likert scale\\ \hline
+%   $f_{28}$&Presence & The level of presence in existing products & Likert scale\\ \hline
+%   $f_{29}$&Update and evolution & The tool is frequently updated & Likert scale\\ \hline
+%   $f_{30}$&Certification & The tool provides courses and other methods to learn its use & Likert scale\\ \hline
+%   $f_{31}$&Financial support & The tool is supported for investors/venture capital, etc. & Likert scale\\ \hline
+% \hline
+% \end{tabular}
+% \caption{Features for selecting a technique of datastream processing.}\label{features-techniques}
+%   \end{center}
+% \end{table} 
+
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}[c]{|p{2.5cm}|p{5cm}|p{3cm}|} 
+\hline
+  \textbf{Feature} &  \textbf{Definition}  &  \textbf{Type} \\\hline
+  Data model & This feature indicates how data is represented & Word/sentence associated \\ \hline
+  Programming Language & The programming language used to implement this tool/technique & Word/sentence associated \\ \hline
+  Reasoning & The tool enables some kind of reasoning process & Yes/No and Word/sentence associated  \\ \hline
+  Formats & The input formats that the technique can process & Word/sentence associated  \\ \hline
+  Data integration & The tool enables the consumption of different datasources &  Yes/No \\ \hline
+  Architecture & The type of architecture for data processing & Word/sentence associated\\ \hline
+  Programming Model & The type of programming model for data processing  & Word/sentence associated\\ \hline
+  API & The tool provides and API to manage all processes & Yes/No  \\ \hline
+  Accessibility & The tool can be easily used in different context & Likert scale  \\ \hline
+  Adaptability & The tool can be easily configured to meet new requirements & Likert scale  \\ \hline
+  Auditability & The tool provides a mechanism to know how it is working & Likert scale  \\ \hline
+  Elasticity & The tool can be adjusted its resource consumption to meet demand & Likert scale  \\ \hline
+  Extensibility & The tool can be easily extended & Likert scale  \\ \hline
+  Flexibility & The tool can be configured on-demand adding/removing features & Likert scale  \\ \hline  
+  Interoperability & The tool can be integrated with third-parties  & Likert scale  \\ \hline
+  Portability & The tool can be easily move to different architectures & Likert scale  \\ \hline
+  Usability & The tool can be easily configured  & Likert scale  \\ \hline
+  Security & The tool can be used under a protocol for secure communication & Likert scale  \\ \hline
+  Standards & The tool is based in the use of standards (compliance) & Likert scale\ \\ \hline
+  Off-line processing & The technique enables off-line/batch processing & Yes/No  \\ \hline
+  Real-time processing & The technique enables real-time processing & Yes/No  \\ \hline
+  Storage & The database to store data &  Word/sentence associated \\ \hline
+  Query & The formal query language to access to results & Yes/No\\ \hline
+  Dashboard & The technique provides a graphical tool to manage processes, export data, etc. & Likert scale\ \\ \hline
+  Licensing and pricing & The type of license & Word/sentence associated \\ \hline
+  Maturity & The tool has reached a good level of maturity or development & Likert scale\\ \hline
+  Presence & The tool has reached a good level of presence in existing products & Likert scale\\ \hline
+  Update and evolution & The tool is frequently updated & Likert scale\\ \hline
+  Certification & The tool provides courses and other methods to learn its use & Likert scale\\ \hline
+  Financial support & The tool is supported for investors/venture capital, etc. & Likert scale\\ \hline
+\hline
+\end{tabular}
+\caption{Features for selecting a technique of datastream processing.}\label{features-techniques}
+  \end{center}
+\end{table} 
+
+
+\begin{sidewaystable}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+%\begin{tabular}[c]{|p{0.5cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.8cm}|p{0.6cm}|p{0.6cm}|p{0.7cm}|p{0.5cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.8cm}|p{0.8cm}|}
+\begin{tabular}[c]{|p{1.7cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|} 
+\hline
+ % \textbf{Tool/Feature} & \textbf{Data model} & \textbf{Programming Language} & \textbf{Reasoning} & \textbf{Input Format} & \textbf{Output Format} & \textbf{Data integration} & \textbf{Architecture} & \textbf{Programming Model} & \textbf{API} & \textbf{Accessibility} & \textbf{Adaptability} & \textbf{Auditability} & \textbf{Elasticity} & \textbf{Extensibility} & \textbf{Flexibility} & \textbf{Interoperability} & \textbf{Portability} & \textbf{Usability} & \textbf{Security} & \textbf{Standards} & \textbf{Off-line processing} & \textbf{Real-time processing} & \textbf{Storage} & \textbf{Query} & \textbf{Dashboard} & \textbf{Licensing and pricing} & \textbf{Maturity} & \textbf{Presence} & \textbf{Update and evolution} & \textbf{Certification} & \textbf{Financial support} \\\hline
+ \textbf{Tool/ Feature} & IEEE 1451 &  EEML~\cite{eeml} & SWE~\cite{sensorweb-wb} & SSN~\cite{Compton:2012:OPS:2400766.2401456} & Semantic Streams~\cite{Whitehouse:2006:SSF:2180141.2180148} & Storm~\cite{BigDataManing} & Impala~\cite{impala-project} & SPARK~\cite{zaharia2012discretized} & Druid~\cite{yangdruid} & S4~\cite{neumeyer2010s4}  & MapR~\cite{mapr-project}\\ \hline
+  Data model & TEDS~\footnote{Transducer electronic data sheet} & EEML & SensorML & OWL / RDF & -  & Topology & - & - & - & - & - \\ \hline  
+  Programming Language & - &  Java & - & -& - & Java and JVM-based languages & Java & Scala, Java \& Python. & Java & Java &  Java\\ \hline  
+  Reasoning & - & - &  - & Y & Y & N & N & N & N &  N & \\ \hline  
+  Formats & 1451.x & EEML & SensorML & RDF syntax~\footnote{RDF/XML normative syntax, Turtle, N3, etc.} & - & - & Sequence Files (Snappy, Avro, Gzip, Bzip, LZO etc.) & Hadoop Input Formats & - & - &Hadoop Input Formats \\ \hline  
+  Data integration & Y & Y & Y  & Y & Y & N & N & N & N & N & N \\ \hline  
+  Architecture & S/D~\footnote{Sensor/Distributed (cluster)} & S/D  & S/D  & S/D  & S/D & D & D & D & D  & D  & D  \\ \hline  
+  Programming Model & Service & Service & Service & - & -  & MapReduce~\footnote{It is based on MapReduce in the sense of batch processing.} & MapReduce & MapReduce & MapReduce &EP~\footnote{Event Processing}  &  MapReduce\\ \hline  
+  API & 1451.x & Pachube  & SOS~\footnote{Sensor Observation Service} and SPS~\footnote{Sensor Planning Service}  & - & Y & Y & Y & Y & Y  & Y & Y \\ \hline  
+  Accesibility & 4 & 4 & 4 & 5 & 2 & 5 & 5 & 5 & 5 & 5 & 5 \\ \hline  
+  Adaptability & 4 & 4& 5 & 5 & 4 & 5 & 5 & 5 & 4 & 5 & 5 \\ \hline  
+  Auditability & 3 &3 & 3 & 3 & 3 & 5 &  5& 4 & 3 & 4 & 4 \\ \hline  
+  Elasticity & 4 & 4& 4 & 5 & 4 & 5 & 5 & 5 &4  & 5 & 4 \\ \hline  
+  Extensibility & 4 & 4& 4 & 5 & 4 & 5 & 5 & 5 & 4 & 5 & 5 \\ \hline  
+  Flexibility &4  & 5& 5 & 5 & 4 & 5 & 5 & 5 & 4 & 5 & 5 \\ \hline  
+  Interoperability & 4 &5& 5 & 5 & 4 & 4 & 4 & 4& 3 & 4 & 4\\ \hline  
+  Portability & 4 &5 & 3 &5  & 4 & 5 & 5 & 5 & 3 & 5 & 5\\ \hline  
+  Usability & 3 &4 & 4 & 1 & 4 & 4 &5  & 4 & 3 & 4 & 4\\ \hline  
+  Security & 3 & 3& 3 & 3 & 3 & 4 & 5 & 3 & 3 & 3 & 4 \\ \hline  
+  Standards & 5 & 4 & 5& 5 & 3 & 3 & 4 & 3 & 3 & 4 & 4 \\ \hline  
+  Off-line processing & 3 &3  &3 & - & - & 2 & 4 & 4 & 4 & 3 & 5 \\ \hline  
+  Real-time processing & 3 &4 & 4 & - & 4 & 5 & 54 & 5 & 5 & 5 & 4  \\ \hline  
+  Storage & 3 &3 & 3 & 3 & 3 & 4 (DFS~\footnote{Distributed File System}) & HDFS & HDFS & -  & DFS & HDFS \\ \hline  
+  Query & - & Y& Y & Y (SPARQL) & Y  & Y (Trident) & Hive SQL & Hive SQL (iif Shark)  & Y (SQL-based) &  - & Hive SQL / Pig\\ \hline  
+  Dashboard & 3 & 4 & 4 & 1 & 4 & 2 & 5 & 3 & 3 & 3 & 4\\ \hline  
+  Licensing and pricing & Open & Open & Fee on TGAR~\footnote{Total Gross Annual Revenue} & W3C & - & EPL v1.0 & Apache & Apache & GPL & Apache  & M3 Edition is free, M5 \& M7 commercial licenses\\ \hline  
+  Maturity & 4 & 4&  4& 2 & 4 & 5  & 5  & 4 & 4 & 5 &4 \\ \hline  
+  Presence & 4 & 4 & 5 & 2 & 2 & 4 & 5 & 4 & 5 & 5 &5 \\ \hline  
+  Update and evolution & 4 & 4 & 5  & 4 & 2 & 5 & 5 & 5 & 5 & 4 &5\\ \hline  
+  Certification & 4 &4 & 5 & 2 & 2 & 3 & 5 & 4 & 3 & 4 & 3\\ \hline  
+  Financial support & 4 & 4&  5 & 2 & 3 & 4 & 5 & 4 (Apache Spark) & 4  & 4 (Apache S4) & 5 \\ \hline  
+  
+\hline
+\end{tabular}
+\caption{Summary of selected tools and techniques for data stream processing  (I).}\label{table:tools-1}
+  \end{center}
+\end{sidewaystable} 
+
+\begin{sidewaystable}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}[c]{|p{1.7cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|} 
+\hline
+ \textbf{Tool/ Feature}  &  Streaming SPARQL~\cite{Bolles:2008:SSE:1789394.1789438} & C-SPARQL~\cite{Barbieri:2010:EEC:1739041.1739095} & CQELS~\cite{deri2010} & EP-SPARQL~\cite{Anicic:2011:EUL:1963405.1963495} & WebPIE~\cite{DBLP:journals/ws/UrbaniKMHB12} & QueryPIE~\cite{Urbani:2011:QBR:2063016.2063063} & SAOR~\cite{DBLP:journals/ijswis/HoganHP09} & Pig SPARQL~\cite{Schatzle:2011:PMS:1999299.1999303}& Hadoop SPARQL~\cite{liuhadoopsparql} & H2RDF~\cite{Papailiou:2012:HAQ:2187980.2188058}   \\ \hline
+  Data model & OWL / RDF & OWL / RDF   &  & OWL / RDF & - & - &  OWL / RDF & - & - & -\\ \hline  
+  Programming Language & Java & Java  & Java & Java & Java &  Java & Java &  Java &  Java & Java \\ \hline  
+  Reasoning & N & N  & N & Y & Y (RDFS / OWL-Horst backward) & Y (RDFS / OWL-Horst backward) & Y (OWL / RDFS) & N & N & N \\ \hline  
+  Formats & RDF syntax & RDF syntax  &RDF syntax  & RDF syntax & Hadoop Input Formats & Hadoop Input Formats & - & Hadoop Input Formats & Hadoop Input Formats & RDF syntax\\ \hline  
+  Data integration & Y & Y & Y & Y &  N & N & N & N & N & Y\\ \hline  
+  Architecture & C~\footnote{Centralized} & C  &  D& C & D & D & D & D & D & D\\ \hline  
+  Programming Model & MapReduce & Events  & Events & Events &  MapReduce &  MapReduce & - & MapReduce & MapReduce & MapReduce\\ \hline  
+  API & N & Y  & Y & Y & N & N & N & N & N & N \\ \hline  
+  Accesibility & 3 & 4  & 4  & 4 & 4 & 4 & 4 & 3 & 2 & 3\\ \hline  
+  Adaptability & 4 & 3  & 4 & 4 & 3 & 4 & 4 & 3 & 3 & 3\\ \hline  
+  Auditability & 2 & 2  & 3 & 3 & 3 & 3 & 3 & 2 & 2 & 3\\ \hline  
+  Elasticity & 3 & 2  & 4 & 4 & 3 & 4 & 4 & 4 & 4 & 4\\ \hline  
+  Extensibility & 3 & 2  & 4 & 4 & 4 & 4 & 3 & 3 & 3 &4 \\ \hline  
+  Flexibility & 2 & 2  & 3  & 4 & 3 & 3 & 3 & 4 & 3 & 4\\ \hline  
+  Interoperability & 4 & 3  & 4 &4  & 4 & 4 & 4 & 3 & 3 & 4\\ \hline  
+  Portability & 4 & 3  & 4 & 4 & 4 & 4 & 4 & 4 & 3 &4 \\ \hline  
+  Usability & 2 & 2  & 3 & 4 & 4 & 4 & 4 & 4 & 3 & 4\\ \hline  
+  Security & 3 & 2  & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\ \hline  
+  Standards & 4 & 4  & 4 & 4 & 4 & 4 & 4 & 3 & 3 & 4\\ \hline  
+  Off-line processing & 4 & 2  & 2 & 2 & 4 & 4 & 4 & 4 & 4 & 4\\ \hline  
+  Real-time processing & 2 & 4  & 4 & 4 & 2 & 2 & 2 & 2 & 2 & 3\\ \hline  
+  Storage &  M~\footnote{Memory}&M  & - & M &  HDFS & HDFS & - & HDFS & HDFS &HDFS \\ \hline  
+  Query & Y (SPARQL) & Y (SPARQL)  & Y (CQELS language) & Y (SPARQL) & Y (SPARQL) & Y (SPARQL) & - & Y (SPARQL / Pig) & Y (SPARQL) & Y (SPARQL)\\ \hline  
+  Dashboard & N & N &  & N & N & N & N & N & N & N\\ \hline  
+  Licensing and pricing & - & CC BY-NC-SA 3.0  & LGPLv3.0 & GPL (Etalis Engine) & Apache & Apache & - & -  & - & GPL \\ \hline  
+  Maturity & 2 &  3 & 4 & 4 & 4 & 4 & 4  & 3 & 2 & 3\\ \hline  
+  Presence & 2 &  3 & 3 & 4 & 2 & 2  & 3 & 2 & 2 & 2\\ \hline  
+  Update and evolution & 2 & 2  & 4 & 4 & 2 & 2 & 3 & 3 & 2 & 3\\ \hline  
+  Certification & 1 & 1  & 3 & 3 & 2 & 2 & 2 & 3 & 2 & 3\\ \hline  
+  Financial support & 1 & 1  & 3 & 3 & 2 & 2 & 3 & 3 & - & 3\\ \hline  
+
+\hline
+\end{tabular}
+\caption{Summary of selected tools and techniques for data stream processing (II).}\label{table:tools-ii}
+  \end{center}
+\end{sidewaystable} 
+
+\clearpage
+
+According to Table~\ref{table:tools-1} and Table~\ref{table:tools-ii} it seems that there are two main approaches:
+\begin{itemize}
+ \item Datastream tools and techniques (with a high-level of maturity) that offer a distributed MapReduce-based 
+ framework (with a high-level language) on the top of some kind of NoSQL store to provide off-line and real-time datastream processing.
+ \item Semantic-based frameworks that offer a better interoperability and integration but less performance and stability (in terms of maturity and support).
+\end{itemize}
+In fact the introduction of semantics in existing ``Big Data'' tools is becoming a major challenges due to vendors perfectly know the advantages 
+of providing a more standardized solution. Nevertheless, at the moment, a MapReduce-based solution such as Storm or Impala is clearly a good 
+option to deal with a vast amount of data but sacrificing semantics. Finally there is a new ``Dataland'' of start-ups creating ``Big Data'' solutions, 
+this financial support represents a growing and manifest commitment to boost a new data-based economy. Nevertheless the conjunction or addition of semantics in 
+existing tools can dramatically improve their adoption and uptake for business users since technicians perfectly know how to use these big data frameworks 
+to implement their solutions.
+

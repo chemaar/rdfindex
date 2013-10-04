@@ -1,0 +1,223 @@
+Cloud Computing represents the next natural step in the evolution of on-demand services and applications. 
+Several definitions have been made but the description~\cite{mell2011nist} provided by the NIST institute has reached a major consensus:  
+\textit{A large-scale distributed computing paradigm that is driven by economies of scale, in which a pool of 
+abstracted, virtualized, dynamically-scalable, managed computing power, storage, platforms, and services are delivered on demand to external customers over the Internet}. 
+The NIST institute has also defined~\cite{mell2011nist}: 
+\begin{enumerate}
+ \item Five key characteristics: on-demand self-service, ubiquitous network access, location independent resource pooling, rapid elasticity and pay per use.
+ \item Three service models: Software-as-a-Service (SaaS), Platform-as-a-Service (PaaS) and Infrastructure-as-a-Service (IaaS).
+ \item Four development models: private, community, public and hybrid clouds. 
+\end{enumerate}
+
+These basic concepts~\cite{mell2011nist} and usages~\cite{cloud-usage} in a cloud environment lead us to consider that QoS is a key-enabler of the five essential characteristics identified by 
+the NIST institute and it is closely related to the concepts of Autonomic and Utility Computing~\cite{Huebscher:2008:SAC:1380584.1380585}. 
+As a consequence the QoS management must play a major role in cloud environments and in the Future Internet to 
+afford, from a quality point of view, the implementation of the ``Measured Service'' concept, see Figure~\ref{fig:qos-intro}.
+
+On the other hand, the ITUT-T Recommendation E.800 defines QoS as \textit{collective effect of service performance that determines the degree of 
+satisfaction by a user of the service}. Thus QoS data is a key-enabler to design, identify and put in action SLAs. It should also influence 
+software components and applications to ensure a reliable environment for executing services. Some open issues in 
+QoS management emerge to extend this definition including reputation-based mechanisms for service selection or 
+dynamic adaptation of resource provisioning. The application of QoS has been widely studied and 
+applied~\cite{Conejero:2012:MSQ:2357487.2357591,Pedersen:2011:AMQ:2114495.2115542} to web services and grid computing areas and it is now 
+gaining momentum in the new Cloud Computing paradigm. 
+
+In order to facilitate the QoS management in the cloud-environment some tools, called Cloud Management Platforms (CMPs) can be found 
+to manage the different layers of cloud-based applications but the majority of them are now focused on the IaaS and PaaS layers. 
+The use of these platforms can help to manage the growing of cloud applications and ease the deployment and monitoring of services across 
+public and private clouds. The six key capabilities~\cite{Kephart2012} that we should look for in a CMP are: simplify complexity, 
+manage multiple clouds, build for the future, support the whole application lifecycle, self-management (set-it and forget-it) and manage/control costs. 
+In this sense OASIS just launched a CAMP TC to create and inter-operable protocol that cloud 
+implementers can use to package and deploy their applications. The idea is to provide a set of REST services, at the PaaS layer, to foster an ecosystem of 
+common tools, plug-ins, libraries and frameworks, which will allow vendors to offer greater value-add. In the particular case of QoS, the use of standards to gather data 
+from applications can improve the process of making decisions about resource provisioning or help in saving costs among others. Nevertheless 
+this specification is still in an early stage and its objectives are more focused on the management of cross-cloud applications than a 
+real management from QoS point of view. Following main characteristics of the CAMP specification are presented:
+\begin{itemize}
+ \item It is a language, framework and platform neutral to manage in the same way Java, Ruby on Rails or Node.js applications.
+ \item It only covers interactions between a cloud consumer and a provider~\cite{mell2011nist}.
+ \item It supports the management of the entire lifecycle of the application not just the deployment of isolated components.
+ \item A major objective of the specification is to provide an inter-operable environment. They are trying to keep simple as 
+ possible but with the possibility of being extended by third-parties.
+\end{itemize}
+
+Although there is no a clear objective to support quality indicators it can be considered as a major effort to unify information exposed by providers and 
+improve the creation of an integrated and inter-operable ecosystem in which existing cloud management application platforms such 
+as RightScale, Enstratus, ScaleUp, Cloudability, Cloudyn, CloudExpress or MyGravitant can take advantage of implemented 
+added-value services on the top of a common API. Although these commercial products offer a very good option 
+to manage cloud-based applications there is a lack of standardization and some QoS features cannot be managed.  
+Nevertheless these existing cloud management platforms present some interesting features and services for 
+multi-cloud management that must be taken into account in the design of a dedicated cloud quality management platform such as:
+\begin{itemize}
+ \item Integrated management of cloud resources: compute, networking and storage.
+ \item Organization: tagging capabilities or creation of profiles and views to group cloud resources.
+ \item Accessibility and usability: monitoring (tracking and graphing custom metrics), dashboard or import capabilities.
+ \item Custom services: creation of alerts using a particular set of indicators, cost forecasting or reporting.
+\end{itemize}
+
+%Policy making
+On the other hand there is an interesting approach to manage cloud quality indicators using a policy-making 
+perspective. In this sense public and private bodies are continuously seeking for new analytical tools and methods to 
+assess, rank and compare their performance based on distinct indicators and dimensions with the objective of making 
+some decision or developing a new policy. In this context the creation and use of quantitative indexes is 
+a widely accepted practice that has been applied to various domains such as Bibliometrics and academic performance and 
+quality (the Impact Factor by Thomson-Reuters, the H-index or the Shanghai and Webometrics rankings) the Web impact (the Webindex~\cite{webindexlod} 
+by the Webfoundation) or Smart Cities (The European Smart Cities ranking) to name a few. Therefore policymakers as well as individuals are 
+continuously evaluating quantitative measures to tackle or improve existing problems in different areas and 
+support their decisions. Nevertheless the sheer mass of data now available is raising a new dynamic and challenging environment 
+in which traditional tools are facing major problems to deal with data-sources diversity, structural issues or complex processes of estimation. 
+According to some efforts such as the ``Policy-making $2.0$'' within the Cross-Over project~\footnote{\url{http://www.crossover-project.eu/}} 
+that \textit{refers to a blend of emerging and fast developing technologies that enable better, more timely and more participated decision-making}, 
+new paradigms and tools are required to take advantage of the existing environment (open data and big data) to design and estimate 
+actions in this dynamic context according to requirements of transparency, standardization, adaptability and extensibility among 
+others with the aim of providing new context-aware and added-value services such as visualization that 
+can help a deepen and broaden understanding of the impact of a policy in a more fast and efficient way. 
+As a consequence common features and requirements can be extracted from the existing situation out:
+\begin{itemize}
+ \item Data sources. Data and information is continuously being generated as observations from social networks, public and private institutions, NGOs, services and applications, etc. 
+ creating a tangled environment of sources, formats and access protocols with a huge but restricted potential for exploitation. Nevertheless data processing, knowledge inferring, etc. are not mere processes 
+ of gathering and analyzing, it is necessary to deal with semantic and syntactic issues, e.g. particular measurements and dimensions or name mismatches, 
+ in order to enable a proper data/information re-use and knowledge generation.
+ 
+ \item Structure. Quantitative indexes are usually defined (a mathematical model) by experts to aggregate several indicators (in a hierarchy structure) 
+ in just one value to provide a measure of the impact or performance of some policy in a certain context. The structure of these indexes are 
+ obviously subjected to change over time  to collect more information or adjust their composition and relationships (narrower/broader). 
+ That is why technology should be able to afford adequate techniques to automatically populate new changes in an efficient way.
+ 
+  \item Computation process. This feature refers to the calculation of the index. Observations are gathered from diverse data sources and aligned 
+  to the index structure, commonly indicators, that are processed through various mathematical operators to generate a final index value. 
+  Nevertheless the computation process is not always described neither open (any minor change can imply a long time for validation) implying that 
+  cannot be easily replied for third-parties with other purposes, for instance research, preventing one 
+  of the most wanted characteristics such as transparency. Furthermore it is necessary to ensure that the computation process 
+  is sound and correct.
+
+  \item Documentation. As the European project Cross-over has stated, new policy-making strategies go ahead of a simple and closed value and it is necessary to bring 
+  new ways of exploiting data and information. Moreover the use of the Web as a dissemination channel represents a powerful environment in which 
+  information should be available taking into account the multilingual and multicultural character of information. In this context documentation mechanisms 
+  must necessarily cover all the aforementioned features to afford a detailed explanation of a quantitative index-based policy to both policymakers 
+  and final users. However existing initiatives usually generates some kind of hand-made report which is not easy to keep up-to-date and deliver 
+  to the long-tail of interested third-parties.
+\end{itemize}
+
+Following this perspective of creating a quantitative index the Cloud Computing community~\cite{Maiya:2012:QMC:2353730.2353862,DBLP:conf/quatic/KlemsBW12} 
+and some of the big players have launched some relevant indexes such as:
+
+\begin{itemize}
+ \item The Service Measurement Index (SMI) by the Cloud Services Measurement Initiative Consortium (CSMIC) consortium. It is 
+ based on a framework of critical key performance indicators (both business and technical) \textit{associated attributes, and measures 
+ that provide a standardized method for measuring and comparing a business service regardless of whether that service is internally provided or sourced from an outside company for any cloud service (IaaS, PaaS, SaaS, etc.). It is designed to become a 
+ standard method to help organizations measure cloud-based services based on their specific business and technology requirements.} As 
+ an implementation of the SMI Index the ``Ranking Clouds''~\cite{DBLP:journals/fgcs/GargVB13} presents a framework to manage this index 
+ and makes a ranking of different PaaS providers using the Analytic Hierarchy Process (AHP) method to weight some key performance indicators.
+ 
+ \item The Cisco Global Cloud Index (GCI) by Cisco. \textit{It is an ongoing effort to forecast the growth of global data 
+ center and cloud-based IP traffic. The forecast includes trends associated with data center virtualization and cloud computing. }
+ It also provides a visual representation of countries ranging  from ``Cloud Prepared'' to ``Cloud Emerging''.
+
+ \item The CSC Cloud Usage index. It is an index created through a survey of more than $3500$ cloud computing users 
+ in eight countries around the world. The survey is focused on capturing user information about outcomes and 
+ experiences rather than predictions and intentions.
+
+ \item The VMWare Cloud index. It is an study conducted by Forrester Consulting and ITR in Japan. \textit{The 2012 study surveyed 
+ approximately $6500$ senior IT practitioners across the APJ region in eleven countries / regions with the aim of establishing 
+ top cloud drivers and concerns in the community.}
+
+\end{itemize}
+
+As final remark, the creation of a quantitative index of QoS indicators seems to be a promising approach because 
+it represents a joint effort to establish a common set of KPI's and it can be applied to the different cloud types and models. Furthermore 
+the participation of big players validates and ensures their potential development. Nevertheless, as other existing quantitative indexes, 
+the structure and the computing process are completely closed and there is not any framework to automatically compute observations. Apart from 
+that it would also be necessary the definition of an API for exposing quality indicators that could be part of existing CAMPs.
+
+% 
+% 
+% \begin{sidewaystable}[!ht]
+% \renewcommand{\arraystretch}{1.3}
+% \tiny
+% \begin{center}
+% \begin{tabular}[c]{|p{2.5cm}|p{9cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|} 
+% \hline
+%   \textbf{KPI} &  \textbf{Definition}  &  \textbf{Broader} & \textbf{Defined by} & \textbf{Scope} \\\hline
+%   Accountability&This component is used to measure the properties related to the service provider
+% organization. These properties may be independent of the service being provided.&&CSMIC&$\ast$ \\ \hline
+%   Agility&Indicates the impact of a service upon a client's ability to change direction, strategy, or tactics quickly and with minimal disruption.&&CSMIC&$\ast$ \\ \hline
+%   Assurance&This category includes key attributes that indicate how likely it is that the service will be available as specified.&&CSMIC&$\ast$ \\ \hline 
+%   Financial&The amount of money spent on the service by the client.&&CSMIC&$\ast$ \\ \hline 
+%   Performance&This category covers the features and functions of the provided services.&&CSMIC&$\ast$ \\ \hline 
+%   Security and Privacy&This category includes attributes that indicate the effectiveness of a service provider's controls on access to services, service data, and the physical facilities from which services are provided.&&CSMIC&$\ast$ \\ \hline 
+%   Usability&The ease with which a service can be used.&&CSMIC&$\ast$ \\ \hline 
+%   Auditability&The ability of a client to verify that the service provider is adhering to the standards, processes, and policies that they follow.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Compliance&Standards, processes, and policies committed to by the service provider are followed.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Contracting Experience&Indicators of client effort and satisfaction with the process of entering into the agreements required to use a service.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Data Ownership&The Level of rights a client has over client data associated with a service.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Ease of Doing Business&Client satisfaction with the ability to do business with a service provider.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Ease of Doing Business&The processes used by the service provider to manage client expectations, issues and service performance.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Ownership&The level of rights a client has over software licenses, intellectual property and data associated with a service.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider business stability&The likelihood that the service provider will continue to exist throughout the contracted term.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider Certifications&The service provider maintains current certifications for standards relevant to their clients' requirements.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider Contract/SLA Verification&The service provider makes available to clients SLAs adequate to manage the service and mitigate risks of service failure.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider Ethicality&Ethicality refers to the manner in which the service provider conducts business; it includes business practices and ethics outside the scope of regulatory compliance. Ethicality includes fair practices with suppliers, customers, and employees.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider Personnel Requirements&The extent to which service provider personnel have the skills, experience, education, and certifications required to effectively deliver a service.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Provider Supply Chain&The service provider ensures that any SLAs that must be supported by its suppliers are supported.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Security Capabilities&The capabilities of service providers to ensure application, data, and infrastructure securiy based on the security requirements of the client.&Accountability&CSMIC&$\ast$ \\ \hline 
+%   Sustainability&The impact on the economy, society and the environment of the service provider.&Accountability&SMIC&$\ast$ \\ \hline 
+%   Adaptability&The ability of the service provider to adjust to changes in client requirements.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Capacity&The maximum amount of a service that a service provider can deliver while meeting agreed SLAs.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Elasticity&The ability of a service to adjust its resource consumption to meet demand.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Extensibility&The ability to add new features or services to existing services.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Flexibility&The ability to add or remove predefined features from a service.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Portability&The ability of a client to easily move a service from one service provider to another with minimal disruption.&Agility&CSMIC&$\ast$ \\ \hline 
+%   Scalability&The ability of a service provider to increase or decrease the amount of service available to meet client requirements.&Agility&CSMIC&$\ast$ \\ \hline 
+% \hline
+% \end{tabular}
+% \caption{Key Performance Indicators I.}\label{table:kpi-1}
+%   \end{center}
+% \end{sidewaystable} 
+% 
+% \begin{sidewaystable}[!ht]
+% \renewcommand{\arraystretch}{1.3}
+% \tiny
+% \begin{center}
+% \begin{tabular}[c]{|p{2.5cm}|p{9cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|} 
+% \hline
+%   \textbf{KPI} &  \textbf{Definition}  &  \textbf{Broader} & \textbf{Defined by} & \textbf{Scope} \\\hline
+%  Availability&The amount of time that a client can make use of a service.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Maintainability&Maintainability refers to the ability for the service provider to make modifications to the service to keep the service in a condition of good repair.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Recoverability&Recoverability is the degree to which a service is able to quickly resume a normal state of operation after an unplanned disruption.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Reliability&Reliability reflects measures of how a service operates without failure under given conditions during a given time period.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Resiliency&The ability of a service to continue to operate properly in the event of a failure in one or more of its components.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Stability&The degree to which the service is resistant to change, deterioration, or displacement.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Serviceability&The ease and efficiency of performing maintenance and correcting problems with the service.&Assurance&CSMIC&$\ast$ \\ \hline 
+%  Acquisition&Any client costs to acquire the rights and ability to use a service and to move from an existing service to the new one.&Financial&CSMIC&$\ast$ \\ \hline 
+%  On-going Cost&The client cost to operate a service. This includes both recurring flat costs (e.g. monthly access fees) and usage-based costs.&Financial&CSMIC&$\ast$ \\ \hline 
+%  Profit&Arrangement between client and provider(s) under which costs or profits of a service are shared by the involved parties, according to an agreed upon formula.&Financial&CSMIC&$\ast$ \\ \hline 
+%  Accuracy&The extent to which a service adheres to its requirements.&Performance&CSMIC&$\ast$ \\ \hline 
+%  Functionality&The specific features provided by a service.&Performance&CSMIC&$\ast$ \\ \hline 
+%  Suitability&How closely do the capabilities of the service match the needs of the client.&Performance&CSMIC&$\ast$ \\ \hline 
+%  Suitability&How closely do the capabilities of the service match the needs of the client.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Suitability&The ability of a service to easily interact with other services (from the same service provider and from other service providers).&Performance&CSMIC&$\ast$ \\ \hline 
+%  Service Response Time&An indicator of the time between when a service is requested and when the response is available.&Performance&CSMIC&$\ast$ \\ \hline 
+%  Access Control&Policies and processes in use by the service provider to ensure that only the provider and client personnel with appropriate status/reasons to make use of or modify data/work products may do so.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Geographical Constraint&The client's constraints on service location based on geography.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Political Constraint&The client's constraints on service location based on politics.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Data Integrity&Keeping the data that is created, used, and stored in its correct form so that clients may be confident that it is accurate and valid.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Data Privacy&Client restrictions on access and use of client data are enforced by the service provider. Any failures of these protections are promptly detected and reported to the client.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Data Loss&Client restrictions on access and use of client data are enforced by the service provider. Any failures of these protections are promptly detected and reported to the client.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Physical \& Environmental Security&Policies and processes in use by the service provider to protect the provider facilities from unauthorized access, damage or interference.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Proactive Threat \&  Vulnerability Management&Mechanisms in place to ensure that the service is protected against know recurring threats as well as new evolving vulnerabilities.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Retention/Disposition&The service provider’s data retention and disposition processes meet the clients' requirements.&Security and Privacy&CSMIC&$\ast$ \\ \hline 
+%  Accessibility&The degree to which a service is operable by users with disabilities.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Client Personnel Requirements&The minimum number of personnel satisfying roles, skills, experience, education, and certification required of the client to effectively utilize a service.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Client Personnel Requirements&Installability characterizes the time and effort required to get a service ready for delivery (where applicable).&Usability&CSMIC&$\ast$ \\ \hline 
+%  Learnability&The effort required of users to learn to use the service.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Operability&The ability of a service to be easily operated by users.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Transparency&The extent to which users are able to determine when changes in a feature or component of the service occur and whether these changes impact usability.&Usability&CSMIC&$\ast$ \\ \hline 
+%  Understandability&The ease with which users can understand the capabilities and operation of the service.&Usability&CSMIC&$\ast$ \\ \hline 
+% 
+% \hline
+% \end{tabular}
+% \caption{Key Performance Indicators II.}\label{table:kpi-2}
+%   \end{center}
+% \end{sidewaystable} 
+% 

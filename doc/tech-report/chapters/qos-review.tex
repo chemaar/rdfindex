@@ -1,0 +1,442 @@
+In this section a literature review of main ontology-based frameworks for QoS management is presented. After that 
+an empirical evaluation of some selected features, see Table~\ref{features-qos-models}, is also outlined to finally present 
+a summary, see Table~\ref{summary-features-qos-models}, of the most relevant approaches for semantic-based QoS management.
+% These issues are considered to be key-enablers of the future semantic-based QoS management in cloud environments.
+\subsection{Ontology-based frameworks for QoS management}
+Ontology-based resource description is proposed to solve problems in~\cite{Pernas:2005:UOD:1068510.1069326,Armstrong17} with regards to the difficulty of 
+resource information management, no standard definitions of resource requirements and the difficulty of guaranteeing compatibility of resource allocation. 
+There are works that tries to produce a global ontology by merging ontologies of resource groups~\cite{Lopes:2006:PEM:1135771.1136110}. 
+Authors in~\cite{Ejarque:2008:USR:1443230.1444322} propose the Semantically-Enhanced Resource Allocator (SERA), a scheduling system using customer 
+requests with the ability of re-scheduling requests based on their priorities and considering advanced reservations.
+
+% In~\cite{2009gdc..conf..221Y} authors propose a resource virtualization method using a virtual ontology (VOn) and an execution environment called OReSS 
+% (Ontology-based Resource Selection Service) that is configured dynamically based on user requirements. The VOn is mapped to cloud resources 
+% and a Map/Reduce technique is applied for the rapid and efficient merging of a number of ontologies. The execution environment is comprised of resources 
+% described using the VOn and they are automatically populated applying the Ontology Merge engine. The main contribution of this work lies in 
+% the resource management in cloud computing systems tackling the complex management of distributed heterogeneous resources causes the aforementioned problems. 
+% In order to solve these problems a resource virtualization method is proposed using ontologies in a cloud environment. 
+
+In~\cite{rule-2013-resource-provisioning} a Rule Based Resource Manager is proposed for a cloud hybrid environment with the objective of increasing the scalability of private 
+clouds on-demand being cost-effective. This work also set up the execution time for public and private cloud in order to fulfill requests selected different services. 
+The methodology is applied to the IaaS layer to access resources on demand enabling the scale up of private clouds with a cost-effective.
+
+The SITIO platform~\cite{Garcia-Sanchez:2010:ASS:1852403.1852409} gathers the emerging concepts of SaaS, semantic technologies, Business Process 
+Modeling and Cloud Computing to foster dramatic evolution of a new platform oriented towards interoperability and cost reduction. SITIO is defined as a 
+platform for reliable, privacy-aware, secure and cost-efficient semantics-based Software-as-a-Service Creation, Integration and Management. The relevant component 
+of the SITIO platform lies in the annotation of web services using old-fashioned semantic web services techniques. Authors have implemented a methodology 
+to enable the semi-automatic annotation of web services in a three-step method: 1) collect information from the web service; 2) find mappings between 
+domain ontologies and the web service and 3) web service annotation and expert user validation of the suggested annotations. Although the SITIO platform applies 
+semantics to solve interoperability problems it is only focused on the description of web services functionality and capabilities.
+
+A declarative system called CloudRecommender is presented 
+in~\cite{DBLP:conf/gecon/ZhangRNMH12} through a unified and formalized domain 
+model capable of describing infrastructure services such as Amazon, Microsoft 
+Azure, GoGrid, etc. A prototype is also presented to show the main benefits of 
+this approach: 1) a recommender with the capability of estimating costs across 
+multiple providers, 2) aid in the selection of cloud services and 3) a 
+user-friendly service interface based on widgets that maps user requirements 
+based on form inputs to available infrastructure services. Nevertheless authors 
+suggest some future work including the extension of the recommender to support 
+the selection of more cloud service types such as PaaS services and the 
+integration with other existing cloud services as well as the implementation of 
+benchmarking methods for facilitating run-time selection based on dynamic QoS 
+information such as throughput, latency, and utilization.
+
+In~\cite{5682131} authors review three concepts developed in the framework of 
+the FP7 4WARD with the objective of demonstrating their potential impact on QoS 
+management: network virtualization, generic path semantic resource management 
+and in-network management. These are novel concepts that are being targeted at 
+handling QoS issues and are supposed to be relevant for enabling a new dynamic, 
+flexible, adaptable and scalable cloud environment. Thus network virtualization 
+decouples networks from infrastructure and allows infrastructure resources to be 
+shared among multiple isolated networks overcoming the limitations of the 
+traditional “one-size-fits-all” approaches. However, a two-layer QoS model is 
+required, which raises new challenges, particularly in multi-domain scenarios. 
+The Generic Path is a new end-to-end communication abstraction that aims at 
+overcoming the inadequacies of the traditional layered network model. Resource 
+management is accomplished by applying shared semantic concepts and formalizing 
+the heterogeneous communication technology with ontologies. The QoS features of 
+the Generic Path can be represented by an ontology from which QoS profile 
+parameters, such as bandwidth, delay and error tolerance can be derived. 
+Semantic resource management enables fair resource strategies by combining best 
+effort and strict allocation policies. Finally, the component in-Network 
+management allows the incorporation of QoS management capabilities in network 
+elements, facilitating QoS configuration.
+
+Authors in~\cite{DBLP:conf/soca/ChenL10} aims to provide a suitable service cater to discover consumer 
+service requests including functional requirements and non-functional 
+properties. They propose a service registry model named as SRC which is an 
+extension of the keyword based service registry model. The SRC is deployed as a 
+cloud application to provide a behavior-aware and QoS aware service discovery 
+storing semantic descriptors of web services and the feedback of dynamic status 
+of QoS in a GFS file system. This data is processed using a Map/Reduce 
+mechanism. Basically it is a matchmaking service based on the WSDL descriptions 
+taking advantage of using OWL for simple annotations of functional and 
+non-functional properties. Thus the system guarantees that the records of 
+inputs, outputs, predicates, and constraints of a service are stored in the same 
+node of the cloud and the OWL classes in every node of the cloud. That is why, 
+even if the tables are divided into chunks and each chunk is stored in an 
+exclusive node, when they look for all the semantic information of a service, 
+they do not need to do any inter-node query. The main drawback of this approach 
+lies in the necessity of ensuring synced multiple copies of OWL definitions on 
+all nodes.
+
+In~\cite{cloudle} a search engine and an architecture for cloud systems (Cloudle) is 
+outlined to semantically look up services according to a user profile. The 
+Cloudle system works as follows: a user send a query through a web interface, 
+cloud providers are registered in the system with a rating, a service discovery 
+agent works by means of a query processor that takes the user profile and 
+performs a similarity reasoning process against registered services trying to 
+optimize price and time-slots. Two ontologies have been also designed in order to 
+assist this similarity reasoning process and are used to improve the accuracy of 
+results. The difference between these two ontologies lies in their structure, 
+the first one only includes a concept hierarchy and the second one also includes 
+individuals, semantic relationships, etc. that improves the performance of the 
+similarity matchmaking process providing reasoning over data type and object 
+properties and concepts. The main finding of this study is that an enriched 
+ontology can improve the selection of cloud services. However all concepts, 
+properties, etc. are defined by the authors from the scratch without any reuse 
+of existing standard concepts.
+
+In~\cite{6206823} authors introduce the system Inter-cloud Resource Provisioning System 
+(IRPS) to accomplish the requirements of a customer to the maximum providing 
+additional resources to the cloud system participating in a federated 
+environment. This system schedules some tasks to allocate resources by using 
+semantics and an inference engine; more specifically they use Sesame and RQL to 
+query over RDF instead of the approach in~\cite{Ejarque:2008:USR:1443230.1444322} where Jena is used. Their idea of 
+running semantics in a federated environment is powerful idea but although the 
+use of RDF could be solved some of the interoperability issues it is still under 
+study.
+
+
+In~\cite{Buyya:2010:IUF:2143583.2143586} a framework called Reference Architecture for Semantically Inter-operable 
+Clouds (RASIC) is presented to facilitate the management of inter-cloud 
+components and to provide reliable end to end services that meet the SLA 
+requirements. This work tries to capture the concepts and attributes of 
+resources in a cloud environment using semantics to address the problem of 
+semantic interoperability between heterogeneous cooperating clouds.
+
+
+A cloud computing ontology is proposed in~\cite{secloud12} to ease the semantic 
+identification, discovery and access to cloud services Moreover, a tool that 
+semi-automatically annotates cloud services and stores their semantic 
+description is also introduced. Authors create ontologies and taxonomies trying 
+to capture existing concepts and relationships in a cloud environment. 
+Basically, they are focus on service discovery and selection according to 
+functional and non-functional properties. After that they use a semantic 
+description to describe cloud services and enable automatically the discovery of 
+services using a semantic reasoner.
+
+A semantic-based monitoring and management system (SAMM) is presented in~\cite{fg-2266}. 
+This system shows a novel approach to automatic infrastructure scaling, based on 
+the observation of business-related metrics with the objective of offering 
+on-demand resource provisioning capabilities and high flexibility to manage 
+cloud systems. By using ontologies to describe resources and metrics available 
+for observation, SAMM has capabilities to express different system architectures 
+and monitoring facilities. Owing to its module-based architecture based on OSGi 
+bundles and services, it can be extended to support new technologies without 
+much effort. Finally, to meet the requirement of being able to define rules in a 
+convenient way, authors use a decision-making module based on the Esper~\cite{esper-project} event 
+processing engine. The main outcome of this work is the possibilities of 
+dynamically increasing the amount of resources taking into account both business 
+and technical issues. In order to add flexibility to this system they use 
+ontologies, rules and an event processing engine. They also suggest as future 
+work the creation of a web interface to manage the functionalities and support 
+other cloud stacks such as OpenStack or OpenNebula to make their tool 
+inter-operable in a heterogeneous environments.
+
+
+In~\cite{srt-15} authors present QoSMONaaS (Quality of Service MONitoring as a Service), 
+a QoS monitoring facility built on top of the SRT-15, a cloud-oriented and 
+CEP-based platform being developed in the context of the homonymous EU funded 
+project. In particular they present the main components of QoSMONaaS (a semantic 
+model, a SLA analyzer, a KPI Meter, a Breach Detector and a Violation Certifier) 
+and illustrate QoSMONaaS operation and internals with respect to a substantial 
+case study of an Internet of Thing application. In conclusion, the work address 
+the implementation of a new monitoring tool in the context of the SRT-15 project 
+which major contribution is an innovative approach to QoS monitoring based on 
+complex event processing and content based routing (CBR). Finally, authors point 
+out the possibility of combining statistical and logical reasoning to make 
+predictions in a QoS aware cloud environment.
+
+
+Author presents in~\cite{anastasi2011} a three-year research about QoS in Service Oriented 
+Architectures in which his main contributions~\cite{cucinottaSOA_IA09,Konstanteli:2009:RGF:1632706.1633120,DBLP:conf/compsac/CucinottaAA09} consists in: 1) 
+design and development of a real-time SOA with QoS negotiation and management 
+capabilities, more specifically an effective way to guarantee QoS in service 
+provisioning has been proposed by achieving temporal isolation between 
+high-level software infrastructures and low-level control logic, exploiting a 
+modified Linux kernel supporting real-time scheduling strategies. SLAs have been 
+also extended in order to support QoS attributes related to individual 
+activities in real-time; 2) design and development of a QoS registry for 
+supporting the QoS management of adaptive service-oriented real-time 
+applications that gathers QoS data to different functional behaviors of the 
+application (application modes) and to predict the future performance based on 
+data already collected in the past. This approach permits the correct resource 
+allocation and self-configuration while providing QoS guarantees; 3) a 
+methodology to support QoS management for virtualized services deployed in 
+Service Oriented Infrastructures (SOIs). In particular, author proposes 
+admission control policies for providing both deterministic and probabilistic 
+guarantees for service activations within a predefined time frame and 4) design 
+and development of a service-oriented, flexible and adaptable middleware for QoS 
+configuration and management of Wireless Sensor Networks (WSNs). It is based on 
+a contract negotiation scheme using SLAs and enables applications to reconfigure 
+and maintain the network during its lifetime independently of the underlying WSN 
+technology. Although this work perfectly address some of the challenges in a 
+cloud environment it is mainly focused on the intermixing of real-time 
+techniques with SOAs, whilst other aspects typical of SOA-based approaches to 
+software design such as semantics are not provided.
+
+
+In~\cite{DBLP:conf/compsac/CucinottaAA10} authors discuss the challenging problem of how to ensure predictable 
+levels of QoS in cloud applications across multiple layers of the typical cloud 
+infrastructure and how SLAs management and enforcement policy might look like. 
+They present their advances on the experience developing the IRMOS platform 
+(real-time cloud computing infrastructure in the context of the IRMOS European 
+Project).The main outcomes of this work lies in the advance in the 
+state-of-the-art in SLAs and in particular the expression of requirements in the 
+language of the application domain, the user’s  needs are dynamically translated 
+to infrastructure requirements in fine grained SLAs and a real-time method to 
+evaluate and mitigate violations in SLAs. Thus, this framework adds to the 
+already known benefits of cloud systems the possibility of executing interactive 
+and resource-demanding applications with QoS guarantee. Although it is a 
+promising platform there is no information on how this platform models the SLAs, 
+resources or the QoS features.
+
+
+Authors present in~\cite{Mabrouk:2009:SEQ:1564601.1564724} a QoS model to provide the appropriate ground for QoS 
+engineering in Service Oriented Computing (SOC). The model is focused on 
+emerging QoS features related to the dynamics of service environments such as 
+user mobility and context awareness of application services. QoS is considered 
+as an end-to-end basis by covering QoS features of all resources and actors 
+involved in service provisioning such as network, device, service or end-user. 
+The use of semantics appears to represent and enrich QoS features making use of 
+the Web Service Quality Model (WSQM). Additionally this model is supposed to be 
+extensible in specific domains where QoS factors are required. The main focus of 
+this approach is the semantic representation through ontologies rather than 
+specifying a new vocabulary for QoS. Similar to this approach appears other 
+old-QoS models Maximilien~\cite{Maximilien:2004:FOD:1024866.1025003}, MOQ~\cite{Kim:2007:MWS:1359823.1359827}, 
+QoSOnt~\cite{Dobson:2005:QQO:1090946.1091252}, Papaioannou~\cite{Papaioannou:2006:QOL:1129027.1129054}, Dobson~\cite{Dobson:2006:TUQ:1173701.1174285}, 
+Marchetti~\cite{Marchetti:2004:QMM:1013367.1013377} or WiQoSM~\cite{Resta:2008:WIQ:1340085.1340215} that partially support issues and criteria 
+such as semantic description of QoS features, device mobility and capabilities, 
+network performance,  environment characteristics, adaptation, context 
+awareness, user requirements among others. In most of cases these models are not 
+up-to-date and are more focused on web services than QoS in cloud systems.
+
+
+In~\cite{DBLP:conf/woa/Talia11} author makes a review of the marriage between clouds and agents 
+discussing how this can done and which scientific areas and issues must be 
+involved to carry out research work for producing intelligent cloud services. 
+The main focus of this article is the convergence between multi-agent systems 
+that need a reliable infrastructure and cloud computing that needs intelligent 
+software with dynamic, flexible and autonomous behavior. This is a position 
+paper that addresses the needs and requirements of agents running on the cloud 
+but without any emphasis in QoS or semantics.
+
+
+A study of the semantic technologies for enterprise cloud management is presented in~\cite{Haase:2010:STE:1940334.1940342}. Authors present the suite eCloudManager to address 
+the topics of data integration, collaborative documentation and annotation, intelligent information access and analytics. One of the main conclusions is that a RDF approach can 
+improve data integration in highly heterogeneous and changing enterprise environments and they also point out some remain challenges such as policies, reasoning, and complex event processing.
+
+
+Following the same approach in~\cite{Mabrouk:2009:SEQ:1564601.1564724} authors 
+present in~\cite{Mabrouk:2009:QSC:1656980.1656990} a QoS-aware service 
+composition that enables the fulfilling of complex user tasks while meeting QoS 
+constraints. One challenging issue in this topic is the selection of the best 
+set of services to compose and meeting global QoS constraints defined by the 
+user. This problem is considered to be a NP-hard problem. Furthermore in a 
+dynamic environment the resolution of this problem becomes more complex. The 
+main outcome of this work is an algorithm guided by a heuristic that provides 
+the appropriate ground for QoS composition in dynamic service environments. 
+Finally an evaluation of the efficiency of the algorithm is also presented. From 
+a semantics point of view there is no any relevant advance and it is just a 
+matchmaking service for discovering and selecting services according to a set of 
+QoS constraints.
+
+mOSAIC~\cite{Cretella:2012:UMS:2428736.2428805} is a an Open-Source API and 
+Platform for Multiple Clouds that uses ontologies and semantics for providing a 
+unified description of cloud components, interfaces, SLAs, QoS, APIs and 
+requirements. The main objective is to enable a semantic framework in which 
+reasoning processes can be carried out as well as SPARQL queries for 
+discovering, selecting and matchmaking services. The use of semantics is based 
+on OWL-S for describing services. 
+
+The Q-Clouds system~\cite{Nathuji:2010:QMP:1755913.1755938} is a QoS-aware 
+control framework that tunes resource allocations to mitigate performance 
+interference effects. It uses on-line control feedback to build a multi-input 
+multi-output (MIMO) model to capture performance interference interactions and 
+it reuses this information to perform closed loop resource management. Authors 
+also apply this functionality to allow applications to specify multiple levels 
+of QoS. For such applications, Q-Clouds dynamically provisions underutilized 
+resources to enable elevated QoS levels, thereby improving system efficiency. 
+The main contribution of this work is a system to provide assurances in 
+performance issues applying a MIMO model for capturing interference effects and 
+driving a closed loop resource management controller.
+
+Authors in~\cite{DBLP:journals/ijguc/Chang11} introduce a trust model for 
+efficient reconfiguration and allocation of computing resources satisfying user 
+requests. Their model collects and analyzes reliability based on historical 
+information of servers in a cloud data center with the objective of providing a 
+trust model for managing resources efficiently in cloud providers. Thus a 
+reliable model is provided and validated against different datasets but no 
+semantics is used in any process. 
+
+QAComPS, a quality-aware federated computational semantic web service for 
+computational  modelers, is presented in~\cite{dewqacomps} to provide a 
+federated QABroker based on ontologies and making use of OWL2 features. 
+Basically they perform a matchmaking reasoning process for discovering and 
+selecting services according to a set of characteristics to meet user 
+requirements. A SAWSDL interface is also used to transfer semantic annotation 
+to/from the QAComPS service and QABroker. The final objective is to demonstrate 
+a promising framework to make cloud computing more accessible and cost effective 
+for computational modelers.
+
+Authors present in~\cite{stantchev2009negotiating} an approach (a three-step method) 
+to map SLAs and QoS requirements of business processes. They formalize the capabilities 
+and requirements to finally compare them with the objective of detecting performance 
+or reliability gaps. This method is evaluated as a dynamic technique to accommodate 
+and improve the performance of individual services deployed in a grid or 
+a cloud computing infrastructure. In~\cite{stantchev2011addressing} 
+an application of a SLA management is proposed to address dependability in 
+a SOA lifecycle. Authors describe the concepts and formalisms of each 
+lifecycle stage (Model, Assemble, Deploy, and Manage). The final objective 
+of this approach is to meet the user requirements offering optimized levels 
+of dependability.
+
+A taxonomy of QoS management and Service Selection Methodologies in cloud 
+computing is presented in~\cite{qos-taxonomy}. This survey reviews the current 
+status of QoS in web services and purpose a taxonomy to model the resources on 
+cloud computing environments. The main objective of this work is to provide a 
+taxonomy for service selection in grid computing, SOA and cloud computing as 
+well as define the QoS characteristics such as user preferences, QoS source, 
+context, web service attributes, semantic descriptions of web services, fuzzy 
+preferences, roles, etc. Finally the taxonomy is tested using the Analytic 
+Hierarchy Process (AHP) technique to make decisions about service selection.
+
+In~\cite{DBLP:conf/ic/BernsteinV10} authors make a proposal for in inter-cloud 
+exchanges using an ontology and XMPP for cataloging computing resources. They 
+make queries via SPARQL to select the components of being exchanged. The main 
+aim of this work is to provide a federated cloud environment but it is still an 
+early stage of development.
+
+ServiceRank~\cite{Wu:2009:CQS:1696051.1696105} is a new ranking method which 
+considers quality of service aspects (such as response time and availability) as 
+well as social perspectives of services (such as how they invoke each other via 
+service composition). Authors present this new algorithm that has been 
+implemented on SOAlive, a platform for creating and managing services and 
+situational applications. The main outcome of this work is the combination of 
+QoS metrics with social aspects but no semantics is applied in any of the 
+process to select services. 
+
+Other QoS ontology, onQoS, is presented in~\cite{Damiano:2009:OQL:1506129.1506143}. Authors make a study of the impact of 
+Semantics for the management of QoS requirements in service-based 
+applications and they also present the aforementioned ontology, its role for 
+specifying service requirements and the onQoS-QL language to support queries for 
+service discovery. Finally, in~\cite{Dautov:2013:ASC:2462307.2462312} authors present a proposal for an 
+ontology-driven approach to self-management cloud application platforms using 
+the MAPE-K reference model and another ontology-based framework for policy-driven 
+governance in cloud application platforms is also presented 
+in~\cite{DBLP:conf/icsoc/KourtesisP11}.
+
+\subsection{Summary and Evaluation}
+This section presents a summary/questionnaire of the most relevant aforementioned semantic approaches for QoS management 
+with the aim of establishing an intituitive  but empirical comparison among the different QoS models. 
+The evaluation of ``quality'' in ontologies is not a mere process as some works~\cite{DBLP:conf/dexa/dAquinSSS07,DBLP:conf/nldb/SabouFM09} 
+have already demonstrated. That is why we summarize these models according to a set of features, see Table~\ref{features-qos-models}. 
+This list is inspired in previous works but not exclusive in order to remark characteristics 
+to take into account when we want to re-use or extend some of the existing QoS models. 
+Each feature is evaluated following the next approaches:
+\begin{itemize}
+ \item Open ended questions using a word/sentence associated to the feature.
+ \item Multiple choice using the Likert scale~\cite{albaum1997likert} value: 1-Strongly disagree, 2-Disagree, 3-Neither agree nor disagree, 4-Agree and 5-Strongly agree.
+ \item Closed ended questions with a Yes (Y)/No (N) value. 
+ \item Finally the symbol ``-'' is used to represent those unknown/missing/not applicable features.
+\end{itemize}
+
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}[c]{|p{2.5cm}|p{5cm}|p{3cm}|} 
+\hline
+  \textbf{Feature} &  \textbf{Definition}  &  \textbf{Type} \\\hline
+  Language & This feature indicates how data is modeled & Word/sentence associated \\ \hline
+  Reasoning & The model enables some kind of reasoning process & Yes/No and Word/sentence associated  \\ \hline
+  Accessibility & The model can be easily accessed in different context & Likert scale  \\ \hline
+  Adaptability & The model can be easily configured to meet new requirements & Likert scale  \\ \hline
+  Auditability & The model provides a mechanism to know how it is working & Likert scale  \\ \hline
+  Extensibility & The model can be easily extended & Likert scale  \\ \hline
+  Flexibility & The model can be configured on-demand adding/removing features & Likert scale  \\ \hline  
+  Interoperability & The model can be integrated with third-parties  & Likert scale  \\ \hline
+  Portability & The model can be easily move to different architectures & Likert scale  \\ \hline
+  Usability & The model can be easily configured and exploited & Likert scale  \\ \hline
+  Standards & The model is based in the (re) use of standards and vocabularies (compliance) & Likert scale\ \\ \hline
+  Licensing & The type of license & Word/sentence associated \\ \hline
+  Maturity & The model presents a good level of maturity, development or presence & Likert scale\\ \hline
+  Update & The model is frequently updated & Likert scale\\ \hline
+\hline
+\end{tabular}
+\caption{Features for selecting a semantic-based QoS model.}\label{features-qos-models}
+  \end{center}
+\end{table} 
+
+
+\begin{sidewaystable}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+%\begin{tabular}[c]{|p{0.5cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.8cm}|p{0.6cm}|p{0.6cm}|p{0.7cm}|p{0.5cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.8cm}|p{0.8cm}|}
+\begin{tabular}[c]{|p{2.5cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{1.1cm}|p{1.1cm}|p{1.1cm}|p{1.1cm}|p{1.1cm}|p{1.1cm}|p{1.1cm}|} 
+\hline
+  \textbf{Model/ Feature} & \textbf{Language} & \textbf{Reasoning} & \textbf{Access.} & \textbf{Adapt.} & \textbf{Audit.} & \textbf{Extens.} & \textbf{Flex.} & \textbf{Interoper.} & \textbf{Port.} & \textbf{Usability} & \textbf{Standards} & \textbf{Licensing} & \textbf{Maturity} & \textbf{Update} \\ \hline
+   SERA~\cite{Ejarque:2008:USR:1443230.1444322} & OWL & Y & 1 & 3 & 4 & 3 & 2 & 4 & 3 & 3 & 4 & - & 2 & 2 \\ \hline
+   OReSS~\cite{2009gdc..conf..221Y} & OWL & Y & 1 & 2 & 3 & 4 & 4 & 2 & 2 & 3 & 4 & - & 2 & 2 \\ \hline
+   SITIO~\cite{Garcia-Sanchez:2010:ASS:1852403.1852409} & OWL + Rules & Y & 1 & 4 & 4  & 3 & 4 & 3 & 4 & 4 & 4 & - & 2 & 2 \\ \hline
+   Cloud Recommender~\cite{DBLP:conf/gecon/ZhangRNMH12} & - & 1 & 4 & 3 & 4 & 2 & 2 & 3 & 2 & 4 & 3 & - & 2 & 1 \\ \hline
+   FP7 4WARD~\cite{5682131} & OWL & Y & 3 & 2 & 4 & 2 & 2 & 3 & 2& 3 & 3 & -& 1 & 1 \\ \hline
+   SRC~\cite{DBLP:conf/soca/ChenL10} & OWL & Y & 1 & 3 & 3 & 4 & 2 & 2 &3 & 3  & 3 & - & 2 & 2 \\ \hline
+   Cloudle~\cite{5682131} & OWL & Y & 1 & 2 & 4 & 3& 2& 2 & 3& 2& 3& -&2 &1 \\ \hline
+   IRPS~\cite{6206823} & OWL + RDQL& Y & 1 & 4&3 &4 & 3& 4& 2& 3& 2& -&1&1 \\ \hline
+   RASIC~\cite{Buyya:2010:IUF:2143583.2143586} &- & -& 1 & 4 & 4& 3& 4& 4& 4& 3& 3&-&1 &1 \\ \hline
+   SAMM~\cite{fg-2266} & OWL + ESPER & Y & 1 & 4&4 &4 &4 &4 & 4& 3& 3&- & 1&1 \\ \hline
+   QoSMONaaS~\cite{srt-15} & OWL + CEP + SLA& Y & 1&3 &4 &4 & 4& 4& 3& 4& 3& -& 1&1 \\ \hline
+   IRMOS~\cite{DBLP:conf/compsac/CucinottaAA10}  & -&- &1 & 3& 4& 4& 4& 2& 2& 2& 3& -&2 &2 \\ \hline
+   QoS model~\cite{Mabrouk:2009:SEQ:1564601.1564724} & WSQM & - &1 &4 &2 &4 &4 &4 &2 &2 &4 &- &1 &1 \\ \hline
+   Maximilien~\cite{Maximilien:2004:FOD:1024866.1025003} & OWL & Y & 1&4 &3 &4 &4 &4 &4 &3 &3 &- &1 &1 \\ \hline
+   MOQ~\cite{Kim:2007:MWS:1359823.1359827} & OWL & Y & 1&4 &3 &4 &4 &4 &4 &3 &3 &- &1 &1 \\ \hline
+   Papaioannou\cite{Papaioannou:2006:QOL:1129027.1129054} & OWL & Y & 1&3 &3 &3 &3 &3 &3 &3 &3 &- &1 &1 \\ \hline
+   Dobson~\cite{Dobson:2006:TUQ:1173701.1174285} & OWL & Y & 1&3 &4 &4 &4 &4 &3 &4 &4 &- &1 &1 \\ \hline
+   Marchetti~\cite{Marchetti:2004:QMM:1013367.1013377} & - & - & 1 &2 &2 &2 &2 &2 &2 &3 &3 &- &1 &1 \\ \hline
+   WiQoSM~\cite{Resta:2008:WIQ:1340085.1340215} & - & - & 1 &2 &2 &2 &2 &2 &2 &2 &2 &- &1 &1 \\ \hline
+   QoSOnt~\cite{Dobson:2005:QQO:1090946.1091252} & OWL & Y & 1&  &3 &4 &4 &4 &4 &3 &3 &- &1 &1 \\ \hline
+   eCloudManager~\cite{Haase:2010:STE:1940334.1940342} & RDF & Y & 1& 3 &3 &3 &3 &3 &3 &2 &4 &- &1 &1 \\ \hline
+   mOSAIC~\cite{Cretella:2012:UMS:2428736.2428805} & OWL-S + SPARQL & Y & 1 & 4 &4 &4 &4 &3 &3 &4 &4 &- &1 &1 \\ \hline
+   Q-Clouds~\cite{Nathuji:2010:QMP:1755913.1755938} & MIMO & - & 1 & 3 &3 &4 &4 &3 &3 &3 &3 &- &1 &1 \\ \hline
+   QAComPS~\cite{dewqacomps} & OWL2 + SAWSDL & Y & 1 & 3 &3 &4 &4 &4 &4 &3 &4 &- &1 &1 \\ \hline
+   ServiceRank~\cite{Wu:2009:CQS:1696051.1696105} & - & - & 1 & 3 &3 &2 &3 &34 &3 &2 &2 &- &2 &2 \\ \hline
+   onQoS~\cite{Damiano:2009:OQL:1506129.1506143} & OWL + onQoS-QL & Y & 1 & 3 &3 &3 &4 &4 &4 &3 &2 &- &1 &1 \\ \hline
+   QoS \& SLAs~\cite{stantchev2009negotiating} & - & - & 1 & 4 & 4 &4 &4 &4 &4 &4 &3 &- &2 &2 \\ \hline
+   SOA \& Dependability~\cite{stantchev2011addressing} & - & - & 1 & 4 & 4 &4 &4 &4 &4 &4 &3 &- &2 &2 \\ \hline   
+   QoS Taxonomy~\cite{qos-taxonomy} & - & - & 1 & 3 & 3 &3 &3 &3 &3 &3 &3 &- &1 &1 \\ \hline   
+\hline
+\end{tabular}
+\caption{Summary of Ontology-based frameworks for QoS management.}\label{summary-features-qos-models}
+  \end{center}
+\end{sidewaystable} 
+
+At a first glance and according to results in Table~\ref{summary-features-qos-models} it seems that most of the QoS models 
+based on semantics are not publicly available. Although in most of them some uses of OWL or SPARQL are very promising 
+to define profiles, restrictions, SLAs, ECA rules, etc. there is no way of re-using them avoiding one of the main 
+principles of semantic web technologies. In most of cases they have been developed within the execution of some 
+research project but, at the moment, are not up-to-date. Apart from that the number of QoS models implies that 
+there is no consensus in building a common set of QoS indicators and, maybe, this is one of the reasons that 
+prevents the real deployment of quality-based methods. Although the use of the Likert scale to evaluate 
+some features presents some disadvantages it can serve as a guide to ranking different approaches. As a final remark, semantic 
+technologies have been applied to QoS but violating some of the basic principles: 1) re-use of existing vocabularies and 2) 
+build on the top of a common and shared understanding. Further steps in this area should be the creation of a common set 
+of quality indicators and their representation using semantic web technologies with the aim of enabling a better 
+re-use of knowledge and dissemination. Although it is not easy to reach an agreement in a broad field like QoS some 
+minimal common definitions should be established. In this sense, the initiatives presented in Section~\ref{qos-cloud-index} 
+can be a step-forward to boost the application of QoS in real environments.
+
+\clearpage

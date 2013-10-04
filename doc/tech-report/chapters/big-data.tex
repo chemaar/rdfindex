@@ -1,0 +1,75 @@
+Recent times have seen the emergence of new applications to deal with ``Big Data'' that usually 
+includes the processing of large datasets and vast amounts of data coming from different sources 
+with the objective of extracting ``the most of data'' to support decision processes. These tools 
+are focused on capturing, curating, managing and processing data in a certain slot of time. Due 
+to the fact data is continuously generated from users, services or devices the size of the dataset 
+to be processed goes from dozen of terabytes to many petabytes. In this new environment 
+traditional Database Management Systems (DBMS) are facing a major challenge to deal with 
+a new dynamic and growing data context and new movements such as NoSQL systems are emerging due to 
+their ability to handle larger amounts of data in a smart fashion.
+
+The main characteristic of Big Data tools lies in its capability to tackle three (Vs) main dimensions: 
+1) volume (amount of data), 2) velocity (speed of data in and out) and 3) variety (range of 
+data types and sources). In this sense Gartner has established a Big Data definition 
+that perfectly summarizes what a Big Data system is: \textit{Big data are high volume,
+high velocity, and/or high variety information assets that require new forms of
+processing to enable enhanced decision making, insight discovery and process
+optimization.} Nevertheless a new ``V'' (``Veracity'') has been added in 
+some organizations to assess the quality of results in Big Data systems. At a first glance 
+a big difference with the Business Intelligence community is hard to draw but the maturity 
+of Big Data tools makes this difference more obvious: Business Intelligence uses 
+descriptive statistics and high-density information while Big Data is focused on low-density but large volumes of data and 
+inductive statistics e.g. regression models to predict some variable.
+
+Therefore systems~\cite{BigDataComputing} that require real-time, search or high-frequency trading 
+in a certain context such as smart cities, advertising or social networks are moving 
+to this kind of Big Data architectures to be able to process large 
+volumes of data in highly scalable and streaming fashion. Existing tools 
+and frameworks use or implement a streaming strategy of partitioning 
+the input data into fixed-size segments as MapReduce-based frameworks do but
+the main drawback of this approach lies in the latency (it is proportional to
+the length of the segment plus the overhead required to do the segmentation and initiate
+the processing of new jobs). In this case the size of the segment is a key-decision 
+to get an optimal data-processing system. Nevertheless new architectures such 
+as the ``Lambda Architecture''~\cite{BigDataManing} minimizes this issue adding different layers 
+of processing to operate with data streams in real-time.
+
+The evolving Big Data Community is unleashing the potential of these tools 
+to drive innovation through the creation of new platforms with more 
+and more analysis capabilities that try to fulfill both market 
+and research areas. Forrester~\cite{forrester} has outlined the importance of 
+this new rise of big data as an opportunity to increase corporate knowledge 
+and get competitive advantages with regards to competitors making 
+faster and better decisions. In this sense it seems clear that the use of 
+predictive analytics to find patterns in data represents a new 
+market of opportunities and a real development of a 
+new data-based economy. Nevertheless Forrester also presents a set 
+of requirements that an organization must address: 
+1) understand data from a variety of sources; 2) create the predictive model; 
+3) prepare the data; 4) evaluate the model; 5) deploy the model and 
+6) monitor the effectiveness of the model. Finally they have also created 
+a set of 51 criteria to evaluate the current offering, strategy 
+and market presence of these monitoring tools with the aim of 
+obtaining a quantitative measure of existing vendors such as 
+Oracle, SAS or IBM.
+
+% Since Big Data technology is a clear candidate to be used as monitoring tool 
+% for a great variety of problems in which decision-makers require answers 
+% in real-time some questions have been that must be 
+% answered to justify the use of this technology.
+% \begin{itemize}
+%  \item Does the solution allow for stream processing, and incremental calculation of statistics?
+%  \item Does the solution parallelize processing and take advantage of distributed computing?
+%  \item Does the solution perform summary indexing to accelerate queries of huge datasets?
+%  \item What are the solution's data exploration and evaluation environments that enable a quick understanding of the value of new datasets?
+%  \item How does a solution directly provide or easily integrate with visualization tools?
+%  \item What is the strategy for verticalization of the technology?
+%  \item What is the ecosystem strategy? 
+% \end{itemize}
+
+% http://www.forbes.com/sites/danwoods/2011/10/21/big-data-technology-evaluation-checklist/
+
+% 
+% 
+% 
+% 

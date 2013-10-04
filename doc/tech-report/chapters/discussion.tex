@@ -1,0 +1,145 @@
+Despite the growing interest in Cloud Computing and the hype of this 
+paradigm for the creation of new era of applications, services and data 
+available through the Web, a real advanced cloud management environment is far 
+from being fully developed. There are many open issues to be solved and 
+technology to ease the transition from traditional developments and applications 
+to a cloud-based environment is still under development. With regards to QoS, 
+there are a lot of initiatives and efforts trying to model and manage functional 
+and non-functional properties in an intelligent fashion. Nevertheless the lack 
+of standards for unifying information and data is preventing the deployment of 
+advanced techniques for QoS management. In the case of semantic technologies, 
+works in different areas are emerging to solve interoperability and integration 
+problems in distributed environments. More specifically, the creation of 
+knowledge-based systems applying semantic-based techniques as stream reasoning 
+and CEP are currently being developed to deal mainly with Big Data problems in the 
+context of social media or e-Government. Following a list of questions/answers 
+are provided to discuss the current status and future challenges in the 
+topics covered in this paper:
+\begin{itemize}
+
+ \item Which dimensions and metrics should be taken into account to manage QoS in Cloud Systems?
+ 
+There are a big variety of QoS dimensions to ensure in a cloud system. 
+The methods to ensure reliability, security and trust should be modeled and 
+discovered in automatic ways. In this specific case it is also required to take 
+into account user feedback to evaluate the real quality and trust of a service. 
+Moreover, depending on the cloud layer, specific QoS characteristics should be 
+defined to collect the requirements of each particular case. Currently QoS 
+approaches are mainly focused on web service discovery and selection but new 
+ranking methods~\cite{DBLP:journals/fgcs/GargVB13} and reactive control systems taking into QoS features should be 
+deployed to provide an intelligent cloud infrastructure.  
+
+\item Which is the ``best'' approach to tackle the QoS management in Cloud Systems?
+
+From a policy-making perspective the use of quantitative indexes is a widely accepted 
+practice to compile in just one value a set of indicators. In this sense the on-going 
+works presented in Section~\ref{qos-cloud-index} are a nice start, more specifically 
+the SMI index seems to be a clear candidate to assess the quality of cloud services (XaaS). 
+Nevertheless it is necessary to find a method to: 1) integrate different data sources; 
+2) model the index structure and its computation and 3) provide proper documentation 
+in a multilingual environment with different user profiles and intentions. In this sense, 
+semantics can help to address these requirements through a common and shared data model 
+with implicit support for multilingual documentation. In fact if a quantitative index 
+is modeled using semantics it can be deployed and transformed to an existing monitoring 
+tool since RDF, OWL and SPARQL semantics is clearly defined and enable transformations 
+to other formal models or languages such as SQL.
+
+\item How QoS can leverage semantics?
+
+According to Section~\ref{qos-semantics} the big variety of ontologies, OWL models, etc. that 
+have been designed in recent years imply a tangled set of options that should be 
+unified to provide an unique view of what QoS should be and cover. Apart from that the 
+use of semantics is not clear, in some cases reasoning processes are used to 
+discover services but others just define an ontology as a proposal to provide a 
+formal model without any real application. A clear semantic-based architecture 
+should be defined containing: 1) the adequate definitions of 
+functional and non-functional properties and 2) different perspectives (technical and business).
+
+Furthermore semantics can help to increase the reliability in Cloud Computing providing the 
+building blocks and models for an advanced, standardized and inter-operable QoS management. 
+In the same way, Cloud Computing can help semantic technologies to be more scalable and flexible making use of the web as 
+infrastructure to create large-scale data-intensive batch applications.
+
+
+\item Are semantic technologies able to enable scalable predictive analytical processes?
+
+With regards to Semantic Web and reasoning, there is a growing community 
+trying to provide technology for supporting intelligent systems in the new Web 
+of Data. As a consequence the necessity of dealing with Big Data problems and 
+data coming from different sources is stimulating the creation of new approaches 
+to reuse existing technology such as Apache Hadoop in the context of querying 
+large datasets. Therefore the main application of the Semantic Web principles 
+lies in the unification of data and the execution of reasoning processes to 
+validate data and infer new facts. Nevertheless, the existing logic formalisms 
+available in OWL such as DL, FOL, F-Logic, etc. do not seem to be a solution to 
+tackle the challenge of modeling dynamic domains that is why some works 
+regarding Continuous Semantics are emerging.
+
+\item How Linked Data can help to a better QoS management experience?
+
+Currently this initiative has been successfully applied to 
+information retrieval systems or in the creation of rich user interfaces. 
+Nevertheless, the expectations of linking different datasets to enrich 
+information are growing as a manner for delivering more intelligent services. To 
+apply Linked Data in the Cloud Computing environment we should ensure that any 
+resource to be monitored has an URI, its data is coded into RDF according to a 
+formal model, an API or endpoint is accessible for fetching data using pulling, 
+pushing or triggering techniques and the methods for graph processing and 
+reasoning are efficient and scalable under real-time constraints.
+
+\item How can I select a monitoring tool? Should I design and implement a new one from the scratch?
+
+Following the review in Section~\ref{data-stream} there is already a proven set of tools to analyze 
+big data. Most of them are based on an internal model, a formal query language and a NoSQL-based storage 
+to perform queries or analysis in real-time. Nevertheless an extra layer of semantics based on standards 
+such as RDF or SPARQL is still an open issue. An effort to expose processed data as a SPARQL endpoint it is 
+completely possible since a similar approach have been reached using SQL (e.g. SploutSQL). In that sense a good approach can 
+be to re-use the effort of existing monitoring tools but adding a RDF layer, see Section~\ref{framework}, 
+to leverage the two main advantages of semantics: integration and interoperability.
+
+\item Which are the key-factors to select a monitoring tool?
+
+
+Depending on the context and the requirements of the problem (real-time, predictive analytics, type of license, etc.) 
+some different characteristics must be evaluated but, at least, we should ensure if the monitoring tool 
+is able to provide the next services: 1) stream processing and incremental calculation of statistics; 
+2) paralleling processing; 3) a dashboard for data exploration or integration with other 
+existing visualization tools; 4) data import capabilities; 5) extensibility; 6) use of standards and 6) in general, 
+a reporting tool to extract summaries. In fact, the selection of a monitoring tool does not differ from 
+any other kind of software but the two first points must be carefully evaluated. Finally the selection 
+must be aligned with a business/research strategy.
+
+
+\item Which is the next big thing in QoS management, Semantics and Big Data?
+
+In the case of QoS management, if we assume we are able to access different key performance indicators and perform 
+some analysis then the scenario presented in Section~\ref{motivating}, Cloud Brokerage, can 
+be efficiently address. Nevertheless the complete automation of a broker service is still 
+an utopia since human-validation is required to make strategic decisions. Furthermore it is necessary 
+to define a QoS API, maybe using the SMI indicators, to be able to implement a real Cloud Quality Management 
+Platform. For instance, SalesForce offers~\footnote{\url{http://trust.salesforce.com}} 
+some RSS feeds to check the status of their services, a similar approach should be followed for other providers to boost 
+the user experience and trust and create a real cloud service market.
+
+On the other hand semantic technologies and Linked Data are now focused on addressing some challenges in
+data quality~\cite{bizer2007,Bizer2009QA,lodq,link-qa}, provenance~\cite{DBLP:conf/ipaw/HartigZ10}, trust~\cite{Carroll05namedgraphs}, 
+large dataset processing~\cite{DBLP:conf/closer/HausenblasGHC12}, entity reconciliation~\cite{Maali_Cyganiak_2011}, 
+searching~\cite{hoga-etal-2011-swse-JWS} or inference~\cite{DBLP:journals/ws/BonattiHPS11} to name a few.
+
+Finally the use of Big Data techniques and tools is already in the market and an evolving community is generating 
+more and more approaches to provide more faster and scalable analysis processes. The design of algorithms taking 
+advantage of a distributed environment, the possibility of integrating diverse data, the use of standards and the creation 
+of more enriched visualization tools are some open issues that must be addressed to improve and bring these tools 
+to public at large boosting a new data-based economy.
+
+\end{itemize}
+
+
+
+
+%  \item Information about a service consists in both static and dynamic data, the 
+% matchmaking of services according to these issues is a key-enabler for a real 
+% QoS management but it is not fully addressed by existing works.
+
+
+
