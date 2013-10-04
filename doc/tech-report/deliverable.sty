@@ -83,7 +83,7 @@
 \newcommand{\kwebversion}{?}
 \newcommand{\kwebstate}{?}
 \newcommand{\kwebformat}{LaTeX}
-\newcommand{\kwebdistribution}{Protegida}
+\newcommand{\kwebdistribution}{Protected}
 % Empty field at bottom of page if CEC reference is not defined
 \newcommand{\kwebcecfield}{}
 \newcommand{\coverpages}{\docoverpages{1}}
@@ -103,7 +103,7 @@
 \newcommand{\project}[1]{\renewcommand{\kwebproject}{#1}}
 \renewcommand{\kwebcecfield}{EU Reference\\}
 \newcommand{\revised}[1]{\renewcommand{\kwebrevised}{#1}}
-\newcommand{\synopsis}[1]{\def\synopsisheader{Resumen.}
+\newcommand{\synopsis}[1]{\def\synopsisheader{Abstract.}
        \renewcommand{\kwebsynopsis}{#1}}
 \newcommand{\format}[1]{\renewcommand{\kwebformat}{#1}}
 \newcommand{\distribution}[1]{\renewcommand{\kwebdistribution}{#1}}
@@ -363,7 +363,7 @@ Distribution & \kwebdistribution \\ \hline
 \setlength{\rhpwidth}{\lhpwidth}
 \advance\lhpwidth by -12pt
 \advance\rhpwidth by -12pt
-{\begin{flushleft}\large\bf Proyecto 10ders Information Services \end{flushleft}}
+{\begin{flushleft}\large\bf The FP7 Marie Curie Initial Training Network ``RELATE'' \end{flushleft}}
 {\clsize
 \vskip 12pt\dockweb
 \vskip 22pt{\lpartner{\kit}}
@@ -391,9 +391,7 @@ Distribution & \kwebdistribution \\ \hline
 \advance\rhpwidth by -12pt
 \chapter*{Members}
 {\normalsize \begin{flushleft}
-Las siguientes personas e instituciones han participado
-activamente en la elaboración de esta documento así como
-de su revisión.
+The following people and institutions have actively participated in the development of this work and document.
 \vspace{0.5cm}
 
 \kwparticipants
@@ -522,17 +520,27 @@ E-mail: iparaskakis@seerc.org
 
 
 \newcommand{\dockweb}{%
-The research leading to these results has received funding from the European Union's Seventh Framework Programme (FP7-PEOPLE-2010-ITN) 
-under grant agreement n° 264840 and developed in the context of the workpackage 4 and more specifically under the project 
-``Quality Management in Service-based Systems and Cloud Applications''.
+% The FP7 Marie Curie Initial Training Network ``RELATE'' provides an opportunity 
+% for young researchers to study the latest technologies, platforms and tools in 
+% the area of engineering and provisioning of service-based Cloud applications. 
+% The ITN consists of seven leading European research institutes and five 
+% associated partners. The ITN organizes regular workshops and summer schools, so 
+% that the trained Early Stage Researchers (ESRs) and Experienced Researchers 
+% (ERs) can exchange research experience, insights and ideas. A total of 19 
+% fellows, 15 ESR fellows who are registered for PhD degrees and four ER fellows, 
+% have been recruited so far. Through an integrative and multidisciplinary research approach, RELATE promotes 
+% the advancement of the state-of-the-art in the related areas of model-driven 
+% development of Software-as-a-Service (SaaS) applications, formal methods, 
+% service-based mash-ups and application integration, security and performance of 
+% SaaS applications, as well as quality management and business model innovation.
 }
 
 % Standard KWEB Acknowledgement (can be used in \thanks command)
 
 \newcommand{\ackkweb}{%
-The research leading to these results has received funding from the European Union's Seventh Framework Programme (FP7-PEOPLE-2010-ITN) 
-under grant agreement n° 264840 and developed in the context of the workpackage 4 and more specifically under the project 
-``Quality Management in Service-based Systems and Cloud Applications''.
+% The research leading to these results has received funding from the European Union's Seventh Framework Programme (FP7-PEOPLE-2010-ITN) 
+% under grant agreement number 264840 and developed in the context of the workpackage 4 and more specifically under the project 
+% ``Quality Management in Service-based Systems and Cloud Applications''.
 }
 
 \catcode`\@=12\relax
