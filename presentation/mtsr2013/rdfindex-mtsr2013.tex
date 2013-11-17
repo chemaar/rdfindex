@@ -236,6 +236,51 @@
 }
 
 \frame{
+  \frametitle{Example: Building the ``The World Bank Naive Index''.} 
+  \begin{itemize}
+   \item Topics: ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$).
+   \item Indicators: ``Life Expectancy'' ($in_1$) and ``Health expenditure, total (\%) of GDP'' ($in_2$).
+   \item The index, $i$, is calculated through the ordered weighted averaging (OWA) operator: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$
+   \item All observaitons must be normalized using the \textit{z-score} before computing intermediate and final values for each indicator, component and index.
+   \item It is necessary to populate the average age by country and year to create a new ``derivate'' indicator of ``Life Expectancy'' without the ``sex'' dimension.
+  \end{itemize}
+ 
+  }
+  
+\frame{
+  \frametitle{Example of indicator observations from the WorldBank.} 
+  
+  \begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}{|p{4.5cm}|p{1cm}|p{2cm}|p{1cm}|p{1.5cm}|}
+\hline
+  \textbf{Description} & \textbf{Year} & \textbf{Country} & \textbf{Value} & \textbf{Status} \\  \hline
+  Life Expectancy Male & 2010 & Spain & $79$ & Normal \\ \hline
+  Life Expectancy Male & 2011 & Spain & $79$ & Normal\\ \hline
+  Life Expectancy Female & 2010 & Spain & $85$ & Normal\\ \hline
+  Life Expectancy Female & 2011 & Spain & $85$ & Normal\\ \hline
+  Life Expectancy Male & 2010 & Greece & $78$ & Normal\\ \hline
+  Life Expectancy Male & 2011 & Greece & $79$ & Normal\\ \hline
+  Life Expectancy Female & 2010 & Greece & $83$ & Normal\\ \hline
+  Life Expectancy Female & 2011 & Greece & $83$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2010 & Spain & $74.2$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2011 & Spain & $73.6$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2010 & Spain & $61.5$ & Normal\\ \hline
+  Health expenditure, total (\% of GDP) & 2011 & Spain & $61.2$ & Normal\\ \hline
+  \hline
+  \end{tabular}
+   \label{tab:example-wb}
+  \end{center}	 
+\end{table} 
+
+
+}
+
+
+
+\frame{
   \frametitle{Underlying definitions}
 
 \scriptsize
