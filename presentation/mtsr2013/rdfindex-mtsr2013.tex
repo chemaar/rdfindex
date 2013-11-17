@@ -28,6 +28,12 @@
 
 }
 
+
+\frame{
+\tableofcontents
+
+}
+
 \section{Introduction}
 
 \frame{
@@ -179,7 +185,7 @@
 
 }
 
-\section{Related Work}
+
 \frame{
   \frametitle{Statistics and the Web of Data} 
 \scriptsize
@@ -230,22 +236,209 @@
 }
 
 \frame{
-  \frametitle{Example} 
+  \frametitle{Underlying definitions}
+
+\scriptsize
+\begin{block}{Observation-$o$}
+It is a tuple $\{v,m,s\}$, where $v$ is a numerical value for the measure $m$ with an status $s$ that belongs to 
+only one dataset of observations $O$. 
+\end{block}
+
+
+\begin{exampleblock}{Dataset-$q$}
+It is a tuple $\{O,m,D,A,T\}$ where $O$ is a set of observations for only one measure $m$ that is described under 
+a set of dimensions $D$ and a set of annotations $A$. Additionally, some attributes can be defined in the set $T$ for structure enrichment. 
+\end{exampleblock}
+
+
+\begin{alertblock}{Aggregated dataset-$aq$}
+It is an aggregation of $n$ datasets $q_i$ (identified by the set $Q$) which set of observations $O$ is derivate by applying 
+an OWA operator $p$ to the observations $O_{q_i}$. 
+\end{alertblock}
+
 }
 
 \frame{
-  \frametitle{Step 1: FIXME} 
+  \frametitle {Scope and Consequences}
+
+\scriptsize
+
+\begin{exampleblock}{Necessary condition for the computation process}
+An aggregated dataset $aq$ defined by means of the set of dimensions $D_{aq}$ can be computed iif 
+$\forall q_j \in Q: D_{aq} \subseteq D_{q_j}$. Furthermore the OWA operator $p$ can only aggregate values belonging to the same measure $m$.
+\end{exampleblock}
+
+
+\begin{itemize}
+ \item The set of dimensions $D$, annotations $A$ and attributes $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
+ the same context.
+ \item An index $i$ and a component $c$ are aggregated datasets. Nevertheless this restriction is relaxed if observations can be directly mapped to 
+ these elements without any computation process.
+ \item An indicator $in$ can be both dataset or aggregated dataset.
+ \item All elements in definitions must be uniquely identified. 
+ \item An aggregated dataset is also a dataset.
+\end{itemize}
+
 }
 
 
-\section{Use Case: the Web Index project}
 
 \frame{
-  \frametitle{Overview} 
+  \frametitle{Mapping the RDFIndex to the RDF Data Cube Vocabulary} 
+  
+ \begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}{|p{2cm}||p{3.8cm}|p{3.5cm}|}
+\hline
+  \textbf{Concept} & \textbf{Vocabulary element} &  \textbf{Comments}  \\  \hline
+   Observation $o$ & \texttt{qb:Observation} &  Enrichment through annotations\\ \hline
+   Numerical value $v$ & \texttt{xsd:double} & Restriction to numerical values  \\ \hline
+   Measure $m$ & \texttt{qb:MeasureProperty} \texttt{sdmx-measure:obsValue} & Restriction to one measure \\ \hline
+   Status $s$ & \texttt{sdmx-concept:obsStatus} & Defined by the SDMX-RDF vocabulary\\ \hline
+   Dataset $q$ & \texttt{qb:dataSet} and \texttt{qb:qb:DataStructureDefinition} &  Metadata of the \texttt{qb:dataSet}\\ \hline
+   Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} & Context of observations \\ \hline
+   Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  Intensive use of Dublin Core\\ \hline
+   Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} & Link to existing datasets such as DBPedia \\ \hline
+   OWA operator $p$ &  SPARQL 1.1 aggregation operators & Other extensions depend on the RDF repository \\ \hline
+   Index, Component and Indicator & \texttt{skos:Concept} & SKOS taxonomy (logical structure) \\ \hline
+  \hline
+  \end{tabular}
+ % \caption{Summary of mappings between the index definition and the RDF Data Cube Vocabulary.}
+  \label{index-to-rdf}
+  \end{center}
+\end{table} 
+
+}
+
+\begin{frame}[fragile]
+\frametitle{Example of an index structure in RDF.}
+\begin{figure}[!ht]
+\begin{lstlisting}[language=XML,basicstyle=\tiny]  
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-wb:  <http://purl.org/rdfindex/wb/resource/> .
+@prefix rdfindex-wbont:  <http://purl.org/rdfindex/wb/ontology/> .
+
+rdfindex-wb:TheWorldBankNaiveIndex 
+  a rdfindex:Index;
+  rdfs:label "The World Bank Naive Index"@en;
+  rdfindex:type rdfindex:Quantitative;
+  rdfindex:aggregates [ 		
+    rdfindex:aggregation-operator rdfindex:OWA;
+    rdfindex:part-of [
+      rdfindex:dataset rdfindex-wb:AidEffectiveness; 
+      rdfindex:weight 0.4];
+    rdfindex:part-of [rdfindex:dataset rdfindex-wb:Health; 
+      rdfindex:weight 0.6];
+  ];
+  #More meta-data properties...
+  qb:structure 	rdfindex-wb:TheWorldBankNaiveIndexDSD ; .
+  
+rdfindex-wb:TheWorldBankNaiveIndexDSD 
+  a qb:DataStructureDefinition;  
+  qb:component    
+  [qb:dimension rdfindex-wbont:ref-area],
+  [qb:dimension rdfindex-wbont:ref-year],
+  [qb:measure   rdfindex:value],
+  [qb:attribute sdmx-attribute:unitMeasure];
+  #More meta-data properties...
+  .
+\end{lstlisting}
+ \label{fig:results-rdf-index}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{SPARQL template for building aggregated observations.}
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize,mathescape]  
+SELECT ($d_i \in D$) [(sum(?w*?measure) as ?newvalue) | OWA(?measure)]
+WHERE{
+  $q$ rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset $q_i$ .
+  FILTER($?partof \in Q$).  
+  ?observation rdf:type qb:Observation.
+  ?part rdfindex:weight ?defaultw.     
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation $m$ ?measure . 
+  ?observation ?dim ?dimRef. 
+  FILTER ($?dim  \in D$).
+}GROUP BY ($d_i \in D$)
+\end{lstlisting}
+ \label{fig:results-rdf-sparql-template}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Example of generated SPARQL query.}
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
+prefix rdfindex:  <http://purl.org/rdfindex/ontology/> 
+SELECT ?dim0 ?dim1 ( sum(?w*?measure) as ?newvalue) 
+WHERE{ 
+  rdfindex-wb:TheWorldBankNaiveIndex  
+  rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset ?part .
+  FILTER ((?part =rdfindex-wb:AidEffectiveness) || 
+	  (?part =rdfindex-wb:Health)). 
+  ?observation qb:dataSet ?part . 
+  ?part rdfindex:weight ?defaultw.        
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation rdfindex:value ?measure . 
+  ?observation rdfindex-wbont:ref-area ?dim0. 
+  ?observation rdfindex-wbont:ref-year ?dim1. 
+} GROUP BY ?dim0 ?dim1 
+\end{lstlisting}
+ 
+\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Partial example of a populated observation for ``The World Bank Naive Index''.}
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
+rdfindex-wb:o6808100851579
+      a       qb:observation ;
+      qb:dataSet rdfindex-wb:TheWorldBankNaiveIndex  ;
+      rdfindex-wbont:ref-area dbpedia-res:Spain ;
+      rdfindex-wbont:ref-year
+	<http://reference.data.gov.uk/id/
+	gregorian-interval/2010-01-01T00:00:00/P1Y> ;
+      ...
+      #rdfs:{label,comment} {literal};
+      #dcterms:{issued, date, contributor, author, 
+      #publisher, identifier} 
+      #{resource, literal};
+      rdfindex:md5-hash "6cdda76088cd161d766809d6a78d35f6";
+      sdmx-concept:obsStatus
+              sdmx-code:obsStatus-E;
+      rdfindex:value "0.707"^^xsd:double .
+\end{lstlisting}
+ 
+\end{figure}
+\end{frame}
+
+
+
+
+
+\frame{
+  \frametitle{Use Case: the Web Index project} 
 }
 
 
-\section{Evaluation}
+\section{Evaluation and Discussion}
 
 \frame{
   \frametitle{Design of the experiment} 
@@ -257,8 +450,6 @@
   \frametitle{Results} 
 }
 
-
-\section{Discussion}
 
 \frame{
   \frametitle{Advantages} 
@@ -282,8 +473,19 @@
   \frametitle{Future Work} 
 }
 
+\frame{
+    
+  \begin{figure}[!htb]
+\centering
+ \includegraphics[width=9cm]{imgs/thanks}
+\end{figure}
+
+
+}
 
 \section{Metadata and Information}
+
+
 
 \frame{
   \frametitle{Acknowledgements} 
@@ -306,17 +508,6 @@
   \frametitle{References} 
 }
 
-
-\frame{
-  \frametitle{Thank you...} 
-}
-
-
-\frame{
-\titlepage
-
-}
-
 \appendix
 \section*{References}
 \bibliographystyle{abbrv}
@@ -324,5 +515,12 @@
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\frame{
+\titlepage
+
+}
+
 
 \end{document}
