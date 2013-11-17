@@ -232,17 +232,13 @@
 \section{The RDFIndex approach}
 
 \frame{
-  \frametitle{Overview} 
-}
-
-\frame{
   \frametitle{Example: Building the ``The World Bank Naive Index''.} 
   \begin{itemize}
-   \item Topics: ``Aid Efectiveness'' ($c_1$) and ``Health'' ($c_2$).
-   \item Indicators: ``Life Expectancy'' ($in_1$) and ``Health expenditure, total (\%) of GDP'' ($in_2$).
-   \item The index, $i$, is calculated through the ordered weighted averaging (OWA) operator: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$
-   \item All observaitons must be normalized using the \textit{z-score} before computing intermediate and final values for each indicator, component and index.
-   \item It is necessary to populate the average age by country and year to create a new ``derivate'' indicator of ``Life Expectancy'' without the ``sex'' dimension.
+   \item Components: \textbf{``Aid Efectiveness''} ($c_1$) and \textbf{``Health''} ($c_2$).
+   \item Indicators: \textbf{``Life Expectancy''} ($in_1$) and \textbf{``Health expenditure, total (\%) of GDP''} ($in_2$).
+   \item The index, $i$, is calculated through the \textbf{ordered weighted averaging} (OWA) operator: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$
+   \item All \textbf{observations} must be \textbf{normalized} using the \textit{z-score} before computing intermediate and final values for each indicator, component and index.
+   \item It is necessary to populate the average age by country and year to create a new \textbf{``derivate'' indicator of ``Life Expectancy''} without the ``sex'' dimension.
   \end{itemize}
  
   }
@@ -278,6 +274,24 @@
 
 }
 
+\frame{
+  \frametitle{Representing and computing data with the RDFIndex (summary)}
+  
+  \begin{exampleblock}{Steps}
+   \begin{enumerate}
+    \item Define the structure and computation of the index with the RDFIndex vocabulary.
+    \item Run the Java SPARQL based processor:
+    \begin{itemize}
+    \item Load the RDFIndex ontology to have access to common definitions.
+    \item Create a kind of Abstract Syntax Tree (AST) containing the defined meta-data (our index).
+    \item Validate the structure with an AST Walker (structure and RDF Data Cube normalization).
+    \item Create the SPARQL queries to compute the index (another AST walker).
+    \item Load the observations and run the SPARQL queries to generate new observations.
+    \end{itemize}
+ \end{enumerate}
+\end{exampleblock}
+
+}
 
 
 \frame{
@@ -358,7 +372,7 @@ $\forall q_j \in Q: D_{aq} \subseteq D_{q_j}$. Furthermore the OWA operator $p$ 
 }
 
 \begin{frame}[fragile]
-\frametitle{Example of an index structure in RDF.}
+\frametitle{Example of the ``World Bank Naive index'' structure in RDF.}
 \begin{figure}[!ht]
 \begin{lstlisting}[language=XML,basicstyle=\tiny]  
 @prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
@@ -476,25 +490,27 @@ rdfindex-wb:o6808100851579
 
 
 
+\frame{
+  \frametitle{On-going working examples}
+  \begin{block}{The Cloud Index}
+   
+  \end{block}
+
+  \begin{block}{The Web Index 2012}
+   
+  \end{block}
+
+}
 
 
 \frame{
-  \frametitle{Use Case: the Web Index project} 
+  \frametitle{Computex: an extension to the RDFIndex}
+  
+
 }
 
 
 \section{Evaluation and Discussion}
-
-\frame{
-  \frametitle{Design of the experiment} 
-}
-
-
-
-\frame{
-  \frametitle{Results} 
-}
-
 
 \frame{
   \frametitle{Advantages} 
@@ -504,7 +520,6 @@ rdfindex-wb:o6808100851579
 \frame{
   \frametitle{Restrictions} 
 }
-
 
 
 \section{Conclusions and Future Work}
@@ -550,12 +565,13 @@ rdfindex-wb:o6808100851579
 }
 
 \frame{
-  \frametitle{References} 
+  \frametitle{Resources} 
 }
 
 \appendix
 \section*{References}
 \bibliographystyle{abbrv}
+\tiny
 \bibliography{references}
 
 
