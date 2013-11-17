@@ -79,6 +79,8 @@
 
 }
 
+
+
 \frame{
   \frametitle{The Motivating example...} 
  
@@ -156,21 +158,68 @@
 
 }
 
-\frame{
-  \frametitle{Main Contributions} 
-}
-
 
 \section{Related Work}
-
 \frame{
-  \frametitle{Linked Open Data} 
+  \frametitle{Statistics and the Web of Data} 
+  \scriptsize
+\begin{block}{Vocabularies}<1->
+  \begin{enumerate}
+ \item The Statistical Core Vocabulary~\cite{scovo} (SCOVO), a former standard to describe statistical information in the Web of Data (2009).
+ \item The RDF Data Cube Vocabulary~\cite{rdf-data-cube}, an adaptation of the ISO standard SDMX (Statistical Data and Metadata Exchange Vocabulary) (2013). 
+ \item ``DDI-RDF discovery vocabulary. a metadata vocabulary for documenting research and survey data.'' (2013)~\cite{DDI2013} .
+\end{enumerate}
+\end{block}
+
+\begin{exampleblock}{Statistics and Linked Data}<2->
+  \begin{enumerate}
+ \item ``Defining and Executing Assessment Tests on Linked Data for Statistical Analysis'' (2011)~\cite{DBLP:conf/semweb/ZapilkoM11}.
+ \item ``Publishing Statistical Data on the Web'' (2012)~\cite{DBLP:journals/ijsc/SalasMBCMA12}.
+ \item ``Publishing open statistical data: the Spanish census'' (2011)~\cite{DBLP:conf/dgo/FernandezMG11}.
+ \item ``Publishing Statistical Data following the Linked Open Data Principles: The Web Index Project'' (2012)~\cite{webindexlod}.
+ \item ``Linked Open Data Statistics: Collection and Exploitation'' (2013)~~\cite{DBLP:conf/kesw/ErmilovMLA13}.
+ \item Some works in the ``RDF Validation Workshop 2013'' (\url{http://www.w3.org/2012/12/rdf-val/}).
+\end{enumerate}
+\end{exampleblock}
+
 }
 
+\section{Related Work}
+\frame{
+  \frametitle{Preliminary Evaluation} 
+  
+ \begin{block}{Vocabularies...}<1->
+  Existing RDF-based vocabularies enable us the possibility of modelling and representing statistical data.
+ \end{block}
+
+ 
+ \begin{alertblock}{Existing approaches...}<2->
+  All of the approaches are/were focused on data publishing/consumption...but...
+  \begin{itemize}
+   \item \textbf{Validation} of statistical data and/or structure...and
+   \item the \textbf{Computation} process are still \textbf{open issues}.
+  \end{itemize}
+
+ \end{alertblock}
+
+
+}
 
 \frame{
-  \frametitle{Statistics and Linked Open Data} 
-}
+  \frametitle{Main Contributions} 
+  
+ \begin{exampleblock}{1-Representation}<1->
+  A \textbf{high-level model on top of the RDF Data Cube Vocabulary} for representing quantitative indexes.
+ \end{exampleblock}
+ 
+ 
+ \begin{block}{2-Computation}<2->
+  A \textbf{Java-SPARQL based processor} to exploit the meta-information, validate and compute the new index values.
+ \end{block}
+
+ }
+
+
 
 
 \section{The RDFIndex approach}
@@ -270,6 +319,11 @@
 \titlepage
 
 }
+
+\appendix
+\section*{References}
+\bibliographystyle{abbrv}
+\bibliography{references}
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
