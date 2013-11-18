@@ -165,6 +165,31 @@
 }
 
 
+\frame{
+  \frametitle{A quantitative index is...}
+  \begin{enumerate}
+   \item It is technique to \textbf{collect in just one value} a set of indicators.
+   \item It can be splitted into: index, component and indicator.
+   \item An index is calculated by aggregating $n$ components using an \textbf{OWA operator}~\footnote{\textbf{Ordered weighted averaging} operator: $\sum_{i=1}^n  w_i a_i$, where \textbf{$w_i$} is the weight of the aggregated element \textbf{$a_i$}.}.
+   \item A component is also calculated by aggregating $n$ indicators using an OWA operator.
+   \item Observations are aligned to an indicator including some metadata such as: location, measure, value, etc.
+  \end{enumerate}
+
+  }
+  
+  
+  
+\frame{
+  \frametitle{Graphical view of a quantitative index...}
+\begin{figure}[htb]
+\centering
+	\includegraphics[width=10cm]{imgs/structure-index}
+%\caption{Modelo $5\star$ (W3C).}
+\end{figure}
+
+  }
+  
+  
 \section{Related Work}
 \frame{
   \frametitle{Statistics and the Web of Data} 
@@ -214,6 +239,7 @@
 
 }
 
+\section{Main Contributions}
 \frame{
   \frametitle{Main Contributions} 
   
@@ -293,6 +319,19 @@
 
 }
 
+
+\frame{
+  \frametitle{Graphical view of the RDFIndex workflow...}
+\begin{figure}[htb]
+\centering
+	\includegraphics[width=10cm]{imgs/index-flow}
+%\caption{Modelo $5\star$ (W3C).}
+\end{figure}
+
+  }
+  
+  
+  
 
 \frame{
   \frametitle{Underlying definitions}
@@ -490,35 +529,212 @@ rdfindex-wb:o6808100851579
 
 
 
+
+\frame{
+  \frametitle{Evolution: joint effort between RDFIndex and Computex}
+  \scriptsize
+  \begin{block}{Computex}
+   \begin{enumerate}
+    \item Vocabulary for statistical computations.
+    \item Extends RDF Data Cube.
+    \item Ontology at: \url{http://purl.org/weso/computex}.
+    \item Data and structure validation using SPARQL Queries.
+    \item Some terms:
+    \begin{itemize}
+     \item \texttt{cex:Concept}
+    \item \texttt{cex:Indicator}
+    \item \texttt{cex:Computation}
+    \item \texttt{cex:WeightSchema}
+    \item \texttt{qb:Observation}
+    \end{itemize}
+    \item Learn more: \url{http://computex.herokuapp.com/}
+   \end{enumerate}
+   \end{block}
+
+  \begin{exampleblock}{Preliminary Evaluation...}
+   Similar approaches that have been merged between July and September, 2013.
+  \end{exampleblock}
+
+
+}
+
+
+\frame{
+  \frametitle{Demo of the RDFIndex/Computex...}
+\begin{figure}[htb]
+\centering
+	\includegraphics[width=10cm]{imgs/computex}
+%\caption{Modelo $5\star$ (W3C).}
+\end{figure}
+
+\url{http://computex.herokuapp.com/}
+  }
+  
+  
 \frame{
   \frametitle{On-going working examples}
-  \begin{block}{The Cloud Index}
-   
+  \scriptsize
+  \begin{block}{The Cloud Index}<1->
+   \begin{itemize}
+    \item Compilation of \textbf{Key Performance Indicators} for cloud services.
+    \item Creation of a Cloud Index to measure \textbf{Quality of Service} of cloud providers.
+    \item Funded by: the RELATE-ITN (FP7-PEOPLE-2010-ITN, 264840) project and developed in the subproject 
+    \textbf{``Quality Management in Service-based Systems and Cloud Applications''}.
+    \item Demo: \url{http://cloudindex-doc.herokuapp.com/}
+   \end{itemize}
+
   \end{block}
 
-  \begin{block}{The Web Index 2012}
-   
-  \end{block}
+  \begin{exampleblock}{The Web Index 2012 and 2013}<2->
+   \begin{itemize}
+    \item Compilation of several indicators (85) from \textbf{61 countries} (100 in 2013).
+    \item Creation of the Web Index to measure the web impact over the world.
+    \item Funded by: The Webfoundation.
+    \item Demo: \url{http://thewebindex.org}
+   \end{itemize}
+  \end{exampleblock}
 
 }
 
 
-\frame{
-  \frametitle{Computex: an extension to the RDFIndex}
-  
-
-}
 
 
 \section{Evaluation and Discussion}
 
+
 \frame{
   \frametitle{Advantages} 
+ \begin{exampleblock}{Data Sources}<1->
+  Data management applying the Linked Data principles.
+ \end{exampleblock}
+
+ \begin{block}{Structure}<2->
+Automatic validation and verfication of the structure and metadata of quantitative indexes.
+ \end{block}
+
+ 
+ 
+ \begin{alertblock}{Computation process}<3->
+A native approach using SPARQL queries that can help to boost transparency.
+ \end{alertblock}
+
+ 
+  \begin{exampleblock}{Documentation}<4->
+Implicit multilingual and multicultural support.
+ \end{exampleblock}
+
+ 
+ 
+ 
+ }
+
+\frame{
+  \frametitle{Detailed advantages (I)} 
+  
+   
+   
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}{|p{2cm}|p{8.5cm}|}
+\hline
+  \textbf{Feature} & \textbf{Main advantages}  \\  \hline
+  Data sources  & \begin{itemize}
+		      \item Common and shared data model, RDF.
+		      \item Description of data providers (provenance and trust).
+		      \item A formal query language to query data, SPARQL.
+		      \item Use of Internet protocols, HTTP.
+		      \item Data enrichment and validation (domain and range).
+		      \item Unique identification of entities, concepts, etc. through (HTTP) URIs.
+		      \item Possibility of publishing new data under the aforementioned characteristics.
+		      \item Standardization and integration of data sources.
+		    \end{itemize} \\ \hline  
+  Structure & \begin{itemize}
+                  \item Meta-description of index structure (validation).
+                  \item Re-use of existing semantic web vocabularies.
+                  \item Re-use of existing datasets to enrich meta-data.
+                  \item Context-aware definitions.
+                  \item Underlying logic formalism.                  
+                  \item Orthogonal and flexible.                 
+                 \end{itemize} \\ \hline       
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table} 
+
+
+
 }
+
+
+
+\frame{
+  \frametitle{Detailed advantages (II)} 
+  
+   
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\tiny
+\begin{center}
+\begin{tabular}{|p{2cm}|p{8.5cm}|}
+\hline
+  Computation process & \begin{itemize}
+                  \item Meta-description of datasets aggregation.
+                  \item Validation of composed datasets.
+                  \item OWA operators support.
+                  \item Direct translation to SPARQL queries.  
+                 \end{itemize} \\ \hline
+  Documentation & \begin{itemize}
+                  \item Multilingual support to describe datasets, etc.
+                  \item Easy generation with existing tools.                
+                 \end{itemize} \\ \hline      
+                 
+                 Cross-Domain Features & \begin{itemize}
+                  \item Separation of concerns and responsibilities: data and meta-data (structure and computation).
+                  \item Standardization (put in action specs from organisms such as W3C).
+                  \item Declarative and adaptive approach.
+                  \item Non-vendor lock-in (format, access and computation).
+                  \item Integration, Interoperability and Transparency.
+                  \item Align to existing trend (data management: quality and filtering).
+                  \item Easy integration with third-party services such as visualization.
+                  \item Contribution to the Web of Data.
+                 \end{itemize} \\ \hline        
+       
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table} 
+
+
+
+}
+
 
 
 \frame{
   \frametitle{Restrictions} 
+  
+  
+ \begin{alertblock}{SPARQL 1.1 support}<1->
+\begin{enumerate}
+ \item Some built-in functions are not standardized:
+ \begin{itemize}
+  \item Example: \texttt{z-score} employs standard deviation. 
+  \item It requires built-in function: \texttt{sqrt} (only available in some SPARQL implementations).
+ \end{itemize}
+ \item Ranking of values is not obvious: 
+  \begin{itemize} \item \texttt{GROUP\_CONCAT} 
+    \item Check a value against all the other values.
+     \item ...neither solution is efficient.
+   \end{itemize}
+\end{enumerate}
+\end{alertblock}
+ 
+ \begin{block}{Limitations of the RDFIndex expressivity}<2->
+  The working examples show its applicability but some lack of terms/relationships should be expected.
+ \end{block}
+
 }
 
 
