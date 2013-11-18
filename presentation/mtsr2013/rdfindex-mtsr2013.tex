@@ -109,10 +109,10 @@
 \scriptsize
 \begin{alertblock}{Drawbacks of existing indexes...}<1->
  \begin{enumerate}
-\item \textbf{Data heterogenity}: different datasources, formats and access protocols.
+\item \textbf{Data heterogeneity}: different datasources, formats and access protocols.
 \item \textbf{Structure}: math models to aggregate some indicators that can change over time.
 \item \textbf{Computation process}: observations are gathered and processed, \textit{somehow}, generating a final value.
-\item \textbf{Documentation}: mutilingual and multicultural character of information.
+\item \textbf{Documentation}: multilingual and multicultural character of information.
 \item \ldots
 \end{enumerate}
 \end{alertblock}
@@ -169,7 +169,7 @@
   \frametitle{A quantitative index is...}
   \begin{enumerate}
    \item It is technique to \textbf{collect in just one value} a set of indicators.
-   \item It can be splitted into: index, component and indicator.
+   \item It can be divided into: index, component and indicator.
    \item An index is calculated by aggregating $n$ components using an \textbf{OWA operator}~\footnote{\textbf{Ordered weighted averaging} operator: $\sum_{i=1}^n  w_i a_i$, where \textbf{$w_i$} is the weight of the aggregated element \textbf{$a_i$}.}.
    \item A component is also calculated by aggregating $n$ indicators using an OWA operator.
    \item Observations are aligned to an indicator including some metadata such as: location, measure, value, etc.
@@ -310,8 +310,8 @@
     \begin{itemize}
     \item Load the RDFIndex ontology to have access to common definitions.
     \item Create a kind of Abstract Syntax Tree (AST) containing the defined meta-data (our index).
-    \item Validate the structure with an AST Walker (structure and RDF Data Cube normalization).
-    \item Create the SPARQL queries to compute the index (another AST walker).
+    \item Validate the structure with an AST walker (structure and RDF Data Cube normalization).
+    \item Create the SPARQL queries to compute the index (other AST walker).
     \item Load the observations and run the SPARQL queries to generate new observations.
     \end{itemize}
  \end{enumerate}
@@ -578,7 +578,7 @@ rdfindex-wb:o6808100851579
    \begin{itemize}
     \item Compilation of \textbf{Key Performance Indicators} for cloud services.
     \item Creation of a Cloud Index to measure \textbf{Quality of Service} of cloud providers.
-    \item Funded by: the RELATE-ITN (FP7-PEOPLE-2010-ITN, 264840) project and developed in the subproject 
+    \item Funded by the RELATE-ITN (FP7-PEOPLE-2010-ITN, 264840) project and developed in the subproject 
     \textbf{``Quality Management in Service-based Systems and Cloud Applications''}.
     \item Demo: \url{http://cloudindex-doc.herokuapp.com/}
    \end{itemize}
@@ -589,7 +589,7 @@ rdfindex-wb:o6808100851579
    \begin{itemize}
     \item Compilation of several indicators (85) from \textbf{61 countries} (100 in 2013).
     \item Creation of the Web Index to measure the web impact over the world.
-    \item Funded by: The Webfoundation.
+    \item Funded by The Webfoundation.
     \item Demo: \url{http://thewebindex.org}
    \end{itemize}
   \end{exampleblock}
@@ -609,7 +609,7 @@ rdfindex-wb:o6808100851579
  \end{exampleblock}
 
  \begin{block}{Structure}<2->
-Automatic validation and verfication of the structure and metadata of quantitative indexes.
+Automatic validation and verification of the structure and metadata of quantitative indexes.
  \end{block}
 
  
@@ -742,12 +742,33 @@ Implicit multilingual and multicultural support.
 
 \frame{
   \frametitle{Conclusions} 
+  \begin{enumerate}
+   \item The use of quantitative indexes is a common practice to compile and rank indicators for making decisions.
+   \item Existing indexes are completely opaque (PDF, HTML, etc.)
+   \item It is necessary to \textbf{improve} the \textbf{access to data/metadata} and to \textbf{boost transparency}.
+   \item The \textbf{RDFIndex/Computex} vocabulary seeks for providing the \textbf{appropriate building blocks} to \textbf{represent} and \textbf{compute} indexes.
+   \item However: 
+   \begin{itemize}
+    \item SPARQL limitations avoid a fully development of ``pedantic'' Linked Data approach.
+    \item The vocabulary likely does not cover all required elements to represent any index.
+   \end{itemize}
+
+  \end{enumerate}
+
 }
 
 
 \frame{
   \frametitle{Future Work} 
+  
+  \begin{enumerate}
+   \item Extend the RDFIndex/Computex vocabulary.
+   \item Externalize the computation with a hybrid approach R+SPARQL.
+   \item Parallelization of the computation process.
+  \end{enumerate}
 }
+
+\section*{End of the presentation...}
 
 \frame{
     
@@ -762,29 +783,87 @@ Implicit multilingual and multicultural support.
 \section{Metadata and Information}
 
 
-
 \frame{
-  \frametitle{Acknowledgements} 
+  \frametitle{Roster...} 
+  
+  \begin{table}[!htb]
+
+\scriptsize
+\begin{center}
+\begin{tabular}{p{3cm} p{7cm}}
+  \begin{figure}[!htb]
+\centering
+ \includegraphics[width=1cm]{imgs/chema}
+\end{figure} & \begin{itemize}
+                \item Dr. Jose María Alvarez-Rodríguez
+                \item SEERC (until August, 2013) and Carlos III University of Madrid, Spain
+                \item E-mail: \url{josemaria.alvarez@uc3m.es}
+                \item WWW: \url{http://www.josemalvarez.es}
+               \end{itemize} \\
+
 \begin{figure}[!htb]
 \centering
- \includegraphics[width=9cm]{imgs/linkedin}
-\end{figure}
+ \includegraphics[width=1cm]{imgs/patriop}
+\end{figure} & \begin{itemize}
+                \item Prof. Dr. Patricia Ordoñez De Pablos
+                \item University of Oviedo, Spain
+                \item E-mail: \url{patriop@uniovi.es}
+               \end{itemize} \\
+               
+
+\begin{figure}[!htb]
+\centering
+ \includegraphics[width=1cm]{imgs/labra}
+\end{figure} & \begin{itemize}
+                \item Prof. Dr. Jose Emilio Labra-Gayo
+                \item University of Oviedo, Spain
+                \item E-mail: \url{labra@uniovi.es}
+                \item WWW: \url{http://www.di.uniovi.es/~labra}
+               \end{itemize}
+               \end{tabular}
+  \end{center}
+\end{table} 
+
+  
 }
 
-
-\frame{
-  \frametitle{Contact} 
-}
-
-\frame{
-  \frametitle{Credits} 
-}
-
-\frame{
-  \frametitle{Resources} 
-}
 
 \appendix
+\section*{Some SPARQL queries}
+
+
+\begin{frame}[fragile]
+\frametitle{Z-score normalization using SPARQL...}
+
+\scriptsize
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL]  
+prefix afn: <http://jena.hpl.hp.com/ARQ/function#>
+SELECT ( (?measure-?mean)/?stddev as ?zscore) 
+WHERE{
+ ...
+ ?observation rdfindex:value ?measure 
+ {
+  SELECT ?mean (afn:sqrt((SUM((?measure-?mean)*
+	 (?measure-?mean))/?count)) as ?stddev) 
+  WHERE{ 
+   ?observation rdfindex:value ?measure 
+   {
+    SELECT (COUNT(?measure) as ?count) (AVG(?measure) as ?mean)
+    WHERE {
+     ?observation rdfindex:value ?measure 
+     }GROUP BY ?count ?mean LIMIT 1
+
+   }	
+  }GROUP BY ?mean ?count LIMIT 1
+ }
+}
+\end{lstlisting}
+ \label{fig:sparql-zscore}
+\end{figure}
+\end{frame}
+
+
 \section*{References}
 \bibliographystyle{abbrv}
 \tiny
