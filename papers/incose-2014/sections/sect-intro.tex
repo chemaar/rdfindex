@@ -39,12 +39,12 @@ bus is expected to be the next big thing in systems development elevating the me
 semantic-based technologies. More specifically the OSLC Requirements and Quality management specifications are defining 
 the appropiate concepts and properties to share data among development tools. 
 
-On the other hand, public and private bodies are continuously seeking for new analytical tools and methods to assess some policy, change, etc. and 
+On the other hand, public and private bodies are continuously seeking for new analytical tools and methods to assess some policy, change, specification, etc. and 
 to support their decisions. Nevertheless the sheer mass of data now available is raising a new dynamic and challenging environment 
 in which traditional tools are facing major problems to deal with data-sources diversity, structural issues or complex processes of estimation.
 New paradigms and tools are required to take advantage of the existing data-based environment to design and estimate actions 
 in this dynamic context according to requirements of transparency, standardization, adaptability and extensibility among others with the aim of providing new context-aware 
-and added-value services that can help a deepen and broaden understanding of the impact of a policy (requirement?) in a more fast and efficient way. 
+and added-value services that can help a deepen and broaden understanding of the impact of a policy (or a requirement change) in a more fast and efficient way. 
 As a consequence common features and requirements can be extracted from the existing situation out:
 \begin{itemize}
  \item Data sources. Data and information is continuously being generated as observations from social networks, public and private institutions, NGOs, services and applications, etc. 
@@ -64,20 +64,14 @@ As a consequence common features and requirements can be extracted from the exis
   of the most wanted characteristics such as transparency. Furthermore it is necessary to ensure that the computation process 
   is sound and correct.
 
-  \item Documentation. As the European project Cross-over has stated, new policy-making strategies go ahead of a simple and closed value and it is necessary to bring 
-  new ways of exploiting data and information. Moreover the use of the Web as a dissemination channel represents a powerful environment in which 
+  \item Documentation.New policy-making or quality managmeent strategies go ahead of a simple and closed value and it is necessary to bring 
+  new ways of exploiting data and information. Moreover the use of the Web-based protocols as a dissemination channel represents a powerful environment in which 
   information should be available taking into account the multilingual and multicultural character of information. In this context documentation mechanisms 
   must necessarily cover all the aforementioned features to afford a detailed explanation of a quantitative index-based policy to both policymakers 
   and final users. However existing initiatives usually generates some kind of hand-made report which is not easy to keep up-to-date and deliver 
   to the long-tail of interested third-parties.
 \end{itemize}
 
-%  Semantic Web area has experienced during last years a growing commitment from both academia and industrial areas 
-% % with the objective of elevating the meaning of web information resources through a common and shared data model (graphs) and 
-% % an underlying semantics based on a logic formalism (ontologies). The Resource Description Framework (RDF), based on a graph model, 
-% % and the Web Ontology Language (OWL), designed to formalize and model domain knowledge, are a \textit{lingua-franca} to re-use information 
-% % and data in a knowledge-based environment. Thus data, information and knowledge can be easily shared, exchanged and linked 
-% % to other databases through the use URIs, more specifically HTTP-URIs. 
 % 
 Obviously semantic-based technologies, as underlying concepts of the OSLC initiative, can partially address this challenging environment for supporting 
 new quality-checking strategies. A common and shared data model based on existing standardized semantic web vocabularies and datasets can be used to 
@@ -89,16 +83,16 @@ That is why the present paper introduces: 1) a high-level model on top of the RD
 
 % 
 Finally as a motivating and on-going example, see Table~\ref{tab:example-wb}, a quality manager wants to re-use requirements metrics to model and compute a new index, 
-``The Naive Requirement Quality Index''. This  index uses the topics ``Maintainability'' ($c_1$) and ``Usability'' ($c_2$) with the aim of 
+``The Naive Requirement Quality Index''. This  index uses the components ``Maintainability'' ($c_1$) and ``Usability'' ($c_2$) with the aim of 
 comparing the status and evolution of requirements in a project to decide whether new actions are performed. 
 From these components two indicators have been respectively selected by experts: ``Maturity'' ($in_1$) and ``Understandability'' ($in_2$). 
-Once components and their indicators are defined and data can be retrieved from the requirements quality tool it is necessary to set how the index and 
+Once components and their indicators are defined and data can be retrieved from the requirements, a quality tool it is necessary to set how the index and 
 components are computed taking into account that only data about indicators is available. Following a top-down approach the index, $i$, is calculated through 
 an ordered weighted averaging (OWA) operator using the formula: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$. On the other hand, 
 both components only aggregates one indicator, the computation must also consider the observation status and values must be normalized using the 
 \textit{z-score} before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to 
-change in the future adding new data sources and meta-data, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). 
-Finally, the quality manage is also interested in applying this index to other scenarios and he also needs a way of explaining in different 
+change in the future adding new components or indicators, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). 
+Finally, the quality manager is also interested in applying this index to other scenarios and he also needs a way of explaining in different 
 languages how the index is computed. 
 
 
@@ -108,11 +102,11 @@ languages how the index is computed.
 \begin{center}
 \begin{tabular}{|p{2.5cm}|p{3cm}|p{2cm}|p{1cm}|p{1.5cm}|}
 \hline
-  \textbf{Description} & \textbf{Requirement} & \textbf{Specification} & \textbf{Value} & \textbf{Status} \\  \hline
-  Stability & $R_1$ & $S_1$ & $79$ & Normal \\ \hline
-  Understandability & $R_1$ & $S_1$  & $85$ & Normal\\ \hline
-  Stability & $R_2$ & $S_1$ & $79$ & Normal \\ \hline
-  Understandability & $R_2$ & $S_1$  & $85$ & Normal\\ \hline
+  \textbf{Description} & \textbf{Requirement} & \textbf{Project} & \textbf{Value} & \textbf{Status} \\  \hline
+  Stability & $R_1$ & $P_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_1$ & $P_1$  & $85$ & Normal\\ \hline
+  Stability & $R_2$ & $P_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_2$ & $P_1$  & $85$ & Normal\\ \hline
   \hline
   \end{tabular}
   \caption{Example of indicator observations from an ISO-based Quality Model.}
