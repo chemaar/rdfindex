@@ -1,0 +1,128 @@
+The use of requirements in software and systems engineering lifecycles is a widely accepted practice for analysis~\cite{Sommerville:1998:REP:552009} and 
+quality assessment~\cite{4685703} purposes. Traditionally requirements try to address or find out what the 
+target system is supposed to do. In this sense requirements extraction as a common practice for understanding stakeholder’s 
+intentions is still far from being fully developed and in most of cases the use of requirements is isolated 
+in the development process. That is why the software community is trying to elevate the meaning of 
+natural language specifications through new but well-known approaches such as the realization of 
+Model-Driven Engineering (MDE)~\cite{DBLP:conf/gttse/Bezivin06,DBLP:conf/jisbd/Bezivin09} in combination 
+with Requirements Engineering (RE), as a basic unit of specification, to support the whole lifecycle of a product or service. Furthermore and 
+in case of critical systems, Software Requirements Specifications (SRS) are widely recognized as  
+a key-factor for the sucess of the development process. To do so the software community has been 
+involved in the research of techniques and methods for producing high-quality SRS using 
+structured and controlled languages, boilerplates or patterns to guide the creation of requirements or 
+ontologies to name a few. This effort is strongly justified in the field of systems engineering since 
+requirements are expected to be used in the validation and verification phases of critical systems. That is 
+why a proper definition of requirements must be supported to accomplish with both stakeholder's expectations and 
+software quality standards such as ISO/IEC TR 24766:2009, 25000:2005, 25012:2008 or 25030:2007 (250XX) or ISO quality standards 
+such as ISO/IEC 9126-1. 
+
+In order to shift the paradigm of development processes from document-centric approaches to a 
+Model-Driven Requirements Engineering (MDRE) process it is necessary to deal with the creation of requirements and, therefore, 
+with the ambiguity and risks of natural language: 
+\begin{itemize}
+ \item Requirements are expressed with different levels of detail and precision to specify similar functionalities.
+ \item Requirements may be too abstract and not easy to use by developers.
+ \item Not adequate people can be involved in the creation of requirements.
+ \item \ldots
+\end{itemize}
+
+To tackle this situation the use of controlled vocabularies and indicators to write \textit{better} requirements are 
+common practices in the software and systems engineering areas. Furthermore a quality model is usually applied to validate the quality 
+of requirements specifications to compile just in one quantitative value a set of quality indicators. Nevertheless 
+existing development methodologies are facing a major challenge (interoperability) when data and information of different processes 
+and tools must be shared among applications. In this context the Open Services for Lifecycle Collaboration (OSLC) 
+initiative is seeking for new methods to easily integrate software and build an ideal development and operations environment.  
+This initiative is releasing several specifications (leaded by industry partners) to model shared resources 
+between applications with the aim of sharing more data, boosting the use of web-based standards (RDF and HTTP) 
+and delivering robust products through the collaboration of development and operational tools. The OSLC as an integration 
+bus is expected to be the next big thing in systems development elevating the meaning of information resources through 
+semantic-based technologies. More specifically the OSLC Requirements and Quality management specifications are defining 
+the appropiate concepts and properties to share data among development tools. 
+
+On the other hand, public and private bodies are continuously seeking for new analytical tools and methods to assess some policy, change, etc. and 
+to support their decisions. Nevertheless the sheer mass of data now available is raising a new dynamic and challenging environment 
+in which traditional tools are facing major problems to deal with data-sources diversity, structural issues or complex processes of estimation.
+New paradigms and tools are required to take advantage of the existing data-based environment to design and estimate actions 
+in this dynamic context according to requirements of transparency, standardization, adaptability and extensibility among others with the aim of providing new context-aware 
+and added-value services that can help a deepen and broaden understanding of the impact of a policy (requirement?) in a more fast and efficient way. 
+As a consequence common features and requirements can be extracted from the existing situation out:
+\begin{itemize}
+ \item Data sources. Data and information is continuously being generated as observations from social networks, public and private institutions, NGOs, services and applications, etc. 
+ creating a tangled environment of sources, formats and access protocols with a huge but restricted potential for exploitation. Nevertheless data processing, knowledge inferring, etc. are not mere processes 
+ of gathering and analyzing, it is necessary to deal with semantic and syntactic issues, e.g. particular measurements and dimensions or name mismatches, 
+ in order to enable a proper data/information re-use and knowledge generation.
+ 
+ \item Structure. Quantitative indexes are usually defined (a mathematical model) by experts to aggregate several indicators (in a hierarchy structure) in just one value to provide
+ a measure of the impact or performance of some policy in a certain context. The structure of these indexes are obviously subjected to change over time 
+ to collect more information or adjust their composition and relationships (narrower/broader). That is why technology should be able to afford 
+ adequate techniques to automatically populate new changes in an efficient way.
+ 
+  \item Computation process. This feature refers to the calculation of the index. Observations are gathered from diverse data sources and aligned 
+  to the index structure, commonly indicators, that are processed through various mathematical operators to generate a final index value. 
+  Nevertheless the computation process is not always described neither open (any minor change can imply a long time for validation) implying that 
+  cannot be easily replied for third-parties with other purposes, for instance research, preventing one 
+  of the most wanted characteristics such as transparency. Furthermore it is necessary to ensure that the computation process 
+  is sound and correct.
+
+  \item Documentation. As the European project Cross-over has stated, new policy-making strategies go ahead of a simple and closed value and it is necessary to bring 
+  new ways of exploiting data and information. Moreover the use of the Web as a dissemination channel represents a powerful environment in which 
+  information should be available taking into account the multilingual and multicultural character of information. In this context documentation mechanisms 
+  must necessarily cover all the aforementioned features to afford a detailed explanation of a quantitative index-based policy to both policymakers 
+  and final users. However existing initiatives usually generates some kind of hand-made report which is not easy to keep up-to-date and deliver 
+  to the long-tail of interested third-parties.
+\end{itemize}
+
+%  Semantic Web area has experienced during last years a growing commitment from both academia and industrial areas 
+% % with the objective of elevating the meaning of web information resources through a common and shared data model (graphs) and 
+% % an underlying semantics based on a logic formalism (ontologies). The Resource Description Framework (RDF), based on a graph model, 
+% % and the Web Ontology Language (OWL), designed to formalize and model domain knowledge, are a \textit{lingua-franca} to re-use information 
+% % and data in a knowledge-based environment. Thus data, information and knowledge can be easily shared, exchanged and linked 
+% % to other databases through the use URIs, more specifically HTTP-URIs. 
+% 
+Obviously semantic-based technologies, as underlying concepts of the OSLC initiative, can partially address this challenging environment for supporting 
+new quality-checking strategies. A common and shared data model based on existing standardized semantic web vocabularies and datasets can be used to 
+represent quantitative indexes from both, structural and computational, points of view enabling a right exploitation of meta-data and semantics. 
+That is why the present paper introduces: 1) a high-level model on top of the RDF Data Cube Vocabulary~\cite{rdf-data-cube}, a shared effort to model statistical data in RDF reusing parts 
+(the cube model) of the Statistical Data and Metadata Exchange Vocabulary~\cite{sdmx} (SDMX), to represent the structure and computation of quantitative indexes and 
+2) a Java-SPARQL based processor to exploit the meta-information and compute the new index values.
+% 
+
+% 
+Finally as a motivating and on-going example, see Table~\ref{tab:example-wb}, a quality manager wants to re-use requirements metrics to model and compute a new index, 
+``The Naive Requirement Quality Index''. This  index uses the topics ``Maintainability'' ($c_1$) and ``Usability'' ($c_2$) with the aim of 
+comparing the status and evolution of requirements in a project to decide whether new actions are performed. 
+From these components two indicators have been respectively selected by experts: ``Maturity'' ($in_1$) and ``Understandability'' ($in_2$). 
+Once components and their indicators are defined and data can be retrieved from the requirements quality tool it is necessary to set how the index and 
+components are computed taking into account that only data about indicators is available. Following a top-down approach the index, $i$, is calculated through 
+an ordered weighted averaging (OWA) operator using the formula: $\sum_{i=1}^n  w_i c_i$, where $w_i$ is the weight of the component $c_i$. On the other hand, 
+both components only aggregates one indicator, the computation must also consider the observation status and values must be normalized using the 
+\textit{z-score} before computing intermediate and final values for each indicator, component and index. Furthermore this index is supposed to 
+change in the future adding new data sources and meta-data, modifying the computation processes (weights) or the structure (new components, indicators and dimensions). 
+Finally, the quality manage is also interested in applying this index to other scenarios and he also needs a way of explaining in different 
+languages how the index is computed. 
+
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\scriptsize
+\begin{center}
+\begin{tabular}{|p{2.5cm}|p{3cm}|p{2cm}|p{1cm}|p{1.5cm}|}
+\hline
+  \textbf{Description} & \textbf{Requirement} & \textbf{Specification} & \textbf{Value} & \textbf{Status} \\  \hline
+  Stability & $R_1$ & $S_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_1$ & $S_1$  & $85$ & Normal\\ \hline
+  Stability & $R_2$ & $S_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_2$ & $S_1$  & $85$ & Normal\\ \hline
+  \hline
+  \end{tabular}
+  \caption{Example of indicator observations from an ISO-based Quality Model.}
+  \label{tab:example-wb}
+  \end{center}	 
+\end{table} 
+
+% 
+% 
+% 
+% 	 	
+% 
+% 

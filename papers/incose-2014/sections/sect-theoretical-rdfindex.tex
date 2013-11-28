@@ -1,0 +1,317 @@
+% This section outlines a model for representing quantitative indexes based on the aggregation 
+% of different components and indicators. Furthermore a computation process for those elements is 
+% also presented in order to specify the population of new observations. 
+Essentially a quantitative index is comprised of the aggregation of several components. In the same way, 
+a component is also composed of the aggregation of indicators that keep concrete observations. From this initial definition 
+some characteristics and assumptions can be found: 1) although observations can be directly mapped to an index or a component, they 
+are frequently computed applying a bottom-up approach from an indicator to a component and so on. 2) An observation is 
+a real numerical value extracted from some agent out under a precise context. Generally observations only takes one measure and are considered 
+to be raw without any pre-processing. 3) Before aggregating observation values, components and indexes can 
+estimate missing values to finally normalize them in order to get a quantitative value. According to the aforementioned characteristics and assumptions an ``observable'' element (index, component or indicator) is a 
+dataset of observations under a specific context (dimensions and/or meta-data) that can be directly gathered from external 
+sources or computed by some kind of OWA operator. 
+
+\begin{definition}[Observation-$o$]\upshape
+It is a tuple $\{v,m,s\}$, where $v$ is a numerical value for the measure $m$ with an status $s$ that belongs to 
+only one dataset of observations $O$. 
+\end{definition}
+
+
+\begin{definition}[Dataset-$q$]\upshape
+It is a tuple $\{O,m,D,A,T\}$ where $O$ is a set of observations for only one measure $m$ that is described under 
+a set of dimensions $D$ and a set of annotations $A$. Additionally, some attributes can be defined in the set $T$ for structure enrichment. 
+\end{definition}
+
+
+\begin{definition}[Aggregated dataset-$aq$]\upshape
+It is an aggregation of $n$ datasets $q_i$ (identified by the set $Q$) which set of observations $O$ is derivate by applying 
+an OWA operator $p$ to the observations $O_{q_i}$. 
+\end{definition}
+
+As a necessary condition for the computation process, an aggregated dataset $aq$ defined by means of the set of dimensions $D_{aq}$ can be computed iif 
+$\forall q_j \in Q: D_{aq} \subseteq D_{q_j}$. Furthermore the OWA operator $p$ can only aggregate values belonging to the same measure $m$.
+
+As a consequence of the aforementioned definitions some remarks must be outlined in order to restrict the understanding of 
+a quantitative index (structure and computation):
+\begin{itemize}
+ \item The set of dimensions $D$, annotations $A$ and attributes $T$ for a given dataset $Q$ is always the same with the aim of describing all observations under 
+ the same context.
+ \item An index $i$ and a component $c$ are aggregated datasets. Nevertheless this restriction is relaxed if observations can be directly mapped to 
+ these elements without any computation process.
+ \item An indicator $in$ can be both dataset or aggregated dataset.
+ \item All elements in definitions must be uniquely identified. 
+ \item An aggregated dataset is also a dataset.
+\end{itemize}
+
+Following the on-going example, see Table~\ref{tab:example-wb}, the modeling of the ``The Naive World Bank Index'' would be the next one:
+\begin{itemize}
+ \item Each row of the table is an observation $o_i$ with a numerical value $v$, the measure is $m_{in}$ and the status is ``Raw''.
+ \item Two indicators can be found: \{ ($in_1$, ``Stability''), ($in_2$, ``Understandability'') \}, each indicator contains a set 
+ of observations $O_{in_i}$. The dimensions for both indicators are: $D_{in_k}$  \{(``Requirement'', ``Project''\}. Nevertheless specific dimensions 
+ could be defined for earch indicator and observation if it is required. Furthermore this model also enable us the possibility of 
+ merging indicators in just one aggregated indicator due to the fact that the process of calculating an aggregated indicator is 
+ the same as the process to calculate components or indexes.
+ 
+  \item In order to join the ``Maintainability'' and ``Usability'' components it is necessary to define a new aggregated dataset $aq_1$ which 
+ dimensions $D_{aq_1}$ are \{``Requirement'', ``Project''\} and the OWA operator is the average of values $v \in O_{in_1}$. In this sample the aggregated indicator $aq_1$
+ can be assembled due to the fact that both components accomplish with the next necessary conditions: 
+ 1) $D_{aq} \subseteq D_{c_1} \wedge D_{aq_1} \subseteq D_{c_2}$ and  2) $m_{aq_1}= m_{c_k}$.
+ 
+ \item In the same way, the set of components: \{($c_1$,``Maintainability''), ($c_2$,``Usability'')\} are built by aggregating the indicators $aq_1$ and 
+ $q_2$ using as OWA operator the ``min'' value. In this case ``min'' or ``max'' operators can be used due to an observation is uniquely identified in a 
+ dataset by a tuple $\{v,m,s\} \cup D$. 
+ \item Finally, the index is computed using the general form of an OWA operator $\sum_{i=1}^n  w_i c_i$ and taking as weights those we select. 
+ 
+
+\end{itemize}
+
+As final remark, the computation process is generating new observations, following a bottom-up approach, according to the structure defined 
+in each dataset. Although a logical structure of indexes, components and indicators can be directly established using narrower/broader properties 
+the main advantage of this approach lies in the possibility of expressing new elements by aggregating the existing ones. Nevertheless restrictions 
+about the type of dataset that can be aggregated in each level could be added at any time for other reasons such as validation or to generate 
+a human-readable form of the index.
+
+
+\section{Representation of a quantitative composite index in RDF: The RDFIndex}
+Since previous section has stated the key definitions to represent quantitative indexes by aggregation, a direct translation built 
+on the top of the RDF Data Cube Vocabulary, SDMX and other semantic web vocabularies is presented in Table~\ref{index-to-rdf}. Thus 
+all concepts in the index are described reusing existing definitions, taking advantage of previous efforts and pre-established semantics 
+with the aim of being extended in the future to fit new requirements. According to these mappings a definition of the index in the 
+on-going example and some dimensions are presented in Figure~\ref{fig:results-rdf-index} and Figure~\ref{fig:results-rdf-properties}.
+
+% FIXME: Maybe an observation? include a table with all reused vocabularies? a diagram of the ontology?
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\scriptsize
+\begin{center}
+\begin{tabular}{|p{3cm}||p{4.8cm}|p{4.5cm}|}
+\hline
+  \textbf{Concept} & \textbf{Vocabulary element} &  \textbf{Comments}  \\  \hline
+   Observation $o$ & \texttt{qb:Observation} &  Enrichment through annotations\\ \hline
+   Numerical value $v$ & \texttt{xsd:double} & Restriction to numerical values  \\ \hline
+   Measure $m$ & \texttt{qb:MeasureProperty} \texttt{sdmx-measure:obsValue} & Restriction to one measure \\ \hline
+   Status $s$ & \texttt{sdmx-concept:obsStatus} & Defined by the SDMX-RDF vocabulary\\ \hline
+   Dataset $q$ & \texttt{qb:dataSet} and \texttt{qb:qb:DataStructureDefinition} &  Metadata of the \texttt{qb:dataSet}\\ \hline
+   Dimension $d_i \in D$ & \texttt{qb:DimensionProperty} & Context of observations \\ \hline
+   Annotation $a_i \in A$ & \texttt{owl:AnnotationProperty} &  Intensive use of Dublin Core\\ \hline
+   Attribute $at_i \in T$ & \texttt{qb:AttributeProperty} & Link to existing datasets such as DBPedia \\ \hline
+   OWA operator $p$ &  SPARQL 1.1 aggregation operators & Other extensions depend on the RDF repository \\ \hline
+   Index, Component and Indicator & \texttt{skos:Concept} & SKOS taxonomy (logical structure) \\ \hline
+  \hline
+  \end{tabular}
+  \caption{Summary of mapping between the index definition and the RDF Data Cube Vocabulary.}
+  \label{index-to-rdf}
+  \end{center}
+\end{table} 
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=XML,basicstyle=\scriptsize]  
+@prefix rdfindex:  <http://purl.org/rdfindex/ontology/> .
+@prefix rdfindex-rq:  <http://purl.org/rdfindex/rq/resource/> .
+@prefix rdfindex-rqont:  <http://purl.org/rdfindex/rq/ontology/> .
+
+rdfindex-rq:TheNaiveRequirementQualityIndex
+  a rdfindex:Index;
+  rdfs:label "The Naive Requirement Quality Index"@en;
+  rdfindex:type rdfindex:Quantitative;
+  rdfindex:aggregates [ 		
+    rdfindex:aggregation-operator rdfindex:OWA;
+    rdfindex:part-of [
+      rdfindex:dataset rdfindex-rq:Maintainability; 
+      rdfindex:weight 0.4];
+    rdfindex:part-of [rdfindex:dataset rdfindex-rq:Usability; 
+      rdfindex:weight 0.6];
+  ];
+  #More meta-data properties...
+  qb:structure 	rdfindex-rq:TheNaiveRequirementQualityIndexDSD ; .
+  
+rdfindex-rq:TheNaiveRequirementQualityIndexDSD 
+  a qb:DataStructureDefinition;  
+  qb:component    
+  [qb:dimension rdfindex-rqont:ref-requirement],
+  [qb:dimension rdfindex-rqont:ref-project],
+  [qb:measure   rdfindex:value],
+  [qb:attribute sdmx-attribute:unitMeasure];
+  #More meta-data properties...
+  .
+\end{lstlisting}
+\caption{Example of an index structure in RDF.}
+ \label{fig:results-rdf-index}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=XML,basicstyle=\scriptsize]  
+rdfindex-rqont:ref-requirement a rdf:Property, 
+  qb:DimensionProperty; 
+   rdfs:subPropertyOf sdmx-dimension:ref-area; 
+  rdfs:range skos:Concept; 
+  qb:concept sdmx-concept:ref-area . 
+
+rdfindex:value a rdf:Property, qb:MeasureProperty;
+  rdfs:label "Value of an observation"@en;
+  skos:notation "value" ;
+  rdfs:subPropertyOf sdmx-measure:obsValue;
+  rdfs:range xsd:double . 
+\end{lstlisting}
+\caption{Example of a dimension and a measure definition in RDF.}
+ \label{fig:results-rdf-properties}
+\end{figure}
+
+
+Since the structure and the computation processes can be built on the top of existing RDF vocabulary it is then 
+possible to make a translation to a generic SPARQL query (includes the basic OWA operator), see Figure~\ref{fig:results-rdf-sparql-template}, 
+in order generate new observations following the bottom-up approach that previous section has outlined.
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize,mathescape]  
+SELECT ($d_i \in D$) [(sum(?w*?measure) as ?newvalue) | OWA(?measure)]
+WHERE{
+  $q$ rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset $q_i$ .
+  FILTER($?partof \in Q$).  
+  ?observation rdf:type qb:Observation.
+  ?part rdfindex:weight ?defaultw.     
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation $m$ ?measure . 
+  ?observation ?dim ?dimRef. 
+  FILTER ($?dim  \in D$).
+}GROUP BY ($d_i \in D$)
+\end{lstlisting}
+\caption{SPARQL template for building aggregated observations.}
+ \label{fig:results-rdf-sparql-template}
+\end{figure}
+
+
+\subsection{A Java-SPARQL based interpreter of the RDFIndex}
+The first implementation of the RDFIndex vocabulary processor~\footnote{\url{https://github.com/chemaar/rdfindex}} is based on traditional 
+language processor techniques such as the use of design patterns (e.g. Composite or Visitor) 
+to separate the exploitation of meta-data from the interpretation. Thus the processor 
+works and provides next functionalities (hereafter load and query an endpoint are completely equivalent due to 
+data is separated from access and storage formats):
+
+\begin{itemize}
+ \item The RDFIndex ontology is loaded to have access to common definitions.
+ \item The structure of an index described with the aforementioned vocabulary is 
+ also loaded to create a kind of Abstract Syntax Tree (AST) containing the defined meta-data.
+ \item Once the meta-data structure is available in the AST it can be managed 
+ through three AST walkers that performs: 1) validation (structure and RDF Data Cube normalization) 
+ and 2) SPARQL queries creation and 3) documentation generation (optional). 
+%  As an example a partial creation of a SPARQL implementing  the z-score normalization function is presented in Figure~\ref{fig:sparql-zscore}.
+ \item In order to promote new observations to the different components and indexes 
+ a set of raw observations is also loaded and a new AST walker generates new values, through SPARQL queries (see Figure~\ref{fig:sparql-generated-query}), 
+ in a bottom-up approach until reaching the upper-level (index), see Table~\ref{tab:example-generated-wb} and Figure~\ref{fig:generated observation}. 
+ Finally each new observation also contains a data property to store the hash MD5 of a string comprising 
+ (publisher, $q$, $D$, $v$) and separated by \#, e.g. ``RDFIndex\#TheWorldBankNaiveIndex\#Spain\#2010\#0.707'', to avoid potential ``man-in-the-middle'' attacks when the new observations 
+ are published. This value are easily generated using the new string functions in SPARQL 1.1 \texttt{concat} and \texttt{MD5}.
+ \end{itemize}
+
+% \begin{figure}[!ht]
+% \begin{lstlisting}[language=SQL]  
+% prefix afn: <http://jena.hpl.hp.com/ARQ/function#>
+% SELECT ( (?measure-?mean)/?stddev as ?zscore) 
+% WHERE{
+%  ...
+%  ?observation rdfindex:value ?measure 
+%  {
+%   SELECT ?mean (afn:sqrt((SUM((?measure-?mean)*(?measure-?mean))/?count)) 
+% 		as ?stddev) 
+%   WHERE{ 
+%    ?observation rdfindex:value ?measure 
+%    {
+%     SELECT (COUNT(?measure) as ?count) (AVG(?measure) as ?mean)
+%     WHERE {
+%      ?observation rdfindex:value ?measure 
+%      }GROUP BY ?count ?mean LIMIT 1
+% 
+%    }	
+%   }GROUP BY ?mean ?count LIMIT 1
+%  }
+% }
+% \end{lstlisting}
+% \caption{Z-score normalization using SPARQL.}
+%  \label{fig:sparql-zscore}
+% \end{figure}
+
+
+% 
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
+prefix rdfindex:  <http://purl.org/rdfindex/ontology/> 
+SELECT ?dim0 ?dim1 ( sum(?w*?measure) as ?newvalue) 
+WHERE{ 
+  rdfindex-rq:TheNaiveRequirementQualityIndex  
+    rdfindex:aggregates ?parts.
+  ?parts rdfindex:part-of ?partof.
+  ?partof rdfindex:dataset ?part .
+  FILTER ((?part =rdfindex-rq:Maintainability) || 
+	  (?part =rdfindex-rq:Usability)). 
+  ?observation qb:dataSet ?part . 
+  ?part rdfindex:weight ?defaultw.        
+  OPTIONAL {?partof rdfindex:weight ?aggregationw.}.
+  BIND (if( BOUND(?aggregationw), ?aggregationw, ?defaultw) AS ?w)
+  ?observation rdfindex:value ?measure . 
+  ?observation rdfindex-rqont:ref-requirement ?dim0. 
+  ?observation rdfindex-rqont:ref-project ?dim1. 
+} GROUP BY ?dim0 ?dim1 
+\end{lstlisting}
+\caption{Example of generated SPARQL query.}
+ \label{fig:sparql-generated-query}
+\end{figure}
+
+
+
+\begin{table}[!htb]
+\renewcommand{\arraystretch}{1.3}
+\scriptsize
+\begin{center}
+\begin{tabular}{|p{2.5cm}|p{2cm}|p{2cm}|p{1cm}|p{1.8cm}|}
+\hline
+  \textbf{Description} & \textbf{Requirement} & \textbf{Specification} & \textbf{Value} & \textbf{Status} \\  \hline
+  \multicolumn{5}{|c|}{\textbf{Indicator}} \\ \hline
+  Stability & $R_1$ & $S_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_1$ & $S_1$  & $85$ & Normal\\ \hline
+  Stability & $R_2$ & $S_1$ & $79$ & Normal \\ \hline
+  Understandability & $R_2$ & $S_1$  & $85$ & Normal\\ \hline
+  \multicolumn{5}{|c|}{\textbf{Component}} \\ \hline
+  Maintainability  & $R_1$ & $S_1$ & $0.707$  & Estimated \\ \hline
+  Maintainability  & $R_2$ & $S_1$ & $0.707$  & Estimated \\ \hline
+  Usability  & $R_1$ & $S_1$ & $0.707$  & Estimated \\ \hline
+  Usability  & $R_2$ & $S_1$ & $0.707$  & Estimated \\ \hline
+ \multicolumn{5}{|c|}{\textbf{Index}} \\ \hline
+  The Naive Requirement Quality Index  & & $S_1$ & $0.707$ & Estimated \\ \hline
+  \hline
+  \end{tabular}
+  \caption{Example of aggregated observations from ``The Naive Requirement Quality Index''.}
+  \label{tab:example-generated-wb}
+  \end{center}	 
+\end{table} 
+
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}[language=SQL,basicstyle=\scriptsize]  
+rdfindex-rq:o6808100851579
+      a       qb:observation ;
+      qb:dataSet rdfindex-rq:TheNaiveRequirementQualityIndex  ;
+      rdfindex-rqont:ref-project rdfindex-rq:P1;
+      rdfindex-rqont:ref-requirement  rdfindex-rq:R1;
+      dcterms:date <http://reference.data.gov.uk/id/
+	gregorian-interval/2013-01-01T00:00:00/P1Y> ;
+      ...
+      #rdfs:{label,comment} {literal};
+      #dcterms:{issued, date, contributor, author, publisher, identifier} 
+      #	{resource, literal};
+      rdfindex:md5-hash "6cdda76088cd161d766809d6a78d35f6";
+      sdmx-concept:obsStatus
+              sdmx-code:obsStatus-E;
+      rdfindex:value "0.707"^^xsd:double .
+\end{lstlisting}
+\caption{Partial example of a populated observation for ``The Naive Requirement Quality Index''.}
+ \label{fig:generated observation}
+\end{figure}
+
+
+% FIXME: A Java code snippet of visitors?
