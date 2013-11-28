@@ -1,0 +1,118 @@
+\documentclass{llncs}
+
+%\usepackage{llncsdoc}
+
+%\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\usepackage{url}
+\usepackage{rotating}
+
+%%%Math
+\usepackage{latexsym}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{amsthm}
+%\usepackage{eurosans}
+
+\usepackage{eurosym}
+
+\usepackage{longtable}
+
+\usepackage{listings}
+
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{achicago}
+
+
+\definecolor{gray}{gray}{0.5}
+\definecolor{green}{rgb}{0,0.5,0}
+
+
+\begin{document}
+
+\title{Towards a semantic-based representation and computation of quantitative indexes for quality management of requirements.\thanks{The research leading to these results has received funding from the ARTEMIS Joint Undertaking under
+grant agreement No 332830-CRYSTAL (CRitical sYSTem engineering AcceLeration project) and from specific national programs and/or funding authorities. This work has been supported by the Spanish Ministry of Industry.}}
+
+\author{Jose Mar\'{i}a \'{A}lvarez-Rodr\'{i}guez\inst{1} \and Juan Llorens\inst{1}  \and Manuela Alejandres\inst{1} \and Jose Fuentes\inst{2}}
+
+
+\authorrunning{Jose Mar\'{i}a Alvarez \and  Jos\'{e} Emilio Labra \and Patricia Ordoñez de Pablos}
+
+
+\institute{Department of Computer Science, Carlos III University of Madrid, \\ 28911, Madrid, Spain\\
+  \email{{\{josemaria.alvarez,juan.llorens,manuela.alejandres\}@uc3m.es}}\\
+\and The Reuse Company Inc., \\ , Oviedo, Spain.\\
+  \email{{jose.fuentes@reusecompany.es}}\\  
+}
+
+
+\date{}
+
+\maketitle
+
+\renewcommand{\labelitemi}{$\bullet$}
+\small
+\begin{abstract}
+Quality management of requirements has seen a dramatic increase of the amount of 
+applications, management platforms, data, etc. gaining momentum in the Systems 
+Engineering area and more specifically in the deployment of the next wave of 
+critical system. In this context, one of the next big things lies in the 
+creation of quality functions that can automatically detect and make decisions 
+according to natural-language based requirements specifications and models. In 
+this sense quality indicator of requirements seeks for providing an intelligent 
+environment for detecting values of Correctness, Consistency and Completeness 
+based on domain knowledge in which both functional and non-functional properties 
+of system components can be validated and verified easing the transition to a 
+smart system environment. Thus the testing of critical systems based on 
+requirements quality can be seen as a special kind of policy-making strategy 
+that must compile several key indicators to summarize data and information and 
+obtain an objective quantitative measure. Nevertheless the quantitative analysis 
+of several quality indicators is becoming a challenging task due to natural 
+language ambiguities and a tangled/heterogeneous environment of data, providers, 
+etc. Existing tools and techniques based on traditional processes of quality 
+assessment are preventing a proper use of the new dynamic and data environment 
+avoiding more timely, adaptable and flexible (on-demand) quantitative index 
+creation and, as a consequence, more accurate decisions. On the other hand, 
+semantic-based technologies emerge to provide the adequate building blocks to 
+represent domain-knowledge and process data in a flexible fashion using a common 
+and shared data model. That is why the present paper introduces a Resource 
+Description Framework (RDF) vocabulary to semantically represent and compute 
+quantitative indexes as part of the implementation of the Open Services for 
+Lifecycle Collaboration initiative (OSLC) Quality Management specification. 
+Finally some discussion, conclusions and future work are also outlined.
+\end{abstract}
+%
+
+ \section{Introduction}
+ \input{sections/sect-intro}
+ \section{Related Work}
+ \input{sections/sect-related-work}
+\section{Theoretical modeling of a quantitative composite index}
+\input{sections/sect-theoretical-rdfindex}
+ \section{Discussion and Further Steps}
+\input{sections/sect-discussion}
+\section{Conclusions and Future Work}
+s% \input{sections/sect-conclusions}
+
+% \section{Acknowledgements}
+% This work is part of the FP7 Marie Curie Initial Training Network ``RELATE'' (cod. 264840) and developed in the context 
+% of the Workpackage 4 and more specifically under the project ``Quality Management in Service-based Systems and Cloud Applications''. It is 
+% also supported by the ROCAS project with code TIN2011-27871, a research project partially funded by the Spanish Ministry of Science and Innovation.
+
+
+\appendix
+
+
+\bibliographystyle{achicago}
+\bibliography{incose}
+
+
+
+\end{document}
+
